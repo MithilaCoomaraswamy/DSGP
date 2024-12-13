@@ -1,0 +1,65 @@
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from google.colab import files
+
+# Step 1: Upload the dataset
+print("Upload your dataset:")
+uploaded = files.upload()  # This will prompt you to upload the file
+filename = list(uploaded.keys())[0]
+
+# Step 2: Load the dataset
+data = pd.read_csv(filename)
+print("First few rows of the dataset:")
+display(data.head())
+
+# Step 3: Handle missing values
+numeric_data = data.select_dtypes(include=['float64', 'int64'])  # Select only numeric columns
+imputer = SimpleImputer(strategy='mean')
+data_imputed = imputer.fit_transform(numeric_data)
+
+# Step 4: Standardize the data
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(data_imputed)
+
+# Step 5: Perform PCA
+pca = PCA()
+pca_result = pca.fit_transform(data_scaled)
+
+# Step 6: Visualize Explained Variance
+explained_variance = pca.explained_variance_ratio_
+cumulative_variance = np.cumsum(explained_variance)
+
+# Scree Plot
+plt.figure(figsize=(8, 5))
+plt.plot(range(1, len(explained_variance) + 1), explained_variance, marker='o', label='Individual Variance')
+plt.title('Scree Plot')
+plt.xlabel('Principal Components')
+plt.ylabel('Explained Variance Ratio')
+plt.grid()
+plt.legend()
+plt.show()
+
+# Cumulative Variance Plot
+plt.figure(figsize=(8, 5))
+plt.plot(range(1, len(cumulative_variance) + 1), cumulative_variance, marker='o', color='orange', label='Cumulative Variance')
+plt.axhline(y=0.9, color='r', linestyle='--', label='90% Threshold')
+plt.title('Cumulative Explained Variance')
+plt.xlabel('Principal Components')
+plt.ylabel('Cumulative Variance Ratio')
+plt.grid()
+plt.legend()
+plt.show()
+
+# Step 7: Find number of components explaining ~90% variance
+num_components_90 = np.argmax(cumulative_variance >= 0.9) + 1
+print(f"Number of components to explain ~90% variance: {num_components_90}")
+
+# Step 8: Save PCA results for further use (optional)
+pca_df = pd.DataFrame(pca_result[:, :num_components_90], columns=[f'PC{i+1}' for i in range(num_components_90)])
+pca_df.to_csv('pca_transformed_data.csv', index=False)
+print("PCA results saved as 'pca_transformed_data.csv'")
