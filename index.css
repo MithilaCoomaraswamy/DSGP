@@ -1,0 +1,159 @@
+nav a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+    padding: 8px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button {
+  background-color: #f7d6d0;
+  color: #821d30;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+ul {
+  display: flex;
+  list-style-type: none;
+}
+
+h1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+li {
+  display: flex;
+  list-style-type: none;
+  float: left;
+  color: #f07670;
+  text-align: center;
+  padding: 0;
+  text-decoration: none;
+  font-size: 17px;
+}
+body {
+  background-color: #B9AEDC;
+  color: #821d30;
+  padding: 60px;
+  height: 100vh;
+  font-family: Sans-Serif;
+  text-align: center;
+  border-radius: 50px;
+}
+
+nav {
+  background-color: white;
+  overflow: hidden;
+  border-radius: 50px;
+  width: 100%; 
+  margin: 0 auto; 
+
+}
+footer{
+  background-color: white;
+  border-radius: 50px;
+}
+
+/* General Section Container to hold two sections side by side */
+.section-container {
+  display: flex;
+  justify-content: space-between; /* Space between sections */
+  gap: 20px;  /* Add space between the sections */
+  margin-bottom: 20px;
+}
+
+/* General Section Styling */
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px; /* Optional: rounded corners for sections */
+  width: 48%; /* Each section takes up 48% of the container's width */
+  height: 300px; /* Limiting the height of each section */
+}
+
+/* Section 1 background color */
+.section:nth-of-type(1) {
+  background-color: #B9AEDC; /* Soft Rose */
+}
+
+/* Section 2 background color */
+.section:nth-of-type(2) {
+  background-color: #B9AEDC; /* Lavender */
+}
+
+/* Section Content Styling */
+.section-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-image {
+  flex: 0 0 50%;        /* Set image container to take up 50% width */
+  height: 100%;         /* Make the image container take up the full height of the section */
+  overflow: hidden;     /* Hide overflow in case the image doesn't exactly match the aspect ratio */
+}
+
+.section-image img {
+  width: 100%;          /* Make the image fill the full width of the container */
+  height: 100%;         /* Make the image fill the full height of the container */
+  object-fit: cover;    /* Ensure the image covers the entire container without distortion */
+  border-radius: 8px;   /* Optional: rounded corners */
+}
+
+.section-text {
+  flex: 1;              /* Allow the text container to take up the remaining space */
+  margin-left: 20px;    /* Space between the image and the text */
+}
+
+.section-text h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.section-text p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.section-text button {
+  padding: 10px 20px;
+  background-color: #5f9ea0; /* Soft teal or choose your brand color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.section-text button:hover {
+  background-color: #4f8b8a; /* Darker teal for hover effect */
+}
+
+/* Responsive Layout for Smaller Screens */
+@media (max-width: 768px) {
+  /* When screen size is small, stack the sections vertically */
+  .section-container {
+      flex-direction: column; /* Stack sections vertically */
+  }
+
+  .section {
+      width: 100%; /* Make each section take full width on smaller screens */
+      margin-bottom: 20px; /* Adds space between stacked sections */
+  }
+
+  .section-image, .section-text {
+      width: 100%; /* Full width for both image and text */
+  }
+
+  .section-image img {
+      width: 100%; /* Make the image responsive */
+      height: auto; /* Let the height adjust automatically for small screens */
+  }
+}
