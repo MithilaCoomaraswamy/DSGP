@@ -1,45 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 nav a {
     display: flex;
     justify-content: flex-end;
     align-items: center; 
     padding: 8px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Poppins', sans-serif; 
+    text-decoration: none;
+    color: black;
 }
 
-button {
-  background-color: #f7d6d0;
-  color: #821d30;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-}
 ul {
   display: flex;
   list-style-type: none;
+  justify-content: space-between; /* Space out logo and links */
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Vertically center items */
 }
 
 h1{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family:'Poppins', sans-serif; 
 }
 
 li {
   display: flex;
   list-style-type: none;
-  float: left;
-  color: #f07670;
+  float: right;
   text-align: center;
+  justify-content: right;
   padding: 0;
-  text-decoration: none;
   font-size: 17px;
+
 }
+
+nav ul li:last-child a {
+  font-weight: bold;
+}
+
 body {
-  background-color: #B9AEDC;
-  color: #821d30;
+  background-color: #5f9ea0;
+  color: black;
   padding: 60px;
   height: 100vh;
-  font-family: Sans-Serif;
+  font-family: 'Poppins', sans-serif; 
   text-align: center;
   border-radius: 50px;
 }
@@ -47,22 +51,74 @@ body {
 nav {
   background-color: white;
   overflow: hidden;
-  border-radius: 50px;
+  border-radius: 5px;
   width: 100%; 
   margin: 0 auto; 
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 }
-footer{
-  background-color: white;
-  border-radius: 50px;
+footer {
+  background-color: white; /* Light grey background */
+  border-radius: 5px;
+  text-align: center;         /* Center text */
+  padding: 20px;              /* Padding around the footer */
+  font-family: 'Poppins', sans-serif; /* Use the same font as the rest of the site */
+  margin-top: 30px;           /* Add space above the footer */
 }
+
+.footer-content {
+  max-width: 1200px;  /* Max width to keep the content centered */
+  margin: 0 auto;     /* Center align the content */
+}
+
+footer p {
+  color: black;           /* Dark color for text */
+  font-size: 16px;       /* Font size for copyright text */
+}
+
+.footer-links {
+  margin: 20px 0;        /* Space between copyright and links */
+}
+
+.footer-links a {
+  text-decoration: none; /* Remove underline */
+  color: black;           /* Link color */
+  font-size: 14px;       /* Font size for links */
+  margin: 0 10px;        /* Space between links */
+}
+
+.footer-links a:hover {
+  font-weight: bold;        /* Change color on hover */
+}
+
+.social-icons {
+  margin-top: 20px;      /* Space above the social icons */
+}
+
+.social-icons a {
+  margin: 0 15px;        /* Space between the icons */
+}
+
+.social-icon {
+  width: 30px;           /* Icon size */
+  height: auto;          /* Maintain aspect ratio */
+}
+
+/* Optional: Add hover effect to social icons */
+.social-icons a:hover .social-icon {
+  opacity: 0.8;          /* Slightly fade on hover */
+}
+
+
 
 /* General Section Container to hold two sections side by side */
 .section-container {
   display: flex;
   justify-content: space-between; /* Space between sections */
   gap: 20px;  /* Add space between the sections */
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 /* General Section Styling */
@@ -74,6 +130,7 @@ footer{
   border-radius: 8px; /* Optional: rounded corners for sections */
   width: 48%; /* Each section takes up 48% of the container's width */
   height: 300px; /* Limiting the height of each section */
+  border: 2px solid black; /* Add a border with a specific color (matches the theme) */
 }
 
 /* Section 1 background color */
@@ -113,14 +170,16 @@ footer{
 
 .section-text h2 {
   font-size: 24px;
-  color: #333;
+  color: black;
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif; 
 }
 
 .section-text p {
   font-size: 16px;
-  color: #666;
+  color: black;
   margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif; 
 }
 
 .section-text button {
@@ -130,6 +189,8 @@ footer{
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: bold;
 }
 
 .section-text button:hover {
@@ -156,4 +217,15 @@ footer{
       width: 100%; /* Make the image responsive */
       height: auto; /* Let the height adjust automatically for small screens */
   }
+}
+
+.heading {
+  display: flex;
+  align-items: center; /* Vertically center the logo */
+}
+
+.heading img.logo {
+  width: 200px; /* Increase width to make the logo bigger */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 60px; /* Increase max height to allow a larger logo */
 }

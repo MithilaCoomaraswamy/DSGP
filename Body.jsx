@@ -10,7 +10,9 @@ function Body() {
                     </div>
                     <div className="section-text">
                         <h2>Period Tracker</h2>
-                        <p>Tracking your menstrual cycle has never been easier—or more important. With the FemPredict period tracker, you can effortlessly monitor your periods, putting you in control of your body.</p>
+                        <p>Tracking your menstrual cycle has never been easier—or more important. 
+                            With the FemPredict period tracker, you can effortlessly monitor your periods, 
+                            putting you in control of your body.</p>
                         <button>Click Here</button>
                     </div>
                 </div>
@@ -24,7 +26,10 @@ function Body() {
                     </div>
                     <div className="section-text">
                         <h2>PCOS Quiz</h2>
-                        <p>Polycystic Ovary Syndrome (PCOS) affects millions of people, but understanding the symptoms and managing your health can be challenging. With this quiz, you can easily check for signs of PCOS, so you can take the first step toward understanding and managing your condition.</p>
+                        <p>
+                        Polycystic Ovary Syndrome (PCOS) affects millions of women, and recognizing its 
+                        symptoms can be challenging. This quiz helps you identify signs of PCOS, taking the 
+                        first step toward managing your health.</p>
                         <button>Click Here</button>
                     </div>
                 </div>
@@ -39,7 +44,9 @@ function Body() {
                     </div>
                     <div className="section-text">
                         <h2>Exercise Recommender</h2>
-                        <p>Looking to build strength, boost energy, lose weight, or simply feel better, the FemPredict exercise recommender helps you discover personalized workout plans tailored to your goals, preferences, and fitness level.</p>
+                        <p>Looking to build strength, boost energy, lose weight, or simply feel better, 
+                            the FemPredict exercise recommender helps you discover personalized workout 
+                            plans tailored to your preferences and fitness level.</p>
                         <button>Click Here</button>
                     </div>
                 </div>
@@ -53,7 +60,9 @@ function Body() {
                     </div>
                     <div className="section-text">
                         <h2>Chatbot</h2>
-                        <p>Looking for answers, help, or guidance? Our AI-powered chatbot is here to assist you every step of the way. Whether you need support, have questions, or just want quick information, our chatbot provides instant, friendly assistance at any time.</p>
+                        <p>Have questions about managing your reproductive health or need someone to talk to during
+                            "that time of the month"? Our AI-powered chatbot provides instant, friendly 
+                            assistance at any time.</p>
                         <button>Click Here</button>
                     </div>
                 </div>
