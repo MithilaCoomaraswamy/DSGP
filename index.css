@@ -1,61 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 nav a {
     display: flex;
     justify-content: flex-end;
     align-items: center; 
     padding: 8px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Poppins', sans-serif; 
+    text-decoration: none;
+    color: black;
 }
 
-button {
-  background-color: #f7d6d0;
-  color: #821d30;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-}
 ul {
   display: flex;
   list-style-type: none;
+  justify-content: space-between; /* Space out logo and links */
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Vertically center items */
 }
 
 h1{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family:'Poppins', sans-serif; 
 }
 
 li {
   display: flex;
   list-style-type: none;
-  float: left;
-  color: #f07670;
+  float: right;
   text-align: center;
+  justify-content: right;
   padding: 0;
-  text-decoration: none;
   font-size: 17px;
+
 }
+
+nav ul li:last-child a {
+  font-weight: bold;
+}
+
 body {
-  background-color: #fb6090;
-  color: #821d30;
-  padding: 40px;
+  background-color: #5f9ea0;
+  color: black;
+  padding: 60px;
   height: 100vh;
-  font-family: Sans-Serif;
+  font-family: 'Poppins', sans-serif; 
   text-align: center;
   border-radius: 50px;
 }
 
 nav {
-  background-color: #f7d6d0;
+  background-color: white;
   overflow: hidden;
-  border-radius: 50px;
-  width: 80%; 
+  border-radius: 5px;
+  width: 100%; 
   margin: 0 auto; 
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 }
-footer{
-  background-color: #f7d6d0;
-  border-radius: 50px;
+footer {
+  background-color: white; /* Light grey background */
+  border-radius: 5px;
+  text-align: center;         /* Center text */
+  padding: 20px;              /* Padding around the footer */
+  font-family: 'Poppins', sans-serif; /* Use the same font as the rest of the site */
+  margin-top: 30px;           /* Add space above the footer */
 }
-.sections{
-  border-radius: 50px;
+
+.footer-content {
+  max-width: 1200px;  /* Max width to keep the content centered */
+  margin: 0 auto;     /* Center align the content */
+}
+
+footer p {
+  color: black;           /* Dark color for text */
+  font-size: 16px;       /* Font size for copyright text */
+}
+
+.footer-links {
+  margin: 20px 0;        /* Space between copyright and links */
+}
+
+.footer-links a {
+  text-decoration: none; /* Remove underline */
+  color: black;           /* Link color */
+  font-size: 14px;       /* Font size for links */
+  margin: 0 10px;        /* Space between links */
+}
+
+.footer-links a:hover {
+  font-weight: bold;        /* Change color on hover */
+}
+
+.social-icons {
+  margin-top: 20px;      /* Space above the social icons */
+}
+
+.social-icons a {
+  margin: 0 15px;        /* Space between the icons */
+}
+
+.social-icon {
+  width: 30px;           /* Icon size */
+  height: auto;          /* Maintain aspect ratio */
+}
+
+/* Optional: Add hover effect to social icons */
+.social-icons a:hover .social-icon {
+  opacity: 0.8;          /* Slightly fade on hover */
+}
+
+
+
+/* General Section Container to hold two sections side by side */
+.section-container {
+  display: flex;
+  justify-content: space-between; /* Space between sections */
+  gap: 20px;  /* Add space between the sections */
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+/* General Section Styling */
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px; /* Optional: rounded corners for sections */
+  width: 48%; /* Each section takes up 48% of the container's width */
+  height: 300px; /* Limiting the height of each section */
+  border: 2px solid black; /* Add a border with a specific color (matches the theme) */
+}
+
+/* Section 1 background color */
+.section:nth-of-type(1) {
+  background-color: #B9AEDC; /* Soft Rose */
+}
+
+/* Section 2 background color */
+.section:nth-of-type(2) {
+  background-color: #B9AEDC; /* Lavender */
+}
+
+/* Section Content Styling */
+.section-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-image {
+  flex: 0 0 50%;        /* Set image container to take up 50% width */
+  height: 100%;         /* Make the image container take up the full height of the section */
+  overflow: hidden;     /* Hide overflow in case the image doesn't exactly match the aspect ratio */
+}
+
+.section-image img {
+  width: 100%;          /* Make the image fill the full width of the container */
+  height: 100%;         /* Make the image fill the full height of the container */
+  object-fit: cover;    /* Ensure the image covers the entire container without distortion */
+  border-radius: 8px;   /* Optional: rounded corners */
+}
+
+.section-text {
+  flex: 1;              /* Allow the text container to take up the remaining space */
+  margin-left: 20px;    /* Space between the image and the text */
+}
+
+.section-text h2 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.section-text p {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.section-text button {
+  padding: 10px 20px;
+  background-color: #5f9ea0; /* Soft teal or choose your brand color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: bold;
+}
+
+.section-text button:hover {
+  background-color: #4f8b8a; /* Darker teal for hover effect */
+}
+
+/* Responsive Layout for Smaller Screens */
+@media (max-width: 768px) {
+  /* When screen size is small, stack the sections vertically */
+  .section-container {
+      flex-direction: column; /* Stack sections vertically */
+  }
+
+  .section {
+      width: 100%; /* Make each section take full width on smaller screens */
+      margin-bottom: 20px; /* Adds space between stacked sections */
+  }
+
+  .section-image, .section-text {
+      width: 100%; /* Full width for both image and text */
+  }
+
+  .section-image img {
+      width: 100%; /* Make the image responsive */
+      height: auto; /* Let the height adjust automatically for small screens */
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center; /* Vertically center the logo */
+}
+
+.heading img.logo {
+  width: 200px; /* Increase width to make the logo bigger */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 60px; /* Increase max height to allow a larger logo */
 }
