@@ -185,12 +185,13 @@ footer p {
 .section-text button {
   padding: 10px 20px;
   background-color: #5f9ea0; /* Soft teal or choose your brand color */
-  color: white;
-  border: none;
+  color: black;
+  border: 2px solid black;
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif; 
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 16px;
 }
 
 .section-text button:hover {
