@@ -16,7 +16,7 @@ function Header(){
                     <li><Link to="/pcos_quiz">PCOS Quiz</Link></li>
                     <li><Link to="/chatbot">Chatbot</Link></li>
                     <li><Link to="/exercise_recommender">Exercise Recommender</Link></li>
-                    <li><Link to="/profile"><i className="fas fa-user-circle" style={{ fontSize: '40px', color: 'black'}}></i></Link></li>
+                    <li><Link to="/profile"><i className="fas fa-user-circle" style={{ fontSize: '30px', color: 'black'}}></i></Link></li>
                 </ul>
             </nav>
         

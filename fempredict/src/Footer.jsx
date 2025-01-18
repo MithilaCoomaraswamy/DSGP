@@ -15,14 +15,20 @@ function Footer() {
 
                 {/* Social Media Icons */}
                 <div className="social-icons">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-facebook" style={{ fontSize: '40px', color: 'black'}}></i>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-facebook" style={{ fontSize: '30px', color: 'black'}}></i>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-twitter" style={{ fontSize: '40px', color: 'black' }}></i>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-x-twitter" style={{ fontSize: '30px', color: 'black' }}></i> 
+                    </a> 
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-instagram" style={{ fontSize: '30px', color: 'black' }}></i>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-instagram" style={{ fontSize: '40px', color: 'black' }}></i>
+                    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-linkedin" style={{ fontSize: '30px', color: 'black' }}></i>
+                    </a>
+                    <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-tiktok" style={{ fontSize: '30px', color: 'black' }}></i>
                     </a>
                 </div>
             </div>
