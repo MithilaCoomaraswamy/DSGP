@@ -8,6 +8,11 @@ nav a {
     font-family: 'Poppins', sans-serif; 
     text-decoration: none;
     color: black;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    font-weight: bold;
 }
 
 
@@ -37,6 +42,11 @@ li {
 
 nav ul li:last-child a {
   font-weight: bold;
+}
+
+nav ul li:last-child a:hover {
+  font-weight: bold;
+  color: #5f9ea0;
 }
 
 body {
@@ -196,7 +206,7 @@ footer p {
 }
 
 .section-text button:hover {
-  background-color: #4f8b8a; /* Darker teal for hover effect */
+  background-color: white; /* Darker teal for hover effect */
 }
 
 /* Responsive Layout for Smaller Screens */

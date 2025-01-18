@@ -14,13 +14,13 @@ function Footer() {
                 {/* Social Media Icons */}
                 <div className="social-icons">
                     <a href="#" target="_blank" rel="noopener noreferrer">
-                        <img src="facebook-icon.png" alt="Facebook" className="social-icon"/>
+                        <i className="fab fa-facebook" style={{ fontSize: '40px', color: 'black'}}></i>
                     </a>
                     <a href="#" target="_blank" rel="noopener noreferrer">
-                        <img src="twitter-icon.png" alt="Twitter" className="social-icon"/>
+                        <i className="fab fa-twitter" style={{ fontSize: '40px', color: 'black' }}></i>
                     </a>
                     <a href="#" target="_blank" rel="noopener noreferrer">
-                        <img src="instagram-icon.png" alt="Instagram" className="social-icon"/>
+                        <i className="fab fa-instagram" style={{ fontSize: '40px', color: 'black' }}></i>
                     </a>
                 </div>
             </div>
