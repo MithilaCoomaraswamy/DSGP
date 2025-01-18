@@ -1,4 +1,4 @@
-function Body() {
+function Home() {
     return (
         <>
         <div className="section-container">
@@ -73,4 +73,4 @@ function Body() {
     );
 }
 
-export default Body;
+export default Home;

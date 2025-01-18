@@ -1,23 +1,22 @@
+import { Link } from 'react-router-dom';
+
 function Header(){
     return(
         <header>
             <nav> 
                 <ul>
                     <div className="heading">
-                        <a href="#">
+                        <Link to="/">
                             <img src="logo.png" alt="FemPredict Logo"  className="logo"/>
-                        </a>
+                        </Link>
                     </div>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Period Tracker</a></li>
-                    <li><a href="#">PCOS Quiz</a></li>
-                    <li><a href="#">Chatbot</a></li>
-                    <li><a href="#">Exercise Recommender</a></li>
-                    <li><a href="#">
-                            <i className="fas fa-user-circle" style={{ fontSize: '40px', color: 'black'}}></i>
-                        </a>
-                    </li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/period_tracker">Period Tracker</Link></li>
+                    <li><Link to="/pcos_quiz">PCOS Quiz</Link></li>
+                    <li><Link to="/chatbot">Chatbot</Link></li>
+                    <li><Link to="/exercise_recommender">Exercise Recommender</Link></li>
+                    <li><Link to="/profile"><i className="fas fa-user-circle" style={{ fontSize: '40px', color: 'black'}}></i></Link></li>
                 </ul>
             </nav>
         
@@ -25,3 +24,4 @@ function Header(){
     );
     }
     export default Header
+
