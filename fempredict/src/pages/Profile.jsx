@@ -34,59 +34,63 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <h1>Welcome to Your Profile</h1>
-
       <div className="auth-container">
-        <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+        <div className="left-side">
+          <img src="your-image.jpg" alt="Description" />
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <div className="right-side">
+          <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {!isLogin && (
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="email">Email</label>
               <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
             </div>
-          )}
 
-          <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
-        </form>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <p>
-          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
-          <button onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Sign Up' : 'Login'}
-          </button>
-        </p>
+            {!isLogin && (
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
+
+            <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
+          </form>
+
+          <p>
+            {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+            <button onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? 'Sign Up' : 'Login'}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

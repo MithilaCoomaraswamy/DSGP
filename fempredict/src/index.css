@@ -15,7 +15,7 @@ nav a:hover{
   font-weight: bold;
 }
 
-nav a.clicked{
+nav a.active{
   font-weight: bold;
 }
 
@@ -241,4 +241,77 @@ footer p {
   color: black;    /* Set the color to black */
 }
 
+.profile-container {
+  text-align: center;
+  padding: 20px;
+}
 
+.auth-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: #B9AEDC;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+/* button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+} */
+
+/* button:hover {
+  background-color: #45a049;
+} */
+
+p {
+  text-align: center;
+}
+
+/* button {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
+} */
+
+/* button:hover {
+  text-decoration: underline;
+} */
+
+.profile-container button {
+  padding: 10px 20px;
+  background-color: #5f9ea0; /* Soft teal or choose your brand color */
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.section-text button:hover {
+  background-color: white; /* Darker teal for hover effect */
+}
