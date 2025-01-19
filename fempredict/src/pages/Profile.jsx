@@ -36,7 +36,7 @@ const Profile = () => {
     <div className="profile-container">
       <div className="auth-container">
         <div className="left-side">
-          <img src="your-image.jpg" alt="Description" />
+          <img src="profile.png" alt="Description" />
         </div>
 
         <div className="right-side">
