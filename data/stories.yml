@@ -1,0 +1,51 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+
+  - story: PCOS risk assessment
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: check_pcos_risk
+      - action: utter_ask_age
+      - intent: provide_data
+        entities:
+          - age: "25"
+      - action: utter_ask_bmi
+      - intent: provide_data
+        entities:
+          - bmi: "28"
+      - action: utter_ask_symptoms
+      - intent: provide_data
+        entities:
+          - symptoms: "irregular periods"
+      - action: action_predict_pcos
+      - action: utter_submit_pcos
