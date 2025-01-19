@@ -4,6 +4,7 @@ import Footer from './Footer.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
+import Profile from './pages/Profile.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* Other routes */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
       <Footer />
