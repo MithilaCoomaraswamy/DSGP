@@ -1,38 +1,66 @@
 function About() {
     return (
+      <section className="about-us">
       <div className="about-page">
-        <h2>About Us</h2>
+        <h3>About Us</h3>
         <p>
-          Welcome to our website! We are passionate about delivering high-quality products and services to our customers.
+        Welcome to our website! We are dedicated to providing effective solutions and support to women managing PCOS 
+        (Polycystic Ovary Syndrome). Our goal is to empower you with the knowledge, tools, and resources needed to 
+        take control of your health and wellbeing.
         </p>
   
         <h3>Our Mission</h3>
         <p>
-          Our mission is to create innovative solutions that improve lives and inspire creativity. We believe in building strong, lasting relationships with our customers by providing exceptional service and value.
+        Our mission is to offer personalized, evidence-based guidance that helps women with PCOS manage their symptoms 
+        and lead healthier lives. We believe in fostering a supportive community, where every woman can feel informed, 
+        confident, and in charge of her journey to better health.
         </p>
   
         <h3>Our Values</h3>
-        <ul>
-          <li><strong>Customer-Centric:</strong> We put our customers first and always strive to meet their needs.</li>
-          <li><strong>Innovation:</strong> We continuously push the boundaries of what's possible, embracing new ideas and technologies.</li>
-          <li><strong>Integrity:</strong> We operate with honesty, transparency, and fairness in everything we do.</li>
-          <li><strong>Quality:</strong> We are committed to delivering only the best products and services.</li>
-        </ul>
-  
-        <h3>Our Story</h3>
-        <p>
-          Founded in 2010, our company started with a small but dedicated team of professionals passionate about technology and design. Over the years, we have grown into a leading name in our industry, constantly evolving to meet the changing needs of our customers.
-        </p>
-  
+          <div className="values-list">
+            <div className="value-item">
+              <h4>Empathy</h4>
+              <p>We understand the challenges of living with PCOS and are here to support you every step of the way.</p>
+            </div>
+            <div className="value-item">
+              <h4>Education</h4>
+              <p>We provide trustworthy, science-backed information to help you make informed decisions about managing PCOS.</p>
+            </div>
+            <div className="value-item">
+              <h4>Holistic Care</h4>
+              <p>We believe in a comprehensive approach to PCOS management, combining lifestyle changes, nutrition, mental health support, and medical guidance.</p>
+            </div>
+          </div>
         <h3>Meet the Team</h3>
         <p>
-          Our diverse and talented team is at the heart of everything we do. From creative designers to experienced engineers, each member brings a unique perspective to the table, working together to achieve our common goals.
+          Our diverse and talented team is at the heart of everything we do. Each member brings a unique perspective to the table, working 
+          together to achieve our common goals.
         </p>
   
-        <p>
-          Thank you for taking the time to learn more about us. We are excited to share our journey with you and look forward to serving you in the future.
-        </p>
+        <div className="team-cards">
+          <div className="card">
+            <img src="20230967.jpg" alt="Team Member 1" />
+            <h4>Mithila Coomaraswamy</h4>
+            <p>Team lead, period tracker designer</p>
+          </div>
+          <div className="card">
+            <img src="team.png" alt="Team Member 2" />
+            <h4>Danishya Shanmuganathan</h4>
+            <p>Chat bot designer</p>
+          </div>
+          <div className="card">
+            <img src="team.png" alt="Team Member 3" />
+            <h4>Harini Crusz</h4>
+            <p>PCOS quiz designer</p>
+          </div>
+          <div className="card">
+            <img src="team.png" alt="Team Member 4" />
+            <h4>Chathuranga Dayarathne</h4>
+            <p>Exercise Recommender deisgner</p>
+          </div>
+        </div>
       </div>
+      </section>
     );
   }
   

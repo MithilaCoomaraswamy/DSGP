@@ -282,3 +282,81 @@ input {
   box-sizing: border-box;
   margin-top: 5px;
 }
+
+.about-us {
+  background-color:#B9AEDC;
+  background-position: center;
+  padding: 20px 40px 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+}
+
+.team-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.card h4 {
+  margin-top: 15px;
+  font-size: 1.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.values-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.value-item {
+  width: 250px;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.value-item h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.value-item p {
+  font-size: 1.1rem;
+  color: black;
+}
+
+/* Meet the Team Section */
+h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 40px;
+}
