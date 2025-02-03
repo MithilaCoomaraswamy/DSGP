@@ -5,7 +5,6 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Profile from './pages/Profile.jsx';
-import PeriodTracker from './pages/PeriodTracker.jsx';
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/period_tracker" element={<PeriodTracker />} />
+
         </Routes>
       </div>
       <Footer />
