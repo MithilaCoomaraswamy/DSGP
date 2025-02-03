@@ -5,7 +5,7 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Profile from './pages/Profile.jsx';
-import PeriodTracker from './pages/PeriodTracker';
+import PeriodTracker from './pages/PeriodTracker.jsx';
 
 function App() {
   return (
