@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function Header() {
+function Header({ openModal }) {
   return (
     <header>
       <nav>
@@ -11,60 +11,44 @@ function Header() {
             </NavLink>
           </div>
           <li>
-            <NavLink 
-              to="/" 
-              activeClassName="active"
-              exact
-            >
+            <NavLink to="/" activeClassName="active" exact>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/about" 
-              activeClassName="active"
-            >
+            <NavLink to="/about" activeClassName="active">
               About
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/period_tracker" 
-              activeClassName="active"
-            >
+            <NavLink to="/period_tracker" activeClassName="active">
               Period Tracker
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/pcos_quiz" 
-              activeClassName="active"
-            >
+            <NavLink to="/pcos_quiz" activeClassName="active">
               PCOS Quiz
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/chatbot" 
-              activeClassName="active"
-            >
+            <NavLink to="/chatbot" activeClassName="active">
               Chatbot
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/exercise_recommender" 
-              activeClassName="active"
-            >
+            <NavLink to="/exercise_recommender" activeClassName="active">
               Exercise Recommender
             </NavLink>
           </li>
+          {/* Login link that opens the modal */}
           <li>
-            <NavLink 
-              to="/profile" 
+            <NavLink
+              to="#"
+              onClick={openModal} // Trigger modal open
+              style={{ display: 'block', textDecoration: 'none' }}
               activeClassName="active"
             >
-              <i className="fas fa-user-circle" style={{ fontSize: '30px', color: 'black' }}></i>
+              Login
             </NavLink>
           </li>
         </ul>

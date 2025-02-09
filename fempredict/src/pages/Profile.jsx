@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const Profile = () => {
-  const [isLogin, setIsLogin] = useState(true); // toggle between login and sign-up
+const Profile = ({ closeModal }) => {
+  const [isLogin, setIsLogin] = useState(true); // Toggle between login and sign-up
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -91,6 +91,9 @@ const Profile = () => {
             </button>
           </p>
         </div>
+
+        {/* Close Modal Button (Cross Icon) */}
+        <button className="close-modal" onClick={closeModal}>×</button>
       </div>
     </div>
   );
