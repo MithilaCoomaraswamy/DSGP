@@ -7,6 +7,7 @@ intents:
   - deny
   - mood_great
   - mood_unhappy
+<<<<<<< HEAD
   - check_pcos_risk
   - provide_data
 
@@ -16,6 +17,10 @@ entities:
   - age
   - bmi
   - symptoms
+=======
+  - bot_challenge
+  - more_info
+>>>>>>> 73be16f (training the model with API)
 
 responses:
   utter_greet:
@@ -37,6 +42,12 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+<<<<<<< HEAD
+=======
+  utter_info:
+  - text: "Here is link to our[website] (https://rasa.com/docs/rasa/custom-actions/)"
+
+>>>>>>> 73be16f (training the model with API)
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

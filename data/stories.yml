@@ -30,6 +30,7 @@ stories:
   - action: utter_goodbye
 
 
+<<<<<<< HEAD
   - story: PCOS risk assessment
     steps:
       - intent: greet
@@ -49,3 +50,9 @@ stories:
           - symptoms: "irregular periods"
       - action: action_predict_pcos
       - action: utter_submit_pcos
+=======
+- story: more_info
+  steps:
+  - intent: more_info
+  - action: utter_info
+>>>>>>> 73be16f (training the model with API)

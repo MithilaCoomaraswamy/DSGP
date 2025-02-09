@@ -25,6 +25,7 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
+<<<<<<< HEAD
 
 
 from rasa_sdk import Action
@@ -53,3 +54,5 @@ class ActionPredictPCOS(Action):
             text=f"Based on your inputs, your PCOS risk is {risk_level}."
         )
         return []
+=======
+>>>>>>> 73be16f (training the model with API)
