@@ -35,10 +35,6 @@ const Profile = ({ closeModal }) => {
   return (
     <div className="profile-container">
       <div className="auth-container">
-        <div className="left-side">
-          <img src="profile.png" alt="Description" />
-        </div>
-
         <div className="right-side">
           <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
 
@@ -65,6 +61,12 @@ const Profile = ({ closeModal }) => {
                 onChange={handleChange}
                 required
               />
+              {/* Forgot Password link under the password field */}
+              {isLogin && (
+                <p className="forgot-password">
+                  <a href="#">Forgot Password?</a>
+                </p>
+              )}
             </div>
 
             {!isLogin && (
