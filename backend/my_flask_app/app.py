@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'  # Your MySQL host
 app.config['MYSQL_USER'] = 'root'  # Your MySQL username
 app.config['MYSQL_PASSWORD'] = ''  # Your MySQL password
-app.config['MYSQL_DB'] = 'user_data'  # The database you created
+app.config['MYSQL_DB'] = 'fempredict'  # The database you created
 
 # Initialize MySQL
 mysql = MySQL(app)
@@ -20,10 +20,10 @@ def register_user():
     data = request.get_json()
 
     # Check if all required fields are present
-    if not data.get('name') or not data.get('email') or not data.get('password'):
-        return jsonify({"message": "Name, email, and password are required!"}), 400
+    if not data.get('username') or not data.get('email') or not data.get('password'):
+        return jsonify({"message": "Username, email, and password are required!"}), 400
     
-    name = data['name']
+    username = data['username']
     email = data['email']
     password = data['password']
     
@@ -32,18 +32,18 @@ def register_user():
 
     # Open a MySQL connection and insert the user into the database
     try:
-        cursor = mysql.connection.cursor()
-        
-        # Check if the email already exists
-        cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
-        existing_user = cursor.fetchone()
+        # Using 'with' statement for cursor management to ensure it is properly closed
+        with mysql.connection.cursor() as cursor:
+            # Check if the email already exists
+            cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
+            existing_user = cursor.fetchone()
 
-        if existing_user:
-            return jsonify({"message": "Email already exists!"}), 400
+            if existing_user:
+                return jsonify({"message": "Email already exists!"}), 400
 
-        # Insert the user data
-        cursor.execute('INSERT INTO users (name, email, password) VALUES (%s, %s, %s)', (name, email, hashed_password))
-        mysql.connection.commit()
+            # Insert the user data
+            cursor.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', (username, email, hashed_password))
+            mysql.connection.commit()
 
         # Return success message
         return jsonify({"message": "User registered successfully!"}), 201
@@ -55,10 +55,6 @@ def register_user():
     except Exception as e:
         # Catch any other errors
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
-
-    finally:
-        # Ensure the cursor is always closed
-        cursor.close()
 
 if __name__ == '__main__':
     app.run(debug=True)
