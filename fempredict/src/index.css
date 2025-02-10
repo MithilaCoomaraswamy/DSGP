@@ -306,9 +306,6 @@ footer p {
   cursor: pointer;
 }
 
-.close-modal:hover {
-  color: red;
-}
 
 form .form-group {
   margin-bottom: 10px;
@@ -345,10 +342,6 @@ button {
   border: none;
   color: #007bff;
   cursor: pointer;
-}
-
-button:hover {
-  text-decoration: underline;
 }
 
 /* Style for Forgot Password link */
