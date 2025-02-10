@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Profile = ({ closeModal }) => {
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and sign-up
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -16,7 +17,7 @@ const Profile = ({ closeModal }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
@@ -27,8 +28,33 @@ const Profile = ({ closeModal }) => {
         alert("Passwords don't match!");
         return;
       }
-      // Perform sign-up logic here
-      console.log('Signing up with', formData);
+
+      // Send data to the backend (Flask API)
+      try {
+        const response = await fetch('http://localhost:5000/register', {  // Replace with your backend URL
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.status === 201) {
+          alert('User registered successfully!');
+          console.log(data);
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred, please try again.');
+      }
     }
   };
 
@@ -37,10 +63,24 @@ const Profile = ({ closeModal }) => {
       <div className="auth-container">
         <div className="right-side">
           <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-
+          <p>Welcome to FemPredict</p>
           <form onSubmit={handleSubmit}>
+            {/* Username input field only visible during sign-up */}
+            {!isLogin && (
+              <div className="form-group">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  placeholder="Username"
+                />
+              </div>
+            )}
+
             <div className="form-group">
-              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -48,11 +88,11 @@ const Profile = ({ closeModal }) => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                placeholder="Email"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
@@ -60,6 +100,7 @@ const Profile = ({ closeModal }) => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                placeholder="Password"
               />
               {/* Forgot Password link under the password field */}
               {isLogin && (
@@ -71,7 +112,6 @@ const Profile = ({ closeModal }) => {
 
             {!isLogin && (
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   type="password"
                   id="confirmPassword"
@@ -79,6 +119,7 @@ const Profile = ({ closeModal }) => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
+                  placeholder="Confirm Password"
                 />
               </div>
             )}
