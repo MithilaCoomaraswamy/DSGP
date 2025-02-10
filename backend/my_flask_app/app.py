@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import MySQLdb
 
 app = Flask(__name__)
@@ -17,9 +17,15 @@ mysql = MySQL(app)
 @app.route('/register', methods=['POST'])
 def register_user():
     # Get the data from the request
-    name = request.json.get('name')
-    email = request.json.get('email')
-    password = request.json.get('password')
+    data = request.get_json()
+
+    # Check if all required fields are present
+    if not data.get('name') or not data.get('email') or not data.get('password'):
+        return jsonify({"message": "Name, email, and password are required!"}), 400
+    
+    name = data['name']
+    email = data['email']
+    password = data['password']
     
     # Hash the password
     hashed_password = generate_password_hash(password)
@@ -38,11 +44,20 @@ def register_user():
         # Insert the user data
         cursor.execute('INSERT INTO users (name, email, password) VALUES (%s, %s, %s)', (name, email, hashed_password))
         mysql.connection.commit()
-        
+
+        # Return success message
         return jsonify({"message": "User registered successfully!"}), 201
+
     except MySQLdb.Error as e:
-        return jsonify({"message": str(e)}), 500
+        # Catch MySQL errors and provide a message
+        return jsonify({"message": f"Error: {str(e)}"}), 500
+
+    except Exception as e:
+        # Catch any other errors
+        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+
     finally:
+        # Ensure the cursor is always closed
         cursor.close()
 
 if __name__ == '__main__':
