@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify, session
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS  # Import CORS
+
 import MySQLdb
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app)
 
 # MySQL configurations
 app.config['MYSQL_HOST'] = 'localhost'
