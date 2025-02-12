@@ -6,7 +6,7 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Profile from './pages/Profile.jsx';
-import Dashboard from './pages/Tracker.jsx';
+import Tracker from './pages/Tracker.jsx';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
