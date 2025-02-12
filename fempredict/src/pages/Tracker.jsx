@@ -72,29 +72,94 @@ const Tracker = () => {
       </form>
       {selectedDate && <h3>Selected Date: {selectedDate}</h3>}
       {chartData && (
-        <div className="chart-container" style={{ textAlign: 'center' }}>
+        <div className="chart-container" style={{ textAlign: 'center', position: 'relative' }}>
           <h3>Menstrual Cycle Phases</h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px' }}>
-            {chartData.map((item) => (
+          <div
+            style={{
+              position: 'relative',
+              width: '400px',  // Fixed circle size
+              height: '400px', // Fixed circle size to maintain aspect ratio
+              margin: '0 auto',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                transform: 'rotate(0deg)', // No rotation of the elements
+              }}
+            >
+              {chartData.map((item, index) => {
+                const angle = (360 / chartData.length) * index; // Angle calculation for each box
+                const translateX = Math.cos((angle * Math.PI) / 180) * 160; // X position along the circle
+                const translateY = Math.sin((angle * Math.PI) / 180) * 160; // Y position along the circle
+
+                return (
+                  <div
+                    key={item.day}
+                    style={{
+                      position: 'absolute',
+                      left: '50%',
+                      top: '50%',
+                      transform: `translate(-50%, -50%) translate(${translateX}px, ${translateY}px)`,
+                      padding: '10px',
+                      borderRadius: '50%', // Circular shape
+                      backgroundColor: item.fill,
+                      color: '#fff',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                      width: '50px', // Fixed size for the boxes, big enough to fit two digits
+                      height: '50px', // Fixed height for boxes
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                    onClick={() => {
+                      setSelectedDay(item.day);
+                      setSelectedDate(item.date);
+                    }}
+                  >
+                    <strong>{item.day}</strong>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Middle circle for displaying phase names */}
+            {selectedDate && (
               <div
-                key={item.day}
                 style={{
-                  padding: '10px',
-                  borderRadius: '5px',
-                  backgroundColor: item.fill,
-                  color: '#fff',
-                  cursor: 'pointer'
-                }}
-                onClick={() => {
-                  setSelectedDay(item.day);
-                  setSelectedDate(item.date);
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  padding: '20px',
+                  backgroundColor: '#fff',
+                  borderRadius: '50%',
+                  textAlign: 'center',
+                  width: '200px', // Fixed size for the middle circle
+                  height: '200px', // Fixed size for the middle circle
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
               >
-                <strong>Day {item.day}</strong>
-                <br />
-                {item.phase}
+                <div>
+                  <h4>{chartData[selectedDay - 1]?.phase}</h4>
+                  <p>{selectedDate}</p>
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       )}
