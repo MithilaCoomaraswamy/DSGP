@@ -135,7 +135,7 @@ footer p {
   border-radius: 8px; /* Optional: rounded corners for sections */
   width: 48%; /* Each section takes up 48% of the container's width */
   height: 300px; /* Limiting the height of each section */
-  border: 2px solid black; /* Add a border with a specific color (matches the theme) */
+ 
 }
 
 /* Section 1 background color */
