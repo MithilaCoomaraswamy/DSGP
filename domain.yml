@@ -7,20 +7,31 @@ intents:
   - deny
   - mood_great
   - mood_unhappy
-<<<<<<< HEAD
-  - check_pcos_risk
-  - provide_data
-
-
-
-entities:
-  - age
-  - bmi
-  - symptoms
-=======
-  - bot_challenge
   - more_info
->>>>>>> 73be16f (training the model with API)
+  - ask_pcos_info
+  - ask_pcos_symptoms
+  - ask_pcos_diagnosis
+  - ask_pcos_common
+  - pcos_causes
+  - ask_pcos_health_risks
+  - ask_pcos_genetic
+  - ask_pcos_hormones
+  - ask_pcos_weight
+  - pcos_diagnosis
+  - ask_pcos_treatment
+  - ask_pcos_cure
+  - ask_pcos_medications
+  - ask_pcos_diet
+  - ask_pcos_exercise
+  - ask_pcos_fertility
+  - ask_pcos_food
+  - ask_pcos_stress
+  - ask_pcos_sleep
+  - ask_pcos_diabetes
+  - ask_pcos_heart
+  - ask_pcos_risks
+  - ask_pcos_thyroid
+
 
 responses:
   utter_greet:
@@ -42,12 +53,82 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-<<<<<<< HEAD
-=======
-  utter_info:
+  utter_web_info:
   - text: "Here is link to our[website] (https://rasa.com/docs/rasa/custom-actions/)"
 
->>>>>>> 73be16f (training the model with API)
+  utter_pcos_info:
+  - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
+
+  utter_pcos_info2:
+  - text: Polycystic Ovary Syndrome (PCOS) is a complex hormonal disorder that affects women of reproductive age. It is characterized by an imbalance in reproductive hormones, particularly an excess production of androgens, which are male hormones present in women in small amounts. This imbalance disrupts the normal development and release of eggs during the menstrual cycle, leading to irregular periods, infertility, or anovulation (the absence of ovulation).
+
+  utter_pcos_symptoms:
+  - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
+
+  utter_pcos_health_risks:
+  - text: "PCOS can lead to several health risks, including Type 2 Diabetes, High Blood Pressure, Heart Disease, Sleep Apnea, Depression, Anxiety, and Endometrial Cancer."
+
+  utter_pcos_diagnosis:
+  - text: "PCOS is diagnosed based on a review of symptoms, medical history, physical examination, blood tests to check hormone levels, and ultrasound imaging of the ovaries."
+
+  utter_pcos_common:
+  - text: "Yes, PCOS is a common condition, affecting about 1 in 10 women of reproductive age."
+
+  utter_pcos_causes:
+  - text: "Insulin Resistance – Leads to higher insulin levels, which stimulate the ovaries to produce more androgens."
+  - text: "Hormonal Imbalance – Increased testosterone levels cause symptoms like acne and hair growth."
+  - text: "Genetics – PCOS often runs in families."
+  - text: "Inflammation – Chronic low-grade inflammation may contribute to PCOS."
+
+  utter_pcos_genetic:
+  - text: "Yes, PCOS can run in families, suggesting a genetic component."
+
+  utter_pcos_hormones:
+  - text: "PCOS affects hormone levels by increasing androgens, disrupting ovulation, and causing irregular menstrual cycles."
+
+  utter_pcos_treatment:
+  - text: "PCOS treatment includes lifestyle changes, medications like Metformin, and hormonal therapy."
+
+  utter_pcos_weight:
+  - text: "Yes, PCOS can cause weight gain due to insulin resistance, which makes it harder for the body to use glucose efficiently. This can lead to weight gain or difficulty losing weight."
+
+  utter_pcos_cure:
+  - text: "There is currently no cure for PCOS, but symptoms can be managed with medications and lifestyle changes. It is important to work with a healthcare provider to find the best treatment for you."
+
+  utter_pcos_medications:
+  - text: "Medications for PCOS may include birth control pills to regulate periods, anti-androgens to reduce hair growth and acne, and metformin to help manage insulin resistance. Other medications may be prescribed based on individual needs."
+
+  utter_pcos_diet:
+  - text: "A healthy, balanced diet is important for managing PCOS. Focus on whole foods such as fruits, vegetables, lean proteins, and whole grains. A low-glycemic diet that controls blood sugar levels can be beneficial for those with insulin resistance."
+
+  utter_pcos_exercise:
+  - text: "Exercise can help manage PCOS symptoms, particularly by improving insulin sensitivity, aiding in weight management, and reducing stress. Activities like cardio, strength training, and yoga are often recommended."
+#  - text: heres our website link to exercise recommendation
+
+  utter_pcos_fertility:
+  - text: "PCOS can affect fertility by disrupting ovulation, making it more difficult to get pregnant. However, many people with PCOS can conceive with proper treatment and lifestyle adjustments."
+
+  utter_pcos_food:
+  - text: "Foods that can help with PCOS include high-fiber vegetables, whole grains, lean proteins, and healthy fats. It's also important to avoid processed foods and foods high in refined sugars."
+
+  utter_pcos_stress:
+  - text: "Stress can worsen PCOS symptoms by increasing hormone imbalances. Managing stress through relaxation techniques, mindfulness, exercise, and healthy lifestyle choices can help reduce the impact of stress on PCOS."
+
+  utter_pcos_sleep:
+  - text: "Yes, poor sleep can worsen PCOS symptoms. Sleep disorders are common in people with PCOS, and inadequate rest can affect hormone levels, insulin resistance, and stress levels."
+
+  utter_pcos_diabetes:
+  - text: "PCOS increases the risk of developing Type 2 Diabetes due to insulin resistance. Managing insulin levels and maintaining a healthy lifestyle can help reduce this risk."
+
+  utter_pcos_heart:
+  - text: "PCOS is linked to an increased risk of heart disease due to factors such as insulin resistance, high cholesterol, and high blood pressure. It is important to manage these risk factors with lifestyle changes and medical treatment."
+
+  utter_pcos_risks:
+  - text: "Long-term risks of PCOS include Type 2 Diabetes, heart disease, high blood pressure, sleep apnea, depression, and even endometrial cancer due to prolonged irregular periods and hormonal imbalances."
+
+  utter_pcos_thyroid:
+  - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

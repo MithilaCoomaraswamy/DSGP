@@ -29,30 +29,129 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
-
-<<<<<<< HEAD
-  - story: PCOS risk assessment
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: check_pcos_risk
-      - action: utter_ask_age
-      - intent: provide_data
-        entities:
-          - age: "25"
-      - action: utter_ask_bmi
-      - intent: provide_data
-        entities:
-          - bmi: "28"
-      - action: utter_ask_symptoms
-      - intent: provide_data
-        entities:
-          - symptoms: "irregular periods"
-      - action: action_predict_pcos
-      - action: utter_submit_pcos
-=======
-- story: more_info
+- story: Fetch PCOS information
   steps:
-  - intent: more_info
-  - action: utter_info
->>>>>>> 73be16f (training the model with API)
+  - intent: ask_pcos_info
+  - action: utter_pcos_info
+
+- story: website_information
+  steps:
+  - intent: web_info
+  - action: utter_web_info
+
+- story: PCOS health risks
+  steps:
+  - intent: ask_pcos_health_risks
+  - action: utter_pcos_health_risks
+
+- story: pcos_symptoms
+  steps:
+  - intent: ask_pcos_symptoms
+  - action: utter_pcos_symptoms
+
+- story: pcos_diagnosis
+  steps:
+  - intent: ask_pcos_diagnosis
+  - action: utter_pcos_diagnosis
+
+- story: pcos_common
+  steps:
+  - intent: ask_pcos_common
+  - action: utter_pcos_common
+
+- story: pcos_factors
+  steps:
+  - intent: pcos_causes
+  - action: utter_pcos_causes
+
+- story: PCOS genetic link
+  steps:
+  - intent: ask_pcos_genetic
+  - action: utter_pcos_genetic
+
+- story: PCOS and hormones
+  steps:
+  - intent: ask_pcos_hormones
+  - action: utter_pcos_hormones
+
+- story: PCOS symptoms
+  steps:
+  - intent: ask_pcos_symptoms
+  - action: utter_pcos_symptoms
+
+- story: PCOS and weight gain
+  steps:
+  - intent: ask_pcos_weight
+  - action: utter_pcos_weight
+
+- story: PCOS diagnosis
+  steps:
+  - intent: ask_pcos_diagnosis
+  - action: utter_pcos_diagnosis
+
+- story: PCOS treatment options
+  steps:
+  - intent: ask_pcos_treatment
+  - action: utter_pcos_treatment
+
+- story: PCOS cure
+  steps:
+  - intent: ask_pcos_cure
+  - action: utter_pcos_cure
+
+- story: PCOS medications
+  steps:
+  - intent: ask_pcos_medications
+  - action: utter_pcos_medications
+
+- story: PCOS diet
+  steps:
+  - intent: ask_pcos_diet
+  - action: utter_pcos_diet
+
+- story: PCOS and exercise
+  steps:
+  - intent: ask_pcos_exercise
+  - action: utter_pcos_exercise
+
+- story: PCOS and pregnancy
+  steps:
+  - intent: ask_pcos_fertility
+  - action: utter_pcos_fertility
+
+- story: Best foods for PCOS
+  steps:
+  - intent: ask_pcos_food
+  - action: utter_pcos_food
+
+- story: PCOS and stress
+  steps:
+   - intent: ask_pcos_stress
+   - action: utter_pcos_stress
+
+- story: PCOS and sleep
+  steps:
+  - intent: ask_pcos_sleep
+  - action: utter_pcos_sleep
+
+- story: PCOS and diabetes
+  steps:
+  - intent: ask_pcos_diabetes
+  - action: utter_pcos_diabetes
+
+- story: PCOS and heart disease
+  steps:
+  - intent: ask_pcos_heart
+  - action: utter_pcos_heart
+
+- story: PCOS risks
+  steps:
+  - intent: ask_pcos_risks
+  - action: utter_pcos_risks
+
+- story: PCOS and thyroid
+  steps:
+  - intent: ask_pcos_thyroid
+  - action: utter_pcos_thyroid
+
+
