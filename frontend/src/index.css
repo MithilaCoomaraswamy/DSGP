@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+nav a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+    padding: 8px;
+    font-family: 'Poppins', sans-serif; 
+    text-decoration: none;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+nav a:hover{
+  font-weight: bold;
+}
+
+nav a.active{
+  font-weight: bold;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between; /* Space out logo and links */
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Vertically center items */
+}
+
+h1{
+  font-family:'Poppins', sans-serif; 
+}
+
+li {
+  display: flex;
+  list-style-type: none;
+  float: right;
+  text-align: center;
+  justify-content: right;
+  padding: 0;
+  font-size: 17px;
+
+}
+
+body {
+  background-color: #cfbaea;
+  color: black;
+  padding: 60px;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif; 
+  text-align: center;
+  border-radius: 50px;
+}
+
+nav {
+  background-color: white;
+  overflow: hidden;
+  border-radius: 5px;
+  width: 100%; 
+  margin: 0 auto; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+footer {
+  background-color: white; /* Light grey background */
+  border-radius: 5px;
+  text-align: center;         /* Center text */
+  padding: 20px;              /* Padding around the footer */
+  font-family: 'Poppins', sans-serif; /* Use the same font as the rest of the site */
+  margin-top: 30px;           /* Add space above the footer */
+}
+
+.footer-content {
+  max-width: 1200px;  /* Max width to keep the content centered */
+  margin: 0 auto;     /* Center align the content */
+}
+
+footer p {
+  color: black;           /* Dark color for text */
+  font-size: 16px;       /* Font size for copyright text */
+}
+
+.footer-links {
+  margin: 20px 0;        /* Space between copyright and links */
+}
+
+.footer-links a {
+  text-decoration: none; /* Remove underline */
+  color: black;           /* Link color */
+  font-size: 14px;       /* Font size for links */
+  margin: 0 10px;        /* Space between links */
+}
+
+.footer-links a:hover {
+  font-weight: bold;        /* Change color on hover */
+}
+
+.social-icons {
+  margin-top: 20px;      /* Space above the social icons */
+}
+
+.social-icons a {
+  margin: 0 15px;        /* Space between the icons */
+}
+
+.social-icon {
+  width: 30px;           /* Icon size */
+  height: auto;          /* Maintain aspect ratio */
+}
+
+/* Optional: Add hover effect to social icons */
+.social-icons a:hover .social-icon {
+  opacity: 0.8;          /* Slightly fade on hover */
+}
+
+
+
+/* General Section Container to hold two sections side by side */
+.section-container {
+  display: flex;
+  justify-content: space-between; /* Space between sections */
+  gap: 20px;  /* Add space between the sections */
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+/* General Section Styling */
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px; /* Optional: rounded corners for sections */
+  width: 48%; /* Each section takes up 48% of the container's width */
+  height: 300px; /* Limiting the height of each section */
+ 
+}
+
+/* Section 1 background color */
+.section:nth-of-type(1) {
+  background-color: white; /* Soft Rose */
+}
+
+/* Section 2 background color */
+.section:nth-of-type(2) {
+  background-color: white; /* Lavender */
+}
+
+/* Section Content Styling */
+.section-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-image {
+  flex: 0 0 50%;        /* Set image container to take up 50% width */
+  height: 100%;         /* Make the image container take up the full height of the section */
+  overflow: hidden;     /* Hide overflow in case the image doesn't exactly match the aspect ratio */
+}
+
+.left-side img{
+  width: 100%;         
+  height: 100%;         
+  object-fit: cover;    
+  border-radius: 8px; 
+}
+
+.section-image img {
+  width: 100%;          /* Make the image fill the full width of the container */
+  height: 100%;         /* Make the image fill the full height of the container */
+  object-fit: cover;    /* Ensure the image covers the entire container without distortion */
+  border-radius: 8px;   /* Optional: rounded corners */
+}
+
+.section-text {
+  flex: 1;              /* Allow the text container to take up the remaining space */
+  margin-left: 20px;    /* Space between the image and the text */
+}
+
+.section-text h2 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.section-text p {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.section-text button {
+  padding: 10px 20px;
+  background-color: #B9AEDC; /* Soft teal or choose your brand color */
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.section-text button:hover {
+  background-color: white; /* Darker teal for hover effect */
+}
+
+/* Responsive Layout for Smaller Screens */
+@media (max-width: 768px) {
+  /* When screen size is small, stack the sections vertically */
+  .section-container {
+      flex-direction: column; /* Stack sections vertically */
+  }
+
+  .section {
+      width: 100%; /* Make each section take full width on smaller screens */
+      margin-bottom: 20px; /* Adds space between stacked sections */
+  }
+
+  .section-image, .section-text {
+      width: 100%; /* Full width for both image and text */
+  }
+
+  .section-image img {
+      width: 100%; /* Make the image responsive */
+      height: auto; /* Let the height adjust automatically for small screens */
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center; /* Vertically center the logo */
+}
+
+.heading img.logo {
+  width: 200px; /* Increase width to make the logo bigger */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 60px; /* Increase max height to allow a larger logo */
+}
+
+.social-icon {
+  font-size: 40px; /* Set the size to 40px */
+  color: black;    /* Set the color to black */
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Modal content (the profile form) */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark background for the modal */
+}
+
+.auth-container {
+  position: relative;
+  width: 400px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.right-side {
+  width: 100%;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+
+form .form-group {
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #b1a1ed;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+button {
+  background: none;
+  border: none;
+  color: #b1a1ed;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; 
+  font-size: 16px;
+}
+
+/* Style for Forgot Password link */
+.forgot-password {
+  margin-top: 5px;
+  text-align: right;
+}
+
+.forgot-password a {
+  color: #b1a1ed;
+  text-decoration: none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.about-us {
+  background-color:#B9AEDC;
+  background-position: center;
+  padding: 20px 40px 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+}
+
+.team-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.card h4 {
+  margin-top: 15px;
+  font-size: 1.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.values-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.value-item {
+  width: 250px;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.value-item h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.value-item p {
+  font-size: 1.1rem;
+  color: black;
+}
+
+/* Meet the Team Section */
+h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 40px;
+}
