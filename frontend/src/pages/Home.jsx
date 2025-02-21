@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';  // Import Axios
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Reset success/error messages
+    setSuccessMessage('');
+    setError('');
+
     // Handle the login logic here
     if (email === '' || password === '') {
       setError('Please fill out both fields');
@@ -14,6 +21,23 @@ const LoginForm = () => {
       setError('');
       console.log('Form submitted:', { email, password });
       // You can call your authentication function here
+    }
+    try {
+      // Make the POST request to the Flask API endpoint
+      const response = await axios.post('http://localhost:5000/login', {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        // Success message
+        setSuccessMessage('Login successful!');
+        console.log('Success:', response.data);
+      }
+    } catch (err) {
+      // Error handling
+      setError('Invalid credentials');
+      console.error('Error:', err.response ? err.response.data : err);
     }
   };
 
