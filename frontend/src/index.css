@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+
+
 nav a {
     display: flex;
     justify-content: flex-end;
@@ -116,8 +118,7 @@ footer p {
 }
 
 
-
-/* General Section Container to hold two sections side by side */
+/* General Section Styling */
 .section-container {
   display: flex;
   justify-content: space-between; /* Space between sections */
@@ -129,55 +130,35 @@ footer p {
 /* General Section Styling */
 .section {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px;
+  background-color: white; /* Set background color to white */
   border-radius: 8px; /* Optional: rounded corners for sections */
-  width: 48%; /* Each section takes up 48% of the container's width */
-  height: 300px; /* Limiting the height of each section */
- 
+  width: 100%; /* Take full width */
+  height: auto; /* Allow the height to adapt to content */
+  box-sizing: border-box; /* Ensure padding doesn't affect the section size */
 }
 
-/* Section 1 background color */
-.section:nth-of-type(1) {
-  background-color: white; /* Soft Rose */
-}
-
-/* Section 2 background color */
-.section:nth-of-type(2) {
-  background-color: white; /* Lavender */
-}
-
-/* Section Content Styling */
-.section-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
+/* Section Image Styling */
 .section-image {
-  flex: 0 0 50%;        /* Set image container to take up 50% width */
-  height: 100%;         /* Make the image container take up the full height of the section */
-  overflow: hidden;     /* Hide overflow in case the image doesn't exactly match the aspect ratio */
-}
-
-.left-side img{
-  width: 100%;         
-  height: 100%;         
-  object-fit: cover;    
-  border-radius: 8px; 
+  width: 50%; /* Adjust image container to take up half of the section */
+  height: 100%; /* Ensure the image container takes the full height */
+  overflow: hidden; /* Hide overflow in case of disproportionate image size */
 }
 
 .section-image img {
-  width: 100%;          /* Make the image fill the full width of the container */
-  height: 100%;         /* Make the image fill the full height of the container */
-  object-fit: cover;    /* Ensure the image covers the entire container without distortion */
-  border-radius: 8px;   /* Optional: rounded corners */
+  width: 100%; /* Make the image fill the width of the container */
+  height: 100%; /* Make the image fill the height of the container */
+  object-fit: cover; /* Make sure the image covers the area without distortion */
+  border-radius: 8px; /* Optional: rounded corners for images */
 }
 
+/* Section Text Styling */
 .section-text {
-  flex: 1;              /* Allow the text container to take up the remaining space */
-  margin-left: 20px;    /* Space between the image and the text */
+  flex: 1; /* Make the text container take the remaining space */
+  margin-left: 20px; /* Space between the image and the text */
+  text-align: center; /* Center the text */
 }
 
 .section-text h2 {
@@ -194,43 +175,78 @@ footer p {
   font-family: 'Poppins', sans-serif; 
 }
 
-.section-text button {
-  padding: 10px 20px;
-  background-color: #B9AEDC; /* Soft teal or choose your brand color */
-  color: black;
-  border: 2px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif; 
-  font-weight: bolder;
-  font-size: 16px;
+/* Section Container with Image and Text */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.section-text button:hover {
-  background-color: white; /* Darker teal for hover effect */
+.section-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  text-align: center;
 }
 
-/* Responsive Layout for Smaller Screens */
+/* Optional: Add some margin at the top for better spacing */
+.section-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.section-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.section-text {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.section-text h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.section-text p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Styling for Responsive Layout */
 @media (max-width: 768px) {
-  /* When screen size is small, stack the sections vertically */
   .section-container {
-      flex-direction: column; /* Stack sections vertically */
+    flex-direction: column; /* Stack sections vertically on smaller screens */
   }
 
   .section {
-      width: 100%; /* Make each section take full width on smaller screens */
-      margin-bottom: 20px; /* Adds space between stacked sections */
+    width: 100%; /* Make sections take full width */
+    margin-bottom: 20px; /* Space between stacked sections */
   }
 
   .section-image, .section-text {
-      width: 100%; /* Full width for both image and text */
+    width: 100%; /* Full width for both image and text */
   }
 
   .section-image img {
-      width: 100%; /* Make the image responsive */
-      height: auto; /* Let the height adjust automatically for small screens */
+    width: 100%; /* Ensure image takes up full width */
+    height: auto; /* Automatically adjust height */
   }
 }
+
 
 .heading {
   display: flex;

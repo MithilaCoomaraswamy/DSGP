@@ -1,76 +1,91 @@
-function Home() {
-    return (
-        <>
-        <div className="section-container">
-            {/* First Section */}
-            <section className="section">
-                <div className="section-content">
-                    <div className="section-image">
-                        <img src="pic1.png" alt="Description 1" />
-                    </div>
-                    <div className="section-text">
-                        <h2>Period Tracker</h2>
-                        <p>Tracking your menstrual cycle has never been easier—or more important. 
-                            With the FemPredict period tracker, you can effortlessly monitor your periods, 
-                            putting you in control of your body.</p>
-                        <button>Click Here</button>
-                    </div>
-                </div>
-            </section>
+import React, { useState } from 'react';
 
-            {/* Second Section */}
-            <section className="section">
-                <div className="section-content">
-                    <div className="section-image">
-                        <img src="pic2.png" alt="Description 2" />
-                    </div>
-                    <div className="section-text">
-                        <h2>PCOS Quiz</h2>
-                        <p>
-                        Polycystic Ovary Syndrome (PCOS) affects millions of women, and recognizing its 
-                        symptoms can be challenging. This quiz helps you identify signs of PCOS, taking the 
-                        first step toward managing your health.</p>
-                        <button>Click Here</button>
-                    </div>
-                </div>
-            </section>
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle the login logic here
+    if (email === '' || password === '') {
+      setError('Please fill out both fields');
+    } else {
+      setError('');
+      console.log('Form submitted:', { email, password });
+      // You can call your authentication function here
+    }
+  };
+
+  return (
+    <div className="login-container">
+      {/* Left section (image) */}
+      <div className="image-container">
+        <img
+          src="pic.png"
+          alt="Image Placeholder"
+          className="login-image"
+        />
+      </div>
+
+      {/* Right section (form) */}
+      <div className="login-form-container">
+        <div className="login-form">
+          {/* Logo at the top center */}
+          <img
+            src="icon.png"
+            alt="Pinterest Logo"
+            className="login-logo"
+          />
+          <h2>Welcome to FemPredict</h2>
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="login-input"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="login-input"
+              />
+              {/* Forgot your password link */}
+              <div className="forgot-password-link">
+                <a href="#">Forgotten your password?</a>
+              </div>
+            </div>
+            <button type="submit" className="login-button">
+              Log In
+            </button>
+          </form>
+
+          {/* Disclaimer about terms and privacy */}
+          <div className="terms-disclaimer">
+            <p>
+              By continuing, you agree to Pinterest's <a href="#">Terms of Service</a> and acknowledge that you've read our{' '}
+              <a href="#">Privacy Policy</a>. Notice at collection.
+            </p>
+          </div>
+          <div className="signup-link">
+            <span>Don't have an account? </span>
+            <a href="#">Sign up</a>
+          </div>
         </div>
-        <div className="section-container">
-            {/* First Section */}
-            <section className="section">
-                <div className="section-content">
-                    <div className="section-image">
-                        <img src="pic3.png" alt="Description 1" />
-                    </div>
-                    <div className="section-text">
-                        <h2>Exercise Recommender</h2>
-                        <p>Looking to build strength, boost energy, lose weight, or simply feel better, 
-                            the FemPredict exercise recommender helps you discover personalized workout 
-                            plans tailored to your preferences and fitness level.</p>
-                        <button>Click Here</button>
-                    </div>
-                </div>
-            </section>
+      </div>
+    </div>
+  );
+};
 
-            {/* Second Section */}
-            <section className="section">
-                <div className="section-content">
-                    <div className="section-image">
-                        <img src="pic4.png" alt="Description 2" />
-                    </div>
-                    <div className="section-text">
-                        <h2>Chatbot</h2>
-                        <p>Have questions about managing your reproductive health or need someone to talk to during
-                            "that time of the month"? Our AI-powered chatbot provides instant, friendly 
-                            assistance at any time.</p>
-                        <button>Click Here</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-        </>
-        
-    );
-}
-
-export default Home;
+export default LoginForm;

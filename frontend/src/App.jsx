@@ -1,52 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
-import Contact from './pages/Contact.jsx';
-import Profile from './pages/Profile.jsx';
-import Tracker from './pages/Tracker.jsx';
-import PCOS from './pages/PCOS.jsx';
-import Recommender from './pages/Recommender.jsx'
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/about";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsofService from "./pages/TermsofService"
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+    return (
+      <>
+      <Home></Home>
+      </>
 
-  // Function to open the modal
-  const openModal = () => setIsModalOpen(true);
-
-  // Function to close the modal
-  const closeModal = () => setIsModalOpen(false);
-
-  return (
-    <Router>
-      {/* Pass the openModal function to Header */}
-      <Header openModal={openModal} />
-
-      {/* Modal overlay and Profile Component */}
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <Profile closeModal={closeModal} />
-          </div>
-        </div>
-      )}
-
-      <div className="main-content">
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/about" exact element={<About />} />
-          <Route path="/contact" exact element={<Contact />} />
-          <Route path="/period_tracker" exact element={<Tracker />} />
-          <Route path="/pcos_quiz" exact element={<PCOS />} />
-          <Route path="/exercise_recommender" exact element={<Recommender />} />
-        </Routes>
-      </div>
-
-      <Footer />
-    </Router>
-  );
+    );
 }
 
 export default App;
