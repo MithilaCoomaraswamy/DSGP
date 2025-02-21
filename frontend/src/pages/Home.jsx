@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';  // Import Axios
+import axios from 'axios';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [showSignUp, setShowSignUp] = useState(false); // State for toggling the Sign Up form
+  const [showForgotPassword, setShowForgotPassword] = useState(false); // State for toggling the Forgot Password form
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const LoginForm = () => {
       console.log('Form submitted:', { email, password });
       // You can call your authentication function here
     }
+
     try {
       // Make the POST request to the Flask API endpoint
       const response = await axios.post('http://localhost:5000/login', {
@@ -39,6 +42,16 @@ const LoginForm = () => {
       setError('Invalid credentials');
       console.error('Error:', err.response ? err.response.data : err);
     }
+  };
+
+  const handleSignUpClick = () => {
+    setShowSignUp(true);
+    setShowForgotPassword(false); // Hide the Forgot Password form if it's open
+  };
+
+  const handleForgotPasswordClick = () => {
+    setShowForgotPassword(true);
+    setShowSignUp(false); // Hide the Sign Up form if it's open
   };
 
   return (
@@ -63,49 +76,68 @@ const LoginForm = () => {
           />
           <h2>Welcome to FemPredict</h2>
           {error && <div className="error-message">{error}</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="login-input"
-              />
+
+          {/* Conditionally render Sign Up or Forgot Password form */}
+          {showSignUp ? (
+            <div>
+              <h3>Sign Up Form</h3>
+              {/* Add your Sign Up form here */}
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="login-input"
-              />
-              {/* Forgot your password link */}
-              <div className="forgot-password-link">
-                <a href="#">Forgot password?</a>
+          ) : showForgotPassword ? (
+            <div>
+              <h3>Forgot Password Form</h3>
+              {/* Add your Forgot Password form here */}
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="login-input"
+                />
               </div>
-            </div>
-            <button type="submit" className="login-button">
-              Log In
-            </button>
-          </form>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="login-input"
+                />
+                {/* Forgot your password link */}
+                <div className="forgot-password-link">
+                  <a href="#" onClick={handleForgotPasswordClick}>Forgot password?</a>
+                </div>
+              </div>
+              <button type="submit" className="login-button">
+                Log In
+              </button>
+            </form>
+          )}
 
           {/* Disclaimer about terms and privacy */}
           <div className="terms-disclaimer">
             <p>
-              By continuing, you agree to FemPredict's <a href="#">Terms of Service</a> and acknowledge that you've read our{' '}
-              <a href="#">Privacy Policy</a>
+              By continuing, you agree to FemPredict's 
+              <a href="TermsofService.jsx" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
+              <a href="C:\Users\mithi\OneDrive\Downloads\GitHub\DSGP\frontend\src\pages\PrivacyPolicy.jsx" target="_blank">Privacy Policy</a>
             </p>
           </div>
-          <div className="signup-link">
-            <span>Don't have an account? </span>
-            <a href="#">Sign up</a>
-          </div>
+
+          {/* Sign Up link */}
+          {!showSignUp && !showForgotPassword && (
+            <div className="signup-link">
+              <span>Don't have an account? </span>
+              <a href="#" onClick={handleSignUpClick}>Sign up</a>
+            </div>
+          )}
         </div>
       </div>
     </div>
