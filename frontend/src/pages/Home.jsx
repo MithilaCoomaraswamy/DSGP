@@ -63,7 +63,7 @@ const LoginForm = () => {
               />
               {/* Forgot your password link */}
               <div className="forgot-password-link">
-                <a href="#">Forgotten your password?</a>
+                <a href="#">Forgot password?</a>
               </div>
             </div>
             <button type="submit" className="login-button">
@@ -74,8 +74,8 @@ const LoginForm = () => {
           {/* Disclaimer about terms and privacy */}
           <div className="terms-disclaimer">
             <p>
-              By continuing, you agree to Pinterest's <a href="#">Terms of Service</a> and acknowledge that you've read our{' '}
-              <a href="#">Privacy Policy</a>. Notice at collection.
+              By continuing, you agree to FemPredict's <a href="#">Terms of Service</a> and acknowledge that you've read our{' '}
+              <a href="#">Privacy Policy</a>
             </p>
           </div>
           <div className="signup-link">
