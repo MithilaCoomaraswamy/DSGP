@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  // Importing useNavigate for navigation
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');  // For the Sign Up form
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [showSignUp, setShowSignUp] = useState(false); // State for toggling the Sign Up form
-  const [showForgotPassword, setShowForgotPassword] = useState(false); // State for toggling the Forgot Password form
-  const [emailSent, setEmailSent] = useState(false); // State for email sent status
-  const [emailForSent, setEmailForSent] = useState(''); // Store email to show after submission
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailForSent, setEmailForSent] = useState('');
+
+  const navigate = useNavigate();  // Initialize the useNavigate hook
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setSuccessMessage('');
     setError('');
 
@@ -30,6 +32,9 @@ const LoginForm = () => {
       if (response.status === 200) {
         setSuccessMessage('Login successful!');
         console.log('Success:', response.data);
+        
+        // After successful login, navigate to the profile page
+        navigate('/profile');
       }
     } catch (err) {
       setError('Invalid credentials');
@@ -39,7 +44,6 @@ const LoginForm = () => {
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-
     setSuccessMessage('');
     setError('');
 
@@ -64,7 +68,6 @@ const LoginForm = () => {
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
-
     setError('');
     setSuccessMessage('');
 
@@ -74,13 +77,12 @@ const LoginForm = () => {
       setError('');
       console.log('Password reset email sent:', { email });
 
-      // You can make an API call to send a password reset link
       try {
         const response = await axios.post('http://localhost:5000/forgot-password', { email });
         if (response.status === 200) {
           setSuccessMessage('Password reset email sent successfully');
-          setEmailSent(true); // Set emailSent to true after the email is sent
-          setEmailForSent(email); // Store the email for display
+          setEmailSent(true);
+          setEmailForSent(email);
           console.log('Success:', response.data);
         }
       } catch (err) {
@@ -92,22 +94,22 @@ const LoginForm = () => {
 
   const handleSignUpClick = () => {
     setShowSignUp(true);
-    setShowForgotPassword(false); // Hide Forgot Password form if open
+    setShowForgotPassword(false);
   };
 
   const handleForgotPasswordClick = () => {
     setShowForgotPassword(true);
-    setShowSignUp(false); // Hide Sign Up form if open
+    setShowSignUp(false);
   };
 
   const handleBackToLogin = () => {
-    setShowSignUp(false); // Hide Sign Up form
-    setShowForgotPassword(false); // Ensure Forgot Password form is also hidden
+    setShowSignUp(false);
+    setShowForgotPassword(false);
   };
 
   const handleTryAgain = () => {
-    setEmailSent(false); // Allow the user to try again
-    setEmail(''); // Clear the email input field
+    setEmailSent(false);
+    setEmail('');
   };
 
   return (
@@ -122,7 +124,6 @@ const LoginForm = () => {
           <h2>Welcome to FemPredict</h2>
           {error && <div className="error-message">{error}</div>}
 
-          {/* Conditionally render Sign Up, Forgot Password or Login form */}
           {showSignUp ? (
             <div>
               <p>Managing PCOS starts here</p>
@@ -168,7 +169,6 @@ const LoginForm = () => {
           ) : showForgotPassword ? (
             <div>
               {emailSent ? (
-                // Email Sent Message
                 <div>
                   <h3>Email Sent</h3>
                   <p>We sent an email to {emailForSent}. If this email is connected to a FemPredict account, you'll be able to reset your password.</p>
@@ -180,7 +180,6 @@ const LoginForm = () => {
                   </div>
                 </div>
               ) : (
-                // Forgot Password Form
                 <div>
                   <p>Reset your password</p>
                   <form onSubmit={handleForgotPasswordSubmit}>
@@ -239,15 +238,17 @@ const LoginForm = () => {
             </form>
           )}
 
-          <div className="terms-disclaimer">
-            <p>
-              By continuing, you agree to FemPredict's{' '}
-              <a href="TermsofService" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
-              <a href="PrivacyPolicy" target="_blank">Privacy Policy</a>
-            </p>
-          </div>
+          {/* Only show the disclaimer if the user is not on the Forgot Password screen */}
+          {!showForgotPassword && (
+            <div className="terms-disclaimer">
+              <p>
+                By continuing, you agree to FemPredict's{' '}
+                <a href="TermsofService" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
+                <a href="PrivacyPolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              </p>
+            </div>
+          )}
 
-          {/* Back to Login link below the disclaimer */}
           {showSignUp && (
             <div className="back-to-login">
               <span>Already have an account? </span>

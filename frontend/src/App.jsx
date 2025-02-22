@@ -1,20 +1,18 @@
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-} from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/about";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsofService from "./pages/TermsofService"
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginForm from './pages/LoginForm';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'; // Import PrivacyPolicy component
 
-function App() {
-    return (
-      <>
-      <Home></Home>
-      </>
-
-    );
-}
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginForm />} /> {/* Login page route */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* Privacy Policy page route */}
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
+

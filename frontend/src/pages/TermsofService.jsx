@@ -1,4 +1,4 @@
-function TermsOfService() {
+const TermsOfService = () => {
     return (
       <div className="terms-of-service">
         <h2>Terms of Service</h2>
