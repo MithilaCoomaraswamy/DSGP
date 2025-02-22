@@ -1,78 +1,135 @@
-body {
-    background-color: #cfbaea;
-    color: black;
-    padding: 60px;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif; 
-    text-align: center;
-    border-radius: 50px;
-  }
- 
- .profile-page {
+/* Profile Page Layout */
+.profile-page {
   display: flex;
+  background-color: #f6f6f6;
+  min-height: 100vh;
 }
 
 .sidebar {
   width: 250px;
+  background-color: #2b2d42;
   padding: 20px;
-  background-color: white;
-  border-right: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  border-radius: 8px;
+  color: white;
 }
 
 .logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .logo-img {
-  width: 200px; /* Adjust size as needed */
+  width: 80%;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.user-icon {
-  margin-right: 10px;
-}
-
-.user-icon-img {
-  width: 40px; /* Adjust size as needed */
-  height: 40px;
-  border-radius: 50%;
-}
-
-.sidebar h3 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.sidebar ul {
+.sidebar-nav {
   list-style-type: none;
   padding: 0;
+  margin-top: 30px;
 }
 
-.sidebar ul li {
+.sidebar-nav .sidebar-btn {
   margin: 10px 0;
   cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4c5c68;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.sidebar ul li:hover {
-  color: #007bff;
+.sidebar-nav .sidebar-btn:hover {
+  background-color: #1d3557;
+}
+
+.sidebar-btn.btn-danger {
+  background-color: #e63946;
+}
+
+.sidebar-btn.btn-warning {
+  background-color: #ffb703;
 }
 
 .profile-content {
   flex: 1;
-  padding: 20px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-content h2 {
-  margin-top: 0;
+.calendar-period-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendar-container {
+  background-color: #f0f4f8;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.period-tracker-container,
+.chart-container {
+  background-color: #f9fafc;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.period-tracker-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.period-tracker-form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.period-tracker-form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.period-tracker-form button:hover {
+  background-color: #264653;
+}
+
+.chatbot-avatar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.chatbot-avatar .avatar-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.chatbot-avatar:hover .avatar-img {
+  transform: scale(1.1);
+}
+
+.chart-container {
+  margin-top: 30px;
 }
