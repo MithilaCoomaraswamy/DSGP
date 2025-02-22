@@ -118,7 +118,7 @@ const LoginForm = () => {
   return (
     <div className="login-container">
       <div className="image-container">
-        <img src="pic.png" alt="Image Placeholder" className="login-image" />
+        <img src="pic1 (3).png" alt="Image Placeholder" className="login-image" />
       </div>
 
       <div className="login-form-container">
