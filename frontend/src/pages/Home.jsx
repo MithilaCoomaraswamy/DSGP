@@ -171,7 +171,7 @@ const LoginForm = () => {
                 // Email Sent Message
                 <div>
                   <h3>Email Sent</h3>
-                  <p>We sent an email to {emailForSent}. If this email is connected to a Pinterest account, you'll be able to reset your password.</p>
+                  <p>We sent an email to {emailForSent}. If this email is connected to a FemPredict account, you'll be able to reset your password.</p>
                   <p>Didn't get the email? Try these tips from our <a href="#" target="_blank">Help Centre</a>.</p>
                   <button onClick={handleTryAgain} className="login-button">Try Again</button>
                   <div className="back-to-login">
@@ -200,6 +200,9 @@ const LoginForm = () => {
                     </button>
                   </form>
                   {successMessage && <div className="success-message">{successMessage}</div>}
+                  <div className="back-to-login">
+                    <a href="#" onClick={handleBackToLogin}>Back</a>
+                  </div>
                 </div>
               )}
             </div>
@@ -239,8 +242,8 @@ const LoginForm = () => {
           <div className="terms-disclaimer">
             <p>
               By continuing, you agree to FemPredict's{' '}
-              <a href="TermsofService.jsx" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
-              <a href="PrivacyPolicy.jsx" target="_blank">Privacy Policy</a>
+              <a href="TermsofService" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
+              <a href="PrivacyPolicy" target="_blank">Privacy Policy</a>
             </p>
           </div>
 
@@ -248,7 +251,7 @@ const LoginForm = () => {
           {showSignUp && (
             <div className="back-to-login">
               <span>Already have an account? </span>
-              <a href="#" onClick={handleBackToLogin}>Back to Login</a>
+              <a href="#" onClick={handleBackToLogin}>Login</a>
             </div>
           )}
 
