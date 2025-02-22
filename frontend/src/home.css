@@ -169,4 +169,48 @@ body {
   .terms-disclaimer a:hover {
     text-decoration: underline;
   }
+
+  .back-to-login {
+    margin-top: 18px;
+    font-size: 14px;
+    color: black;
+  }
+  
+  .back-to-login a {
+    color: #a48ef6;
+    font-weight: bold;
+    text-decoration: none;
+    font-weight: 600;    
+  }
+  
+  .back-to-login a:hover {
+    text-decoration: underline;
+  }
+    
+  .success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .login-button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #b1a1ed;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .back-to-login {
+    margin-top: 15px;
+  }
+  
+  .back-to-login button {
+    background-color: #b1a1ed;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
   
