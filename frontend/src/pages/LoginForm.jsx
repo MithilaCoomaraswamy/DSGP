@@ -33,6 +33,9 @@ const LoginForm = () => {
         setSuccessMessage('Login successful!');
         console.log('Success:', response.data);
         
+        // Save user data to localStorage
+        localStorage.setItem('user', JSON.stringify(response.data)); // assuming response.data contains user info
+  
         // After successful login, navigate to the profile page
         navigate('/profile');
       }
