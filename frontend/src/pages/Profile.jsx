@@ -208,6 +208,22 @@ const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, trackPer
     trackPeriodStart(); // Track the start dates after submitting the form
   };
 
+  const handleIncrementMenses = () => {
+    setMensesLengthLocal((prev) => parseInt(prev) + 1);
+  };
+
+  const handleDecrementMenses = () => {
+    setMensesLengthLocal((prev) => (parseInt(prev) > 1 ? parseInt(prev) - 1 : 1));
+  };
+
+  const handleIncrementCycle = () => {
+    setCycleLengthLocal((prev) => parseInt(prev) + 1);
+  };
+
+  const handleDecrementCycle = () => {
+    setCycleLengthLocal((prev) => (parseInt(prev) > 1 ? parseInt(prev) - 1 : 1));
+  };
+
   return (
     <div>
       <form className="period-tracker-form" onSubmit={handleSubmit}>
@@ -221,25 +237,32 @@ const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, trackPer
         />
 
         <label htmlFor="menses-length">How many days did your period last?</label>
-        <input
-          type="number"
-          id="menses-length"
-          name="menses-length"
-          placeholder="e.g. 5"
-          value={mensesLength}
-          onChange={(e) => setMensesLengthLocal(e.target.value)}
-        />
+        <div className="input-group">
+          <button type="button" onClick={handleDecrementMenses}>-</button>
+          <input
+            type="number"
+            id="menses-length"
+            name="menses-length"
+            placeholder="5"
+            value={mensesLength}
+            onChange={(e) => setMensesLengthLocal(e.target.value)}
+          />
+          <button type="button" onClick={handleIncrementMenses}>+</button>
+        </div>
                 
         <label htmlFor="cycle-length">How long is your menstrual cycle?</label>
-        <input
-          type="number"
-          id="cycle-length"
-          name="cycle-length"
-          placeholder="e.g. 28"
-          value={cycleLength}
-          onChange={(e) => setCycleLengthLocal(e.target.value)}
-        />
-
+        <div className="input-group">
+          <button type="button" onClick={handleDecrementCycle}>-</button>
+          <input
+            type="number"
+            id="cycle-length"
+            name="cycle-length"
+            placeholder="28"
+            value={cycleLength}
+            onChange={(e) => setCycleLengthLocal(e.target.value)}
+          />
+          <button type="button" onClick={handleIncrementCycle}>+</button>
+        </div>
 
         <button type="submit">Start tracking</button>
       </form>
