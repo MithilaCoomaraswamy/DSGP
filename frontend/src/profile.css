@@ -1,41 +1,60 @@
+/* General body styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #cfbaea;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 /* Profile Page Layout */
 .profile-page {
   display: flex;
-  background-color: #f6f6f6;
   min-height: 100vh;
+  padding: 20px; /* External padding around the layout */
 }
 
 .sidebar {
   width: 250px;
-  background-color: #2b2d42;
+  background-color: white;
   padding: 20px;
-  color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+  border-radius: 15px; /* Rounded corners for the sidebar */
+  margin-right: 20px; /* External spacing between sidebar and content */
 }
 
 .logo {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .logo-img {
   width: 80%;
+  max-width: 120px;
+  height: auto;
 }
 
 .sidebar-nav {
   list-style-type: none;
   padding: 0;
   margin-top: 30px;
+  display: flex;
+  flex-direction: column; /* Ensure vertical stacking */
+  gap: 15px; /* Space between buttons */
 }
 
 .sidebar-nav .sidebar-btn {
-  margin: 10px 0;
-  cursor: pointer;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
-  color: #fff;
+  color: white;
   background-color: #4c5c68;
-  border-radius: 5px;
+  border-radius: 20px; /* Increased border-radius for more rounded corners */
   text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  width: 100%; /* Ensures the buttons take full width */
 }
 
 .sidebar-nav .sidebar-btn:hover {
@@ -50,59 +69,64 @@
   background-color: #ffb703;
 }
 
-.profile-content {
-  flex: 1;
-  padding: 40px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
+/* Calendar and Form Section */
 .calendar-period-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex-grow: 1; /* Allows section to grow in the available space */
 }
 
-.calendar-container {
-  background-color: #f0f4f8;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
+.calendar-container,
 .period-tracker-container,
 .chart-container {
   background-color: #f9fafc;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-container {
+  background-color: #f0f4f8;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
 }
 
 .period-tracker-form label {
   display: block;
   margin: 10px 0 5px;
+  font-weight: 600;
 }
 
 .period-tracker-form input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.period-tracker-form input:focus {
+  border-color: #2a9d8f;
+  outline: none;
 }
 
 .period-tracker-form button {
   margin-top: 15px;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 16px;
   background-color: #2a9d8f;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .period-tracker-form button:hover {
@@ -115,15 +139,15 @@ h2 {
   right: 20px;
   cursor: pointer;
   z-index: 9999;
+  transition: transform 0.3s ease-in-out;
 }
 
 .chatbot-avatar .avatar-img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
 }
 
 .chatbot-avatar:hover .avatar-img {
@@ -132,4 +156,22 @@ h2 {
 
 .chart-container {
   margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    flex-direction: column;
+    padding: 15px; /* Adjusted padding for smaller screens */
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+    margin: 0; /* No right margin on mobile */
+    border-radius: 10px; /* Rounded edges on mobile */
+  }
+
+  .calendar-period-section {
+    gap: 15px;
+  }
 }

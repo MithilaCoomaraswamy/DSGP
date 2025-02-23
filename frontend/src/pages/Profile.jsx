@@ -12,6 +12,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [cycleLength, setCycleLength] = useState('');
+  const [mensesLength, setMensesLength] = useState(''); // New state for menses length
   const [selectedDate, setSelectedDate] = useState(null);
   const [periods, setPeriods] = useState([]); // Store the start dates of each period
   const navigate = useNavigate();
@@ -65,9 +66,9 @@ const Profile = () => {
 
     const cycleDay = diffInDays % cycle;
 
-    if (cycleDay >= 0 && cycleDay <= 5) {
+    if (cycleDay >= 0 && cycleDay < mensesLength) {  // Adjusted condition for menses phase
       return 'menstrual';
-    } else if (cycleDay >= 6 && cycleDay <= 13) {
+    } else if (cycleDay >= mensesLength && cycleDay <= 13) {
       return 'follicular';
     } else if (cycleDay === 14) {
       return 'ovulation';
@@ -144,12 +145,24 @@ const Profile = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="profile-content">
         {user ? (
           <>
-            {/* Calendar Section */}
+            {/* Calendar and Period Tracker Section */}
             <div className="calendar-period-section">
+              
+              {/* Period Tracker Form */}
+              <div className="period-tracker-container">
+                <h2>Track Your Cycle</h2>
+                <PeriodTracker 
+                  setStartDate={setStartDate} 
+                  setCycleLength={setCycleLength} 
+                  setMensesLength={setMensesLength}  // Pass mensesLength state setter
+                  trackPeriodStart={trackPeriodStart} 
+                />
+              </div>
+
+              {/* Calendar Section */}
               <div className="calendar-container">
                 <h2>Track Your Period</h2>
                 <p>Select a date to see your cycle phase.</p>
@@ -159,12 +172,6 @@ const Profile = () => {
                   value={selectedDate}
                   minDate={new Date(startDate)} // Optional: Ensure the calendar starts from the first cycle day
                 />
-              </div>
-
-              {/* Period Tracker Form */}
-              <div className="period-tracker-container">
-                <h2>Track Your Cycle</h2>
-                <PeriodTracker setStartDate={setStartDate} setCycleLength={setCycleLength} trackPeriodStart={trackPeriodStart} />
               </div>
 
               {/* Chart Section */}
@@ -181,28 +188,30 @@ const Profile = () => {
 
       {/* Chatbot Avatar */}
       <div className="chatbot-avatar" onClick={() => alert('Chatbot window opens')}>
-        <img src="chatbot-avatar.png" alt="Chatbot Avatar" className="avatar-img" />
+        <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
       </div>
     </div>
   );
 };
 
 // PeriodTracker Component
-const PeriodTracker = ({ setStartDate, setCycleLength, trackPeriodStart }) => {
+const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, trackPeriodStart }) => {
   const [startDate, setStartDateLocal] = useState('');
   const [cycleLength, setCycleLengthLocal] = useState('');
+  const [mensesLength, setMensesLengthLocal] = useState(''); // Local state for menses length
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStartDate(startDate);
     setCycleLength(cycleLength);
+    setMensesLength(mensesLength);  // Pass mensesLength to the parent
     trackPeriodStart(); // Track the start dates after submitting the form
   };
 
   return (
     <div>
       <form className="period-tracker-form" onSubmit={handleSubmit}>
-        <label htmlFor="start-date">Start Date:</label>
+        <label htmlFor="start-date">When did your last period start?</label>
         <input
           type="date"
           id="start-date"
@@ -211,7 +220,17 @@ const PeriodTracker = ({ setStartDate, setCycleLength, trackPeriodStart }) => {
           onChange={(e) => setStartDateLocal(e.target.value)}
         />
 
-        <label htmlFor="cycle-length">Cycle Length (days):</label>
+        <label htmlFor="menses-length">How many days did your period last?</label>
+        <input
+          type="number"
+          id="menses-length"
+          name="menses-length"
+          placeholder="e.g. 5"
+          value={mensesLength}
+          onChange={(e) => setMensesLengthLocal(e.target.value)}
+        />
+                
+        <label htmlFor="cycle-length">How long is your menstrual cycle?</label>
         <input
           type="number"
           id="cycle-length"
@@ -221,7 +240,8 @@ const PeriodTracker = ({ setStartDate, setCycleLength, trackPeriodStart }) => {
           onChange={(e) => setCycleLengthLocal(e.target.value)}
         />
 
-        <button type="submit">Track Period</button>
+
+        <button type="submit">Start tracking</button>
       </form>
     </div>
   );
