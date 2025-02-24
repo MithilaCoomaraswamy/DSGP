@@ -72,22 +72,26 @@ body {
 /* Calendar and Form Section */
 .calendar-period-section {
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  width: 100%; /* Take full width available */
   flex-grow: 1; /* Allows section to grow in the available space */
+  justify-content: space-between;
 }
 
-.calendar-container,
-.period-tracker-container,
-.chart-container {
-  background-color: #f9fafc;
+.period-tracker-container {
+  flex: 1; /* Takes 1/2 of the container */
   padding: 20px;
+  background-color: #f9fafc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .calendar-container {
+  flex: 1; /* Takes 1/2 of the container */
+  padding: 20px;
   background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
@@ -172,6 +176,7 @@ h2 {
   }
 
   .calendar-period-section {
+    flex-direction: column; /* Stack calendar and period tracker vertically on small screens */
     gap: 15px;
   }
 }

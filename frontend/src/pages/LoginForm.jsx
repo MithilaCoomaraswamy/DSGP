@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Importing useNavigate for navigation
+import { useNavigate } from 'react-router-dom'; // Importing useNavigate for navigation
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  // Separate state for each section
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [signupUsername, setSignupUsername] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [forgotEmail, setForgotEmail] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [showSignUp, setShowSignUp] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [emailForSent, setEmailForSent] = useState('');
+  const [loading, setLoading] = useState(false);  // Added loading state for password reset
 
-  const navigate = useNavigate();  // Initialize the useNavigate hook
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
-  const handleSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage('');
     setError('');
 
-    if (email === '' || password === '') {
+    if (loginEmail === '' || loginPassword === '') {
       setError('Please fill out both fields');
     } else {
       setError('');
-      console.log('Form submitted:', { email, password });
+      console.log('Form submitted:', { loginEmail, loginPassword });
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/login', { email, password });
+      const response = await axios.post('http://localhost:5000/login', { email: loginEmail, password: loginPassword });
       if (response.status === 200) {
         setSuccessMessage('Login successful!');
         console.log('Success:', response.data);
@@ -50,42 +55,46 @@ const LoginForm = () => {
     setSuccessMessage('');
     setError('');
 
-    if (name === '' || email === '' || password === '') {
-      setError('Please fill out all fields');
+    if (signupUsername === '' || signupEmail === '' || signupPassword === '') {
+      if (signupUsername === '') setError('Please enter a username');
+      else if (signupEmail === '') setError('Please enter an email address');
+      else if (signupPassword === '') setError('Please enter a password');
     } else {
       setError('');
-      console.log('Sign Up Form submitted:', { name, email, password });
+      console.log('Sign Up Form submitted:', { signupUsername, signupEmail, signupPassword });
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/signup', { name, email, password });
+      const response = await axios.post('http://localhost:5000/signup', { username: signupUsername, email: signupEmail, password: signupPassword });
       if (response.status === 200) {
         setSuccessMessage('Sign Up successful!');
         console.log('Success:', response.data);
+        navigate('/login');  // Redirect to login page after successful sign-up
       }
     } catch (err) {
-      setError('Error during sign up');
+      setError(err.response && err.response.data ? err.response.data.message : 'Error during sign up');
       console.error('Error:', err.response ? err.response.data : err);
     }
   };
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Start loading spinner
     setError('');
     setSuccessMessage('');
 
-    if (email === '') {
+    if (forgotEmail === '') {
       setError('Please enter your email address');
     } else {
       setError('');
-      console.log('Password reset email sent:', { email });
+      console.log('Password reset email sent:', { forgotEmail });
 
       try {
-        const response = await axios.post('http://localhost:5000/forgot-password', { email });
+        const response = await axios.post('http://localhost:5000/forgot-password', { email: forgotEmail });
         if (response.status === 200) {
           setSuccessMessage('Password reset email sent successfully');
           setEmailSent(true);
-          setEmailForSent(email);
+          setEmailForSent(forgotEmail);
           console.log('Success:', response.data);
         }
       } catch (err) {
@@ -93,6 +102,8 @@ const LoginForm = () => {
         console.error('Error:', err.response ? err.response.data : err);
       }
     }
+
+    setLoading(false);  // Stop loading spinner
   };
 
   const handleSignUpClick = () => {
@@ -112,7 +123,7 @@ const LoginForm = () => {
 
   const handleTryAgain = () => {
     setEmailSent(false);
-    setEmail('');
+    setForgotEmail('');
   };
 
   return (
@@ -123,7 +134,7 @@ const LoginForm = () => {
 
       <div className="login-form-container">
         <div className="login-form">
-          <img src="icon.png" alt="Pinterest Logo" className="login-logo" />
+          <img src="icon.png" alt="FemPredict Logo" className="login-logo" />
           <h2>Welcome to FemPredict</h2>
           {error && <div className="error-message">{error}</div>}
 
@@ -132,35 +143,35 @@ const LoginForm = () => {
               <p>Managing PCOS starts here</p>
               <form onSubmit={handleSignUpSubmit}>
                 <div className="form-group">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="signup-username">Username</label>
                   <input
                     type="text"
-                    id="name"
-                    placeholder="Full Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    id="signup-username"
+                    placeholder="Username"
+                    value={signupUsername}
+                    onChange={(e) => setSignupUsername(e.target.value)}
                     className="login-input"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="signup-email">Email Address</label>
                   <input
                     type="email"
-                    id="email"
+                    id="signup-email"
                     placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={signupEmail}
+                    onChange={(e) => setSignupEmail(e.target.value)}
                     className="login-input"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="signup-password">Password</label>
                   <input
                     type="password"
-                    id="password"
+                    id="signup-password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={signupPassword}
+                    onChange={(e) => setSignupPassword(e.target.value)}
                     className="login-input"
                   />
                 </div>
@@ -187,18 +198,18 @@ const LoginForm = () => {
                   <p>Reset your password</p>
                   <form onSubmit={handleForgotPasswordSubmit}>
                     <div className="form-group">
-                      <label htmlFor="email">Email Address</label>
+                      <label htmlFor="forgot-email">Email Address</label>
                       <input
                         type="email"
-                        id="email"
+                        id="forgot-email"
                         placeholder="Enter your email to reset password"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={forgotEmail}
+                        onChange={(e) => setForgotEmail(e.target.value)}
                         className="login-input"
                       />
                     </div>
                     <button type="submit" className="login-button">
-                      Reset Password
+                      {loading ? 'Sending...' : 'Reset Password'}
                     </button>
                   </form>
                   {successMessage && <div className="success-message">{successMessage}</div>}
@@ -209,26 +220,26 @@ const LoginForm = () => {
               )}
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLoginSubmit}>
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="login-email">Email Address</label>
                 <input
                   type="email"
-                  id="email"
+                  id="login-email"
                   placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
                   className="login-input"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="login-password">Password</label>
                 <input
                   type="password"
-                  id="password"
+                  id="login-password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
                   className="login-input"
                 />
                 <div className="forgot-password-link">
@@ -246,8 +257,8 @@ const LoginForm = () => {
             <div className="terms-disclaimer">
               <p>
                 By continuing, you agree to FemPredict's{' '}
-                <a href="TermsofService" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
-                <a href="PrivacyPolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="/terms-of-service" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
+                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
               </p>
             </div>
           )}
