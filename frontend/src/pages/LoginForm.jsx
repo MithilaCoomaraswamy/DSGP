@@ -54,7 +54,7 @@ const LoginForm = () => {
     e.preventDefault();
     setSuccessMessage('');
     setError('');
-
+  
     if (signupUsername === '' || signupEmail === '' || signupPassword === '') {
       if (signupUsername === '') setError('Please enter a username');
       else if (signupEmail === '') setError('Please enter an email address');
@@ -63,19 +63,25 @@ const LoginForm = () => {
       setError('');
       console.log('Sign Up Form submitted:', { signupUsername, signupEmail, signupPassword });
     }
-
+  
     try {
-      const response = await axios.post('http://localhost:5000/signup', { username: signupUsername, email: signupEmail, password: signupPassword });
-      if (response.status === 200) {
+      const response = await axios.post('http://localhost:5000/register', { username: signupUsername, email: signupEmail, password: signupPassword });
+      if (response.status === 201) {
         setSuccessMessage('Sign Up successful!');
         console.log('Success:', response.data);
-        navigate('/login');  // Redirect to login page after successful sign-up
+  
+        // Save user data to localStorage (make sure you're using the correct response data)
+        localStorage.setItem('user', JSON.stringify(response.data.user)); // Ensure you're saving the 'user' object
+  
+        // Navigate to profile page
+        navigate('/profile');  // Redirect to profile page after successful sign-up
       }
     } catch (err) {
       setError(err.response && err.response.data ? err.response.data.message : 'Error during sign up');
       console.error('Error:', err.response ? err.response.data : err);
     }
   };
+  
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
@@ -257,8 +263,8 @@ const LoginForm = () => {
             <div className="terms-disclaimer">
               <p>
                 By continuing, you agree to FemPredict's{' '}
-                <a href="/terms-of-service" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="/termsofservice" target="_blank">Terms of Service</a> and acknowledge that you've read our{' '}
+                <a href="/privacypolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
               </p>
             </div>
           )}
