@@ -81,7 +81,6 @@ const LoginForm = () => {
       console.error('Error:', err.response ? err.response.data : err);
     }
   };
-  
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
