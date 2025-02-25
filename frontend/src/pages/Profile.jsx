@@ -12,11 +12,12 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [cycleLength, setCycleLength] = useState('');
-  const [mensesLength, setMensesLength] = useState(''); // New state for menses length
-  const [lastCycleLength, setLastCycleLength] = useState(''); // New state for last cycle length
-  const [meanMensesLength, setMeanMensesLength] = useState(''); // New state for mean menses length
+  const [mensesLength, setMensesLength] = useState('');
+  const [lastCycleLength, setLastCycleLength] = useState('');
+  const [meanMensesLength, setMeanMensesLength] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
-  const [periods, setPeriods] = useState([]); // Store the start dates of each period
+  const [periods, setPeriods] = useState([]);
+  const [ovulationDate, setOvulationDate] = useState(null); // Store ovulation date
   const navigate = useNavigate();
 
   // Logout functionality
@@ -60,7 +61,6 @@ const Profile = () => {
 
     const start = new Date(startDate);
     const cycle = parseInt(cycleLength);
-
     const diffInTime = date - start;
     const diffInDays = Math.floor(diffInTime / (1000 * 3600 * 24));
 
@@ -68,11 +68,12 @@ const Profile = () => {
 
     const cycleDay = diffInDays % cycle;
 
-    if (cycleDay >= 0 && cycleDay < mensesLength) {  // Adjusted condition for menses phase
+    if (cycleDay >= 0 && cycleDay < mensesLength) {
       return 'menstrual';
     } else if (cycleDay >= mensesLength && cycleDay <= 13) {
       return 'follicular';
     } else if (cycleDay === 14) {
+      setOvulationDate(date); // Set ovulation date when phase is ovulation
       return 'ovulation';
     } else {
       return 'luteal';
@@ -88,7 +89,7 @@ const Profile = () => {
       // Generate start dates for each period over a year (12 cycles)
       for (let i = 0; i < 12; i++) {
         const newStartDate = new Date(start);
-        newStartDate.setMonth(start.getMonth() + i); // Set the start date for each cycle
+        newStartDate.setMonth(start.getMonth() + i);
         periodsList.push(newStartDate);
       }
 
@@ -104,7 +105,7 @@ const Profile = () => {
     } else if (phase === 'follicular') {
       return 'follicular-phase';
     } else if (phase === 'ovulation') {
-      return 'ovulation-phase';
+      return 'ovulation-phase'; // Highlight ovulation day
     } else if (phase === 'luteal') {
       return 'luteal-phase';
     }
@@ -117,7 +118,7 @@ const Profile = () => {
     datasets: [
       {
         label: 'Start Dates of Periods',
-        data: periods.map(period => period.getDate()), // Use the day of the month as data
+        data: periods.map(period => period.getDate()),
         fill: false,
         borderColor: 'rgba(75,192,192,1)',
         tension: 0.1,
@@ -127,7 +128,6 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      {/* Sidebar */}
       <div className="sidebar">
         <div className="logo">
           <img src="logo.png" alt="Logo" className="logo-img" />
@@ -147,51 +147,43 @@ const Profile = () => {
         </ul>
       </div>
       <div className="profile-content">
-  {user ? (
-    <>
-      {/* Calendar and Period Tracker Section */}
-      <div className="calendar-period-section">
-        
-        {/* Period Tracker Form (on the left side) */}
-        <div className="period-tracker-container">
-          <h2>Track Your Cycle</h2>
-          <PeriodTracker 
-            setStartDate={setStartDate} 
-            setCycleLength={setCycleLength} 
-            setMensesLength={setMensesLength}  // Pass mensesLength state setter
-            setLastCycleLength={setLastCycleLength} // Pass lastCycleLength state setter
-            setMeanMensesLength={setMeanMensesLength} // Pass meanMensesLength state setter
-            trackPeriodStart={trackPeriodStart} 
-          />
-        </div>
+        {user ? (
+          <>
+            <div className="calendar-period-section">
+              <div className="period-tracker-container">
+                <h2>Track Your Cycle</h2>
+                <PeriodTracker 
+                  setStartDate={setStartDate} 
+                  setCycleLength={setCycleLength} 
+                  setMensesLength={setMensesLength}
+                  setLastCycleLength={setLastCycleLength}
+                  setMeanMensesLength={setMeanMensesLength}
+                  trackPeriodStart={trackPeriodStart} 
+                />
+              </div>
 
-        {/* Calendar Section (on the right side) */}
-        <div className="calendar-container">
-          <h2>Track Your Period</h2>
-          <p>Select a date to see your cycle phase.</p>
-          <Calendar
-            onChange={handleDateChange}
-            tileClassName={tileClassName}
-            value={selectedDate}
-            minDate={new Date(startDate)} // Optional: Ensure the calendar starts from the first cycle day
-          />
-        </div>
+              <div className="calendar-container">
+                <h2>Track Your Period</h2>
+                <p>Select a date to see your cycle phase.</p>
+                <Calendar
+                  onChange={handleDateChange}
+                  tileClassName={tileClassName}
+                  value={selectedDate}
+                  minDate={new Date(startDate)}
+                />
+              </div>
+            </div>
 
+            <div className="chart-container">
+              <h2>Your Period Trends</h2>
+              <Line data={chartData} />
+            </div>
+          </>
+        ) : (
+          <p>Loading user data...</p>
+        )}
       </div>
 
-      {/* Chart Section */}
-      <div className="chart-container">
-        <h2>Your Period Trends</h2>
-        <Line data={chartData} />
-      </div>
-    </>
-  ) : (
-    <p>Loading user data...</p>
-  )}
-</div>
-
-
-      {/* Chatbot Avatar */}
       <div className="chatbot-avatar" onClick={() => alert('Chatbot window opens')}>
         <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
       </div>
@@ -203,18 +195,18 @@ const Profile = () => {
 const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, setLastCycleLength, setMeanMensesLength, trackPeriodStart }) => {
   const [startDate, setStartDateLocal] = useState('');
   const [cycleLength, setCycleLengthLocal] = useState('');
-  const [mensesLength, setMensesLengthLocal] = useState(''); // Local state for menses length
-  const [lastCycleLength, setLastCycleLengthLocal] = useState(''); // Local state for last cycle length
-  const [meanMensesLength, setMeanMensesLengthLocal] = useState(''); // Local state for mean menses length
+  const [mensesLength, setMensesLengthLocal] = useState('');
+  const [lastCycleLength, setLastCycleLengthLocal] = useState('');
+  const [meanMensesLength, setMeanMensesLengthLocal] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStartDate(startDate);
     setCycleLength(cycleLength);
-    setMensesLength(mensesLength);  // Pass mensesLength to the parent
-    setLastCycleLength(lastCycleLength); // Pass lastCycleLength to the parent
-    setMeanMensesLength(meanMensesLength); // Pass meanMensesLength to the parent
-    trackPeriodStart(); // Track the start dates after submitting the form
+    setMensesLength(mensesLength);
+    setLastCycleLength(lastCycleLength);
+    setMeanMensesLength(meanMensesLength);
+    trackPeriodStart();
   };
 
   return (

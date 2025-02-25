@@ -199,3 +199,24 @@ h2 {
   margin: 0 10px;
   padding: 5px;
 }
+
+.ovulation-date {
+  background-color: #FF6347; /* Highlight color for ovulation */
+  color: white;
+}
+
+.menstrual-phase {
+  background-color: #FFB6C1; /* Light red for menstrual phase */
+}
+
+.follicular-phase {
+  background-color: #90EE90; /* Light green for follicular phase */
+}
+
+.luteal-phase {
+  background-color: #FFD700; /* Yellow for luteal phase */
+}
+
+.ovulation-phase {
+  background-color: #ADD8E6; /* Light blue for ovulation phase */
+}
