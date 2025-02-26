@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-
-// Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -17,7 +12,7 @@ const Profile = () => {
   const [meanMensesLength, setMeanMensesLength] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [periods, setPeriods] = useState([]);
-  const [ovulationDate, setOvulationDate] = useState(null); // Store ovulation date
+  const [ovulationDate, setOvulationDate] = useState(null);
   const navigate = useNavigate();
 
   // Logout functionality
@@ -112,23 +107,9 @@ const Profile = () => {
     return '';
   };
 
-  // Prepare data for the chart
-  const chartData = {
-    labels: periods.map(period => period.toLocaleString('default', { month: 'short', year: 'numeric' })),
-    datasets: [
-      {
-        label: 'Start Dates of Periods',
-        data: periods.map(period => period.getDate()),
-        fill: false,
-        borderColor: 'rgba(75,192,192,1)',
-        tension: 0.1,
-      },
-    ],
-  };
-
   return (
     <div className="profile-page">
-      <div className="sidebar">
+      <div className="header">
         <div className="logo">
           <img src="logo.png" alt="Logo" className="logo-img" />
         </div>
@@ -139,27 +120,44 @@ const Profile = () => {
           </div>
         )}
 
-        <ul className="sidebar-nav">
-          <li onClick={() => navigate('/terms')} className="sidebar-btn">Terms and conditions</li>
-          <li onClick={handleEditProfile} className="sidebar-btn">Edit Profile</li>
-          <li onClick={handleDeleteProfile} className="sidebar-btn btn-danger">Delete Profile</li>
-          <li onClick={handleLogout} className="sidebar-btn btn-warning">Logout</li>
-        </ul>
+        <div className="header-nav">
+          <ul className="header-nav-list">
+            <li onClick={() => navigate('/terms')} className="header-btn">Terms and Conditions</li>
+            <li onClick={handleEditProfile} className="header-btn">Edit Profile</li>
+            <li onClick={handleDeleteProfile} className="header-btn btn-danger">Delete Profile</li>
+            <li onClick={handleLogout} className="header-btn btn-warning">Logout</li>
+          </ul>
+        </div>
       </div>
+
       <div className="profile-content">
         {user ? (
           <>
             <div className="calendar-period-section">
-              <div className="period-tracker-container">
-                <h2>Track Your Cycle</h2>
-                <PeriodTracker 
-                  setStartDate={setStartDate} 
-                  setCycleLength={setCycleLength} 
-                  setMensesLength={setMensesLength}
-                  setLastCycleLength={setLastCycleLength}
-                  setMeanMensesLength={setMeanMensesLength}
-                  trackPeriodStart={trackPeriodStart} 
-                />
+              <div className="tracker-sections">
+                <div className="period-tracker-container">
+                  <h2>Track Your Cycle</h2>
+                  <PeriodTracker 
+                    setStartDate={setStartDate} 
+                    setCycleLength={setCycleLength} 
+                    setMensesLength={setMensesLength}
+                    setLastCycleLength={setLastCycleLength}
+                    setMeanMensesLength={setMeanMensesLength}
+                    trackPeriodStart={trackPeriodStart} 
+                  />
+                </div>
+
+                <div className="health-insights-container">
+                  <h2>Health Insights</h2>
+                  <p>Discover insights about your cycle and health trends.</p>
+                  {/* Add any relevant information or insights here */}
+                </div>
+
+                <div className="recent-activity-container">
+                  <h2>Recent Activity</h2>
+                  <p>View your recent health activity, like workouts or notes.</p>
+                  {/* Display any relevant recent activity data here */}
+                </div>
               </div>
 
               {ovulationDate && (
@@ -175,11 +173,6 @@ const Profile = () => {
                 </div>
               )}
             </div>
-
-            <div className="chart-container">
-              <h2>Your Period Trends</h2>
-              <Line data={chartData} />
-            </div>
           </>
         ) : (
           <p>Loading user data...</p>
@@ -193,7 +186,7 @@ const Profile = () => {
   );
 };
 
-// PeriodTracker Component
+// PeriodTracker Component (same as before)
 const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, setLastCycleLength, setMeanMensesLength, trackPeriodStart }) => {
   const [startDate, setStartDateLocal] = useState('');
   const [cycleLength, setCycleLengthLocal] = useState('');
