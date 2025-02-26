@@ -162,16 +162,18 @@ const Profile = () => {
                 />
               </div>
 
-              <div className="calendar-container">
-                <h2>Track Your Period</h2>
-                <p>Select a date to see your cycle phase.</p>
-                <Calendar
-                  onChange={handleDateChange}
-                  tileClassName={tileClassName}
-                  value={selectedDate}
-                  minDate={new Date(startDate)}
-                />
-              </div>
+              {ovulationDate && (
+                <div className="calendar-container">
+                  <h2>Track Your Period</h2>
+                  <p>Select a date to see your cycle phase.</p>
+                  <Calendar
+                    onChange={handleDateChange}
+                    tileClassName={tileClassName}
+                    value={selectedDate}
+                    minDate={new Date(startDate)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="chart-container">

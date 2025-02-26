@@ -217,6 +217,10 @@ h2 {
   background-color: #FFD700; /* Yellow for luteal phase */
 }
 
+/* Example CSS for marking ovulation day */
 .ovulation-phase {
-  background-color: #ADD8E6; /* Light blue for ovulation phase */
+  background-color: #FF6347; /* Tomato color */
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
 }
