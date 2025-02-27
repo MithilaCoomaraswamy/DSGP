@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [startDate, setStartDate] = useState('');
-  const [cycleLength, setCycleLength] = useState('');
-  const [mensesLength, setMensesLength] = useState('');
-  const [lastCycleLength, setLastCycleLength] = useState('');
-  const [meanMensesLength, setMeanMensesLength] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [periods, setPeriods] = useState([]);
-  const [ovulationDate, setOvulationDate] = useState(null);
+  const [chatbotVisible, setChatbotVisible] = useState(false); // State to control chatbot visibility
+  const [chatbotMinimized, setChatbotMinimized] = useState(false); // State to control chatbot minimization
   const navigate = useNavigate();
 
   // Logout functionality
@@ -50,61 +42,30 @@ const Profile = () => {
     setSelectedDate(date);
   };
 
-  // Function to determine the phase of the cycle based on the selected date
-  const getCyclePhase = (date) => {
-    if (!startDate || !cycleLength) return '';
-
-    const start = new Date(startDate);
-    const cycle = parseInt(cycleLength);
-    const diffInTime = date - start;
-    const diffInDays = Math.floor(diffInTime / (1000 * 3600 * 24));
-
-    if (diffInDays < 0) return '';
-
-    const cycleDay = diffInDays % cycle;
-
-    if (cycleDay >= 0 && cycleDay < mensesLength) {
-      return 'menstrual';
-    } else if (cycleDay >= mensesLength && cycleDay <= 13) {
-      return 'follicular';
-    } else if (cycleDay === 14) {
-      setOvulationDate(date); // Set ovulation date when phase is ovulation
-      return 'ovulation';
-    } else {
-      return 'luteal';
-    }
+  // Navigate to Period Tracker page
+  const handlePeriodTracker = () => {
+    navigate('/period-tracker');
   };
 
-  // Store the start dates of each period
-  const trackPeriodStart = () => {
-    if (startDate && cycleLength) {
-      const start = new Date(startDate);
-      const periodsList = [];
-
-      // Generate start dates for each period over a year (12 cycles)
-      for (let i = 0; i < 12; i++) {
-        const newStartDate = new Date(start);
-        newStartDate.setMonth(start.getMonth() + i);
-        periodsList.push(newStartDate);
-      }
-
-      setPeriods(periodsList);
-    }
+  // Navigate to Health Insights page
+  const handleChecker = () => {
+    navigate('/pcos-quiz');
   };
 
-  // Style function to determine the background color of each day
-  const tileClassName = ({ date }) => {
-    const phase = getCyclePhase(date);
-    if (phase === 'menstrual') {
-      return 'menstrual-phase';
-    } else if (phase === 'follicular') {
-      return 'follicular-phase';
-    } else if (phase === 'ovulation') {
-      return 'ovulation-phase'; // Highlight ovulation day
-    } else if (phase === 'luteal') {
-      return 'luteal-phase';
-    }
-    return '';
+  // Navigate to Recent Activity page
+  const handleRecommender = () => {
+    navigate('/exercise-recommender');
+  };
+
+  // Toggle the visibility of the chatbot
+  const toggleChatbot = () => {
+    setChatbotVisible(prevState => !prevState);
+    setChatbotMinimized(false); // Ensure chatbot is not minimized when opened
+  };
+
+  // Toggle chatbot minimization
+  const toggleMinimizeChatbot = () => {
+    setChatbotMinimized(prevState => !prevState);
   };
 
   return (
@@ -133,40 +94,27 @@ const Profile = () => {
                 {/* Period Tracker Section */}
                 <div className="period-tracker-container">
                   <h2>Track Your Cycle</h2>
-                  <p>Track your periods and view ovulation dates here.</p>
+                  <p>Easily track your periods and discover your ovulation dates here.</p>
                   <img src="pic1.PNG" alt="Period Tracker" className="tracker-image" />
-                  <button className="rounded-btn">Start Tracking</button> {/* Added rounded button */}
+                  <button className="rounded-btn" onClick={handlePeriodTracker}>Start tracking</button>
                 </div>
 
                 {/* Health Insights Section */}
                 <div className="health-insights-container">
                   <h2>Check Your Symptoms</h2>
-                  <p>Check your symptoms and find out how to manage them here.</p>
+                  <p>Take a look at your symptoms and discover some helpful tips for managing them here!</p>
                   <img src="pic2.PNG" alt="Health Insights" className="insights-image" />
-                  <button className="rounded-btn">Learn More</button> {/* Added rounded button */}
+                  <button className="rounded-btn" onClick={handleChecker}>Check now</button>
                 </div>
 
                 {/* Recent Activity Section */}
                 <div className="recent-activity-container">
                   <h2>Plan Your Workout</h2>
-                  <p>Discover the best workout plan for you here.</p>
+                  <p>Uncover the perfect workout plan tailored just for you right here! Let’s get moving!</p>
                   <img src="pic3.PNG" alt="Recent Activity" className="activity-image" />
-                  <button className="rounded-btn">View Activity</button> {/* Added rounded button */}
+                  <button className="rounded-btn" onClick={handleRecommender}>Get moving</button>
                 </div>
               </div>
-
-              {ovulationDate && (
-                <div className="calendar-container">
-                  <h2>Track Your Period</h2>
-                  <p>Select a date to see your cycle phase.</p>
-                  <Calendar
-                    onChange={handleDateChange}
-                    tileClassName={tileClassName}
-                    value={selectedDate}
-                    minDate={new Date(startDate)}
-                  />
-                </div>
-              )}
             </div>
           </>
         ) : (
@@ -174,19 +122,33 @@ const Profile = () => {
         )}
       </div>
 
-      <div className="chatbot-avatar" onClick={() => alert('Chatbot window opens')}>
-        <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
-      </div>
-    </div>
-  );
-};
+      {/* Chatbot Avatar or Cross Button */}
+      {!chatbotVisible ? (
+        <div className="chatbot-avatar" onClick={toggleChatbot}>
+          <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
+        </div>
+      ) : (
+        <div className="chatbot-close" onClick={toggleChatbot}>
+          <span className="close-icon">×</span>
+        </div>
+      )}
 
-// PeriodTracker Component (No inputs, just a display)
-const PeriodTracker = () => {
-  return (
-    <div>
-      <p>View your cycle phases and ovulation dates here.</p>
-      <img src="pic1.PNG" alt="Cycle Phases" className="tracker-image" />
+      {/* Chatbot Window */}
+      {chatbotVisible && (
+        <div className={`chatbot-window ${chatbotMinimized ? 'minimized' : ''}`}>
+          <div className="chatbot-header">
+            <div className="logo">
+              <img src="icon.png" alt="Logo" className="logo-img" />
+              <span className="logo-name">FemPredict</span>
+            </div>
+            <button onClick={toggleMinimizeChatbot} className="minimize-btn">↓</button>
+            <button onClick={toggleChatbot} className="close-btn">×</button>
+          </div>
+          <div className={`chatbot-body ${chatbotMinimized ? 'minimized' : ''}`}>
+            {!chatbotMinimized && <p>Welcome to the chatbot! How can I assist you today?</p>}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
