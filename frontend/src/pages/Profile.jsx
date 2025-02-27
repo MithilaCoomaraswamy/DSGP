@@ -111,14 +111,9 @@ const Profile = () => {
     <div className="profile-page">
       <div className="header">
         <div className="logo">
-          <img src="logo.png" alt="Logo" className="logo-img" />
+          <img src="icon.png" alt="Logo" className="logo-img" />
+          <span className="logo-name">FemPredict</span>
         </div>
-
-        {user && (
-          <div className="user-info">
-            <h3>Welcome, {user.name}</h3>
-          </div>
-        )}
 
         <div className="header-nav">
           <ul className="header-nav-list">
@@ -135,28 +130,28 @@ const Profile = () => {
           <>
             <div className="calendar-period-section">
               <div className="tracker-sections">
+                {/* Period Tracker Section */}
                 <div className="period-tracker-container">
                   <h2>Track Your Cycle</h2>
-                  <PeriodTracker 
-                    setStartDate={setStartDate} 
-                    setCycleLength={setCycleLength} 
-                    setMensesLength={setMensesLength}
-                    setLastCycleLength={setLastCycleLength}
-                    setMeanMensesLength={setMeanMensesLength}
-                    trackPeriodStart={trackPeriodStart} 
-                  />
+                  <p>Track your periods and view ovulation dates here.</p>
+                  <img src="pic1.PNG" alt="Period Tracker" className="tracker-image" />
+                  <button className="rounded-btn">Start Tracking</button> {/* Added rounded button */}
                 </div>
 
+                {/* Health Insights Section */}
                 <div className="health-insights-container">
-                  <h2>Health Insights</h2>
-                  <p>Discover insights about your cycle and health trends.</p>
-                  {/* Add any relevant information or insights here */}
+                  <h2>Check Your Symptoms</h2>
+                  <p>Check your symptoms and find out how to manage them here.</p>
+                  <img src="pic2.PNG" alt="Health Insights" className="insights-image" />
+                  <button className="rounded-btn">Learn More</button> {/* Added rounded button */}
                 </div>
 
+                {/* Recent Activity Section */}
                 <div className="recent-activity-container">
-                  <h2>Recent Activity</h2>
-                  <p>View your recent health activity, like workouts or notes.</p>
-                  {/* Display any relevant recent activity data here */}
+                  <h2>Plan Your Workout</h2>
+                  <p>Discover the best workout plan for you here.</p>
+                  <img src="pic3.PNG" alt="Recent Activity" className="activity-image" />
+                  <button className="rounded-btn">View Activity</button> {/* Added rounded button */}
                 </div>
               </div>
 
@@ -186,78 +181,12 @@ const Profile = () => {
   );
 };
 
-// PeriodTracker Component (same as before)
-const PeriodTracker = ({ setStartDate, setCycleLength, setMensesLength, setLastCycleLength, setMeanMensesLength, trackPeriodStart }) => {
-  const [startDate, setStartDateLocal] = useState('');
-  const [cycleLength, setCycleLengthLocal] = useState('');
-  const [mensesLength, setMensesLengthLocal] = useState('');
-  const [lastCycleLength, setLastCycleLengthLocal] = useState('');
-  const [meanMensesLength, setMeanMensesLengthLocal] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setStartDate(startDate);
-    setCycleLength(cycleLength);
-    setMensesLength(mensesLength);
-    setLastCycleLength(lastCycleLength);
-    setMeanMensesLength(meanMensesLength);
-    trackPeriodStart();
-  };
-
+// PeriodTracker Component (No inputs, just a display)
+const PeriodTracker = () => {
   return (
     <div>
-      <form className="period-tracker-form" onSubmit={handleSubmit}>
-        <label htmlFor="start-date">When did your last period start?</label>
-        <input
-          type="date"
-          id="start-date"
-          name="start-date"
-          value={startDate}
-          onChange={(e) => setStartDateLocal(e.target.value)}
-        />
-
-        <label htmlFor="menses-length">How many days did your period last?</label>
-        <input
-          type="number"
-          id="menses-length"
-          name="menses-length"
-          placeholder="5"
-          value={mensesLength}
-          onChange={(e) => setMensesLengthLocal(e.target.value)}
-        />
-
-        <label htmlFor="last-cycle-length">What was your last cycle length?</label>
-        <input
-          type="number"
-          id="last-cycle-length"
-          name="last-cycle-length"
-          placeholder="28"
-          value={lastCycleLength}
-          onChange={(e) => setLastCycleLengthLocal(e.target.value)}
-        />
-
-        <label htmlFor="mean-menses-length">What is your average period length?</label>
-        <input
-          type="number"
-          id="mean-menses-length"
-          name="mean-menses-length"
-          placeholder="5"
-          value={meanMensesLength}
-          onChange={(e) => setMeanMensesLengthLocal(e.target.value)}
-        />
-
-        <label htmlFor="cycle-length">What is your average menstrual cycle length?</label>
-        <input
-          type="number"
-          id="cycle-length"
-          name="cycle-length"
-          placeholder="28"
-          value={cycleLength}
-          onChange={(e) => setCycleLengthLocal(e.target.value)}
-        />
-
-        <button type="submit">Start tracking</button>
-      </form>
+      <p>View your cycle phases and ovulation dates here.</p>
+      <img src="pic1.PNG" alt="Cycle Phases" className="tracker-image" />
     </div>
   );
 };

@@ -12,6 +12,8 @@ body {
   display: flex;
   min-height: 100vh;
   padding: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Sidebar Styles */
@@ -36,7 +38,7 @@ body {
 }
 
 .logo-img {
-  width: 80%;
+  width: 20%;
   max-width: 120px;
   height: auto;
 }
@@ -79,6 +81,10 @@ body {
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Calendar and Form Section */
@@ -90,14 +96,29 @@ body {
   justify-content: space-between;
 }
 
-.period-tracker-container {
+/* Period Tracker Section */
+.period-tracker-container,
+.health-insights-container,
+.recent-activity-container {
   flex: 1;
   padding: 20px;
-  background-color: #f9fafc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
+.period-tracker-container {
+  background-color: #f5e9f9;
+}
+
+.health-insights-container {
+  background-color: #e9f7f1;
+}
+
+.recent-activity-container {
+  background-color: #f9e9f7;
+}
+
+/* Calendar Section */
 .calendar-container {
   flex: 1;
   padding: 20px;
@@ -106,47 +127,26 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Section Headings */
 h2 {
   font-size: 26px;
   margin-bottom: 15px;
   color: #333;
 }
 
-.period-tracker-form label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: 600;
-}
-
-.period-tracker-form input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
-}
-
-.period-tracker-form input:focus {
-  border-color: #2a9d8f;
-  outline: none;
-}
-
-.period-tracker-form button {
-  margin-top: 15px;
-  padding: 12px 25px;
-  font-size: 16px;
-  background-color: #2a9d8f;
+/* Button Styling */
+.rounded-btn {
+  background-color: #007bff;
   color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
-.period-tracker-form button:hover {
-  background-color: #264653;
+.rounded-btn:hover {
+  background-color: #0056b3;
 }
 
 /* Chatbot Avatar */
@@ -171,53 +171,12 @@ h2 {
   transform: scale(1.1);
 }
 
-.chart-container {
-  margin-top: 30px;
-}
-
-@media (max-width: 768px) {
-  .profile-page {
-    flex-direction: column;
-    padding: 15px;
-  }
-
-  .sidebar {
-    width: 100%;
-    padding: 15px;
-    margin: 0;
-    border-radius: 10px;
-  }
-
-  .calendar-period-section {
-    flex-direction: column;
-    gap: 15px;
-  }
-}
-
-/* Input Group for Custom Controls */
-.input-group {
-  display: flex;
-  align-items: center;
-}
-
-.input-group button {
-  padding: 5px 10px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.input-group input {
-  width: 60px;
-  text-align: center;
-  margin: 0 10px;
-  padding: 5px;
-}
-
 /* Cycle Phase Styling */
-.ovulation-date {
+.ovulation-phase {
   background-color: #FF6347;
   color: white;
+  border-radius: 50%;
+  font-weight: bold;
 }
 
 .menstrual-phase {
@@ -232,66 +191,55 @@ h2 {
   background-color: #FFD700;
 }
 
-.ovulation-phase {
-  background-color: #FF6347;
-  color: white;
-  border-radius: 50%;
-  font-weight: bold;
-}
-
 /* Period Tracker Layout */
 .tracker-sections {
   display: flex;
   gap: 20px;
 }
 
-.period-tracker-container,
-.health-insights-container,
-.recent-activity-container {
-  flex: 1;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.period-tracker-container {
-  background-color: #f9f9f9;
-}
-
-.health-insights-container {
-  background-color: #e9f7f1;
-}
-
-.recent-activity-container {
-  background-color: #f9e9f7;
-}
-
-.profile-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header {
+/* Health Insights and Recent Activity Images */
+.insights-image,
+.activity-image,
+.tracker-image {
   width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.health-insights-container img,
+.recent-activity-container img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Profile Page Header */
+.header {
+  width: calc(100% - 40px); /* Adjust for the padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #f4f4f4;
+  padding: 20px; /* Increased padding for more space */
+  background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* Added border-radius to match the sections */
 }
 
+/* Logo Styling */
 .logo {
   display: flex;
   align-items: center;
+  gap: 10px; /* Space between the icon and the text */
 }
 
-.logo-img {
-  width: 50px;
-  height: 50px;
+.logo-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
 }
 
+/* Header Navigation */
 .header-nav {
   display: flex;
   align-items: center;
@@ -315,12 +263,22 @@ h2 {
   color: yellow;
 }
 
-.profile-content {
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .profile-page {
+    flex-direction: column;
+    padding: 15px;
+  }
 
-/* Add any additional styling as needed */
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+    border-radius: 10px;
+  }
+
+  .calendar-period-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
