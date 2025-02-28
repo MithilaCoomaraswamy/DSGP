@@ -1,18 +1,26 @@
+/* General container for the tracker */
 .tracker-container {
   font-family: Arial, sans-serif;
   margin: 30px auto;
   padding: 20px;
   max-width: 1200px;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column; /* Stacked vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: flex-start;
+  background-color: white; /* White background */
+  border-radius: 8px; /* Optional, rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional, for slight shadow effect */
+  position: relative; /* To position close and minimize buttons */
 }
 
+/* Title */
 h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Form container */
 .tracker-form {
   display: flex;
   flex-direction: column;
@@ -20,6 +28,7 @@ h2 {
   margin-bottom: 30px;
 }
 
+/* Input fields inside the form */
 .tracker-form input {
   padding: 10px;
   font-size: 14px;
@@ -27,6 +36,7 @@ h2 {
   border: 1px solid #ddd;
 }
 
+/* Button styles */
 button {
   background-color: #4CAF50;
   color: white;
@@ -41,17 +51,20 @@ button:hover {
   background-color: #45a049;
 }
 
+/* Error message */
 .error-message {
   color: red;
   text-align: center;
   font-weight: bold;
 }
 
+/* Chart container */
 .chart-container {
   margin-top: 30px;
   text-align: center;
 }
 
+/* Cycle details container */
 .cycle-details {
   margin-top: 20px;
   padding: 20px;
@@ -72,6 +85,31 @@ button:hover {
   color: #2c3e50;
 }
 
+/* Close and minimize buttons at the top of the form */
+.tracker-container .buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.tracker-container .buttons button {
+  background-color: #f0f0f0; /* Light background */
+  color: #333; /* Dark text for visibility */
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+/* Button hover effect */
+.tracker-container .buttons button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 768px) {
   .tracker-form {
     gap: 10px;
