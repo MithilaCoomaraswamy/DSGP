@@ -156,7 +156,6 @@ h2 {
   transform: scale(1.1);
 }
 
-
 /* Period Tracker Layout */
 .tracker-sections {
   display: flex;
@@ -216,6 +215,16 @@ h2 {
 .header-nav-list {
   display: flex;
   list-style: none;
+  padding: 0;
+  gap: 15px; /* Add gap between nav items */
+}
+
+.header-nav-list li {
+  cursor: pointer;
+}
+
+.header-nav-list.open {
+  display: block;
 }
 
 .header-btn {
@@ -249,88 +258,129 @@ h2 {
     flex-direction: column;
     gap: 15px;
   }
+
+  /* Hide the nav links by default on mobile */
+  .header-nav-list {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Hamburger menu visibility */
+  .hamburger-icon {
+    display: flex;
+  }
+
+  /* Show the nav links when the hamburger menu is clicked */
+  .header-nav-list.open {
+    display: block;
+  }
 }
 
-/* Positioning the chatbot on the side */
-.chatbot-avatar {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.avatar-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
-
-.chatbot-window {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  height: 400px;
-  background-color: #a88afc;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  z-index: 999;
-}
-
-.chatbot-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chatbot-body {
-  margin-top: 10px;
-  height: 80%;
-  overflow-y: auto;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.chatbot-close {
-  cursor: pointer;
-  font-size: 2rem;
-  color: #000;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.chatbot-window {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.chatbot-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #f4f4f4;
-}
-
-.chatbot-body.minimized {
+/* Hamburger Menu */
+.hamburger-icon {
   display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger-icon .bar {
+  width: 30px;
+  height: 4px;
+  background-color: #333;
+  transition: 0.4s;
+}
+
+/* Add this to your CSS */
+
+/* Header Navigation - change to column layout */
+.header-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; /* Keep hidden by default */
+  position: absolute;
+  top: 60px;  /* Position below header */
+  right: 20px;  /* Adjust position as necessary */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px; /* Adjust width */
+}
+
+.header-nav-list.open {
+  display: block;
+}
+
+.header-nav-list li {
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.header-nav-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.hamburger-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+}
+
+.hamburger-icon .bar {
+  background-color: #333;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+/* Profile.css */
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-container div {
+  margin-bottom: 20px;
+}
+
+.footer-container h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.footer-container p {
+  font-size: 14px;
+}
+
+.footer-link {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
 }
