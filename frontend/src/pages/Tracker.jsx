@@ -57,38 +57,83 @@ const Tracker = () => {
     <div className="tracker-container" style={{ display: 'flex', alignItems: 'flex-start' }}>
       <div style={{ flex: 1 }}>
         <h2>Menstrual Cycle Tracker</h2>
-        <form onSubmit={handleSubmit} className="tracker-form">
+        <form onSubmit={handleSubmit} className="tracker-form" style={{ display: 'flex', flexDirection: 'column' }}>
           <label>When did your last period start?</label>
-          <input type="date" value={lastMensesDate} onChange={(e) => setLastMensesDate(e.target.value)} required />
+          <input 
+            type="date" 
+            value={lastMensesDate} 
+            onChange={(e) => setLastMensesDate(e.target.value)} 
+            required 
+          />
 
           <label>How many days did your period last?</label>
-          <input type="number" value={LengthofMenses} onChange={(e) => setLengthofMenses(e.target.value)} required min="1" />
+          <input 
+            type="number" 
+            value={LengthofMenses} 
+            onChange={(e) => setLengthofMenses(e.target.value)} 
+            required 
+            min="1" 
+          />
 
           <label>How long is your menstrual cycle?</label>
-          <input type="number" value={LengthofCycle} onChange={(e) => setLengthofCycle(e.target.value)} required min="1" />
+          <input 
+            type="number" 
+            value={LengthofCycle} 
+            onChange={(e) => setLengthofCycle(e.target.value)} 
+            required 
+            min="1" 
+          />
 
           <label>What is your average period length?</label>
-          <input type="number" value={MeanMensesLength} onChange={(e) => setMeanMensesLength(e.target.value)} required min="1" />
+          <input 
+            type="number" 
+            value={MeanMensesLength} 
+            onChange={(e) => setMeanMensesLength(e.target.value)} 
+            required 
+            min="1" 
+          />
 
           <label>What is your average cycle length?</label>
-          <input type="number" value={MeanCycleLength} onChange={(e) => setMeanCycleLength(e.target.value)} required min="1" />
+          <input 
+            type="number" 
+            value={MeanCycleLength} 
+            onChange={(e) => setMeanCycleLength(e.target.value)} 
+            required 
+            min="1" 
+          />
 
-          {error && <div className="error-message">{error}</div>}
+          {error && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
 
           <button type="submit" style={{ marginTop: '10px' }}>Submit</button>
         </form>
-      </div>
 
-      <div className="results" style={{ textAlign: 'center' }}>
+        {/* Ovulation Date Box below the form */}
         {ovulationDate && (
-          <div className="ovulation-date">
-            <h4>Predicted Ovulation Date: {ovulationDate}</h4>
+          <div className="results" style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div className="ovulation-date-box" style={{
+              backgroundColor: '#f8f9fa',
+              borderRadius: '10px',
+              padding: '20px',
+              border: '1px solid #ddd',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              width: '300px',
+              margin: '0 auto'
+            }}>
+              <h4 style={{ color: '#4CAF50', fontSize: '20px' }}>Predicted Ovulation Date:</h4>
+              <p style={{ fontSize: '18px', color: '#333' }}>{ovulationDate}</p>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Displaying the image */}
-      <img src="periods.png" alt="Cycle Tracker" style={{ width: '600px', height: 'auto', marginLeft: '20px', marginTop: '20px' }} />
+      {/* Image to the right of the form */}
+      <div style={{ marginLeft: '20px' }}>
+        <img 
+          src="periods.png" 
+          alt="Cycle Tracker" 
+          style={{ width: '600px', height: 'auto' }} 
+        />
+      </div>
     </div>
   );
 };
