@@ -7,17 +7,17 @@ intents:
   - deny
   - mood_great
   - mood_unhappy
-  - more_info
+  - bot_challenge
+  - web_info
   - ask_pcos_info
-  - ask_pcos_symptoms
-  - ask_pcos_diagnosis
   - ask_pcos_common
-  - pcos_causes
+  - ask_pcos_causes
   - ask_pcos_health_risks
   - ask_pcos_genetic
   - ask_pcos_hormones
+  - ask_pcos_symptoms
   - ask_pcos_weight
-  - pcos_diagnosis
+  - ask_pcos_diagnosis
   - ask_pcos_treatment
   - ask_pcos_cure
   - ask_pcos_medications
@@ -32,14 +32,33 @@ intents:
   - ask_pcos_risks
   - ask_pcos_thyroid
 
+entities:
+  - Polycystic Ovary Syndrome
+  - PCOS
+  - symptom
+  - treatment
+  - health_risks
+  - hormones
+  - fertility
+  - weight
+  - stress
+  - diet
+  - exercise
+
+
+actions:
+  - action_fallback_llm
+
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
+  utter_default:
+  - text: "Sorry, I didn't understand that. Can you please rephrase?"
 
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  - text: "Cheer up! Everything will be okay!"
+
+  utter_greet:
+  - text: "Hey! How are you?"
 
   utter_did_that_help:
   - text: "Did that help you?"
@@ -56,11 +75,11 @@ responses:
   utter_web_info:
   - text: "Here is link to our[website] (https://rasa.com/docs/rasa/custom-actions/)"
 
-  utter_pcos_info:
+  utter_ask_pcos_info:
   - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
 
-  utter_pcos_info2:
-  - text: Polycystic Ovary Syndrome (PCOS) is a complex hormonal disorder that affects women of reproductive age. It is characterized by an imbalance in reproductive hormones, particularly an excess production of androgens, which are male hormones present in women in small amounts. This imbalance disrupts the normal development and release of eggs during the menstrual cycle, leading to irregular periods, infertility, or anovulation (the absence of ovulation).
+#  utter_pcos_info2:
+#  - text: Polycystic Ovary Syndrome (PCOS) is a complex hormonal disorder that affects women of reproductive age. It is characterized by an imbalance in reproductive hormones, particularly an excess production of androgens, which are male hormones present in women in small amounts. This imbalance disrupts the normal development and release of eggs during the menstrual cycle, leading to irregular periods, infertility, or anovulation (the absence of ovulation).
 
   utter_pcos_symptoms:
   - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
@@ -71,7 +90,7 @@ responses:
   utter_pcos_diagnosis:
   - text: "PCOS is diagnosed based on a review of symptoms, medical history, physical examination, blood tests to check hormone levels, and ultrasound imaging of the ovaries."
 
-  utter_pcos_common:
+  utter_ask_pcos_common:
   - text: "Yes, PCOS is a common condition, affecting about 1 in 10 women of reproductive age."
 
   utter_pcos_causes:
@@ -128,6 +147,10 @@ responses:
 
   utter_pcos_thyroid:
   - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
+
+  utter_ask_question:
+  - text: "How can I assist you with PCOS-related information?"
+
 
 session_config:
   session_expiration_time: 60

@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import Routes instead of Switch
+import ChatbotLanding from './components/ChatbotLanding';
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>  {/* Use Routes instead of Switch */}
+        {/* Define routes for different pages */}
+        <Route path="/" element={<ChatbotLanding />} /> {/* Use element instead of component */}
+        <Route path="/chatbot" element={<Chatbot />} />     {/* Use element instead of component */}
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
+
+

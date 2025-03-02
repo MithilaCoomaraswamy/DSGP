@@ -11,3 +11,15 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+
+- rule: Handle fallback
+  steps:
+  - intent: nlu_fallback
+  - action: action_fallback_llm
+
+
+- rule: Respond to PCOS common question
+  steps:
+  - intent: ask_pcos_common
+  - action: utter_ask_pcos_common

@@ -101,20 +101,28 @@ nlu:
       - What is PCOS?
       - Can you tell me more about PCOS?
       - Explain PCOS to me.
-
-  - intent: pcos_common
+      - What is Polycystic Ovary Syndrome?
+      - Tell me about PCOS.
+  
+  - intent: ask_pcos_common
     examples: |
-      - Is PCOS common?
-      - How common is PCOS?
-      - Do many women have PCOS?
-      - Is PCOS rare or common?
+     - Is PCOS common?
+     - How common is PCOS?
+     - Do many women have PCOS?
+     - Is PCOS rare or common?
+     - PCOS is common?
+     - What percentage of women have PCOS?
+     - Is PCOS a widespread condition?
+     - How many women suffer from PCOS?
+     - Are there many cases of PCOS?
 
-  - intent: pcos_causes
+
+  - intent: ask_pcos_causes
     examples: |
       - what cause PCOS
       - Why do people get PCOS?
       - What are the reasons for PCOS?
-      
+
   - intent: ask_pcos_health_risks
     examples: |
       - What are the health risks of PCOS?
@@ -149,7 +157,7 @@ nlu:
       - Why do people with PCOS gain weight?
       - Does PCOS make it hard to lose weight?
 
-  - intent: pcos_diagnosis
+  - intent: ask_pcos_diagnosis
     examples: |
       - How is PCOS diagnosed?
       - How do doctors check for PCOS?
@@ -168,7 +176,7 @@ nlu:
       - Can PCOS be cured?
       - Is there a permanent solution for PCOS?
       - How can I get rid of PCOS?
-      
+
   - intent: ask_pcos_medications
     examples: |
       - What medications are used for PCOS?
@@ -234,9 +242,9 @@ nlu:
       - Is PCOS linked to thyroid issues?
       - Can PCOS cause thyroid problems?
       - How are PCOS and thyroid related?
+      - Is PCOS affect thyroid?What I
       
       
-
 
 
 

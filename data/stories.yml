@@ -1,6 +1,10 @@
 version: "3.1"
 
 stories:
+- story: cheer up
+  steps:
+  - intent: cheer_up
+  - action: utter_cheer_up
 
 - story: happy path
   steps:
@@ -32,7 +36,7 @@ stories:
 - story: Fetch PCOS information
   steps:
   - intent: ask_pcos_info
-  - action: utter_pcos_info
+  - action: utter_ask_pcos_info
 
 - story: website_information
   steps:
@@ -57,11 +61,11 @@ stories:
 - story: pcos_common
   steps:
   - intent: ask_pcos_common
-  - action: utter_pcos_common
+  - action: utter_ask_pcos_common
 
 - story: pcos_factors
   steps:
-  - intent: pcos_causes
+  - intent: ask_pcos_causes
   - action: utter_pcos_causes
 
 - story: PCOS genetic link
@@ -153,5 +157,4 @@ stories:
   steps:
   - intent: ask_pcos_thyroid
   - action: utter_pcos_thyroid
-
 
