@@ -5,19 +5,36 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
 
-  // Handle user input
   const handleInputChange = (e) => setUserInput(e.target.value);
 
-  // Handle send button click
-  const handleSendMessage = () => {
-    if (userInput.trim()) {
-      setMessages([
-        ...messages,
-        { text: userInput, sender: "user" },
-        { text: "Bot response will be here", sender: "bot" }, // Placeholder for bot response
+  const handleSendMessage = async () => {
+    if (!userInput.trim()) return;
+
+    setMessages([...messages, { text: userInput, sender: "user" }]);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userInput }),
+      });
+
+      const data = await response.json();
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: data.response, sender: "bot" },
       ]);
-      setUserInput(""); // Clear input field
+    } catch (error) {
+      console.error("Error:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: "Error connecting to chatbot.", sender: "bot" },
+      ]);
     }
+
+    setUserInput("");
   };
 
   return (
