@@ -1,74 +1,16 @@
-## The config recipe.
-## https://rasa.com/docs/rasa/model-configuration/
-#recipe: default.v1
-#
-## The assistant project unique identifier
-## This default value must be replaced with a unique assistant name within your deployment
-#
-##
-### Configuration for Rasa NLU.
-### https://rasa.com/docs/rasa/nlu/components/
-#
-#language: en
-#
-#
-# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-# # If you'd like to customize it, uncomment and adjust the pipeline.
-# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-#pipeline:
-#   - name: WhitespaceTokenizer
-#   - name: RegexFeaturizer
-#   - name: LexicalSyntacticFeaturizer
-#   - name: CountVectorsFeaturizer
-#   - name: CountVectorsFeaturizer
-#     analyzer: char_wb
-#     min_ngram: 1
-#     max_ngram: 4
-#   - name: DIETClassifier
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: EntitySynonymMapper
-#   - name: ResponseSelector
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: FallbackClassifier
-#     threshold: 0.3
-#     ambiguity_threshold: 0.1
-#
-#
-#policies:
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
-#assistant_id: 20250211-102906-scalding-tin
-
-
-
 version: "3.1"
 
 language: en
 
-nlu:
-  pipeline:
-    - name: "SpacyNLP"
-    - name: "SpacyEntityExtractor"
-    - name: "RegexEntityExtractor"
-    - name: "Classifier"
-  confidence_threshold: 0.7
-
-
 pipeline:
-- name: WhitespaceTokenizer
-- name: RegexFeaturizer
-- name: LexicalSyntacticFeaturizer
-- name: CountVectorsFeaturizer
-- name: CountVectorsFeaturizer
+- name: WhitespaceTokenizer    # Tokenizer added before featurizers
+- name: SpacyNLP
+  model: "en_core_web_sm"    # Ensure you have the right spaCy model
+- name: SpacyEntityExtractor
+- name: RegexEntityExtractor    # Optional, can be removed if not needed
+- name: RegexFeaturizer    # Featurizer
+- name: CountVectorsFeaturizer    # Featurizer
+- name: CountVectorsFeaturizer    # Featurizer with ngram features
   analyzer: char_wb
   min_ngram: 1
   max_ngram: 4
@@ -77,20 +19,19 @@ pipeline:
 - name: EntitySynonymMapper
 - name: ResponseSelector
   epochs: 100
+- name: FallbackClassifier
+  threshold: 0.3
+  ambiguity_threshold: 0.1
 
 policies:
-  - name: RulePolicy
-  - name: "MemoizationPolicy"
-  - name: "TEDPolicy"
-  - name: RulePolicy
-  - name: UnexpecTEDIntentPolicy
-    max_history: 5
-  - name: AugmentedMemoizationPolicy
-    core_fallback_action_name: "action_fallback_llm"
-    nlu_threshold: 0.7
-    core_fallback_threshold: 0.3
-    deny_suggestion_intent_name: "out_of_scope"
-
-
-
-assistant_id: 20250227-225535-spatial-airport
+- name: MemoizationPolicy
+- name: RulePolicy
+- name: TEDPolicy
+  max_history: 5
+  epochs: 100
+- name: AugmentedMemoizationPolicy
+  core_fallback_action_name: "action_fallback_llm"
+  nlu_threshold: 0.7
+  core_fallback_threshold: 0.3
+  deny_suggestion_intent_name: "out_of_scope"
+assistant_id: 20250303-170548-antique-coverage
