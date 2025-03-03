@@ -7,6 +7,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import Tracker from './pages/Tracker.jsx';
 import Recommender from './pages/Recommender.jsx';
 import PCOS from './pages/PCOS.jsx';
+import Chatbot from './pages/Chatbot.jsx';
+
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/period-tracker" element={<Tracker />} />
         <Route path="/exercise-recommender" element={<Recommender />} />
         <Route path="/pcos-quiz" element={<PCOS />} />
+        <Route path="/chatbot" element={<Chatbot />} />
       </Routes>
     </Router>
   );

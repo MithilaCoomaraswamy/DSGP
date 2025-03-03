@@ -1,70 +1,60 @@
-import { NavLink } from 'react-router-dom';
+// Header.js
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function Header({ openModal }) {
+const Header = ({ handleLogout, handleEditProfile }) => {
+  const [menuOpen, setMenuOpen] = useState(false); // State to control hamburger menu visibility
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Toggle the hamburger menu
+  };
+
+  // Close menu if the user clicks outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [menuOpen]);
+
   return (
-    <header>
-      <nav>
-        <ul>
-          <div className="heading">
-            <NavLink to="/">
-              <img src="logo.png" alt="FemPredict Logo" className="logo" />
-            </NavLink>
-          </div>
-          <li>
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => isActive ? 'active' : ''} 
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => isActive ? 'active' : ''} 
-            >
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/period_tracker" 
-              className={({ isActive }) => isActive ? 'active' : ''} 
-            >
-              Period Tracker
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/pcos_quiz" 
-              className={({ isActive }) => isActive ? 'active' : ''} 
-            >
-              PCOS Quiz
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/exercise_recommender" 
-              className={({ isActive }) => isActive ? 'active' : ''} 
-            >
-              Exercise Recommender
-            </NavLink>
-          </li>
-          {/* Login link that opens the modal */}
-          <li>
-            <NavLink
-              to="#"
-              onClick={openModal} // Trigger modal open
-              style={{ display: 'block', textDecoration: 'none' }}
-              className={({ isActive }) => isActive ? 'active' : ''} // Ensures active class is applied when needed
-            >
-              Login
-            </NavLink>
-          </li>
+    <div className="header">
+      <div className="logo">
+        <Link to="/Profile" className="logo-link">
+          <img src="logo.png" alt="Logo" className="logo-img" />
+        </Link>
+      </div>
+
+      <div className="header-nav">
+        <div ref={hamburgerRef} className="hamburger-icon" onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+
+        <ul ref={menuRef} className={`header-nav-list ${menuOpen ? 'open' : ''}`}>
+          <li onClick={handleEditProfile} className="header-btn">Edit Profile</li>
+          <li onClick={handleLogout} className="header-btn btn-warning">Logout</li>
         </ul>
-      </nav>
-    </header>
+      </div>
+    </div>
   );
-}
+};
 
 export default Header;

@@ -1,111 +1,135 @@
 import React, { useState } from "react";
 
 function Recommender() {
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [age, setAge] = useState("");
-  const [preferences, setPreferences] = useState("");
-  const [goals, setGoals] = useState("");
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [age, setAge] = useState(0);
+  const [exerciseType, setExerciseType] = useState("home");
   const [recommendation, setRecommendation] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [step, setStep] = useState(1);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Here we can generate a recommendation based on the inputs
-    generateRecommendation();
+    if (!weight || !height || !age) {
+      setRecommendation("Please fill out all fields.");
+      return;
+    }
+
+    setProgress(100);
+
+    try {
+      const response = await fetch("http://localhost:5000/recommend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          weight: Number(weight),
+          height: Number(height),
+          age: Number(age),
+          exerciseType,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        setRecommendation(data.error);
+      } else {
+        const exercise =
+          exerciseType === "home" ? data.home_exercise : data.gym_exercise;
+
+        // Check if recommended exercise is null or undefined, if so, recommend visiting a doctor
+        if (!exercise) {
+          setRecommendation("Recommended exercise not found. Please consult a doctor.");
+        } else {
+          setRecommendation(`Recommended Exercise: ${exercise}`);
+        }
+      }
+    } catch (error) {
+      setRecommendation("An error occurred. Please try again.");
+      console.error(error);
+    }
   };
 
-  const generateRecommendation = () => {
-    // Basic logic for exercise recommendations based on the input
-    let recommendedExercise = "";
-
-    // Check the user's goals and preferences
-    if (goals === "weight loss") {
-      if (preferences === "cardio") {
-        recommendedExercise = "Try running, cycling, or swimming for weight loss.";
-      } else if (preferences === "strength") {
-        recommendedExercise = "Try weight lifting or HIIT workouts for fat burning.";
-      } else {
-        recommendedExercise = "A mix of cardio and strength training is ideal for weight loss.";
-      }
-    } else if (goals === "muscle gain") {
-      recommendedExercise = "Focus on strength training and weight lifting to build muscle.";
-    } else if (goals === "general fitness") {
-      recommendedExercise = "Try a balanced workout routine with both cardio and strength exercises.";
-    }
-
-    // Provide exercise recommendations based on the user's age, weight, and height
-    if (age < 18) {
-      recommendedExercise += " Since you're under 18, focus on bodyweight exercises and form over heavy lifting.";
-    } else if (age >= 18 && age < 40) {
-      recommendedExercise += " You're in a great age range for building muscle and endurance.";
-    } else if (age >= 40) {
-      recommendedExercise += " For your age, focus on joint-friendly exercises like swimming and cycling.";
-    }
-
-    // Set the final recommendation state
-    setRecommendation(recommendedExercise);
+  const handleNext = () => {
+    setStep(step + 1);
+    setProgress((prevProgress) => Math.min(prevProgress + 25, 100));
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Personalized Exercise Recommender</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Weight (kg):</label>
-          <input
-            type="number"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Height (cm):</label>
-          <input
-            type="number"
-            value={height}
-            onChange={(e) => setHeight(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Age:</label>
-          <input
-            type="number"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Preferences (Cardio, Strength, Mixed):</label>
-          <select
-            value={preferences}
-            onChange={(e) => setPreferences(e.target.value)}
-          >
-            <option value="">Select</option>
-            <option value="cardio">Cardio</option>
-            <option value="strength">Strength</option>
-            <option value="mixed">Mixed</option>
-          </select>
-        </div>
-        <div>
-          <label>Goals (Weight Loss, Muscle Gain, General Fitness):</label>
-          <select
-            value={goals}
-            onChange={(e) => setGoals(e.target.value)}
-          >
-            <option value="">Select</option>
-            <option value="weight loss">Weight Loss</option>
-            <option value="muscle gain">Muscle Gain</option>
-            <option value="general fitness">General Fitness</option>
-          </select>
-        </div>
-        <button type="submit">Get Recommendations</button>
+        {step === 1 && (
+          <div>
+            <label>Weight (kg):</label>
+            <input
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div>
+            <label>Height (cm):</label>
+            <input
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+            />
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div>
+            <label>Age:</label>
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div>
+            <label>Exercise Type:</label>
+            <select
+              value={exerciseType}
+              onChange={(e) => setExerciseType(e.target.value)}
+            >
+              <option value="home">Home</option>
+              <option value="gym">Gym</option>
+            </select>
+            <button type="submit">Get Recommendations</button>
+          </div>
+        )}
       </form>
 
+      {progress > 0 && (
+        <div className="progress-container">
+          <h3>Progress: {progress}%</h3>
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+      )}
+
       {recommendation && (
-        <div>
-          <h2>Recommended Exercise:</h2>
-          <p>{recommendation}</p>
+        <div className="recommendation">
+          <h2>{recommendation}</h2>
         </div>
       )}
     </div>

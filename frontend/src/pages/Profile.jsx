@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [chatbotVisible, setChatbotVisible] = useState(false);
-  const [chatbotMinimized, setChatbotMinimized] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);  // State to control hamburger menu visibility
+  const [menuOpen, setMenuOpen] = useState(false); // State to control hamburger menu visibility
   const navigate = useNavigate();
+
+  // Ref to track the menu and hamburger icon
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -45,40 +47,59 @@ const Profile = () => {
     navigate('/exercise-recommender');
   };
 
-  const toggleChatbot = () => {
-    setChatbotVisible(prevState => !prevState);
-    setChatbotMinimized(false);
-  };
-
-  const toggleMinimizeChatbot = () => {
-    setChatbotMinimized(prevState => !prevState);
-  };
-
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);  // Toggle the hamburger menu
+    setMenuOpen(!menuOpen); // Toggle the hamburger menu
+  };
+
+  // Close menu if the user clicks outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  // Open chatbot in a popup window
+  const handleChatbotClick = () => {
+    const popupWindow = window.open('/chatbot', 'ChatbotPopup', 'width=600,height=800,resizable=yes,scrollbars=yes');
+    
+    if (popupWindow) {
+      popupWindow.focus(); // Ensures the popup window gets focus when opened
+    }
   };
 
   return (
     <div className="profile-page">
       <div className="header">
         <div className="logo">
-          <img src="icon.png" alt="Logo" className="logo-img" />
-          <span className="logo-name">FemPredict</span>
+          <Link to="/Profile" className="logo-link">
+            <img src="logo.png" alt="Logo" className="logo-img" />
+          </Link>
         </div>
 
         <div className="header-nav">
-          {/* Hamburger menu icon */}
-          <div className="hamburger-icon" onClick={toggleMenu}>
+          <div ref={hamburgerRef} className="hamburger-icon" onClick={toggleMenu}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
           </div>
 
-          {/* Navbar links */}
-          <ul className={`header-nav-list ${menuOpen ? 'open' : ''}`}>
-            <li onClick={() => navigate('/terms')} className="header-btn">Terms and Conditions</li>
+          <ul ref={menuRef} className={`header-nav-list ${menuOpen ? 'open' : ''}`}>
             <li onClick={handleEditProfile} className="header-btn">Edit Profile</li>
-            <li onClick={handleDeleteProfile} className="header-btn btn-danger">Delete Profile</li>
             <li onClick={handleLogout} className="header-btn btn-warning">Logout</li>
           </ul>
         </div>
@@ -115,33 +136,10 @@ const Profile = () => {
         )}
       </div>
 
-      {/* Chatbot Avatar or Cross Button */}
-      {!chatbotVisible ? (
-        <div className="chatbot-avatar" onClick={toggleChatbot}>
-          <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
-        </div>
-      ) : (
-        <div className="chatbot-close" onClick={toggleChatbot}>
-          <span className="close-icon">×</span>
-        </div>
-      )}
-
-      {/* Chatbot Window */}
-      {chatbotVisible && (
-        <div className={`chatbot-window ${chatbotMinimized ? 'minimized' : ''}`}>
-          <div className="chatbot-header">
-            <div className="logo">
-              <img src="icon.png" alt="Logo" className="logo-img" />
-              <span className="logo-name">FemPredict</span>
-            </div>
-            <button onClick={toggleMinimizeChatbot} className="minimize-btn">↓</button>
-            <button onClick={toggleChatbot} className="close-btn">×</button>
-          </div>
-          <div className={`chatbot-body ${chatbotMinimized ? 'minimized' : ''}`}>
-            {!chatbotMinimized && <p>Welcome to the chatbot! How can I assist you today?</p>}
-          </div>
-        </div>
-      )}
+      {/* Chatbot Avatar - clicking here will open the chatbot page in a popup window */}
+      <div className="chatbot-avatar" onClick={handleChatbotClick}>
+        <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
+      </div>
 
       {/* Footer */}
       <footer className="footer">
@@ -152,7 +150,7 @@ const Profile = () => {
           </div>
           <div>
             <h3>Contact Us</h3>
-            <p>Email us at: <a href="mailto:info@example.com" className="footer-link">info@example.com</a></p>
+            <p>Email us at: <a href="mailto:fempredict@gmail.com" className="footer-link">fempredict@gmail.com</a></p>
           </div>
           <div>
             <h3>Privacy Policy</h3>
@@ -162,21 +160,9 @@ const Profile = () => {
             <h3>Terms of Use</h3>
             <p><a href="/terms-of-use" className="footer-link">View terms of use</a></p>
           </div>
-          <div>
-            <h3>Security</h3>
-            <p>Your security is our priority. Learn more about our security practices.</p>
-          </div>
-          <div>
-            <h3>Cookie Policy</h3>
-            <p><a href="/cookie-policy" className="footer-link">Read our cookie policy</a></p>
-          </div>
-          <div>
-            <h3>Accessibility Statement</h3>
-            <p><a href="/accessibility-statement" className="footer-link">Learn about our accessibility statement</a></p>
-          </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+          <p>&copy; 2025 FemPredict. All rights reserved.</p>
         </div>
       </footer>
     </div>
