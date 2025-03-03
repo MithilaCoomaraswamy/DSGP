@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCOS Risk Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>PCOS Risk Predictor</h2>
+
+    <form method="post">
+        <label>Age:</label>
+        <input type="number" name="age" step="0.1" value="{{ values.get('age', '') }}" required>
+
+        <label>Weight (kg):</label>
+        <input type="number" name="weight" step="0.1" value="{{ values.get('weight', '') }}" required>
+
+        <label>Height (cm):</label>
+        <input type="number" name="height" step="0.1" value="{{ values.get('height', '') }}" required>
+
+        <label>Insulin Level:</label>
+        <input type="number" name="insulin" step="0.1" value="{{ values.get('insulin', '') }}" required>
+
+        <label>Cycle Length (days):</label>
+        <input type="number" name="cycle" value="{{ values.get('cycle', '') }}" required>
+
+        <label>Excess Hair Growth:</label>
+        <select name="hair_growth">
+            <option value="1" {% if values.get('hair_growth') == 1 %}selected{% endif %}>Yes</option>
+            <option value="0" {% if values.get('hair_growth') == 0 %}selected{% endif %}>No</option>
+        </select>
+
+        <label>Skin Darkening:</label>
+        <select name="skin_darkening">
+            <option value="1" {% if values.get('skin_darkening') == 1 %}selected{% endif %}>Yes</option>
+            <option value="0" {% if values.get('skin_darkening') == 0 %}selected{% endif %}>No</option>
+        </select>
+
+        <button type="submit">Predict Risk</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">Prediction: <strong>{{ prediction }}</strong></div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error">Error: {{ error }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
