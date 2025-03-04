@@ -158,3 +158,8 @@ stories:
   - intent: ask_pcos_thyroid
   - action: utter_pcos_thyroid
 
+
+- story: user asks about PCOS
+  steps:
+  - intent: ask_unknown_query
+  - action: action_fallback_llm
