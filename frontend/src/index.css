@@ -62,57 +62,56 @@ nav {
   padding-top: 10px;
   padding-bottom: 10px;
 
-}
-footer {
+}footer {
   background-color: white; /* Light grey background */
   border-radius: 5px;
-  text-align: center;         /* Center text */
-  padding: 20px;              /* Padding around the footer */
+  text-align: center; /* Center text */
+  padding: 20px; /* Padding around the footer */
   font-family: 'Poppins', sans-serif; /* Use the same font as the rest of the site */
-  margin-top: 30px;           /* Add space above the footer */
+  margin-top: 30px; /* Add space above the footer */
 }
 
 .footer-content {
-  max-width: 1200px;  /* Max width to keep the content centered */
-  margin: 0 auto;     /* Center align the content */
+  max-width: 1200px; /* Max width to keep the content centered */
+  margin: 0 auto; /* Center align the content */
 }
 
 footer p {
-  color: black;           /* Dark color for text */
-  font-size: 16px;       /* Font size for copyright text */
+  color: black; /* Dark color for text */
+  font-size: 16px; /* Font size for copyright text */
 }
 
 .footer-links {
-  margin: 20px 0;        /* Space between copyright and links */
+  margin: 20px 0; /* Space between copyright and links */
 }
 
 .footer-links a {
   text-decoration: none; /* Remove underline */
-  color: black;           /* Link color */
-  font-size: 14px;       /* Font size for links */
-  margin: 0 10px;        /* Space between links */
+  color: black; /* Link color */
+  font-size: 14px; /* Font size for links */
+  margin: 0 10px; /* Space between links */
 }
 
 .footer-links a:hover {
-  font-weight: bold;        /* Change color on hover */
+  font-weight: bold; /* Change color on hover */
 }
 
 .social-icons {
-  margin-top: 20px;      /* Space above the social icons */
+  margin-top: 20px; /* Space above the social icons */
 }
 
 .social-icons a {
-  margin: 0 15px;        /* Space between the icons */
+  margin: 0 15px; /* Space between the icons */
 }
 
 .social-icon {
-  width: 30px;           /* Icon size */
-  height: auto;          /* Maintain aspect ratio */
+  width: 30px; /* Icon size */
+  height: auto; /* Maintain aspect ratio */
 }
 
 /* Optional: Add hover effect to social icons */
 .social-icons a:hover .social-icon {
-  opacity: 0.8;          /* Slightly fade on hover */
+  opacity: 0.8; /* Slightly fade on hover */
 }
 
 

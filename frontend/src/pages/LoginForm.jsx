@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate for navigation
+import { useNavigate } from 'react-router-dom';
+import Footer from './Footer'; // Import Footer component
 
 const LoginForm = () => {
-  // Separate state for each section
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  const [signupUsername, setSignupUsername] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // New state for password confirmation
   const [forgotEmail, setForgotEmail] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -16,9 +16,9 @@ const LoginForm = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [emailForSent, setEmailForSent] = useState('');
-  const [loading, setLoading] = useState(false);  // Added loading state for password reset
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -37,11 +37,7 @@ const LoginForm = () => {
       if (response.status === 200) {
         setSuccessMessage('Login successful!');
         console.log('Success:', response.data);
-        
-        // Save user data to localStorage
-        localStorage.setItem('user', JSON.stringify(response.data)); // assuming response.data contains user info
-  
-        // After successful login, navigate to the profile page
+        localStorage.setItem('user', JSON.stringify(response.data));
         navigate('/profile');
       }
     } catch (err) {
@@ -54,27 +50,28 @@ const LoginForm = () => {
     e.preventDefault();
     setSuccessMessage('');
     setError('');
-  
-    if (signupUsername === '' || signupEmail === '' || signupPassword === '') {
-      if (signupUsername === '') setError('Please enter a username');
-      else if (signupEmail === '') setError('Please enter an email address');
+
+    // Check if passwords match
+    if (signupPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (signupEmail === '' || signupPassword === '') {
+      if (signupEmail === '') setError('Please enter an email address');
       else if (signupPassword === '') setError('Please enter a password');
     } else {
       setError('');
-      console.log('Sign Up Form submitted:', { signupUsername, signupEmail, signupPassword });
+      console.log('Sign Up Form submitted:', { signupEmail, signupPassword });
     }
-  
+
     try {
-      const response = await axios.post('http://localhost:5000/register', { username: signupUsername, email: signupEmail, password: signupPassword });
+      const response = await axios.post('http://localhost:5000/register', { email: signupEmail, password: signupPassword });
       if (response.status === 201) {
         setSuccessMessage('Sign Up successful!');
         console.log('Success:', response.data);
-  
-        // Save user data to localStorage (make sure you're using the correct response data)
-        localStorage.setItem('user', JSON.stringify(response.data.user)); // Ensure you're saving the 'user' object
-  
-        // Navigate to profile page
-        navigate('/profile');  // Redirect to profile page after successful sign-up
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        navigate('/profile');
       }
     } catch (err) {
       setError(err.response && err.response.data ? err.response.data.message : 'Error during sign up');
@@ -84,7 +81,7 @@ const LoginForm = () => {
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Start loading spinner
+    setLoading(true);
     setError('');
     setSuccessMessage('');
 
@@ -108,7 +105,7 @@ const LoginForm = () => {
       }
     }
 
-    setLoading(false);  // Stop loading spinner
+    setLoading(false);
   };
 
   const handleSignUpClick = () => {
@@ -148,17 +145,6 @@ const LoginForm = () => {
               <p>Managing PCOS starts here</p>
               <form onSubmit={handleSignUpSubmit}>
                 <div className="form-group">
-                  <label htmlFor="signup-username">Username</label>
-                  <input
-                    type="text"
-                    id="signup-username"
-                    placeholder="Username"
-                    value={signupUsername}
-                    onChange={(e) => setSignupUsername(e.target.value)}
-                    className="login-input"
-                  />
-                </div>
-                <div className="form-group">
                   <label htmlFor="signup-email">Email Address</label>
                   <input
                     type="email"
@@ -177,6 +163,17 @@ const LoginForm = () => {
                     placeholder="Password"
                     value={signupPassword}
                     onChange={(e) => setSignupPassword(e.target.value)}
+                    className="login-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="confirm-password">Confirm Password</label>
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="login-input"
                   />
                 </div>
@@ -257,7 +254,6 @@ const LoginForm = () => {
             </form>
           )}
 
-          {/* Only show the disclaimer if the user is not on the Forgot Password screen */}
           {!showForgotPassword && (
             <div className="terms-disclaimer">
               <p>
