@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [loginPassword, setLoginPassword] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // New state for password confirmation
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [forgotEmail, setForgotEmail] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -16,7 +16,14 @@ const LoginForm = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [emailForSent, setEmailForSent] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationError, setVerificationError] = useState('');
+  const [codeVerified, setCodeVerified] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resendCodeLoading, setResendCodeLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -88,44 +95,103 @@ const LoginForm = () => {
     if (forgotEmail === '') {
       setError('Please enter your email address');
     } else {
-      setError('');
-      console.log('Password reset email sent:', { forgotEmail });
-
       try {
         const response = await axios.post('http://localhost:5000/forgot-password', { email: forgotEmail });
         if (response.status === 200) {
-          setSuccessMessage('Password reset email sent successfully');
+          setSuccessMessage('Verification code sent. Please check your email.');
           setEmailSent(true);
           setEmailForSent(forgotEmail);
-          console.log('Success:', response.data);
         }
       } catch (err) {
-        setError('Error sending password reset email');
-        console.error('Error:', err.response ? err.response.data : err);
+        setError('Error sending verification email');
       }
     }
 
     setLoading(false);
   };
 
+  const handleVerifyCodeSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5000/verify-code', { email: emailForSent, code: verificationCode });
+      if (response.status === 200) {
+        setCodeVerified(true);
+        setVerificationError('');
+      }
+    } catch (err) {
+      setVerificationError('Invalid or expired verification code');
+    }
+  };
+
+  const handleResetPasswordSubmit = async (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmNewPassword) {
+      setVerificationError('Passwords do not match');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5000/reset-password', {
+        email: emailForSent,
+        new_password: newPassword,
+      });
+      if (response.status === 200) {
+        const loginResponse = await axios.post('http://localhost:5000/login', {
+          email: emailForSent,
+          password: newPassword,
+        });
+
+        if (loginResponse.status === 200) {
+          localStorage.setItem('user', JSON.stringify(loginResponse.data));
+          navigate('/profile');
+        }
+
+        setPasswordResetSuccess(true);
+        setVerificationError('');
+        setCodeVerified(false);
+      }
+    } catch (err) {
+      setVerificationError('Error resetting password');
+    }
+  };
+
   const handleSignUpClick = () => {
     setShowSignUp(true);
     setShowForgotPassword(false);
+    setError(''); // Clear the error when switching to the sign-up form
   };
-
+  
   const handleForgotPasswordClick = () => {
     setShowForgotPassword(true);
     setShowSignUp(false);
+    setError(''); // Clear the error when switching to the forgot password form
   };
-
+  
   const handleBackToLogin = () => {
     setShowSignUp(false);
     setShowForgotPassword(false);
+    setError(''); // Clear the error when switching back to the login form
   };
 
   const handleTryAgain = () => {
     setEmailSent(false);
     setForgotEmail('');
+  };
+
+  const handleResendCode = async () => {
+    setResendCodeLoading(true);
+    try {
+      const response = await axios.post('http://localhost:5000/forgot-password', { email: emailForSent });
+      if (response.status === 200) {
+        setSuccessMessage('Verification code resent. Please check your email.');
+        setEmailSent(true);
+      }
+    } catch (err) {
+      setError('Error resending verification code');
+    }
+    setResendCodeLoading(false);
   };
 
   return (
@@ -139,6 +205,16 @@ const LoginForm = () => {
           <img src="icon.png" alt="FemPredict Logo" className="login-logo" />
           <h2>Welcome to FemPredict</h2>
           {error && <div className="error-message">{error}</div>}
+
+          {/* Display state message */}
+          <div className="state-message">
+            {showForgotPassword && !codeVerified && emailSent && !resendCodeLoading && (
+              <p>Verification code has been sent to {emailForSent}</p>
+            )}
+            {resendCodeLoading && <p>Resending code...</p>}
+            {verificationError && <p className="error-message">{verificationError}</p>}
+            {passwordResetSuccess && <p>Password reset successfully! You can now log in with the new password.</p>}
+          </div>
 
           {showSignUp ? (
             <div>
@@ -184,15 +260,30 @@ const LoginForm = () => {
             </div>
           ) : showForgotPassword ? (
             <div>
-              {emailSent ? (
+              {emailSent && !codeVerified ? (
                 <div>
-                  <h3>Email Sent</h3>
-                  <p>We sent an email to {emailForSent}. If this email is connected to a FemPredict account, you'll be able to reset your password.</p>
-                  <p>Didn't get the email? Try these tips from our <a href="#" target="_blank">Help Centre</a>.</p>
-                  <button onClick={handleTryAgain} className="login-button">Try Again</button>
-                  <div className="back-to-login">
-                    <span>Back to Login</span>
-                    <button onClick={handleBackToLogin} className="login-button">Back to Login</button>
+                  <h3>Enter the 6-digit verification code</h3>
+                  <form onSubmit={handleVerifyCodeSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="verification-code">Verification Code</label>
+                      <input
+                        type="text"
+                        id="verification-code"
+                        placeholder="Enter 6-digit code"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                        className="login-input"
+                      />
+                    </div>
+                    <button type="submit" className="login-button">
+                      Verify Code
+                    </button>
+                  </form>
+                  {verificationError && <div className="error-message">{verificationError}</div>}
+                  <div className="resend-code-link">
+                    <a href="#" onClick={handleResendCode}>
+                      {resendCodeLoading ? 'Resending...' : 'Resend Code'}
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -208,6 +299,7 @@ const LoginForm = () => {
                         value={forgotEmail}
                         onChange={(e) => setForgotEmail(e.target.value)}
                         className="login-input"
+                        disabled={emailSent} // Disable email input if email is sent
                       />
                     </div>
                     <button type="submit" className="login-button">
@@ -218,6 +310,39 @@ const LoginForm = () => {
                   <div className="back-to-login">
                     <a href="#" onClick={handleBackToLogin}>Back</a>
                   </div>
+                </div>
+              )}
+          
+              {codeVerified && (
+                <div>
+                  <h3>Reset Your Password</h3>
+                  <form onSubmit={handleResetPasswordSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="new-password">New Password</label>
+                      <input
+                        type="password"
+                        id="new-password"
+                        placeholder="Enter new password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="login-input"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="confirm-new-password">Confirm New Password</label>
+                      <input
+                        type="password"
+                        id="confirm-new-password"
+                        placeholder="Confirm new password"
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        className="login-input"
+                      />
+                    </div>
+                    <button type="submit" className="login-button">
+                      Reset Password
+                    </button>
+                  </form>
                 </div>
               )}
             </div>
@@ -253,6 +378,7 @@ const LoginForm = () => {
               </button>
             </form>
           )}
+          
 
           {!showForgotPassword && (
             <div className="terms-disclaimer">
@@ -274,7 +400,7 @@ const LoginForm = () => {
           {!showSignUp && !showForgotPassword && (
             <div className="signup-link">
               <span>Don't have an account? </span>
-              <a href="#" onClick={handleSignUpClick}>Sign up</a>
+              <a href="#" onClick={handleSignUpClick}>Sign Up</a>
             </div>
           )}
         </div>

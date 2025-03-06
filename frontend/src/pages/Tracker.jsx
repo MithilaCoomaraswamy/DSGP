@@ -36,9 +36,9 @@ const Tracker = () => {
       const response = await axios.post('http://localhost:5000/predict_ovulation', {
         startDate: lastMensesDate,
         LengthofCycle: parsedLengthofCycle,
-        LengthofMenses: parsedLengthofMenses,
-        MeanMensesLength: parsedMeanMensesLength,
         MeanCycleLength: parsedMeanCycleLength,
+        LengthofMenses: parsedLengthofMenses,
+        MeanMensesLength: parsedMeanMensesLength
       });
 
       // Extracting the predicted ovulation date from the response
@@ -75,7 +75,7 @@ const Tracker = () => {
             min="1" 
           />
 
-          <label>How long is your menstrual cycle?</label>
+          <label>How long was your menstrual cycle?</label>
           <input 
             type="number" 
             value={LengthofCycle} 
