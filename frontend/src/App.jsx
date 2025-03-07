@@ -8,6 +8,8 @@ import Tracker from './pages/Tracker.jsx';
 import Recommender from './pages/Recommender.jsx';
 import PCOS from './pages/PCOS.jsx';
 import Chatbot from './pages/Chatbot.jsx';
+import About from './pages/About.jsx';
+import ContactUs from './pages/Contact.jsx'
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
         <Route path="/exercise-recommender" element={<Recommender />} />
         <Route path="/pcos-quiz" element={<PCOS />} />
         <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

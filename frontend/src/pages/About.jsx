@@ -41,22 +41,22 @@ function About() {
           <div className="card">
             <img src="20230967.jpg" alt="Team Member 1" />
             <h4>Mithila Coomaraswamy</h4>
-            <p>Team lead, period tracker designer</p>
+            <p>Team lead | Period Tracker Developer</p>
           </div>
           <div className="card">
             <img src="team.png" alt="Team Member 2" />
             <h4>Danishya Shanmuganathan</h4>
-            <p>Chat bot designer</p>
+            <p>Chatbot Developer</p>
           </div>
           <div className="card">
             <img src="team.png" alt="Team Member 3" />
             <h4>Harini Crusz</h4>
-            <p>PCOS quiz designer</p>
+            <p>PCOS Quiz Developer</p>
           </div>
           <div className="card">
             <img src="team.png" alt="Team Member 4" />
             <h4>Chathuranga Dayarathne</h4>
-            <p>Exercise Recommender deisgner</p>
+            <p>Exercise Recommender Developer</p>
           </div>
         </div>
       </div>

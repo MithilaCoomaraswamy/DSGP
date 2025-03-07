@@ -19,6 +19,116 @@ nav a.active{
   font-weight: bold;
 }
 
+/* Footer styles */
+footer.footer {
+  width: 100%; /* Ensures footer spans the full width */
+  background-color: #b1a1ed00; /* Or any color you want */
+  border-radius: 5px;
+  padding: 20px 0; /* Adjust padding as needed */
+  text-align: center; /* Center the content inside footer */
+  position: relative; /* Change from absolute to relative */
+  margin-top: 50px; /* Space the footer away from the main section */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto; /* Center the footer container */
+  padding: 0 20px; /* Optional: Add padding to the sides */
+  width: 100%; /* Ensure the footer container takes the full width */
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  padding: 0; /* Reduced padding to decrease footer height */
+  margin-top: 0px;
+  font-family: 'Poppins', sans-serif;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Main container for footer content */
+.footer-container {
+  max-width: 1200px; /* Same width as other content */
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px; /* Increased gap between footer items */
+  align-items: center; /* Vertically align items in the center */
+}
+
+/* Footer sections (links) layout */
+.footer-links {
+  display: flex;
+  gap: 20px; /* Spacing between the links */
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-links div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-container h3 {
+  font-size: 14px; /* Font size for headings */
+  margin-bottom: 4px; /* Reduced margin */
+  color: #333; /* Dark color for headings */
+}
+
+.footer-container p {
+  font-size: 10px; /* Reduced font size */
+  color: #333; /* Darker text for readability */
+  line-height: 1.3; /* Reduced line height for compactness */
+}
+
+.footer-link {
+  color: #000; /* Black links */
+  text-decoration: none;
+  font-weight: 400; /* Regular weight */
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #a88afc; /* Highlight links with a warm color on hover */
+  text-decoration: underline;
+  transform: translateX(5px); /* Subtle slide effect */
+}
+
+/* Footer bottom section */
+.footer-bottom {
+  text-align: center;
+  margin-top: 10px; /* Reduced margin */
+  font-size: 10px; /* Reduced font size */
+  color: #333; /* Darker text for footer bottom */
+}
+
+
+.footer-links li {
+  margin: 0 15px;
+  align-items: center;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #333; /* Or any color you want for links */
+  font-size: small;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+.footer-copyright p {
+  margin-top: 10px;
+  color: #777;
+  align-items: center;
+  font-size: 32px;
+}
+
 ul {
   display: flex;
   list-style-type: none;
@@ -62,58 +172,7 @@ nav {
   padding-top: 10px;
   padding-bottom: 10px;
 
-}footer {
-  background-color: white; /* Light grey background */
-  border-radius: 5px;
-  text-align: center; /* Center text */
-  padding: 20px; /* Padding around the footer */
-  font-family: 'Poppins', sans-serif; /* Use the same font as the rest of the site */
-  margin-top: 30px; /* Add space above the footer */
 }
-
-.footer-content {
-  max-width: 1200px; /* Max width to keep the content centered */
-  margin: 0 auto; /* Center align the content */
-}
-
-footer p {
-  color: black; /* Dark color for text */
-  font-size: 16px; /* Font size for copyright text */
-}
-
-.footer-links {
-  margin: 20px 0; /* Space between copyright and links */
-}
-
-.footer-links a {
-  text-decoration: none; /* Remove underline */
-  color: black; /* Link color */
-  font-size: 14px; /* Font size for links */
-  margin: 0 10px; /* Space between links */
-}
-
-.footer-links a:hover {
-  font-weight: bold; /* Change color on hover */
-}
-
-.social-icons {
-  margin-top: 20px; /* Space above the social icons */
-}
-
-.social-icons a {
-  margin: 0 15px; /* Space between the icons */
-}
-
-.social-icon {
-  width: 30px; /* Icon size */
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* Optional: Add hover effect to social icons */
-.social-icons a:hover .social-icon {
-  opacity: 0.8; /* Slightly fade on hover */
-}
-
 
 /* General Section Styling */
 .section-container {
@@ -123,127 +182,6 @@ footer p {
   margin-bottom: 40px;
   margin-top: 40px;
 }
-
-/* General Section Styling */
-.section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: white; /* Set background color to white */
-  border-radius: 8px; /* Optional: rounded corners for sections */
-  width: 100%; /* Take full width */
-  height: auto; /* Allow the height to adapt to content */
-  box-sizing: border-box; /* Ensure padding doesn't affect the section size */
-}
-
-/* Section Image Styling */
-.section-image {
-  width: 50%; /* Adjust image container to take up half of the section */
-  height: 100%; /* Ensure the image container takes the full height */
-  overflow: hidden; /* Hide overflow in case of disproportionate image size */
-}
-
-.section-image img {
-  width: 100%; /* Make the image fill the width of the container */
-  height: 100%; /* Make the image fill the height of the container */
-  object-fit: cover; /* Make sure the image covers the area without distortion */
-  border-radius: 8px; /* Optional: rounded corners for images */
-}
-
-/* Section Text Styling */
-.section-text {
-  flex: 1; /* Make the text container take the remaining space */
-  margin-left: 20px; /* Space between the image and the text */
-  text-align: center; /* Center the text */
-}
-
-.section-text h2 {
-  font-size: 24px;
-  color: black;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif; 
-}
-
-.section-text p {
-  font-size: 16px;
-  color: black;
-  margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif; 
-}
-
-/* Section Container with Image and Text */
-.slideshow-container {
-  position: relative;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.section-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full height of the viewport */
-  text-align: center;
-}
-
-/* Optional: Add some margin at the top for better spacing */
-.section-container {
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.section-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.section-image img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.section-text {
-  flex: 1;
-  margin-left: 20px;
-}
-
-.section-text h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.section-text p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Styling for Responsive Layout */
-@media (max-width: 768px) {
-  .section-container {
-    flex-direction: column; /* Stack sections vertically on smaller screens */
-  }
-
-  .section {
-    width: 100%; /* Make sections take full width */
-    margin-bottom: 20px; /* Space between stacked sections */
-  }
-
-  .section-image, .section-text {
-    width: 100%; /* Full width for both image and text */
-  }
-
-  .section-image img {
-    width: 100%; /* Ensure image takes up full width */
-    height: auto; /* Automatically adjust height */
-  }
-}
-
 
 .heading {
   display: flex;
@@ -357,7 +295,6 @@ button {
   font-size: 16px;
 }
 
-
 /* Style for Forgot Password link */
 .forgot-password {
   margin-top: 5px;
@@ -386,7 +323,7 @@ input {
 }
 
 .about-us {
-  background-color:#B9AEDC;
+  background-color:#cfbaea;
   background-position: center;
   padding: 20px 40px 60px;
   margin-top: 40px;
@@ -461,4 +398,10 @@ h3 {
   font-size: 2rem;
   text-align: center;
   margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stack footer content vertically on small screens */
+  }
 }

@@ -212,21 +212,32 @@ def reset_password():
 
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM password_resets WHERE email = ? ", (email))
+
+    # Ensure that the email is passed as a tuple
+    cursor.execute("SELECT * FROM password_resets WHERE email = ?", (email,))
     reset_entry = cursor.fetchone()
 
     if reset_entry:
         hashed_password = generate_password_hash(new_password, method='scrypt')
+        
+        # Update the user's password
         cursor.execute("UPDATE users SET password = ? WHERE email = ?", (hashed_password, email))
+
+        # Commit the changes
         conn.commit()
+
+        # Remove the reset entry from the password_resets table
         cursor.execute("DELETE FROM password_resets WHERE email = ?", (email,))
         conn.commit()
+
+        # Close the connection
         conn.close()
 
         return jsonify({"message": "Password has been reset successfully."}), 200
     else:
         conn.close()
         return jsonify({"message": "Invalid reset token or email."}), 400
+
 
 @app.route('/verify-code', methods=['POST'])
 def verify_code():

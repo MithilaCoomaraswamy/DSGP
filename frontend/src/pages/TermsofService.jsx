@@ -93,7 +93,7 @@ const TermsOfService = () => {
 
       <h3>13. Governing Law</h3>
       <p>
-        These Terms of Service will be governed by and construed in accordance with the laws of <strong>[Your Jurisdiction]</strong>, without regard to its conflict of law principles. Any disputes related to these Terms will be resolved in the courts of <strong>[Your Jurisdiction]</strong>.
+        These Terms of Service will be governed by and construed in accordance with the laws, without regard to its conflict of law principles. Any disputes related to these Terms will be resolved in the courts.
       </p>
 
       <h3>14. Termination</h3>
