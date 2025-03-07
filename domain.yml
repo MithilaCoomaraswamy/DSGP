@@ -9,6 +9,7 @@ intents:
   - mood_unhappy
   - bot_challenge
   - web_info
+  - cheer_up
   - ask_pcos_info
   - ask_pcos_common
   - ask_pcos_causes
@@ -31,6 +32,7 @@ intents:
   - ask_pcos_heart
   - ask_pcos_risks
   - ask_pcos_thyroid
+  - ask_unknown_query
 
 entities:
   - Polycystic Ovary Syndrome

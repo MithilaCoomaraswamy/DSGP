@@ -1,0 +1,90 @@
+[
+  {
+    "text": "What is PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.14532345533370972
+    }
+  },
+  {
+    "text": "What are the symptoms of PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.14221099019050598
+    }
+  },
+  {
+    "text": "How do I know if I have PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.2220716029405594
+    }
+  },
+  {
+    "text": "What problems can PCOS cause?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.13995137810707092
+    }
+  },
+  {
+    "text": "How is PCOS diagnosed?",
+    "intent": "ask_pcos_diagnosis",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.2847520411014557
+    }
+  },
+  {
+    "text": "What tests are done for PCOS?",
+    "intent": "ask_pcos_diagnosis",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.2557319700717926
+    }
+  },
+  {
+    "text": "Can I get tested for PCOS?",
+    "intent": "ask_pcos_diagnosis",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.26778194308280945
+    }
+  },
+  {
+    "text": "Tell me about PCOS diagnosis",
+    "intent": "ask_pcos_diagnosis",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.21363778412342072
+    }
+  },
+  {
+    "text": "Is there a permanent solution for PCOS?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.24192772805690765
+    }
+  },
+  {
+    "text": "How can I get rid of PCOS?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.14843203127384186
+    }
+  },
+  {
+    "text": "What medications are used for PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_risks",
+      "confidence": 0.17370343208312988
+    }
+  }
+]

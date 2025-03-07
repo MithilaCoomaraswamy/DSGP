@@ -204,7 +204,6 @@ nlu:
   - intent: ask_pcos_food
     examples: |
       - What are the best foods to eat for PCOS?
-      - Which foods help with PCOS?
       - What diet is good for PCOS?
 
   - intent: ask_pcos_stress
@@ -242,7 +241,7 @@ nlu:
       - Is PCOS linked to thyroid issues?
       - Can PCOS cause thyroid problems?
       - How are PCOS and thyroid related?
-      - Is PCOS affect thyroid?What I
+      - Is PCOS affect thyroid?
       
       
 
