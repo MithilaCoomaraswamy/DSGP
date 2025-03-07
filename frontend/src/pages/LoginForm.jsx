@@ -355,7 +355,7 @@ const LoginForm = () => {
                   </div>
                 </div>
                 <button type="submit" className="login-button">
-                  Log In
+                  Login
                 </button>
               </form>
             )}

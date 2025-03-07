@@ -129,6 +129,8 @@ h2 {
   border: none;
   cursor: pointer;
   margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
 }
 
 .rounded-btn:hover {
@@ -368,84 +370,4 @@ h2 {
   border-radius: 2px;
 }
 
-/* Footer Styles */
-.footer {
-  background-color: #fff; /* White background */
-  color: #000; /* Black text */
-  padding: 0; /* Reduced padding to decrease footer height */
-  margin-top: 0px;
-  font-family: 'Poppins', sans-serif;
-  width: 100%; /* Ensure full width */
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
 
-/* Main container for footer content */
-.footer-container {
-  max-width: 1200px; /* Same width as other content */
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px; /* Increased gap between footer items */
-  align-items: center; /* Vertically align items in the center */
-}
-
-/* Footer sections (links) layout */
-.footer-links {
-  display: flex;
-  gap: 20px; /* Spacing between the links */
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.footer-links div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.footer-container h3 {
-  font-size: 14px; /* Font size for headings */
-  margin-bottom: 4px; /* Reduced margin */
-  color: #333; /* Dark color for headings */
-}
-
-.footer-container p {
-  font-size: 10px; /* Reduced font size */
-  color: #333; /* Darker text for readability */
-  line-height: 1.3; /* Reduced line height for compactness */
-}
-
-.footer-link {
-  color: #000; /* Black links */
-  text-decoration: none;
-  font-weight: 400; /* Regular weight */
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.footer-link:hover {
-  color: #a88afc; /* Highlight links with a warm color on hover */
-  text-decoration: underline;
-  transform: translateX(5px); /* Subtle slide effect */
-}
-
-/* Footer bottom section */
-.footer-bottom {
-  text-align: center;
-  margin-top: 10px; /* Reduced margin */
-  font-size: 10px; /* Reduced font size */
-  color: #333; /* Darker text for footer bottom */
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
-  }
-}

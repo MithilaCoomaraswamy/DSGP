@@ -1,4 +1,6 @@
+import { color } from 'chart.js/helpers';
 import React, { useState, useEffect, useRef } from 'react';
+import { TbBackground } from 'react-icons/tb';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Profile = () => {
@@ -82,6 +84,11 @@ const Profile = () => {
     }
   };
 
+
+  const footerStyle = {
+    backgroundColor: 'white',
+  };
+
   return (
     <div className="profile-page">
       <div className="header">
@@ -142,11 +149,11 @@ const Profile = () => {
       </div>
 
       {/* Footer */}
-      <footer className="footer">
+      <footer style={footerStyle} className="footer">
         <div className="footer-container">
           <div>
             <h3>About Us</h3>
-            <p>Learn more about our company and mission.</p>
+            <p><a href="/about" target="_blank" className="footer-link">Learn more about our company and mission.</a></p>
           </div>
           <div>
             <h3>Contact Us</h3>
@@ -154,11 +161,11 @@ const Profile = () => {
           </div>
           <div>
             <h3>Privacy Policy</h3>
-            <p><a href="/privacy-policy" className="footer-link">Read our privacy policy</a></p>
+            <p><a href="/privacypolicy" target="_blank" className="footer-link">Read our privacy policy</a></p>
           </div>
           <div>
             <h3>Terms of Use</h3>
-            <p><a href="/terms-of-use" className="footer-link">View terms of use</a></p>
+            <p><a href="/termsofservice" target="_blank" className="footer-link">View terms of use</a></p>
           </div>
         </div>
         <div className="footer-bottom">
