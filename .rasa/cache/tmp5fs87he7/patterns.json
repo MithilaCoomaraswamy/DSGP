@@ -1,0 +1,14 @@
+[
+  {
+    "name": "pcos",
+    "pattern": "(?i)pcos"
+  },
+  {
+    "name": "pcos",
+    "pattern": "(?i)polycystic ovarian syndrome"
+  },
+  {
+    "name": "pcos",
+    "pattern": "(?i)polycystic ovary syndrome"
+  }
+]

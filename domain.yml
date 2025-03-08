@@ -9,7 +9,6 @@ intents:
   - mood_unhappy
   - bot_challenge
   - web_info
-  - cheer_up
   - ask_pcos_info
   - ask_pcos_common
   - ask_pcos_causes
@@ -32,7 +31,6 @@ intents:
   - ask_pcos_heart
   - ask_pcos_risks
   - ask_pcos_thyroid
-  - ask_unknown_query
 
 entities:
   - Polycystic Ovary Syndrome
@@ -54,11 +52,7 @@ actions:
 
 
 responses:
-  utter_default:
-  - text: "Sorry, I didn't understand that. Can you please rephrase?"
 
-  utter_cheer_up:
-  - text: "Cheer up! Everything will be okay!"
 
   utter_greet:
   - text: "Hey! How are you?"
@@ -151,8 +145,6 @@ responses:
   utter_pcos_thyroid:
   - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
 
-  utter_ask_question:
-  - text: "How can I assist you with PCOS-related information?"
 
 
 session_config:

@@ -19,7 +19,3 @@ rules:
   - action: action_fallback_llm
 
 
-- rule: Respond to PCOS common question
-  steps:
-  - intent: ask_pcos_common
-  - action: utter_ask_pcos_common

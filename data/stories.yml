@@ -1,11 +1,6 @@
 version: "3.1"
 
 stories:
-- story: cheer up
-  steps:
-  - intent: cheer_up
-  - action: utter_cheer_up
-
 - story: happy path
   steps:
   - intent: greet
@@ -18,7 +13,7 @@ stories:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
-  - action: utter_cheer_up
+
   - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
@@ -28,7 +23,7 @@ stories:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
-  - action: utter_cheer_up
+
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
@@ -159,7 +154,3 @@ stories:
   - action: utter_pcos_thyroid
 
 
-- story: user asks about PCOS
-  steps:
-  - intent: ask_unknown_query
-  - action: action_fallback_llm

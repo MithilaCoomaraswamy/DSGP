@@ -89,12 +89,22 @@ nlu:
       - are you a human?
       - am I talking to a bot?
       - am I talking to a human?
+      - are you real?
+      - who created you?
+      - what are you?
+      - do you have emotions?
+      - are you AI?
+      - do you think like humans?
 
   - intent: web_info
     examples: |
-      - i want to know about your website
+      - I want to know about your website
       - tell me more about your website
       - what about your website
+      - what's your website about?
+      - what services does your website offer?
+      - give me details about your platform
+      - what can I do on your website?
 
   - intent: ask_pcos_info
     examples: |
@@ -103,25 +113,44 @@ nlu:
       - Explain PCOS to me.
       - What is Polycystic Ovary Syndrome?
       - Tell me about PCOS.
+      - Give me an overview of PCOS.
+      - PCOS meaning?
+      - PCOS full form?
+      - PCOS in simple words?
+
+  - regex: pcos
+    examples: |
+      - (?i)pcos
+      - (?i)polycystic ovary syndrome
+      - (?i)polycystic ovarian syndrome
+
+  - synonym: polycystic ovary syndrome
+    examples: |
+      - PCOS
+      - polycystic ovarian syndrome
+      - P.C.O.S
   
   - intent: ask_pcos_common
     examples: |
-     - Is PCOS common?
-     - How common is PCOS?
-     - Do many women have PCOS?
-     - Is PCOS rare or common?
-     - PCOS is common?
-     - What percentage of women have PCOS?
-     - Is PCOS a widespread condition?
-     - How many women suffer from PCOS?
-     - Are there many cases of PCOS?
+      - Is PCOS common?
+      - How common is PCOS?
+      - Do many women have PCOS?
+      - Is PCOS rare or common?
+      - PCOS is common?
+      - What percentage of women have PCOS?
+      - Is PCOS a widespread condition?
+      - How many women suffer from PCOS?
+      - Are there many cases of PCOS?
 
 
   - intent: ask_pcos_causes
     examples: |
-      - what cause PCOS
+      - What causes PCOS?
       - Why do people get PCOS?
       - What are the reasons for PCOS?
+      - How does someone develop PCOS?
+      - What leads to PCOS?
+      - Can PCOS be inherited?
 
   - intent: ask_pcos_health_risks
     examples: |
@@ -135,12 +164,24 @@ nlu:
       - Is PCOS genetic?
       - Can PCOS run in families?
       - Does PCOS come from parents?
+      - Is there a family history link to PCOS?
+      - Can I inherit PCOS from my mother?
+      - Is PCOS passed down through generations?
+      - Can PCOS be inherited?
+      - Does PCOS have a genetic cause?
+
 
   - intent: ask_pcos_hormones
     examples: |
       - How does PCOS affect hormones?
       - What hormonal changes occur in PCOS?
       - How do hormones cause PCOS?
+      - How do hormones impact PCOS symptoms?
+      - Which hormones are involved in PCOS?
+      - What role do hormones play in PCOS?
+      - How is hormone imbalance related to PCOS?
+      - Can PCOS cause hormonal imbalance?
+
 
 
   - intent: ask_pcos_symptoms
@@ -150,12 +191,22 @@ nlu:
       - What signs indicate PCOS?
       - Tell me the symptoms of PCOS
       - What problems can PCOS cause?
+      - How does PCOS affect the body?
+      - Can PCOS cause irregular periods?
+      - Is weight gain a symptom of PCOS?
+      - Can PCOS cause acne?
+      - Does PCOS affect hair growth?
 
   - intent: ask_pcos_weight
     examples: |
       - Can PCOS cause weight gain?
       - Why do people with PCOS gain weight?
       - Does PCOS make it hard to lose weight?
+      - How does PCOS affect weight?
+      - Why is weight loss harder for women with PCOS?
+      - Does PCOS contribute to obesity?
+      - Is it common for women with PCOS to gain weight?
+      - Can losing weight help manage PCOS?
 
   - intent: ask_pcos_diagnosis
     examples: |
@@ -164,77 +215,138 @@ nlu:
       - What tests are done for PCOS?
       - Can I get tested for PCOS?
       - Tell me about PCOS diagnosis
+      - What are the diagnostic criteria for PCOS?
+      - How do I know if I have PCOS?
+      - What does a doctor do to diagnose PCOS?
+      - What tests confirm PCOS?
 
   - intent: ask_pcos_treatment
     examples: |
       - How is PCOS treated?
       - What are the treatment options for PCOS?
       - Can PCOS be managed?
+      - What can I do to control PCOS?
+      - Are there medications for PCOS?
+      - Can lifestyle changes help with PCOS?
+      - What is the best treatment for PCOS?
+      - Can PCOS be treated naturally?
 
   - intent: ask_pcos_cure
     examples: |
       - Can PCOS be cured?
       - Is there a permanent solution for PCOS?
       - How can I get rid of PCOS?
+      - Can PCOS go away?
+      - Is PCOS lifelong?
+      - Can I reverse PCOS?
 
   - intent: ask_pcos_medications
     examples: |
       - What medications are used for PCOS?
       - Are there any medicines for PCOS?
       - How do doctors treat PCOS with drugs?
+      - What are the treatment options for PCOS?
+      - Can medication help manage PCOS?
+      - Are birth control pills used for PCOS?
+      - What kind of drugs are prescribed for PCOS symptoms?
+      - What are the most common treatments for PCOS?
 
   - intent: ask_pcos_diet
     examples: |
       - How does diet affect PCOS?
       - What should I eat for PCOS?
       - Are there any food restrictions for PCOS?
+      - What foods are good for PCOS?
+      - Can diet improve PCOS symptoms?
+      - Is there a PCOS diet plan?
+      - What should I avoid eating with PCOS?
+      - Can I eat carbs with PCOS?
 
   - intent: ask_pcos_exercise
     examples: |
       - Can exercise help with PCOS symptoms?
       - What are the best exercises for PCOS?
       - How does working out affect PCOS?
+      - Should I do cardio for PCOS?
+      - Does lifting weights help PCOS?
+      - Can yoga help with PCOS?
+      - Is exercise necessary for PCOS treatment?
 
   - intent: ask_pcos_fertility
     examples: |
       - Can I get pregnant with PCOS?
       - Does PCOS affect fertility?
       - How hard is it to conceive with PCOS?
+      - Can PCOS cause infertility?
+      - What are the chances of pregnancy with PCOS?
+      - Can PCOS cause pregnancy complications?
 
   - intent: ask_pcos_food
     examples: |
       - What are the best foods to eat for PCOS?
       - What diet is good for PCOS?
+      - What foods help with PCOS symptoms?
+      - Can a special diet help manage PCOS?
+      - What are some food recommendations for women with PCOS?
+      - Are there superfoods for PCOS?
+      - What foods should I include in my PCOS diet?
+      - Is there a specific diet plan for PCOS?
 
   - intent: ask_pcos_stress
     examples: |
       - How does stress affect PCOS?
       - Does stress make PCOS worse?
       - Can stress trigger PCOS symptoms?
+      - Is stress a factor in PCOS?
+      - Can anxiety affect PCOS?
+      - How can stress influence PCOS?
+      - Can stress lead to hormonal imbalance in PCOS?
+      - Does stress affect my period if I have PCOS?
 
   - intent: ask_pcos_sleep
     examples: |
       - Does sleep impact PCOS symptoms?
       - How does sleep affect PCOS?
       - Can poor sleep worsen PCOS?
+      - How important is sleep for women with PCOS?
+      - Does lack of sleep make PCOS worse?
+      - Can good sleep improve PCOS?
+      - How does PCOS affect sleep patterns?
+      - Can improving sleep help with PCOS management?
 
   - intent: ask_pcos_diabetes
     examples: |
       - Does PCOS cause diabetes?
       - Is there a link between PCOS and diabetes?
       - Can PCOS lead to insulin resistance?
+      - Are women with PCOS more likely to develop diabetes?
+      - Can PCOS cause type 2 diabetes?
+      - Is diabetes common in women with PCOS?
+      - Does PCOS increase the risk of diabetes?
+      - How is insulin resistance related to PCOS?
 
   - intent: ask_pcos_heart
     examples: |
       - Can PCOS lead to heart disease?
       - Does PCOS increase the risk of heart problems?
       - How does PCOS affect the heart?
+      - Can women with PCOS have heart disease?
+      - Does PCOS cause heart issues?
+      - What is the connection between PCOS and heart health?
+      - Can PCOS cause cardiovascular diseases?
+      - Does having PCOS raise your risk of heart attack?
+
 
   - intent: ask_pcos_risks
     examples: |
       - What are the long-term risks of PCOS?
       - Are there complications of PCOS?
       - What happens if PCOS is left untreated?
+      - What are the risks of not treating PCOS?
+      - Can PCOS lead to serious complications?
+      - What are the health risks associated with untreated PCOS?
+      - Does PCOS affect fertility in the long run?
+      - What are the consequences of having PCOS without treatment?
 
   - intent: ask_pcos_thyroid
     examples: |
@@ -242,6 +354,11 @@ nlu:
       - Can PCOS cause thyroid problems?
       - How are PCOS and thyroid related?
       - Is PCOS affect thyroid?
+      - Can PCOS lead to hypothyroidism?
+      - How does PCOS affect thyroid function?
+      - Does PCOS cause thyroid imbalance?
+      - Can women with PCOS have thyroid disorders?
+
       
       
 
