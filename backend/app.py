@@ -268,17 +268,16 @@ def verify_code():
         return jsonify({"message": "Invalid email or code."}), 400
 
 
-# Load the pre-trained model
-model = joblib.load('RFR.pkl')
+ovulation_model = joblib.load('RFR.pkl')
 
-# Function to fetch cycle number from the SQLite table
+# Function to fetch cycle number from the SQLite table based on email
 def get_cycle_number_from_db(email):
     try:
         # Connect to SQLite database
         conn = sqlite3.connect('fempredict.db')
         cursor = conn.cursor()
 
-        # Query to get the cycle number for the given start date (assuming you have a table with relevant data)
+        # Query to get the cycle number for the given email
         query = "SELECT cycle FROM periods WHERE email = ?"
         cursor.execute(query, (email,))
         result = cursor.fetchone()
@@ -288,7 +287,7 @@ def get_cycle_number_from_db(email):
         if result:
             return result[0]  # Return the cycle number
         else:
-            return None  # If no record found, return None
+            return 1  # If no record found, return None
 
     except Exception as e:
         print(f"Error fetching cycle number: {e}")
@@ -302,6 +301,8 @@ def predict_ovulation():
         data = request.get_json()
 
         # Extract relevant information from the request
+        user = data['user']
+        email = user.get('email')  # Extract email from the user object
         LengthofCycle = data['LengthofCycle']
         LengthofMenses = data['LengthofMenses']
         MeanMensesLength = data['MeanMensesLength']
@@ -311,11 +312,8 @@ def predict_ovulation():
         # Convert start date from string to datetime object
         start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
-        # Fetch cycle number from the database
-        cycle_number = get_cycle_number_from_db(start_date)
-
-        if cycle_number is None:
-            return jsonify({'error': 'Cycle number not found in the database'}), 400
+        # Fetch cycle number from the database based on email
+        cycle_number = get_cycle_number_from_db(email) + 1
 
         # Prepare input data for prediction (in the format the model expects)
         input_data = pd.DataFrame([{
@@ -327,7 +325,7 @@ def predict_ovulation():
         }])
 
         # Make prediction using the loaded model
-        prediction = model.predict(input_data)
+        prediction = ovulation_model.predict(input_data)
 
         # Calculate predicted ovulation date (based on the model's output)
         ovulation_date = start_date + timedelta(days=prediction[0])
@@ -345,6 +343,57 @@ def predict_ovulation():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+    
+menses_model = joblib.load('lengthcalculator.pkl')    
+
+@app.route('/predict_cycle_length', methods=['POST'])
+def predict_cycle_length():
+    try:
+        # Get data from the request
+        data = request.get_json()
+
+        user = data['user']
+        email = user.get('email')  # Extract email from the user object
+        LengthofMenses = data['LengthofMenses']
+        MeanMensesLength = data['MeanMensesLength']
+        MeanCycleLength = data['MeanCycleLength']
+        start_date_str = data['startDate']
+
+        # Convert start date from string to datetime object
+        try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+        except ValueError:
+            return jsonify({'error': 'Invalid start date format. Please use YYYY-MM-DD.'}), 400
+
+        # Fetch cycle number from the database based on email
+        cycle_number = get_cycle_number_from_db(email) + 1
+
+        # Prepare input data for prediction (in the format the model expects)
+        input_data = pd.DataFrame([{
+            'CycleNumber': cycle_number,
+            'MeanCycleLength': MeanCycleLength,
+            'LengthofMenses': LengthofMenses,
+            'MeanMensesLength': MeanMensesLength
+        }])
+
+        # Make prediction using the loaded model (assuming the model is loaded elsewhere)
+        prediction = menses_model.predict(input_data)  # Ensure the model is properly loaded and accessible
+
+        # Calculate predicted cycle length
+        predicted_cycle_length = prediction[0]
+
+        next_period_date = start_date + timedelta(days=prediction[0])
+
+        # Prepare the response with the predicted cycle length
+        response = {
+            'next_period_date': next_period_date.strftime('%Y-%m-%d')
+        }
+
+        return jsonify(response)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # Load trained model and dataset
 exercise_recommender_model = joblib.load("random_forest_model.pkl")

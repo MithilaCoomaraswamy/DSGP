@@ -1,28 +1,30 @@
-import { color } from 'chart.js/helpers';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TbBackground } from 'react-icons/tb';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false); // State to control hamburger menu visibility
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  // Ref to track the menu and hamburger icon
   const menuRef = useRef(null);
   const hamburgerRef = useRef(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user'); // Retrieve the user data from localStorage
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);  // Safely parse the data
+        setUser(parsedUser);  // Set the parsed user data into state
+      } catch (error) {
+        console.error('Error parsing user data:', error);  // Handle parsing error
+      }
+    }
+  }, []); 
 
   const handleLogout = () => {
     localStorage.removeItem('user');
     navigate('/');
   };
-
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData) {
-      setUser(userData);
-    }
-  }, []);
 
   const handleDeleteProfile = () => {
     localStorage.removeItem('user');
@@ -50,10 +52,9 @@ const Profile = () => {
   };
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Toggle the hamburger menu
+    setMenuOpen(!menuOpen);
   };
 
-  // Close menu if the user clicks outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -68,22 +69,17 @@ const Profile = () => {
     };
 
     document.addEventListener('click', handleClickOutside);
-
-    // Clean up the event listener when the component unmounts
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [menuOpen]);
 
-  // Open chatbot in a popup window
   const handleChatbotClick = () => {
     const popupWindow = window.open('/chatbot', 'ChatbotPopup', 'width=600,height=800,resizable=yes,scrollbars=yes');
-    
     if (popupWindow) {
-      popupWindow.focus(); // Ensures the popup window gets focus when opened
+      popupWindow.focus();
     }
   };
-
 
   const footerStyle = {
     backgroundColor: 'white',
@@ -143,12 +139,10 @@ const Profile = () => {
         )}
       </div>
 
-      {/* Chatbot Avatar - clicking here will open the chatbot page in a popup window */}
       <div className="chatbot-avatar" onClick={handleChatbotClick}>
         <img src="botAvatar.PNG" alt="Chatbot Avatar" className="avatar-img" />
       </div>
 
-      {/* Footer */}
       <footer style={footerStyle} className="footer">
         <div className="footer-container">
           <div>
