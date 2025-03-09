@@ -13,6 +13,7 @@ const Tracker = () => {
   const [error, setError] = useState('');
   const [ovulationDate, setOvulationDate] = useState('');
   const [nextPeriodDate, setNextPeriodDate] = useState('');
+  const [fertileWindow, setFertileWindow] = useState([]);
   const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ const Tracker = () => {
     setError('');
     setOvulationDate('');
     setNextPeriodDate('');
+    setFertileWindow([]);
     setLoading(true);
 
     if (!lastMensesDate || !MeanMensesLength || !MeanCycleLength || !LengthofCycle || !LengthofMenses) {
@@ -83,7 +85,6 @@ const Tracker = () => {
     }
 
     try {
-      // First make a request to predict ovulation date
       const ovulationResponse = await axios.post('http://localhost:5000/predict_ovulation', {
         user: user,
         email: user?.email, // Send the user's email along with the other data
@@ -95,7 +96,17 @@ const Tracker = () => {
       });
 
       const { predictedOvulationDate } = ovulationResponse.data;
-      setOvulationDate(new Date(predictedOvulationDate).toLocaleDateString());
+      const ovulationDateObject = new Date(predictedOvulationDate);
+      setOvulationDate(ovulationDateObject.toLocaleDateString());
+
+      // Calculate fertile window (5 days before ovulation)
+      let fertileWindowDates = [];
+      for (let i = 1; i <= 5; i++) {
+        let fertileDay = new Date(ovulationDateObject);
+        fertileDay.setDate(ovulationDateObject.getDate() - i);
+        fertileWindowDates.push(fertileDay.toLocaleDateString());
+      }
+      setFertileWindow(fertileWindowDates);
 
       // Now make a request to predict next period date
       const cycleLengthResponse = await axios.post('http://localhost:5000/predict_cycle_length', {
@@ -110,9 +121,23 @@ const Tracker = () => {
       const { next_period_date } = cycleLengthResponse.data;
       setNextPeriodDate(new Date(next_period_date).toLocaleDateString());
 
+      const periodData = {
+        email: user.user.email,
+        startDate: lastMensesDate,
+        LengthofCycle: parsedLengthofCycle,
+        MeanCycleLength: parsedMeanCycleLength,
+        LengthofMenses: parsedLengthofMenses,
+        MeanMensesLength: parsedMeanMensesLength,
+      };
+      
+      console.log('Sending data to backend:', periodData);
+      
+      await axios.post('http://localhost:5000/save_period_data', periodData);
+
+      console.log("Data submitted successfully:");
     } catch (error) {
       setError('An error occurred. Please try again later.');
-      console.error(error);
+      console.error("Error during form submission:", error.response ? error.response.data : error.message);
     } finally {
       setLoading(false);
     }
@@ -136,117 +161,129 @@ const Tracker = () => {
           </div>
 
           <ul ref={menuRef} className={`header-nav-list ${menuOpen ? 'open' : ''}`}>
-          <Link to="" className="logo-link">
-            <li className="header-btn">Edit Profile</li>
-          </Link>
-          <Link to="/" className="logo-link">
-            <li className="header-btn btn-warning">Logout</li>
-          </Link>
+            <Link to="" className="logo-link">
+              <li className="header-btn">Edit Profile</li>
+            </Link>
+            <Link to="/" className="logo-link">
+              <li className="header-btn btn-warning">Logout</li>
+            </Link>
           </ul>
         </div>
       </div>
 
       {/* Tracker Page Content */}
-      <div className="tracker-container" style={{ display: 'flex', alignItems: 'flex-start' }}>
-        <div style={{ flex: 1 }}>
-          <h2>Menstrual Cycle Tracker</h2>
-          <form onSubmit={handleSubmit} className="tracker-form" style={{ display: 'flex', flexDirection: 'column' }}>
-            <label>When did your last period start?</label>
-            <input
-              type="date"
-              value={lastMensesDate}
-              onChange={(e) => setLastMensesDate(e.target.value)}
-              required
-            />
+      <div className="tracker-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px' }}>
+  <div style={{ flex: 1 }}>
+    <h2>Menstrual Cycle Tracker</h2>
+    <form onSubmit={handleSubmit} className="tracker-form" style={{ display: 'flex', flexDirection: 'column' }}>
+      <label>When did your last period start?</label>
+      <input
+        type="date"
+        value={lastMensesDate}
+        onChange={(e) => setLastMensesDate(e.target.value)}
+        required
+      />
 
-            <label>How many days did your period last?</label>
-            <input
-              type="number"
-              value={LengthofMenses}
-              onChange={(e) => setLengthofMenses(e.target.value)}
-              required
-              min="1"
-            />
+      <label>How many days did your period last?</label>
+      <input
+        type="number"
+        value={LengthofMenses}
+        onChange={(e) => setLengthofMenses(e.target.value)}
+        required
+        min="1"
+      />
 
-            <label>How long was your menstrual cycle?</label>
-            <input
-              type="number"
-              value={LengthofCycle}
-              onChange={(e) => setLengthofCycle(e.target.value)}
-              required
-              min="1"
-            />
+      <label>How long was your menstrual cycle?</label>
+      <input
+        type="number"
+        value={LengthofCycle}
+        onChange={(e) => setLengthofCycle(e.target.value)}
+        required
+        min="1"
+      />
 
-            <label>What is your average period length?</label>
-            <input
-              type="number"
-              value={MeanMensesLength}
-              onChange={(e) => setMeanMensesLength(e.target.value)}
-              required
-              min="1"
-            />
+      <label>What is your average period length?</label>
+      <input
+        type="number"
+        value={MeanMensesLength}
+        onChange={(e) => setMeanMensesLength(e.target.value)}
+        required
+        min="1"
+      />
 
-            <label>What is your average cycle length?</label>
-            <input
-              type="number"
-              value={MeanCycleLength}
-              onChange={(e) => setMeanCycleLength(e.target.value)}
-              required
-              min="1"
-            />
+      <label>What is your average cycle length?</label>
+      <input
+        type="number"
+        value={MeanCycleLength}
+        onChange={(e) => setMeanCycleLength(e.target.value)}
+        required
+        min="1"
+      />
 
-            {error && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+      {error && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
 
-            <button type="submit" disabled={loading} style={{ marginTop: '10px' }}>
-              {loading ? 'Submitting...' : 'Log Period'}
-            </button>
-          </form>
-          {ovulationDate && nextPeriodDate && (
-  <div className="results" style={{
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    gap: '20px', 
-    marginTop: '20px',
-  }}>
-    {/* Ovulation Date Box */}
-    <div className="ovulation-date-box" style={{
-      backgroundColor: '#f8f9fa',
-      borderRadius: '10px',
-      padding: '20px',
-      border: '1px solid #ddd',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-      width: '48%', // Adjust width to fit side by side
-    }}>
-      <h4 style={{ color: '#4CAF50', fontSize: '20px' }}>Predicted Ovulation Date:</h4>
-      <p style={{ fontSize: '18px', color: '#333' }}>{ovulationDate}</p>
-    </div>
+      <button type="submit" disabled={loading} style={{ marginTop: '10px' }}>
+        {loading ? 'Submitting...' : 'Log Period'}
+      </button>
+    </form>
 
-    {/* Next Period Date Box */}
-    <div className="next-period-date-box" style={{
-      backgroundColor: '#f8f9fa',
-      borderRadius: '10px',
-      padding: '20px',
-      border: '1px solid #ddd',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-      width: '48%', // Adjust width to fit side by side
-    }}>
-      <h4 style={{ color: 'red', fontSize: '20px' }}>Predicted Next Period Date:</h4>
-      <p style={{ fontSize: '18px', color: '#333' }}>{nextPeriodDate}</p>
-    </div>
-  </div>
-)}
-
+    {ovulationDate && nextPeriodDate && (
+      <div className="results" style={{ display: 'flex', gap: '20px', marginTop: '20px', marginBottom: '40px' }}>
+        {/* Ovulation Date Box */}
+        <div className="ovulation-date-box" style={{
+          backgroundColor: '#f8f9fa',
+          borderRadius: '10px',
+          padding: '20px',
+          border: '1px solid #ddd',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          width: '48%',
+        }}>
+          <h4 style={{ color: '#4CAF50', fontSize: '20px' }}>Predicted Ovulation Date:</h4>
+          <p style={{ fontSize: '18px', color: '#333' }}>{ovulationDate}</p>
         </div>
 
-        <div style={{ marginLeft: '20px' }}>
-          <img
-            src="periods.png"
-            alt="Cycle Tracker"
-            style={{ width: '600px', height: 'auto' }}
-            loading="lazy"
-          />
+        {/* Next Period Date Box */}
+        <div className="next-period-date-box" style={{
+          backgroundColor: '#f8f9fa',
+          borderRadius: '10px',
+          padding: '20px',
+          border: '1px solid #ddd',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          width: '48%',
+        }}>
+          <h4 style={{ color: 'red', fontSize: '20px' }}>Predicted Next Period Date:</h4>
+          <p style={{ fontSize: '18px', color: '#333' }}>{nextPeriodDate}</p>
         </div>
+
+        {/* Fertile Window Box */}
+        {fertileWindow.length > 0 && (
+          <div className="fertile-window-box" style={{
+            backgroundColor: '#fff3e0',
+            borderRadius: '10px',
+            padding: '20px',
+            border: '1px solid #ddd',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            width: '48%',  // Place this box next to the next period box
+          }}>
+            <h4 style={{ color: '#FF8C00', fontSize: '20px' }}>Fertile Window:</h4>
+            <p style={{ fontSize: '18px', color: '#333' }}>
+              From {fertileWindow[4]} to {fertileWindow[0]}
+            </p>
+          </div>
+        )}
       </div>
+    )}
+  </div>
+
+  <div style={{ width: '500px' }}>
+    <img
+      src="pic1 (9).png"
+      alt="Cycle Tracker"
+      style={{ width: '100%', height: 'auto' }}
+      loading="lazy"
+    />
+  </div>
+</div>
 
       <footer style={footerStyle} className="footer">
         <div className="footer-container">

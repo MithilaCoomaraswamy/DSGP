@@ -57,7 +57,9 @@ def create_tables():
         cycle INTEGER NOT NULL,
         period_start TEXT NOT NULL,
         period_length INTEGER NOT NULL,
+        mean_menses_length INTEGER NOT NULL,
         cycle_length INTEGER NOT NULL,
+        mean_cycle_length INTEGER NOT NULL,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
     ''')
@@ -271,27 +273,30 @@ def verify_code():
 ovulation_model = joblib.load('RFR.pkl')
 
 # Function to fetch cycle number from the SQLite table based on email
+import sqlite3
+
 def get_cycle_number_from_db(email):
     try:
         # Connect to SQLite database
         conn = sqlite3.connect('fempredict.db')
         cursor = conn.cursor()
 
-        # Query to get the cycle number for the given email
-        query = "SELECT cycle FROM periods WHERE email = ?"
+        # Query to count the number of records for the given email
+        query = "SELECT COUNT(*) FROM periods WHERE email = ?"
         cursor.execute(query, (email,))
         result = cursor.fetchone()
 
         conn.close()
 
         if result:
-            return result[0]  # Return the cycle number
+            return result[0] + 1  # Return the count of records (cycle number)
         else:
-            return 1  # If no record found, return None
+            return 1  # If no records found, return 1 (default cycle number)
 
     except Exception as e:
         print(f"Error fetching cycle number: {e}")
         return None
+
 
 
 @app.route('/predict_ovulation', methods=['POST'])
@@ -313,7 +318,7 @@ def predict_ovulation():
         start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
         # Fetch cycle number from the database based on email
-        cycle_number = get_cycle_number_from_db(email) + 1
+        cycle_number = get_cycle_number_from_db(email)
 
         # Prepare input data for prediction (in the format the model expects)
         input_data = pd.DataFrame([{
@@ -366,7 +371,7 @@ def predict_cycle_length():
             return jsonify({'error': 'Invalid start date format. Please use YYYY-MM-DD.'}), 400
 
         # Fetch cycle number from the database based on email
-        cycle_number = get_cycle_number_from_db(email) + 1
+        cycle_number = get_cycle_number_from_db(email)
 
         # Prepare input data for prediction (in the format the model expects)
         input_data = pd.DataFrame([{
@@ -394,6 +399,48 @@ def predict_cycle_length():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/save_period_data', methods=['POST'])
+def save_period_data():
+    data = request.json
+    print("Received data:", data)  # Log the incoming data for debugging
+
+    email = data.get('email')
+    if not email:
+            return jsonify({'error': 'Email is required'}), 400
+
+    LengthofMenses = data['LengthofMenses']
+    MeanMensesLength = data['MeanMensesLength']
+    LengthofCycle = data['LengthofCycle']
+    MeanCycleLength = data['MeanCycleLength']
+    start_date_str = data['startDate']
+
+    start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+
+    # Fetch cycle number from the database based on email
+    cycle_number = get_cycle_number_from_db(email)
+
+
+    # Validate input data
+    if not email or not start_date or not LengthofCycle or not MeanCycleLength or not LengthofMenses or not MeanMensesLength:
+        print("Missing data!")
+        return jsonify({"error": "Missing data"}), 400
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO periods (email, cycle, period_start, period_length, mean_menses_length, cycle_length, mean_cycle_length)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (email, cycle_number, start_date, LengthofMenses, MeanMensesLength, LengthofCycle, MeanCycleLength))
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({"message": "Data added successfully"}), 201
+
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 # Load trained model and dataset
 exercise_recommender_model = joblib.load("random_forest_model.pkl")
