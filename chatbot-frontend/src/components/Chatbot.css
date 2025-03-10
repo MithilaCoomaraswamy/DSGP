@@ -8,17 +8,16 @@ html, body {
 
 /* Chatbot container */
 .chatbot-container {
-  width: 850px;
-  height: 600px;
-  background: #ffffff;
+  width: 750px;
+  height: 650px;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 10px solid #b1a1ed;
+  border: 5px solid #b1a1ed;
   transition: all 0.3s ease-in-out;
-
+  background-color: #a9a9a9;
    position: absolute;
   top: 50%;
   left: 50%;
@@ -29,13 +28,18 @@ html, body {
 /* Header of Chatbot */
 .chatbot-header {
   background: linear-gradient(135deg, #a48ef6, #b1a1ed);
-  padding: 18px;
-  text-align: center;
+
+  text-align: left;
+  padding-bottom: 20px;
+  padding-top: 20px;
+    padding-left: 120px;
   color: #fff;
   font-size: 20px;
   font-weight: bold;
   border-bottom: 5px solid #b1a1ed;
   letter-spacing: 1px;
+  height: 30px;
+
 }
 
 /* Message display area */
@@ -50,33 +54,68 @@ html, body {
   height: 100%;
 }
 
-/* User's message */
-.user-message {
-  align-self: flex-end;
-  background: #b1a1ed;
-  padding: 12px 16px;
-  border-radius: 18px;
-  color: #fff;
-  max-width: 75%;
-  word-wrap: break-word;
-  font-size: 14px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+/* Ensure the chat messages align with icons */
+.message-container {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
 }
 
-/* Bot's message */
-.bot-message {
-  align-self: flex-start;
+/* User messages with icon on the right */
+.user {
+  justify-content: flex-end;
+}
+
+.user-message {
   background: #a48ef6;
   padding: 12px 16px;
-  border-radius: 18px;
+  border-radius: 19px;
   color: #fff;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 14px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  order: 1; /* Ensures message appears before the icon */
+}
+
+/* Bot messages with icon on the left */
+.bot {
+  justify-content: flex-start;
+}
+
+.bot-message {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 18px;
+  color: black;
   max-width: 75%;
   word-wrap: break-word;
   font-size: 14px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
+  order: 1; /* Ensures message appears after the icon */
 }
+
+/* Chat icons */
+.chat-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.user-icon {
+  order: 2; /* Places the icon to the right of the user message */
+  margin-left: 10px;
+}
+
+.bot-icon {
+  order: 0; /* Places the icon to the left of the bot message */
+  margin-right: 10px;
+}
+
+
 
 /* Input area */
 .chatbot-input {
@@ -92,7 +131,7 @@ html, body {
   padding: 12px;
   border: 2px solid #ccc;
   border-radius: 25px;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   color: #333;
   transition: 0.3s ease-in-out;
@@ -104,21 +143,31 @@ html, body {
 
 /* Send Button */
 .chatbot-input button {
-  width: 80px;
+  width: 45px;
   height: 45px;
-  background: #a48ef6;
   border: none;
-  color: #fff;
-  font-size: 20px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  border-radius: 24px;
-  margin-left: 10px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.chatbot-input button img {
+  width: 50px;
+  height: 50px;
+
+}
+
 .chatbot-input button:hover {
-  background: #b1a1ed;
+
   transform: scale(1.1);
+}
+
+.chatbot-input button:active {
+  transform: scale(0.95);
 }
 
 /* Scrollbar customization */
@@ -168,4 +217,26 @@ html, body {
 
 .chatbot-widget.hidden {
   transform: scale(0);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  align-self: flex-start;
+  background: #a48ef6;
+  padding: 10px 16px;
+  border-radius: 18px;
+  color: #fff;
+  max-width: 50px;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+  animation: typing 1.5s infinite;
+}
+
+/* Blinking dots effect */
+@keyframes typing {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+  100% { content: ""; }
 }

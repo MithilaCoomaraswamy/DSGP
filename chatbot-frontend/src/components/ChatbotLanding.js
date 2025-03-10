@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";  // For navigation (updated)
+import { useNavigate } from "react-router-dom";
 import "./ChatbotLanding.css";
 
 const ChatbotLanding = () => {
