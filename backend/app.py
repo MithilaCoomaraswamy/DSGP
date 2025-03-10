@@ -11,6 +11,15 @@ from email.mime.multipart import MIMEMultipart
 import pickle
 import pandas as pd
 import joblib
+# from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+# import bcrypt
+import hashlib
+import re
+
+# # Configuration for JWT
+# app.config["JWT_SECRET_KEY"] = "@d22v$u31#R45"  # Replace with your secret key
+# jwt = JWTManager(app)
+
 
 app = Flask(__name__)
 
@@ -268,6 +277,78 @@ def verify_code():
             return jsonify({"message": "Verification code has expired."}), 400
     else:
         return jsonify({"message": "Invalid email or code."}), 400
+    
+
+@app.route('/change-password', methods=['POST'])
+def change_password():
+    email = request.json.get('email', '')
+    current_password = request.json.get('currentPassword', '')
+    new_password = request.json.get('newPassword', '')
+    confirm_new_password = request.json.get('confirmNewPassword', '')
+
+    # Validate password input
+    if not email or not current_password or not new_password or not confirm_new_password:
+        return jsonify({"error": "All fields are required"}), 400
+
+    if new_password != confirm_new_password:
+        return jsonify({"error": "New passwords do not match"}), 400
+
+    # Check if the new password meets a basic length requirement
+    if len(new_password) < 8:
+        return jsonify({"error": "Password must be at least 8 characters long."}), 400
+
+    # Connect to the SQLite database and check if the user exists
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Verify the current password
+    # Retrieve the hashed password from the user and compare it
+    current_hashed_password = user['password']
+    hashed_current_password = hashlib.sha256(current_password.encode('utf-8')).hexdigest()
+
+    if current_hashed_password != hashed_current_password:
+        return jsonify({"error": "Current password is incorrect"}), 401
+
+    # Hash the new password using SHA-256
+    hashed_new_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
+
+    # Update the password in the database
+    cursor.execute("UPDATE users SET password = ? WHERE email = ?", (hashed_new_password, email))
+    conn.commit()
+
+    return jsonify({"message": "Password changed successfully"}), 200
+
+
+@app.route('/delete-account', methods=['DELETE'])
+# @jwt_required()
+def delete_account():
+    # Get the email sent from frontend
+    email = request.json.get('email', '')
+
+    if not email:
+        return jsonify({"error": "Email is required to delete account"}), 400
+
+    # Connect to the SQLite database and check if the user exists
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Delete the user from the database
+    cursor.execute("DELETE FROM users WHERE email = ?", (email,))
+    conn.commit()
+
+    return jsonify({"message": "Account deleted successfully"}), 200
 
 
 ovulation_model = joblib.load('RFR.pkl')

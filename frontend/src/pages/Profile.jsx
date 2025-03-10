@@ -102,8 +102,15 @@ const Profile = () => {
           </div>
 
           <ul ref={menuRef} className={`header-nav-list ${menuOpen ? 'open' : ''}`}>
-            <li onClick={handleEditProfile} className="header-btn">Edit Profile</li>
-            <li onClick={handleLogout} className="header-btn btn-warning">Logout</li>
+            <Link to="/profile" className="logo-link">
+              <li className="header-btn">Home</li>
+            </Link>
+            <Link to="/account" className="logo-link">
+              <li className="header-btn">Edit Profile</li>
+            </Link>
+            <Link to="/" className="logo-link">
+              <li className="header-btn btn-warning">Logout</li>
+            </Link>
           </ul>
         </div>
       </div>

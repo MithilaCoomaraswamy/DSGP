@@ -10,6 +10,7 @@ import PCOS from './pages/PCOS.jsx';
 import Chatbot from './pages/Chatbot.jsx';
 import About from './pages/About.jsx';
 import ContactUs from './pages/Contact.jsx'
+import AccountSettings from './Account.jsx';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<About />} />
+        <Route path="/account" element={<AccountSettings />} />
       </Routes>
     </Router>
   );
