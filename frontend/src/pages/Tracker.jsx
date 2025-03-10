@@ -211,6 +211,12 @@ const Tracker = () => {
         min="1"
       />
 
+      <div>
+        <p style={{ fontSize: '14px', marginTop: '10px' }}>
+          Don’t know? <Link to="/help" className="help-link">Calculate your average period length</Link>
+        </p>
+      </div>
+
       <label>What is your average cycle length?</label>
       <input
         type="number"
@@ -219,6 +225,12 @@ const Tracker = () => {
         required
         min="1"
       />
+
+      <div>
+        <p style={{ fontSize: '14px', marginTop: '10px' }}>
+          Don’t know? <Link to="/help" className="help-link">Calculate your average cycle length</Link>
+        </p>
+      </div>
 
       {error && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
 
