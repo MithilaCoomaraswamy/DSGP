@@ -21,6 +21,15 @@ nlu:
       - catch you later
       - farewell
       - have a good day
+      - see you soon
+      - take it easy
+      - later
+      - bye bye
+      - goodbye for now
+      - talk soon
+      - see you around
+      - have a great day
+
 
   - intent: affirm
     examples: |
@@ -29,6 +38,17 @@ nlu:
       - absolutely
       - definitely
       - of course
+      - that's right
+      - I agree
+      - correct
+      - for sure
+      - sure thing
+      - yeah, exactly
+      - sounds good
+      - I think so
+      - okay
+      - makes sense
+
 
   - intent: deny
     examples: |
@@ -37,22 +57,55 @@ nlu:
       - I don’t think so
       - nope
       - never
+      - not at all
+      - no way
+      - absolutely not
+      - definitely not
+      - I don't think so
+      - I don't believe so
+      - nope, not happening
+      - not sure about that
+      - not in a million years
+      - that's a no
+
 
   - intent: mood_great
     examples: |
-      - I feel fantastic
-      - I'm on top of the world
-      - everything is awesome
-      - feeling amazing
-      - couldn't be better
+      - hey
+      - hello
+      - hi there
+      - good morning
+      - good evening
+      - hey buddy
+      - howdy
+      - greetings
+      - what's up?
+      - hi!
+      - hey there
+      - how's it going?
+      - hey, how are you?
+      - yo
+      - what's good?
+
 
   - intent: mood_unhappy
     examples: |
       - I'm feeling down
-      - today is not my day
+      - Today is not my day
       - I'm really sad
-      - not in the best mood
-      - feeling terrible
+      - Not in the best mood
+      - Feeling terrible
+      - Everything is going wrong
+      - I feel awful
+      - Having a bad day
+      - Super stressed out
+      - I just want to be alone
+      - I'm not okay
+      - Feeling depressed today
+      - I hate this day
+      - I'm really struggling today
+      - Not in the mood for anything
+
 
   - intent: bot_challenge
     examples: |
@@ -61,6 +114,16 @@ nlu:
       - what are you made of?
       - can you think like humans?
       - were you programmed?
+      - do you have feelings?
+      - are you self-aware?
+      - do you have emotions?
+      - can you learn on your own?
+      - do you understand jokes?
+      - are you smarter than a human?
+      - how do you work?
+      - what is your purpose?
+      - are you an advanced AI?
+      - do you evolve over time?
 
   - intent: web_info
     examples: |
@@ -69,6 +132,16 @@ nlu:
       - What features are available on your website?
       - How does your site work?
       - What can I do on your platform?
+      - Is your platform free to use?
+      - How do I sign up on your website?
+      - What makes your website unique?
+      - Is there a membership option?
+      - Can I access the platform on mobile?
+      - How secure is my data on your platform?
+      - Is there customer support?
+      - Do you have a help section?
+      - How often is your website updated?
+      - Are there any special offers?
 
   - intent: ask_pcos_info
     examples: |
@@ -77,96 +150,225 @@ nlu:
       - Give me details about PCOS.
       - What does PCOS stand for?
       - How do you define PCOS?
+      - Is PCOS a disease?
+      - Tell me more about PCOS.
+      - Why is PCOS important to know about?
+      - Is PCOS life-threatening?
+      - Who can be affected by PCOS?
+      - What we should know when talking about PCOS? 
+      - Where can I find more information on PCOS?
+      - Can PCOS be talked out?
+      - Is PCOS serious?
+      - What is the history of PCOS?
 
   - intent: ask_pcos_common
     examples: |
       - Is PCOS a common condition?
-      - How frequently do women get PCOS?
+      - How often do women have PCOS?
+      - How prevalent is PCOS in women?
       - What percentage of women are affected by PCOS?
-      - Is PCOS rare?
-      - How many women experience PCOS?
+      - How common is PCOS in women of reproductive age?
+      - Is PCOS something that most women experience?
+      - How many women suffer from PCOS?
+      - Is PCOS frequently diagnosed in women?
+      - Does PCOS affect a large number of women?
+      - What are the statistics for PCOS in women?
+      - Are most women likely to have PCOS?
+      - How many women are affected by PCOS globally?
+      - What is the global prevalence of PCOS?
+      - Can you tell me how widespread PCOS is?
+      - Is PCOS one of the most common hormonal disorders?
+
 
   - intent: ask_pcos_causes
     examples: |
       - What causes PCOS?
+      - What are the reasons behind PCOS?
+      - What leads to the development of PCOS?
+      - How does someone get PCOS?
       - What factors contribute to PCOS?
-      - how does pcos affect human body?
-      - What are the underlying reasons for PCOS?
-      - Are there known triggers for PCOS?
-      - How does someone develop PCOS?
+      - Is there a specific cause for PCOS?
+      - How does insulin resistance lead to PCOS?
+      - What is the relationship between PCOS and hormonal imbalance?
+      - Does genetics play a role in PCOS?
+      - Can inflammation contribute to PCOS?
+      - What triggers PCOS symptoms?
+      - What factors increase the risk of getting PCOS?
+      - How do hormones influence the development of PCOS?
+      - Does obesity have a role in causing PCOS?
+      - How does the body develop PCOS?
+  
 
   - intent: ask_pcos_genetic
     examples: |
       - Is PCOS hereditary?
-      - Can PCOS run in families?
-      - Are genes responsible for PCOS?
-      - Does having a family history increase the risk of PCOS?
-      - Is PCOS passed from mother to daughter?
-      - Is pcos is generic disorder
+      - Can PCOS be passed down genetically?
+      - Can having a family history of PCOS increase the risk?
+      - Does PCOS run in families?
+      - Is PCOS a genetic disorder?
+      - Are genetics responsible for PCOS?
+      - Can my daughter inherit PCOS from me?
+      - If my mother has PCOS, am I more likely to develop it?
+      - Is PCOS passed down from generation to generation?
+      - Can PCOS be inherited from either parent?
+      - Do genes play a major role in developing PCOS?
+      - How likely am I to get PCOS if it runs in my family?
+      - Does having relatives with PCOS make me more susceptible?
+      - Is PCOS a genetic condition or environmental?
+      - How important is family history in the risk of PCOS?
+
 
   - intent: ask_pcos_hormones
     examples: |
-      - How does PCOS impact hormones?
-      - What hormonal imbalances occur with PCOS?
-      - What role do hormones play in PCOS?
-      - Does PCOS cause high testosterone?
-      - How are estrogen and PCOS related?
+      - How does PCOS affect hormones?
+      - What hormonal changes occur with PCOS?
+      - How does PCOS disrupt hormone balance?
+      - Does PCOS increase male hormones?
+      - What role do testosterone and estrogen play in PCOS?
+      - How does high testosterone affect women with PCOS?
+      - Does PCOS lead to an imbalance in estrogen?
+      - Can PCOS cause excess male hormone production?
+      - What hormonal imbalances are common with PCOS?
+      - How does PCOS affect estrogen levels?
+      - How do insulin and testosterone interact in PCOS?
+      - Can PCOS cause irregular hormone cycles?
+      - What is the relationship between PCOS and hormones?
+      - How do hormones contribute to PCOS symptoms?
+      - Why do women with PCOS have more male hormones?
+
 
   - intent: ask_pcos_symptoms
     examples: |
-      - What are the signs of PCOS?
+      - What are the symptoms of PCOS?
+      - How do I know if I have PCOS?
+      - What should I look for to detect PCOS?
+      - What are the first signs of PCOS?
+      - What are the typical symptoms of PCOS?
       - How does PCOS affect the body?
-      - What are the first symptoms of PCOS?
-      - How do I recognize PCOS symptoms?
-      - Can PCOS affect my periods?
+      - Can PCOS cause irregular periods?
+      - Is weight gain a symptom of PCOS?
+      - Do I need to worry about acne with PCOS?
+      - How do I know if I have the symptoms of PCOS?
+      - Does PCOS cause excess hair growth?
+      - Is hair thinning a symptom of PCOS?
+      - How does PCOS affect your skin?
+      - What changes can I expect in my body with PCOS?
+      - Are there specific signs of PCOS in early stages?
+
 
   - intent: ask_pcos_diagnosis
     examples: |
       - How is PCOS diagnosed?
-      - What tests confirm PCOS?
-      - What is the medical process for detecting PCOS?
-      - Can a doctor diagnose PCOS through blood tests?
-      - What exams are used to diagnose PCOS?
+      - What tests do doctors use to diagnose PCOS?
+      - Can a doctor detect PCOS through blood tests?
+      - What steps are involved in diagnosing PCOS?
+      - How do healthcare providers diagnose PCOS?
+      - What examinations are necessary to confirm PCOS?
+      - Do I need an ultrasound to diagnose PCOS?
+      - How can PCOS be diagnosed through hormone testing?
+      - What kind of tests are done to confirm PCOS?
+      - How is PCOS typically diagnosed in women?
+      - Do I need a physical exam for a PCOS diagnosis?
+      - What is the diagnostic process for PCOS?
+      - Can PCOS be diagnosed based on symptoms alone?
+      - Are there specific blood tests for PCOS?
+      - How does the diagnosis process for PCOS work?
+
 
   - intent: ask_pcos_treatment
     examples: |
       - What are the treatment options for PCOS?
-      - How can PCOS be managed?
-      - Are there medical treatments for PCOS?
-      - What therapies are available for PCOS patients?
-      - How do doctors treat PCOS?
+      - How can PCOS be managed effectively?
+      - What are the best treatments for PCOS?
+      - Are there medications available for PCOS treatment?
+      - How do doctors treat PCOS symptoms?
+      - Can lifestyle changes help with PCOS management?
+      - Are there natural treatments for PCOS?
+      - What therapies are available to treat PCOS?
+      - How do you treat the hormonal imbalance in PCOS?
+      - Can birth control pills help with PCOS?
+      - What treatments help with irregular periods in PCOS?
+      - Can PCOS be treated with diet or exercise?
+      - Are there medications to regulate insulin in PCOS?
+      - How can stress management help in PCOS treatment?
+      - Can surgical treatments help with PCOS?
+
 
   - intent: ask_pcos_cure
     examples: |
       - Is there a cure for PCOS?
-      - Can PCOS be completely cured?
-      - Will PCOS ever go away?
-      - Can PCOS be reversed permanently?
-      - Are there permanent solutions for PCOS?
+      - Can PCOS be cured permanently?
+      - Will I ever be cured of PCOS?
+      - Can PCOS be completely reversed?
+      - Is there a permanent solution to PCOS?
+      - Can PCOS go away on its own?
+      - Will PCOS symptoms eventually disappear?
+      - Can lifestyle changes cure PCOS?
+      - Is PCOS reversible with treatment?
+      - Can women recover fully from PCOS?
+      - Can modern medicine cure PCOS?
+      - Can PCOS be managed without lifelong treatment?
+      - Is there a definitive cure for PCOS on the horizon?
+      - Can I completely overcome PCOS?
+      - Can surgery cure PCOS?
+
 
   - intent: ask_pcos_medications
     examples: |
-      - What medications are prescribed for PCOS?
-      - Are birth control pills used for PCOS?
-      - What drugs help with PCOS symptoms?
-      - Are there medications to regulate periods in PCOS?
-      - Can insulin medications help with PCOS?
+      - What medications are used to treat PCOS?
+      - Are birth control pills used for managing PCOS?
+      - What medicines help with PCOS symptoms?
+      - Can metformin help manage PCOS?
+      - Are there specific medications for managing insulin resistance in PCOS?
+      - What medications do doctors prescribe for PCOS?
+      - Can anti-androgen drugs help with PCOS?
+      - What pills regulate periods in PCOS?
+      - Are there medications to improve fertility in PCOS?
+      - Can medication help with weight gain due to PCOS?
+      - How do hormones help in the treatment of PCOS?
+      - What drugs are recommended for acne caused by PCOS?
+      - Do I need to take medications for PCOS long-term?
+      - Can metformin help with insulin levels in PCOS?
+      - Are there medications for managing hair growth in PCOS?
+
 
   - intent: ask_pcos_diet
     examples: |
-      - What diet is recommended for PCOS?
-      - Can diet changes help manage PCOS?
-      - What foods should I eat for PCOS?
-      - Are there dietary restrictions for PCOS patients?
-      - Can a healthy diet reduce PCOS symptoms?
+      - What is the best diet for someone with PCOS?
+      - Can dietary changes help with managing PCOS?
+      - What foods should I avoid if I have PCOS?
+      - Are there specific foods that improve PCOS symptoms?
+      - What diet is recommended for PCOS patients?
+      - Can eating low glycemic foods help with PCOS?
+      - How should I change my diet if I have PCOS?
+      - What are the benefits of a healthy diet for PCOS?
+      - Can a balanced diet help regulate hormones in PCOS?
+      - Should I follow a special diet to control my PCOS?
+      - What are the best foods to eat with PCOS?
+      - Are there any food restrictions for people with PCOS?
+      - How does diet impact PCOS symptoms?
+      - What kind of foods are good for insulin resistance in PCOS?
+      - Can vegetarian diets help with PCOS?
+
 
   - intent: ask_pcos_exercise
     examples: |
-      - What type of exercise helps with PCOS?
-      - Can working out improve PCOS symptoms?
-      - Is cardio good for PCOS?
-      - Should I do strength training if I have PCOS?
-      - Can regular exercise balance hormones in PCOS?
+      - What kind of exercise is good for PCOS?
+      - Does exercise help with managing PCOS symptoms?
+      - Can regular exercise improve insulin resistance in PCOS?
+      - What type of workout should I do if I have PCOS?
+      - Is cardio helpful for PCOS?
+      - How does exercise benefit women with PCOS?
+      - Should I focus on weight training for PCOS?
+      - Can exercise help with weight loss in PCOS?
+      - Can yoga or Pilates help with PCOS?
+      - How does regular exercise help balance hormones in PCOS?
+      - Does exercise help reduce stress in PCOS patients?
+      - What exercises help with PCOS and fertility?
+      - Is it important to exercise regularly if I have PCOS?
+      - How often should I exercise if I have PCOS?
+      - Can walking help with PCOS symptoms?
+
 
   - intent: ask_pcos_fertility
     examples: |
@@ -175,6 +377,17 @@ nlu:
       - Is it difficult to get pregnant with PCOS?
       - How does PCOS impact fertility?
       - Are fertility treatments necessary for PCOS?
+      - Does PCOS affect a woman's ability to get pregnant?
+      - Can women with PCOS have healthy pregnancies?
+      - How can PCOS impact my chances of conceiving?
+      - Is fertility more challenging with PCOS?
+      - Can PCOS make it harder to get pregnant?
+      - Does PCOS cause infertility?
+      - What should I know about fertility and PCOS?
+      - Are there ways to improve fertility with PCOS?
+      - Does PCOS prevent pregnancy?
+      - Can women with PCOS undergo IVF?
+
 
   - intent: ask_pcos_food
     examples: |
@@ -183,6 +396,16 @@ nlu:
       - What diet should I follow for PCOS?
       - Can certain foods improve PCOS symptoms?
       - What is the best food for PCOS?
+      - Are there foods to avoid with PCOS?
+      - Does a particular diet help manage PCOS?
+      - What are the most recommended foods for PCOS?
+      - Is a gluten-free diet good for PCOS?
+      - What should I include in my PCOS-friendly diet?
+      - How does nutrition affect PCOS?
+      - Can eating more fiber help manage PCOS?
+      - Should I avoid dairy with PCOS?
+      - What are the best foods to balance hormones in PCOS?
+      - Can eating healthy reduce PCOS symptoms?
 
   - intent: ask_pcos_health_risks
     examples: |
@@ -191,6 +414,17 @@ nlu:
       - What complications can arise from PCOS?
       - Does PCOS affect overall health?
       - Are there serious health concerns related to PCOS?
+      - What are the long-term risks of having PCOS?
+      - Can PCOS lead to other medical conditions?
+      - How does PCOS impact a person's health over time?
+      - Are women with PCOS at a higher risk for other diseases?
+      - What are some associated health problems with PCOS?
+      - Can PCOS lead to heart disease?
+      - Is there a risk of stroke with PCOS?
+      - How does PCOS increase the risk of diabetes?
+      - Can PCOS cause mental health problems?
+      - What are the dangers of untreated PCOS?
+
 
   - intent: ask_pcos_weight
     examples: |
@@ -199,6 +433,17 @@ nlu:
       - Does PCOS make it harder to lose weight?
       - How can I manage weight with PCOS?
       - Is weight loss more difficult with PCOS?
+      - Why do women with PCOS struggle with weight loss?
+      - Can PCOS cause difficulty in losing weight?
+      - Does PCOS make it easier to gain weight?
+      - How can I prevent weight gain with PCOS?
+      - Can managing PCOS help with weight loss?
+      - How does insulin resistance in PCOS impact weight?
+      - Can weight management be part of PCOS treatment?
+      - Does PCOS affect metabolism?
+      - How does PCOS influence appetite and cravings?
+      - How can I maintain a healthy weight with PCOS?
+
 
 
   - intent: ask_pcos_stress
@@ -208,6 +453,17 @@ nlu:
       - Is stress a factor in PCOS flare-ups?
       - Can managing stress help with PCOS?
       - Does anxiety make PCOS worse?
+      - How does stress affect hormone levels in PCOS?
+      - Can stress make PCOS symptoms more severe?
+      - How can I reduce stress to manage PCOS better?
+      - Is there a connection between stress and PCOS?
+      - Does emotional stress trigger PCOS symptoms?
+      - Can meditation reduce PCOS symptoms?
+      - How does stress management help with PCOS?
+      - What are the effects of chronic stress on PCOS?
+      - Can I manage PCOS with stress reduction techniques?
+      - How can I avoid stress-induced flare-ups of PCOS?
+
 
   - intent: ask_pcos_sleep
     examples: |
@@ -216,6 +472,17 @@ nlu:
       - Does PCOS affect sleep quality?
       - Can better sleep habits improve PCOS?
       - Is sleep important for PCOS management?
+      - How does lack of sleep affect PCOS?
+      - Can sleeping better help with PCOS symptoms?
+      - Does poor sleep cause hormonal imbalance in PCOS?
+      - What sleep patterns are best for women with PCOS?
+      - Can a good night's sleep reduce PCOS-related issues?
+      - How can I improve my sleep with PCOS?
+      - Does sleep apnea affect women with PCOS?
+      - What role does sleep play in managing PCOS?
+      - Can stress affect sleep in women with PCOS?
+      - Can sleep disturbances be a symptom of PCOS?
+
 
   - intent: ask_pcos_diabetes
     examples: |
@@ -224,6 +491,17 @@ nlu:
       - Are women with PCOS at higher risk of diabetes?
       - Can PCOS lead to type 2 diabetes?
       - What is the connection between PCOS and blood sugar?
+      - Can PCOS lead to gestational diabetes?
+      - How does PCOS impact blood sugar levels?
+      - Is managing insulin important for PCOS treatment?
+      - Does PCOS affect insulin sensitivity?
+      - How can women with PCOS prevent diabetes?
+      - Is insulin resistance a common problem with PCOS?
+      - How does PCOS increase the risk of type 2 diabetes?
+      - Can controlling blood sugar reduce PCOS symptoms?
+      - What treatments help with diabetes in PCOS patients?
+      - How do doctors manage diabetes risk in women with PCOS?
+
 
   - intent: ask_pcos_heart
     examples: |
@@ -232,6 +510,17 @@ nlu:
       - Is PCOS linked to high cholesterol?
       - What heart-related risks come with PCOS?
       - How does PCOS affect heart health?
+      - Can PCOS cause high blood pressure?
+      - How does insulin resistance in PCOS affect heart health?
+      - Are women with PCOS at greater risk for heart attacks?
+      - Does PCOS raise the risk of stroke?
+      - Can PCOS affect blood circulation?
+      - How can heart health be monitored in women with PCOS?
+      - What should I know about heart disease and PCOS?
+      - Is cardiovascular disease more common in women with PCOS?
+      - How can women with PCOS protect their heart health?
+      - Can lifestyle changes prevent heart problems in PCOS patients?
+
 
   - intent: ask_pcos_thyroid
     examples: |
@@ -240,6 +529,17 @@ nlu:
       - Can thyroid disorders be mistaken for PCOS?
       - Are thyroid problems common in PCOS patients?
       - What’s the link between PCOS and thyroid function?
+      - Can thyroid problems worsen PCOS symptoms?
+      - How does PCOS affect thyroid health?
+      - Can having PCOS lead to thyroid dysfunction?
+      - How are PCOS and thyroid issues related?
+      - Is it common to have both PCOS and thyroid problems?
+      - How can thyroid problems impact women with PCOS?
+      - Are thyroid disorders treated differently in PCOS patients?
+      - Can managing thyroid problems help with PCOS?
+      - What thyroid tests are needed for women with PCOS?
+      - Can PCOS lead to hyperthyroidism?
+
 
   - intent: out_of_scope
     examples: |
@@ -248,10 +548,13 @@ nlu:
       - What is the stock price of Tesla?
       - Who is the president of the USA?
       - How do I fix my car engine?
-
-  - intent: unknown_query
-    examples: |
-      - I have a random question
-      - This is unrelated
-      - Tell me something about physics
-      - What is the capital of France?
+      - What is the square root of 144?
+      - Can you sing a song?
+      - How old is the universe?
+      - What time does the sun set in New York?
+      - Who is the CEO of Google?
+      - Where is the Eiffel Tower located?
+      - Can you recommend a movie?
+      - What are the best travel destinations?
+      - How do I bake a cake?
+      - What’s the weather like tomorrow?

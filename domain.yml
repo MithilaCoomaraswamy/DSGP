@@ -30,7 +30,6 @@ intents:
   - ask_pcos_diabetes
   - ask_pcos_heart
   - ask_pcos_thyroid
-  - unknown_query
   - out_of_scope
 
 

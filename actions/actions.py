@@ -16,11 +16,13 @@ class ActionFallbackLLM(Action):
 
     async def run(self, dispatcher: CollectingDispatcher, tracker, domain):
         user_message = tracker.latest_message.get("text")
+        intent_ranking = tracker.latest_message.get("intent_ranking", [])
 
-        # If message is empty, send fallback
-        if not user_message:
-            dispatcher.utter_message(text="Sorry, I didn't understand that.")
-            return []
+        # Check if the highest intent has low confidence (< 0.35)
+        if intent_ranking and intent_ranking[0]["confidence"] > 0.35:
+            # The intent was classified with enough confidence, do NOT use GPT-3.5
+            dispatcher.utter_message(text="I'm not sure, but I can try to help.")
+            return [UserUtteranceReverted()]
 
         try:
             # Initialize conversation history
