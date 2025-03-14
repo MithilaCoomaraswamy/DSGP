@@ -1,546 +1,18 @@
 [
   {
-    "text": "have a good day",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.3648568391799927
-    }
-  },
-  {
-    "text": "I'm on top of the world",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "web_info",
-      "confidence": 0.24853108823299408
-    }
-  },
-  {
-    "text": "not in the best mood",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.788860023021698
-    }
-  },
-  {
-    "text": "What does PCOS stand for?",
-    "intent": "ask_pcos_info",
-    "intent_prediction": {
-      "name": "ask_pcos_diabetes",
-      "confidence": 0.4205433130264282
-    }
-  },
-  {
-    "text": "How frequently do women get PCOS?",
-    "intent": "ask_pcos_common",
-    "intent_prediction": {
-      "name": "ask_pcos_sleep",
-      "confidence": 0.21929006278514862
-    }
-  },
-  {
-    "text": "how does pcos affect human body?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_symptoms",
-      "confidence": 0.8358067870140076
-    }
-  },
-  {
-    "text": "How does someone develop PCOS?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.21768136322498322
-    }
-  },
-  {
-    "text": "Can PCOS run in families?",
-    "intent": "ask_pcos_genetic",
-    "intent_prediction": {
-      "name": "ask_pcos_medications",
-      "confidence": 0.30678555369377136
-    }
-  },
-  {
-    "text": "Can PCOS affect my periods?",
-    "intent": "ask_pcos_symptoms",
-    "intent_prediction": {
-      "name": "ask_pcos_medications",
-      "confidence": 0.3759731948375702
-    }
-  },
-  {
-    "text": "Can diet changes help manage PCOS?",
-    "intent": "ask_pcos_diet",
-    "intent_prediction": {
-      "name": "ask_pcos_treatment",
-      "confidence": 0.40703487396240234
-    }
-  },
-  {
-    "text": "Can regular exercise balance hormones in PCOS?",
-    "intent": "ask_pcos_exercise",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.7283778786659241
-    }
-  },
-  {
-    "text": "Are fertility treatments necessary for PCOS?",
-    "intent": "ask_pcos_fertility",
-    "intent_prediction": {
-      "name": "ask_pcos_treatment",
-      "confidence": 0.7747750282287598
-    }
-  },
-  {
-    "text": "What foods should I eat if I have PCOS?",
-    "intent": "ask_pcos_food",
-    "intent_prediction": {
-      "name": "ask_pcos_diet",
-      "confidence": 0.7905065417289734
-    }
-  },
-  {
-    "text": "Does PCOS affect overall health?",
-    "intent": "ask_pcos_health_risks",
-    "intent_prediction": {
-      "name": "ask_pcos_heart",
-      "confidence": 0.6959806084632874
-    }
-  },
-  {
-    "text": "Does anxiety make PCOS worse?",
-    "intent": "ask_pcos_stress",
-    "intent_prediction": {
-      "name": "ask_pcos_sleep",
-      "confidence": 0.3732633888721466
-    }
-  },
-  {
-    "text": "Can PCOS cause cardiovascular problems?",
-    "intent": "ask_pcos_heart",
-    "intent_prediction": {
-      "name": "ask_pcos_health_risks",
-      "confidence": 0.3064155876636505
-    }
-  },
-  {
-    "text": "What’s the link between PCOS and thyroid function?",
-    "intent": "ask_pcos_thyroid",
-    "intent_prediction": {
-      "name": "ask_pcos_diabetes",
-      "confidence": 0.5978729724884033
-    }
-  },
-  {
-    "text": "Tell me a joke.",
-    "intent": "out_of_scope",
-    "intent_prediction": {
-      "name": "web_info",
-      "confidence": 0.2011297047138214
-    }
-  },
-  {
-    "text": "hi there",
+    "text": "good morning",
     "intent": "greet",
     "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.4422900676727295
+      "name": "mood_great",
+      "confidence": 0.9203482270240784
     }
   },
   {
-    "text": "of course",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.23024451732635498
-    }
-  },
-  {
-    "text": "not really",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.42767083644866943
-    }
-  },
-  {
-    "text": "I feel fantastic",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.36596494913101196
-    }
-  },
-  {
-    "text": "I'm really sad",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.28568822145462036
-    }
-  },
-  {
-    "text": "How do you define PCOS?",
-    "intent": "ask_pcos_info",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.2038755863904953
-    }
-  },
-  {
-    "text": "Is PCOS a common condition?",
-    "intent": "ask_pcos_common",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.1492443084716797
-    }
-  },
-  {
-    "text": "What causes PCOS?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_info",
-      "confidence": 0.5957371592521667
-    }
-  },
-  {
-    "text": "Is pcos is generic disorder",
-    "intent": "ask_pcos_genetic",
-    "intent_prediction": {
-      "name": "ask_pcos_thyroid",
-      "confidence": 0.2885967493057251
-    }
-  },
-  {
-    "text": "How do I recognize PCOS symptoms?",
-    "intent": "ask_pcos_symptoms",
-    "intent_prediction": {
-      "name": "out_of_scope",
-      "confidence": 0.15197598934173584
-    }
-  },
-  {
-    "text": "What is the medical process for detecting PCOS?",
-    "intent": "ask_pcos_diagnosis",
-    "intent_prediction": {
-      "name": "ask_pcos_treatment",
-      "confidence": 0.10896985232830048
-    }
-  },
-  {
-    "text": "What therapies are available for PCOS patients?",
-    "intent": "ask_pcos_treatment",
-    "intent_prediction": {
-      "name": "ask_pcos_diet",
-      "confidence": 0.36573365330696106
-    }
-  },
-  {
-    "text": "Can PCOS be completely cured?",
-    "intent": "ask_pcos_cure",
-    "intent_prediction": {
-      "name": "ask_pcos_health_risks",
-      "confidence": 0.5505925416946411
-    }
-  },
-  {
-    "text": "Are birth control pills used for PCOS?",
-    "intent": "ask_pcos_medications",
-    "intent_prediction": {
-      "name": "ask_pcos_diagnosis",
-      "confidence": 0.2778374254703522
-    }
-  },
-  {
-    "text": "Can working out improve PCOS symptoms?",
-    "intent": "ask_pcos_exercise",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.45479312539100647
-    }
-  },
-  {
-    "text": "Is it difficult to get pregnant with PCOS?",
-    "intent": "ask_pcos_fertility",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.2562309503555298
-    }
-  },
-  {
-    "text": "What diet should I follow for PCOS?",
-    "intent": "ask_pcos_food",
-    "intent_prediction": {
-      "name": "ask_pcos_diet",
-      "confidence": 0.9897340536117554
-    }
-  },
-  {
-    "text": "Are women with PCOS at higher risk of diabetes?",
-    "intent": "ask_pcos_diabetes",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.4123682677745819
-    }
-  },
-  {
-    "text": "take care",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "ask_pcos_stress",
-      "confidence": 0.3123018145561218
-    }
-  },
-  {
-    "text": "definitely",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "ask_pcos_info",
-      "confidence": 0.741868257522583
-    }
-  },
-  {
-    "text": "never",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.6418304443359375
-    }
-  },
-  {
-    "text": "everything is awesome",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "ask_pcos_genetic",
-      "confidence": 0.1767650842666626
-    }
-  },
-  {
-    "text": "feeling terrible",
-    "intent": "mood_unhappy",
+    "text": "greetings",
+    "intent": "greet",
     "intent_prediction": {
       "name": "mood_great",
-      "confidence": 0.3504829704761505
-    }
-  },
-  {
-    "text": "What is PCOS?",
-    "intent": "ask_pcos_info",
-    "intent_prediction": {
-      "name": "ask_pcos_causes",
-      "confidence": 0.39946672320365906
-    }
-  },
-  {
-    "text": "Is PCOS rare?",
-    "intent": "ask_pcos_common",
-    "intent_prediction": {
-      "name": "ask_pcos_genetic",
-      "confidence": 0.22122631967067719
-    }
-  },
-  {
-    "text": "What are the underlying reasons for PCOS?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.1716163009405136
-    }
-  },
-  {
-    "text": "Is PCOS passed from mother to daughter?",
-    "intent": "ask_pcos_genetic",
-    "intent_prediction": {
-      "name": "ask_pcos_health_risks",
-      "confidence": 0.19648751616477966
-    }
-  },
-  {
-    "text": "Does PCOS cause high testosterone?",
-    "intent": "ask_pcos_hormones",
-    "intent_prediction": {
-      "name": "ask_pcos_heart",
-      "confidence": 0.5262231230735779
-    }
-  },
-  {
-    "text": "How does PCOS affect the body?",
-    "intent": "ask_pcos_symptoms",
-    "intent_prediction": {
-      "name": "ask_pcos_causes",
-      "confidence": 0.9608092308044434
-    }
-  },
-  {
-    "text": "How do doctors treat PCOS?",
-    "intent": "ask_pcos_treatment",
-    "intent_prediction": {
-      "name": "ask_pcos_causes",
-      "confidence": 0.40862998366355896
-    }
-  },
-  {
-    "text": "Is there a cure for PCOS?",
-    "intent": "ask_pcos_cure",
-    "intent_prediction": {
-      "name": "ask_pcos_genetic",
-      "confidence": 0.34619763493537903
-    }
-  },
-  {
-    "text": "What foods should I eat for PCOS?",
-    "intent": "ask_pcos_diet",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.9848085641860962
-    }
-  },
-  {
-    "text": "Can women with PCOS conceive naturally?",
-    "intent": "ask_pcos_fertility",
-    "intent_prediction": {
-      "name": "ask_pcos_common",
-      "confidence": 0.681169331073761
-    }
-  },
-  {
-    "text": "Does PCOS cause insulin resistance?",
-    "intent": "ask_pcos_diabetes",
-    "intent_prediction": {
-      "name": "ask_pcos_medications",
-      "confidence": 0.2170170396566391
-    }
-  },
-  {
-    "text": "How does PCOS affect heart health?",
-    "intent": "ask_pcos_heart",
-    "intent_prediction": {
-      "name": "ask_pcos_health_risks",
-      "confidence": 0.6770495772361755
-    }
-  },
-  {
-    "text": "Who won the latest football match?",
-    "intent": "out_of_scope",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.18126951158046722
-    }
-  },
-  {
-    "text": "yes",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "greet",
-      "confidence": 0.6346690654754639
-    }
-  },
-  {
-    "text": "feeling amazing",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.37891077995300293
-    }
-  },
-  {
-    "text": "Give me details about PCOS.",
-    "intent": "ask_pcos_info",
-    "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.274354487657547
-    }
-  },
-  {
-    "text": "What percentage of women are affected by PCOS?",
-    "intent": "ask_pcos_common",
-    "intent_prediction": {
-      "name": "ask_pcos_symptoms",
-      "confidence": 0.25057709217071533
-    }
-  },
-  {
-    "text": "Are there known triggers for PCOS?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.5810161828994751
-    }
-  },
-  {
-    "text": "Are genes responsible for PCOS?",
-    "intent": "ask_pcos_genetic",
-    "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.21993118524551392
-    }
-  },
-  {
-    "text": "How are estrogen and PCOS related?",
-    "intent": "ask_pcos_hormones",
-    "intent_prediction": {
-      "name": "ask_pcos_stress",
-      "confidence": 0.1302962303161621
-    }
-  },
-  {
-    "text": "What drugs help with PCOS symptoms?",
-    "intent": "ask_pcos_medications",
-    "intent_prediction": {
-      "name": "ask_pcos_symptoms",
-      "confidence": 0.7099242806434631
-    }
-  },
-  {
-    "text": "Are there dietary restrictions for PCOS patients?",
-    "intent": "ask_pcos_diet",
-    "intent_prediction": {
-      "name": "ask_pcos_medications",
-      "confidence": 0.27967292070388794
-    }
-  },
-  {
-    "text": "Should I do strength training if I have PCOS?",
-    "intent": "ask_pcos_exercise",
-    "intent_prediction": {
-      "name": "ask_pcos_food",
-      "confidence": 0.8220064640045166
-    }
-  },
-  {
-    "text": "What is the best food for PCOS?",
-    "intent": "ask_pcos_food",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.4411343038082123
-    }
-  },
-  {
-    "text": "What are the health risks of PCOS?",
-    "intent": "ask_pcos_health_risks",
-    "intent_prediction": {
-      "name": "ask_pcos_heart",
-      "confidence": 0.5257744789123535
-    }
-  },
-  {
-    "text": "Is PCOS linked to high cholesterol?",
-    "intent": "ask_pcos_heart",
-    "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.2894054055213928
-    }
-  },
-  {
-    "text": "Who is the president of the USA?",
-    "intent": "out_of_scope",
-    "intent_prediction": {
-      "name": "ask_pcos_symptoms",
-      "confidence": 0.22740229964256287
+      "confidence": 0.97031569480896
     }
   },
   {
@@ -548,143 +20,1375 @@
     "intent": "goodbye",
     "intent_prediction": {
       "name": "greet",
-      "confidence": 0.3819867670536041
+      "confidence": 0.23553046584129333
     }
   },
   {
-    "text": "sure",
+    "text": "absolutely",
     "intent": "affirm",
     "intent_prediction": {
       "name": "deny",
-      "confidence": 0.5785092115402222
+      "confidence": 0.8875323534011841
     }
   },
   {
-    "text": "I don’t think so",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "bot_challenge",
-      "confidence": 0.32129600644111633
-    }
-  },
-  {
-    "text": "couldn't be better",
+    "text": "hello",
     "intent": "mood_great",
     "intent_prediction": {
-      "name": "ask_pcos_cure",
-      "confidence": 0.2854563295841217
+      "name": "greet",
+      "confidence": 0.9474644064903259
     }
   },
   {
-    "text": "today is not my day",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.40316861867904663
-    }
-  },
-  {
-    "text": "are you human or AI?",
-    "intent": "bot_challenge",
-    "intent_prediction": {
-      "name": "ask_pcos_causes",
-      "confidence": 0.5828743577003479
-    }
-  },
-  {
-    "text": "Can you explain PCOS?",
-    "intent": "ask_pcos_info",
-    "intent_prediction": {
-      "name": "ask_pcos_stress",
-      "confidence": 0.4067968726158142
-    }
-  },
-  {
-    "text": "What factors contribute to PCOS?",
-    "intent": "ask_pcos_causes",
-    "intent_prediction": {
-      "name": "ask_pcos_treatment",
-      "confidence": 0.30565890669822693
-    }
-  },
-  {
-    "text": "Is PCOS hereditary?",
-    "intent": "ask_pcos_genetic",
+    "text": "hi there",
+    "intent": "mood_great",
     "intent_prediction": {
       "name": "greet",
-      "confidence": 0.15461698174476624
+      "confidence": 0.752056360244751
     }
   },
   {
-    "text": "What are the first symptoms of PCOS?",
-    "intent": "ask_pcos_symptoms",
+    "text": "How does your site work?",
+    "intent": "web_info",
     "intent_prediction": {
       "name": "bot_challenge",
-      "confidence": 0.23854468762874603
+      "confidence": 0.6104709506034851
     }
   },
   {
-    "text": "What tests confirm PCOS?",
-    "intent": "ask_pcos_diagnosis",
+    "text": "What does PCOS stand for?",
+    "intent": "ask_pcos_info",
     "intent_prediction": {
-      "name": "ask_pcos_info",
-      "confidence": 0.4768444895744324
+      "name": "ask_pcos_causes",
+      "confidence": 0.3617539405822754
     }
   },
   {
-    "text": "How can PCOS be managed?",
+    "text": "Why is PCOS important to know about?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.5376104116439819
+    }
+  },
+  {
+    "text": "Is PCOS serious?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.40437549352645874
+    }
+  },
+  {
+    "text": "Can you tell me how widespread PCOS is?",
+    "intent": "ask_pcos_common",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.3320346176624298
+    }
+  },
+  {
+    "text": "What are the reasons behind PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.32691752910614014
+    }
+  },
+  {
+    "text": "How do hormones influence the development of PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.3747248351573944
+    }
+  },
+  {
+    "text": "How does the body develop PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.9736708998680115
+    }
+  },
+  {
+    "text": "Does having relatives with PCOS make me more susceptible?",
+    "intent": "ask_pcos_genetic",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.333536833524704
+    }
+  },
+  {
+    "text": "How do hormones contribute to PCOS symptoms?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.45312950015068054
+    }
+  },
+  {
+    "text": "What should I look for to detect PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.48651638627052307
+    }
+  },
+  {
+    "text": "How does PCOS affect your skin?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "web_info",
+      "confidence": 0.3548314869403839
+    }
+  },
+  {
+    "text": "How can PCOS be managed effectively?",
     "intent": "ask_pcos_treatment",
     "intent_prediction": {
       "name": "ask_pcos_cure",
-      "confidence": 0.3407946527004242
+      "confidence": 0.27567505836486816
     }
   },
   {
-    "text": "Will PCOS ever go away?",
-    "intent": "ask_pcos_cure",
+    "text": "How do doctors treat PCOS symptoms?",
+    "intent": "ask_pcos_treatment",
     "intent_prediction": {
-      "name": "ask_pcos_hormones",
-      "confidence": 0.11959841847419739
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.20924295485019684
     }
   },
   {
-    "text": "Can a healthy diet reduce PCOS symptoms?",
-    "intent": "ask_pcos_diet",
+    "text": "Can PCOS be treated with diet or exercise?",
+    "intent": "ask_pcos_treatment",
     "intent_prediction": {
       "name": "ask_pcos_exercise",
-      "confidence": 0.2261054962873459
+      "confidence": 0.9761831164360046
     }
   },
   {
-    "text": "Is cardio good for PCOS?",
+    "text": "Can PCOS go away on its own?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_fertility",
+      "confidence": 0.280008465051651
+    }
+  },
+  {
+    "text": "Do I need to take medications for PCOS long-term?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.248896986246109
+    }
+  },
+  {
+    "text": "What foods should I avoid if I have PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.9994969367980957
+    }
+  },
+  {
+    "text": "How should I change my diet if I have PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.586061418056488
+    }
+  },
+  {
+    "text": "What kind of foods are good for insulin resistance in PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.9498958587646484
+    }
+  },
+  {
+    "text": "Can walking help with PCOS symptoms?",
     "intent": "ask_pcos_exercise",
     "intent_prediction": {
       "name": "ask_pcos_symptoms",
-      "confidence": 0.23461505770683289
+      "confidence": 0.23669397830963135
     }
   },
   {
     "text": "Can certain foods improve PCOS symptoms?",
     "intent": "ask_pcos_food",
     "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.9349378943443298
+    }
+  },
+  {
+    "text": "What are the most recommended foods for PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.7667725086212158
+    }
+  },
+  {
+    "text": "What should I include in my PCOS-friendly diet?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.5788045525550842
+    }
+  },
+  {
+    "text": "Can meditation reduce PCOS symptoms?",
+    "intent": "ask_pcos_stress",
+    "intent_prediction": {
+      "name": "ask_pcos_genetic",
+      "confidence": 0.3071659803390503
+    }
+  },
+  {
+    "text": "Is managing insulin important for PCOS treatment?",
+    "intent": "ask_pcos_diabetes",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.7724221348762512
+    }
+  },
+  {
+    "text": "Does PCOS affect insulin sensitivity?",
+    "intent": "ask_pcos_diabetes",
+    "intent_prediction": {
+      "name": "ask_pcos_fertility",
+      "confidence": 0.46109336614608765
+    }
+  },
+  {
+    "text": "What treatments help with diabetes in PCOS patients?",
+    "intent": "ask_pcos_diabetes",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.8250784277915955
+    }
+  },
+  {
+    "text": "Can PCOS affect blood circulation?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.24443319439888
+    }
+  },
+  {
+    "text": "Who won the latest football match?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.6534269452095032
+    }
+  },
+  {
+    "text": "What is the square root of 144?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.9196750521659851
+    }
+  },
+  {
+    "text": "hey",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9669403433799744
+    }
+  },
+  {
+    "text": "hi there",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9841817021369934
+    }
+  },
+  {
+    "text": "take care",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.27193400263786316
+    }
+  },
+  {
+    "text": "hey buddy",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9529886245727539
+    }
+  },
+  {
+    "text": "hey, how are you?",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.5823475122451782
+    }
+  },
+  {
+    "text": "I just want to be alone",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.3168445825576782
+    }
+  },
+  {
+    "text": "I'm not okay",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.4907265901565552
+    }
+  },
+  {
+    "text": "do you have feelings?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.5634250640869141
+    }
+  },
+  {
+    "text": "how do you work?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "web_info",
+      "confidence": 0.6080981492996216
+    }
+  },
+  {
+    "text": "Can you explain PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.2977513074874878
+    }
+  },
+  {
+    "text": "What we should know when talking about PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
       "name": "ask_pcos_exercise",
-      "confidence": 0.6058945059776306
+      "confidence": 0.5276371240615845
+    }
+  },
+  {
+    "text": "Is there a specific cause for PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.20924897491931915
+    }
+  },
+  {
+    "text": "Does genetics play a role in PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_genetic",
+      "confidence": 0.9940506815910339
+    }
+  },
+  {
+    "text": "Does obesity have a role in causing PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.13585425913333893
+    }
+  },
+  {
+    "text": "Does PCOS lead to an imbalance in estrogen?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.927848756313324
+    }
+  },
+  {
+    "text": "How does PCOS affect estrogen levels?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.834445059299469
+    }
+  },
+  {
+    "text": "Do I need to worry about acne with PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_cure",
+      "confidence": 0.37352609634399414
+    }
+  },
+  {
+    "text": "Does PCOS cause excess hair growth?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.7414653301239014
+    }
+  },
+  {
+    "text": "Are there specific blood tests for PCOS?",
+    "intent": "ask_pcos_diagnosis",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.3123643696308136
+    }
+  },
+  {
+    "text": "How can stress management help in PCOS treatment?",
+    "intent": "ask_pcos_treatment",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.9669138193130493
+    }
+  },
+  {
+    "text": "Can medication help with weight gain due to PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_weight",
+      "confidence": 0.7552847862243652
+    }
+  },
+  {
+    "text": "Can metformin help with insulin levels in PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.7358430027961731
+    }
+  },
+  {
+    "text": "Are there specific foods that improve PCOS symptoms?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.990528404712677
+    }
+  },
+  {
+    "text": "What are the best foods to eat with PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.9991770386695862
+    }
+  },
+  {
+    "text": "Can yoga or Pilates help with PCOS?",
+    "intent": "ask_pcos_exercise",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.9561368227005005
+    }
+  },
+  {
+    "text": "What diet should I follow for PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.9994140863418579
+    }
+  },
+  {
+    "text": "Are there foods to avoid with PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.9601837396621704
     }
   },
   {
     "text": "What complications can arise from PCOS?",
     "intent": "ask_pcos_health_risks",
     "intent_prediction": {
-      "name": "ask_pcos_medications",
-      "confidence": 0.23725441098213196
+      "name": "ask_pcos_cure",
+      "confidence": 0.5428559184074402
     }
   },
   {
-    "text": "What is the connection between PCOS and blood sugar?",
+    "text": "Can PCOS lead to heart disease?",
+    "intent": "ask_pcos_health_risks",
+    "intent_prediction": {
+      "name": "ask_pcos_heart",
+      "confidence": 0.9555553197860718
+    }
+  },
+  {
+    "text": "Does PCOS affect metabolism?",
+    "intent": "ask_pcos_weight",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.25930914282798767
+    }
+  },
+  {
+    "text": "Does anxiety make PCOS worse?",
+    "intent": "ask_pcos_stress",
+    "intent_prediction": {
+      "name": "ask_pcos_weight",
+      "confidence": 0.22738370299339294
+    }
+  },
+  {
+    "text": "Can stress affect sleep in women with PCOS?",
+    "intent": "ask_pcos_sleep",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.520758330821991
+    }
+  },
+  {
+    "text": "Can PCOS lead to gestational diabetes?",
     "intent": "ask_pcos_diabetes",
     "intent_prediction": {
-      "name": "ask_pcos_thyroid",
-      "confidence": 0.2384629100561142
+      "name": "ask_pcos_causes",
+      "confidence": 0.7203480005264282
+    }
+  },
+  {
+    "text": "Does PCOS raise the risk of stroke?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.9975184202194214
+    }
+  },
+  {
+    "text": "Tell me a joke.",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_common",
+      "confidence": 0.47431349754333496
+    }
+  },
+  {
+    "text": "Where is the Eiffel Tower located?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.2096274495124817
+    }
+  },
+  {
+    "text": "good evening",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9720879793167114
+    }
+  },
+  {
+    "text": "howdy",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9643747806549072
+    }
+  },
+  {
+    "text": "I agree",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.3547206223011017
+    }
+  },
+  {
+    "text": "good morning",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9773508310317993
+    }
+  },
+  {
+    "text": "hi!",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5634512901306152
+    }
+  },
+  {
+    "text": "Super stressed out",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.9451050758361816
+    }
+  },
+  {
+    "text": "what is your purpose?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "web_info",
+      "confidence": 0.5572485327720642
+    }
+  },
+  {
+    "text": "Is there customer support?",
+    "intent": "web_info",
+    "intent_prediction": {
+      "name": "ask_pcos_cure",
+      "confidence": 0.22157523036003113
+    }
+  },
+  {
+    "text": "How do you define PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.66396564245224
+    }
+  },
+  {
+    "text": "Is PCOS a disease?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.9252551198005676
+    }
+  },
+  {
+    "text": "Where can I find more information on PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.2067701667547226
+    }
+  },
+  {
+    "text": "What are the statistics for PCOS in women?",
+    "intent": "ask_pcos_common",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.31794849038124084
+    }
+  },
+  {
+    "text": "How does insulin resistance lead to PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.9237477779388428
+    }
+  },
+  {
+    "text": "What is the relationship between PCOS and hormonal imbalance?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.9490886330604553
+    }
+  },
+  {
+    "text": "Do genes play a major role in developing PCOS?",
+    "intent": "ask_pcos_genetic",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.9863246083259583
+    }
+  },
+  {
+    "text": "What hormonal imbalances are common with PCOS?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_common",
+      "confidence": 0.5815072059631348
+    }
+  },
+  {
+    "text": "How does PCOS affect the body?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.3915492296218872
+    }
+  },
+  {
+    "text": "Can lifestyle changes help with PCOS management?",
+    "intent": "ask_pcos_treatment",
+    "intent_prediction": {
+      "name": "ask_pcos_cure",
+      "confidence": 0.3564038872718811
+    }
+  },
+  {
+    "text": "Are there medications to regulate insulin in PCOS?",
+    "intent": "ask_pcos_treatment",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.9795582890510559
+    }
+  },
+  {
+    "text": "Can women recover fully from PCOS?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_genetic",
+      "confidence": 0.3191381096839905
+    }
+  },
+  {
+    "text": "What pills regulate periods in PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.4196772873401642
+    }
+  },
+  {
+    "text": "Are there medications to improve fertility in PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_fertility",
+      "confidence": 0.6898473501205444
+    }
+  },
+  {
+    "text": "Are there any food restrictions for people with PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.703454315662384
+    }
+  },
+  {
+    "text": "What type of workout should I do if I have PCOS?",
+    "intent": "ask_pcos_exercise",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.8277431130409241
+    }
+  },
+  {
+    "text": "Should I focus on weight training for PCOS?",
+    "intent": "ask_pcos_exercise",
+    "intent_prediction": {
+      "name": "ask_pcos_weight",
+      "confidence": 0.9623691439628601
+    }
+  },
+  {
+    "text": "How can PCOS impact my chances of conceiving?",
+    "intent": "ask_pcos_fertility",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.48303478956222534
+    }
+  },
+  {
+    "text": "Are there specific foods that help with PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.993996262550354
+    }
+  },
+  {
+    "text": "Should I avoid dairy with PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.4947368800640106
+    }
+  },
+  {
+    "text": "What are the long-term risks of having PCOS?",
+    "intent": "ask_pcos_health_risks",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.655144989490509
+    }
+  },
+  {
+    "text": "How does stress affect hormone levels in PCOS?",
+    "intent": "ask_pcos_stress",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.9739764928817749
+    }
+  },
+  {
+    "text": "Is PCOS linked to high cholesterol?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.9106844663619995
+    }
+  },
+  {
+    "text": "Is cardiovascular disease more common in women with PCOS?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_common",
+      "confidence": 0.5712874531745911
+    }
+  },
+  {
+    "text": "How do I fix my car engine?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.6242952346801758
+    }
+  },
+  {
+    "text": "What are the best travel destinations?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_sleep",
+      "confidence": 0.11316930502653122
+    }
+  },
+  {
+    "text": "hello",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9643573760986328
+    }
+  },
+  {
+    "text": "talk soon",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.5127907991409302
+    }
+  },
+  {
+    "text": "sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.4185282588005066
+    }
+  },
+  {
+    "text": "never",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.2805430591106415
+    }
+  },
+  {
+    "text": "howdy",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9329593777656555
+    }
+  },
+  {
+    "text": "I feel awful",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.22617816925048828
+    }
+  },
+  {
+    "text": "Is there a membership option?",
+    "intent": "web_info",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.5937545895576477
+    }
+  },
+  {
+    "text": "Is PCOS life-threatening?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.1891622096300125
+    }
+  },
+  {
+    "text": "Who can be affected by PCOS?",
+    "intent": "ask_pcos_info",
+    "intent_prediction": {
+      "name": "ask_pcos_common",
+      "confidence": 0.20458097755908966
+    }
+  },
+  {
+    "text": "Is PCOS a common condition?",
+    "intent": "ask_pcos_common",
+    "intent_prediction": {
+      "name": "ask_pcos_genetic",
+      "confidence": 0.38217100501060486
+    }
+  },
+  {
+    "text": "Is PCOS one of the most common hormonal disorders?",
+    "intent": "ask_pcos_common",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.5127705335617065
+    }
+  },
+  {
+    "text": "What causes PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.38988223671913147
+    }
+  },
+  {
+    "text": "What triggers PCOS symptoms?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.31869980692863464
+    }
+  },
+  {
+    "text": "Are genetics responsible for PCOS?",
+    "intent": "ask_pcos_genetic",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.8762077689170837
+    }
+  },
+  {
+    "text": "Can PCOS cause irregular hormone cycles?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_heart",
+      "confidence": 0.5905653834342957
+    }
+  },
+  {
+    "text": "What is the relationship between PCOS and hormones?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.9905782341957092
+    }
+  },
+  {
+    "text": "Can PCOS cause irregular periods?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_heart",
+      "confidence": 0.4077700078487396
+    }
+  },
+  {
+    "text": "What changes can I expect in my body with PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.6288909912109375
+    }
+  },
+  {
+    "text": "Are there specific signs of PCOS in early stages?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_diagnosis",
+      "confidence": 0.38182929158210754
+    }
+  },
+  {
+    "text": "Can birth control pills help with PCOS?",
+    "intent": "ask_pcos_treatment",
+    "intent_prediction": {
+      "name": "ask_pcos_medications",
+      "confidence": 0.7491500377655029
+    }
+  },
+  {
+    "text": "Is PCOS reversible with treatment?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.7115902900695801
+    }
+  },
+  {
+    "text": "Should I follow a special diet to control my PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.9263205528259277
+    }
+  },
+  {
+    "text": "What should I know about fertility and PCOS?",
+    "intent": "ask_pcos_fertility",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.48122963309288025
+    }
+  },
+  {
+    "text": "Is a gluten-free diet good for PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.6691508889198303
+    }
+  },
+  {
+    "text": "How does nutrition affect PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_stress",
+      "confidence": 0.1904134452342987
+    }
+  },
+  {
+    "text": "Can eating healthy reduce PCOS symptoms?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.1712617427110672
+    }
+  },
+  {
+    "text": "How does insulin resistance in PCOS impact weight?",
+    "intent": "ask_pcos_weight",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.759382963180542
+    }
+  },
+  {
+    "text": "How does PCOS influence appetite and cravings?",
+    "intent": "ask_pcos_weight",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.9189342260360718
+    }
+  },
+  {
+    "text": "Does PCOS cause insulin resistance?",
+    "intent": "ask_pcos_diabetes",
+    "intent_prediction": {
+      "name": "ask_pcos_causes",
+      "confidence": 0.8959596753120422
+    }
+  },
+  {
+    "text": "Does PCOS increase the risk of heart disease?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_health_risks",
+      "confidence": 0.9781033992767334
+    }
+  },
+  {
+    "text": "What should I know about heart disease and PCOS?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.8650041818618774
+    }
+  },
+  {
+    "text": "What is the stock price of Tesla?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_diagnosis",
+      "confidence": 0.3133074641227722
+    }
+  },
+  {
+    "text": "Can you sing a song?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.2103421837091446
+    }
+  },
+  {
+    "text": "Can you recommend a movie?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.5655219554901123
+    }
+  },
+  {
+    "text": "hey buddy",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9627779126167297
+    }
+  },
+  {
+    "text": "see you around",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.3872833251953125
+    }
+  },
+  {
+    "text": "that's right",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_pcos_weight",
+      "confidence": 0.7358454465866089
+    }
+  },
+  {
+    "text": "I think so",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.9696412682533264
+    }
+  },
+  {
+    "text": "hey",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.75431227684021
+    }
+  },
+  {
+    "text": "good evening",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9808605909347534
+    }
+  },
+  {
+    "text": "greetings",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9783912301063538
+    }
+  },
+  {
+    "text": "Everything is going wrong",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5356679558753967
+    }
+  },
+  {
+    "text": "Having a bad day",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.7125129103660583
+    }
+  },
+  {
+    "text": "I hate this day",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.8377783894538879
+    }
+  },
+  {
+    "text": "Do you have a help section?",
+    "intent": "web_info",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.4265221059322357
+    }
+  },
+  {
+    "text": "Are there any special offers?",
+    "intent": "web_info",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.41348034143447876
+    }
+  },
+  {
+    "text": "Is PCOS frequently diagnosed in women?",
+    "intent": "ask_pcos_common",
+    "intent_prediction": {
+      "name": "ask_pcos_diagnosis",
+      "confidence": 0.8473575711250305
+    }
+  },
+  {
+    "text": "How does someone get PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.2781272530555725
+    }
+  },
+  {
+    "text": "What factors increase the risk of getting PCOS?",
+    "intent": "ask_pcos_causes",
+    "intent_prediction": {
+      "name": "ask_pcos_genetic",
+      "confidence": 0.23415151238441467
+    }
+  },
+  {
+    "text": "Is PCOS hereditary?",
+    "intent": "ask_pcos_genetic",
+    "intent_prediction": {
+      "name": "ask_pcos_info",
+      "confidence": 0.3595588803291321
+    }
+  },
+  {
+    "text": "What hormonal changes occur with PCOS?",
+    "intent": "ask_pcos_hormones",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.11910063028335571
+    }
+  },
+  {
+    "text": "Is weight gain a symptom of PCOS?",
+    "intent": "ask_pcos_symptoms",
+    "intent_prediction": {
+      "name": "ask_pcos_weight",
+      "confidence": 0.9831347465515137
+    }
+  },
+  {
+    "text": "Can PCOS be managed without lifelong treatment?",
+    "intent": "ask_pcos_cure",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.9607019424438477
+    }
+  },
+  {
+    "text": "What medicines help with PCOS symptoms?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_exercise",
+      "confidence": 0.2979760766029358
+    }
+  },
+  {
+    "text": "How do hormones help in the treatment of PCOS?",
+    "intent": "ask_pcos_medications",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.7512686848640442
+    }
+  },
+  {
+    "text": "Can eating low glycemic foods help with PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_food",
+      "confidence": 0.9988729357719421
+    }
+  },
+  {
+    "text": "Can a balanced diet help regulate hormones in PCOS?",
+    "intent": "ask_pcos_diet",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.437438428401947
+    }
+  },
+  {
+    "text": "Is cardio helpful for PCOS?",
+    "intent": "ask_pcos_exercise",
+    "intent_prediction": {
+      "name": "ask_pcos_cure",
+      "confidence": 0.34569698572158813
+    }
+  },
+  {
+    "text": "Can women with PCOS undergo IVF?",
+    "intent": "ask_pcos_fertility",
+    "intent_prediction": {
+      "name": "ask_pcos_common",
+      "confidence": 0.4920903444290161
+    }
+  },
+  {
+    "text": "What foods should I eat if I have PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.9984965324401855
+    }
+  },
+  {
+    "text": "Does a particular diet help manage PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_diet",
+      "confidence": 0.3917351961135864
+    }
+  },
+  {
+    "text": "What are the best foods to balance hormones in PCOS?",
+    "intent": "ask_pcos_food",
+    "intent_prediction": {
+      "name": "ask_pcos_hormones",
+      "confidence": 0.7356725931167603
+    }
+  },
+  {
+    "text": "Are women with PCOS at a higher risk for other diseases?",
+    "intent": "ask_pcos_health_risks",
+    "intent_prediction": {
+      "name": "ask_pcos_heart",
+      "confidence": 0.34692302346229553
+    }
+  },
+  {
+    "text": "Is there a risk of stroke with PCOS?",
+    "intent": "ask_pcos_health_risks",
+    "intent_prediction": {
+      "name": "ask_pcos_heart",
+      "confidence": 0.8140786290168762
+    }
+  },
+  {
+    "text": "How does PCOS increase the risk of diabetes?",
+    "intent": "ask_pcos_health_risks",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.9825557470321655
+    }
+  },
+  {
+    "text": "Can weight management be part of PCOS treatment?",
+    "intent": "ask_pcos_weight",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.8764930963516235
+    }
+  },
+  {
+    "text": "How does stress management help with PCOS?",
+    "intent": "ask_pcos_stress",
+    "intent_prediction": {
+      "name": "ask_pcos_treatment",
+      "confidence": 0.6122140288352966
     }
   },
   {
@@ -692,15 +1396,39 @@
     "intent": "ask_pcos_heart",
     "intent_prediction": {
       "name": "ask_pcos_health_risks",
-      "confidence": 0.6679567098617554
+      "confidence": 0.9654138088226318
     }
   },
   {
-    "text": "How do I fix my car engine?",
+    "text": "Can PCOS cause high blood pressure?",
+    "intent": "ask_pcos_heart",
+    "intent_prediction": {
+      "name": "ask_pcos_diabetes",
+      "confidence": 0.1661810427904129
+    }
+  },
+  {
+    "text": "How old is the universe?",
     "intent": "out_of_scope",
     "intent_prediction": {
-      "name": "ask_pcos_genetic",
-      "confidence": 0.10912688076496124
+      "name": "ask_pcos_heart",
+      "confidence": 0.2052420675754547
+    }
+  },
+  {
+    "text": "What time does the sun set in New York?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.17099621891975403
+    }
+  },
+  {
+    "text": "What’s the weather like tomorrow?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "ask_pcos_symptoms",
+      "confidence": 0.2847464680671692
     }
   }
 ]
