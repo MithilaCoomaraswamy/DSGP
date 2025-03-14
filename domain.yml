@@ -29,8 +29,11 @@ intents:
   - ask_pcos_sleep
   - ask_pcos_diabetes
   - ask_pcos_heart
-  - ask_pcos_risks
   - ask_pcos_thyroid
+  - unknown_query
+  - out_of_scope
+
+
 
 entities:
   - Polycystic Ovary Syndrome
@@ -50,10 +53,7 @@ actions:
   - action_fallback_llm
 
 
-
 responses:
-
-
   utter_greet:
   - text: "Hey! How are you?"
 
@@ -70,13 +70,10 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
   utter_web_info:
-  - text: "Here is link to our[website] (https://rasa.com/docs/rasa/custom-actions/)"
+  - text: "Here is link to our [website] (https://rasa.com/docs/rasa/custom-actions/)"
 
   utter_ask_pcos_info:
   - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
-
-#  utter_pcos_info2:
-#  - text: Polycystic Ovary Syndrome (PCOS) is a complex hormonal disorder that affects women of reproductive age. It is characterized by an imbalance in reproductive hormones, particularly an excess production of androgens, which are male hormones present in women in small amounts. This imbalance disrupts the normal development and release of eggs during the menstrual cycle, leading to irregular periods, infertility, or anovulation (the absence of ovulation).
 
   utter_pcos_symptoms:
   - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
@@ -139,11 +136,11 @@ responses:
   utter_pcos_heart:
   - text: "PCOS is linked to an increased risk of heart disease due to factors such as insulin resistance, high cholesterol, and high blood pressure. It is important to manage these risk factors with lifestyle changes and medical treatment."
 
-  utter_pcos_risks:
-  - text: "Long-term risks of PCOS include Type 2 Diabetes, heart disease, high blood pressure, sleep apnea, depression, and even endometrial cancer due to prolonged irregular periods and hormonal imbalances."
-
   utter_pcos_thyroid:
   - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
+
+  utter_out_of_scope:
+  - text: "I'm sorry, but I can't help with that. Please ask something related to PCOS."
 
 
 

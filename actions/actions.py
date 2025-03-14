@@ -5,6 +5,7 @@ from rasa_sdk.events import UserUtteranceReverted
 from rasa_sdk.executor import CollectingDispatcher
 import os
 
+
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -42,7 +43,7 @@ class ActionFallbackLLM(Action):
                 model="gpt-3.5-turbo",
                 messages=conversation_history,
                 max_tokens=300,
-                stream=True  # Enables streaming
+
             )
 
             for chunk in response:

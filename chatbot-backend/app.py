@@ -5,9 +5,9 @@ import requests
 app = Flask(__name__)
 CORS(app)  # Allow requests from React frontend
 
-RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"  # Rasa REST API endpoint
+RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"
 
-
+# Chat route - Handles user messages
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json  # Get user message from frontend
@@ -26,6 +26,10 @@ def chat():
     else:
         return jsonify({"response": "Sorry, I couldn't connect to the chatbot."}), 500
 
+# Ping route - Check if the API is running
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "Server is running"})
 
 if __name__ == '__main__':
     app.run(debug=True)

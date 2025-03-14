@@ -12,10 +12,17 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
-
-- rule: Handle fallback
+- rule: Handle fallback with LLM
   steps:
   - intent: nlu_fallback
   - action: action_fallback_llm
 
+- rule: Handle out-of-scope queries
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
 
+- rule: Handle unknown queries
+  steps:
+  - intent: unknown_query
+  - action: utter_out_of_scope

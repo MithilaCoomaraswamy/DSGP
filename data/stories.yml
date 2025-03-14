@@ -13,7 +13,6 @@ stories:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
-
   - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
@@ -73,20 +72,10 @@ stories:
   - intent: ask_pcos_hormones
   - action: utter_pcos_hormones
 
-- story: PCOS symptoms
-  steps:
-  - intent: ask_pcos_symptoms
-  - action: utter_pcos_symptoms
-
 - story: PCOS and weight gain
   steps:
   - intent: ask_pcos_weight
   - action: utter_pcos_weight
-
-- story: PCOS diagnosis
-  steps:
-  - intent: ask_pcos_diagnosis
-  - action: utter_pcos_diagnosis
 
 - story: PCOS treatment options
   steps:
@@ -142,11 +131,6 @@ stories:
   steps:
   - intent: ask_pcos_heart
   - action: utter_pcos_heart
-
-- story: PCOS risks
-  steps:
-  - intent: ask_pcos_risks
-  - action: utter_pcos_risks
 
 - story: PCOS and thyroid
   steps:
