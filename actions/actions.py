@@ -50,8 +50,29 @@ class ActionFallbackLLM(Action):
                 if "content" in chunk["choices"][0]["delta"]:
                     dispatcher.utter_message(text=chunk["choices"][0]["delta"]["content"])
 
+
+        except openai.error.AuthenticationError as e:
+
+            print("Authentication failed. Please check your OpenAI API key.")
+
+            dispatcher.utter_message(text="There was an authentication issue with the API.")
+
+        except openai.error.RateLimitError as e:
+
+            print("Rate limit exceeded. Try again later.")
+
+            dispatcher.utter_message(text="The API rate limit was exceeded. Please try again later.")
+
+        except openai.error.OpenAIError as e:
+
+            print(f"General OpenAI error: {str(e)}")
+
+            dispatcher.utter_message(text="An error occurred with OpenAI. Please try again later.")
+
         except Exception as e:
-            dispatcher.utter_message(text="Sorry, I encountered an error.")
-            print(f"Error in API call: {str(e)}")  # Log the error for debugging
+
+            print(f"General error: {str(e)}")
+
+            dispatcher.utter_message(text="Sorry, I encountered an error. Please try again later.")
 
         return []

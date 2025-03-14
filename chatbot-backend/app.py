@@ -1,11 +1,18 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
+import openai
 
 app = Flask(__name__)
 CORS(app)  # Allow requests from React frontend
 
 RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"
+
+
+OPENAI_API_KEY = 'your-openai-api-key'  # Replace with your OpenAI API key
+
+# OpenAI ChatGPT API URL
+OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
 
 # Chat route - Handles user messages
 @app.route('/chat', methods=['POST'])
@@ -33,3 +40,20 @@ def ping():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
