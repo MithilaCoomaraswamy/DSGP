@@ -1,0 +1,125 @@
+[
+  {
+    "text": "How does nutrition affect PCOS?",
+    "entities": [
+      {
+        "start": 9,
+        "end": 18,
+        "value": "nutrition",
+        "entity": "nutrition_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Can a plant-based diet help with PCOS?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 18,
+        "end": 22,
+        "confidence_entity": 0.8747038841247559,
+        "value": "diet",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "What meal plan is best for PCOS?",
+    "entities": [
+      {
+        "start": 5,
+        "end": 14,
+        "value": "meal plan",
+        "entity": "nutrition_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "What role does fiber play in PCOS nutrition?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 34,
+        "end": 43,
+        "confidence_entity": 0.9598090052604675,
+        "value": "nutrition",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Are there any superfoods for PCOS?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 14,
+        "end": 24,
+        "confidence_entity": 0.9339165091514587,
+        "value": "superfoods",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "What are anti-inflammatory foods for PCOS?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 27,
+        "end": 32,
+        "confidence_entity": 0.9976060390472412,
+        "value": "foods",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Does diet affect the development of PCOS?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 5,
+        "end": 9,
+        "confidence_entity": 0.693981945514679,
+        "value": "diet",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Can PCOS be treated with diet or exercise?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "nutrition_type",
+        "start": 25,
+        "end": 29,
+        "confidence_entity": 0.7904090881347656,
+        "value": "diet",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  }
+]

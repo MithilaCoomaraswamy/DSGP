@@ -1,37 +1,28 @@
 version: "3.1"
 
 intents:
-  - greet
   - goodbye
   - affirm
   - deny
-  - mood_great
+  - greet
   - mood_unhappy
   - bot_challenge
   - web_info
-  - ask_pcos_info
-  - ask_pcos_common
+  - ask_pcos_general
   - ask_pcos_causes
+  - ask_affect_who
   - ask_pcos_health_risks
-  - ask_pcos_genetic
-  - ask_pcos_hormones
   - ask_pcos_symptoms
-  - ask_pcos_weight
   - ask_pcos_diagnosis
   - ask_pcos_treatment
-  - ask_pcos_cure
-  - ask_pcos_medications
-  - ask_pcos_diet
+  - ask_pcos_period_tracker
+  - ask_pcos_risk_prediction
+  - ask_pcos_nutrition
   - ask_pcos_exercise
+  - ask_pcos_lifestyle
   - ask_pcos_fertility
-  - ask_pcos_food
-  - ask_pcos_stress
-  - ask_pcos_sleep
-  - ask_pcos_diabetes
-  - ask_pcos_heart
   - ask_pcos_thyroid
   - out_of_scope
-
 
 
 entities:
@@ -44,104 +35,104 @@ entities:
   - fertility
   - weight
   - stress
-  - diet
+  - nutrition_type
   - exercise
 
 
 actions:
   - action_fallback_llm
+  - action_listen
+  - action_restart
+  - action_session_start
+  - action_default_fallback
+  - action_default_ask_affirmation
+  - action_default_ask_rephrase
+
+
 
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
   utter_did_that_help:
-  - text: "Did that help you?"
+     - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+    - text: "I'm glad you're feeling great!"
+    - text: Hey how can i help you?
 
   utter_goodbye:
-  - text: "Bye"
+    - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+    - text: "I am a bot, powered by Rasa."
 
   utter_web_info:
-  - text: "Here is link to our [website] (https://rasa.com/docs/rasa/custom-actions/)"
+    - text: "Here is link to our [website] (https://rasa.com/docs/rasa/custom-actions/)"
 
-  utter_ask_pcos_info:
-  - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
-
-  utter_pcos_symptoms:
-  - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
-
-  utter_pcos_health_risks:
-  - text: "PCOS can lead to several health risks, including Type 2 Diabetes, High Blood Pressure, Heart Disease, Sleep Apnea, Depression, Anxiety, and Endometrial Cancer."
-
-  utter_pcos_diagnosis:
-  - text: "PCOS is diagnosed based on a review of symptoms, medical history, physical examination, blood tests to check hormone levels, and ultrasound imaging of the ovaries."
-
-  utter_ask_pcos_common:
-  - text: "Yes, PCOS is a common condition, affecting about 1 in 10 women of reproductive age."
+  utter_ask_pcos_general:
+    - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
 
   utter_pcos_causes:
-  - text: "Insulin Resistance – Leads to higher insulin levels, which stimulate the ovaries to produce more androgens."
-  - text: "Hormonal Imbalance – Increased testosterone levels cause symptoms like acne and hair growth."
-  - text: "Genetics – PCOS often runs in families."
-  - text: "Inflammation – Chronic low-grade inflammation may contribute to PCOS."
+    - text: "Insulin Resistance – Leads to higher insulin levels, which stimulate the ovaries to produce more androgens."
+    - text: "Hormonal Imbalance – Increased testosterone levels cause symptoms like acne and hair growth."
+    - text: "Genetics – PCOS often runs in families."
+    - text: "Inflammation – Chronic low-grade inflammation may contribute to PCOS."
 
-  utter_pcos_genetic:
-  - text: "Yes, PCOS can run in families, suggesting a genetic component."
+  utter_ask_affect_who:
+    - text: "PCOS primarily affects women of reproductive age, typically between the ages of 15 and 44. It can affect women of all ethnicities, though it may be more common in certain populations."
 
-  utter_pcos_hormones:
-  - text: "PCOS affects hormone levels by increasing androgens, disrupting ovulation, and causing irregular menstrual cycles."
+  utter_pcos_symptoms:
+    - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
+
+  utter_pcos_tracker:
+    - text: "Our web application provides a separate period tracking feature to help users monitor their menstrual cycles effectively."
+
+  utter_pcos_risk_prediction:
+    - text: "You can predict your PCOS risk using our PCOS risk assessment quiz available on our platform. It evaluates factors like symptoms, medical history, and BMI to give you an estimate."
+
+  utter_pcos_diagnosis:
+    - text: "PCOS is diagnosed based on a review of symptoms, medical history, physical examination, blood tests to check hormone levels, and ultrasound imaging of the ovaries."
 
   utter_pcos_treatment:
-  - text: "PCOS treatment includes lifestyle changes, medications like Metformin, and hormonal therapy."
+    - text: "There are several treatment options for PCOS, which may vary depending on the symptoms and individual health conditions. Here are some common approaches:
+          - Medications such as birth control pills can help regulate periods and reduce symptoms like excess hair growth.
+          - Insulin-sensitizing drugs like metformin can help manage insulin resistance.
+          - Hormonal treatments like progesterone may be prescribed to regulate periods.
+          - Lifestyle changes such as maintaining a healthy diet and regular exercise can help manage weight and improve overall health.
+          - Stress management and a balanced lifestyle can also play a role in managing PCOS symptoms.
+          - In some cases, surgical options like ovarian drilling are considered for women who don’t respond to other treatments.
+          - Natural treatments, such as acupuncture or herbal remedies, are also used by some women but should be discussed with a doctor.
 
-  utter_pcos_weight:
-  - text: "Yes, PCOS can cause weight gain due to insulin resistance, which makes it harder for the body to use glucose efficiently. This can lead to weight gain or difficulty losing weight."
+          It's important to work with your healthcare provider to determine the best treatment plan tailored to your needs."
 
-  utter_pcos_cure:
-  - text: "There is currently no cure for PCOS, but symptoms can be managed with medications and lifestyle changes. It is important to work with a healthcare provider to find the best treatment for you."
-
-  utter_pcos_medications:
-  - text: "Medications for PCOS may include birth control pills to regulate periods, anti-androgens to reduce hair growth and acne, and metformin to help manage insulin resistance. Other medications may be prescribed based on individual needs."
-
-  utter_pcos_diet:
-  - text: "A healthy, balanced diet is important for managing PCOS. Focus on whole foods such as fruits, vegetables, lean proteins, and whole grains. A low-glycemic diet that controls blood sugar levels can be beneficial for those with insulin resistance."
+  utter_pcos_nutrition:
+    - text: "A balanced diet can help manage PCOS symptoms. A low-glycemic diet rich in whole foods, lean proteins, and healthy fats is often recommended."
+    - text: "Yes! Dietary changes can be beneficial for PCOS. Try incorporating more fiber, healthy fats, and lean proteins while reducing processed foods and sugars."
+    - text: "For PCOS, focus on whole grains, leafy greens, lean protein sources like fish and chicken, and healthy fats from nuts and seeds."
+    - text: "Yes, some foods can help manage PCOS symptoms. Anti-inflammatory foods like berries, spinach, and omega-3-rich foods such as salmon are beneficial."
+    - text: "An ideal meal plan for PCOS includes a mix of complex carbs, protein, and healthy fats. Meal prepping with whole foods can help maintain balanced blood sugar levels."
+    - text: "Dairy affects individuals differently. Some women with PCOS find that reducing dairy helps with inflammation and hormonal balance."
+    - text: "The best foods for PCOS include high-fiber vegetables, lean proteins, and healthy fats. Avoid refined carbs and excessive sugar."
+    - text: "Diet plays a crucial role in managing PCOS. Maintaining balanced blood sugar levels through proper nutrition can help improve symptoms."
 
   utter_pcos_exercise:
-  - text: "Exercise can help manage PCOS symptoms, particularly by improving insulin sensitivity, aiding in weight management, and reducing stress. Activities like cardio, strength training, and yoga are often recommended."
-#  - text: heres our website link to exercise recommendation
+    - text: "Exercise can help manage PCOS symptoms by improving insulin sensitivity, aiding in weight management, and reducing stress. Activities such as cardio, strength training, and yoga are often recommended. You can also check out our exercise recommendation site, which is available on our platform."
+
+  utter_pcos_lifestyle:
+    - text: "Managing stress and improving sleep are crucial for PCOS. Consider:
+      - Stress reduction techniques like yoga, meditation, and deep breathing.
+      - Maintaining a regular sleep schedule and avoiding blue light exposure before bed."
 
   utter_pcos_fertility:
-  - text: "PCOS can affect fertility by disrupting ovulation, making it more difficult to get pregnant. However, many people with PCOS can conceive with proper treatment and lifestyle adjustments."
+    - text: "PCOS can affect fertility by disrupting ovulation, making it more difficult to get pregnant. However, many people with PCOS can conceive with proper treatment and lifestyle adjustments."
 
-  utter_pcos_food:
-  - text: "Foods that can help with PCOS include high-fiber vegetables, whole grains, lean proteins, and healthy fats. It's also important to avoid processed foods and foods high in refined sugars."
-
-  utter_pcos_stress:
-  - text: "Stress can worsen PCOS symptoms by increasing hormone imbalances. Managing stress through relaxation techniques, mindfulness, exercise, and healthy lifestyle choices can help reduce the impact of stress on PCOS."
-
-  utter_pcos_sleep:
-  - text: "Yes, poor sleep can worsen PCOS symptoms. Sleep disorders are common in people with PCOS, and inadequate rest can affect hormone levels, insulin resistance, and stress levels."
-
-  utter_pcos_diabetes:
-  - text: "PCOS increases the risk of developing Type 2 Diabetes due to insulin resistance. Managing insulin levels and maintaining a healthy lifestyle can help reduce this risk."
-
-  utter_pcos_heart:
-  - text: "PCOS is linked to an increased risk of heart disease due to factors such as insulin resistance, high cholesterol, and high blood pressure. It is important to manage these risk factors with lifestyle changes and medical treatment."
+  utter_pcos_health_risks:
+    - text: "PCOS can lead to several health risks, including Type 2 Diabetes, High Blood Pressure, Heart Disease, Sleep Apnea, Depression, Anxiety, and Endometrial Cancer."
 
   utter_pcos_thyroid:
-  - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
+    - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
 
   utter_out_of_scope:
-  - text: "I'm sorry, but I can't help with that. Please ask something related to PCOS."
-
-
+    - text: "I'm sorry, but I can't help with that. Please ask something related to PCOS."
 
 session_config:
   session_expiration_time: 60

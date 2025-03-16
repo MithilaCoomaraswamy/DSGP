@@ -1,314 +1,236 @@
 {
-  "ask_pcos_heart": {
-    "precision": 0.5384615384615384,
-    "recall": 0.4666666666666667,
-    "f1-score": 0.5,
-    "support": 15,
+  "deny": {
+    "precision": 0.7272727272727273,
+    "recall": 0.8421052631578947,
+    "f1-score": 0.7804878048780488,
+    "support": 19,
     "confused_with": {
-      "ask_pcos_health_risks": 3,
-      "ask_pcos_info": 1
+      "affirm": 3
     }
   },
-  "ask_pcos_food": {
-    "precision": 0.14285714285714285,
-    "recall": 0.13333333333333333,
-    "f1-score": 0.1379310344827586,
-    "support": 15,
+  "ask_pcos_period_tracker": {
+    "precision": 0.9,
+    "recall": 0.9,
+    "f1-score": 0.9,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_diet": 11,
-      "ask_pcos_hormones": 1
-    }
-  },
-  "ask_pcos_genetic": {
-    "precision": 0.6875,
-    "recall": 0.7333333333333333,
-    "f1-score": 0.7096774193548386,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_causes": 2,
-      "ask_pcos_info": 1
-    }
-  },
-  "ask_pcos_hormones": {
-    "precision": 0.5333333333333333,
-    "recall": 0.5333333333333333,
-    "f1-score": 0.5333333333333333,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_causes": 3,
-      "ask_pcos_common": 1
-    }
-  },
-  "ask_pcos_common": {
-    "precision": 0.6666666666666666,
-    "recall": 0.6666666666666666,
-    "f1-score": 0.6666666666666666,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_hormones": 1,
-      "ask_pcos_diagnosis": 1
-    }
-  },
-  "web_info": {
-    "precision": 0.7692307692307693,
-    "recall": 0.6666666666666666,
-    "f1-score": 0.7142857142857142,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_causes": 1,
-      "ask_pcos_cure": 1
-    }
-  },
-  "mood_great": {
-    "precision": 0.35714285714285715,
-    "recall": 0.3333333333333333,
-    "f1-score": 0.3448275862068965,
-    "support": 15,
-    "confused_with": {
-      "greet": 9,
-      "bot_challenge": 1
-    }
-  },
-  "ask_pcos_health_risks": {
-    "precision": 0.5625,
-    "recall": 0.6,
-    "f1-score": 0.5806451612903225,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_heart": 3,
-      "ask_pcos_cure": 1
-    }
-  },
-  "ask_pcos_symptoms": {
-    "precision": 0.4,
-    "recall": 0.4,
-    "f1-score": 0.4000000000000001,
-    "support": 15,
-    "confused_with": {
-      "web_info": 1,
-      "ask_pcos_hormones": 1
-    }
-  },
-  "ask_pcos_diabetes": {
-    "precision": 0.625,
-    "recall": 0.6666666666666666,
-    "f1-score": 0.6451612903225806,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_causes": 2,
-      "ask_pcos_treatment": 2
-    }
-  },
-  "mood_unhappy": {
-    "precision": 0.8,
-    "recall": 0.5333333333333333,
-    "f1-score": 0.64,
-    "support": 15,
-    "confused_with": {
-      "goodbye": 2,
-      "ask_pcos_info": 1
-    }
-  },
-  "affirm": {
-    "precision": 0.9090909090909091,
-    "recall": 0.6666666666666666,
-    "f1-score": 0.7692307692307692,
-    "support": 15,
-    "confused_with": {
-      "deny": 2,
-      "greet": 1
-    }
-  },
-  "ask_pcos_medications": {
-    "precision": 0.5714285714285714,
-    "recall": 0.5333333333333333,
-    "f1-score": 0.5517241379310344,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_diabetes": 1,
-      "ask_pcos_weight": 1
-    }
-  },
-  "ask_pcos_treatment": {
-    "precision": 0.4444444444444444,
-    "recall": 0.5333333333333333,
-    "f1-score": 0.4848484848484848,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_medications": 2,
-      "ask_pcos_cure": 2
-    }
-  },
-  "ask_pcos_diet": {
-    "precision": 0.2857142857142857,
-    "recall": 0.4,
-    "f1-score": 0.3333333333333333,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_food": 8,
-      "ask_pcos_treatment": 1
-    }
-  },
-  "out_of_scope": {
-    "precision": 0.75,
-    "recall": 0.2,
-    "f1-score": 0.31578947368421056,
-    "support": 15,
-    "confused_with": {
-      "bot_challenge": 3,
       "ask_pcos_symptoms": 2
     }
   },
-  "ask_pcos_fertility": {
-    "precision": 0.8,
-    "recall": 0.8,
-    "f1-score": 0.8000000000000002,
-    "support": 15,
+  "ask_pcos_exercise": {
+    "precision": 0.8333333333333334,
+    "recall": 0.75,
+    "f1-score": 0.7894736842105262,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_info": 1,
-      "ask_pcos_common": 1
+      "ask_pcos_symptoms": 3,
+      "ask_pcos_nutrition": 1
     }
   },
-  "ask_pcos_cure": {
-    "precision": 0.6470588235294118,
-    "recall": 0.7333333333333333,
-    "f1-score": 0.6875,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_treatment": 2,
-      "ask_pcos_fertility": 1
-    }
-  },
-  "ask_pcos_diagnosis": {
-    "precision": 0.8235294117647058,
-    "recall": 0.9333333333333333,
-    "f1-score": 0.8749999999999999,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_food": 1
-    }
-  },
-  "ask_pcos_info": {
-    "precision": 0.4166666666666667,
+  "ask_pcos_general": {
+    "precision": 0.45454545454545453,
     "recall": 0.3333333333333333,
-    "f1-score": 0.3703703703703704,
+    "f1-score": 0.3846153846153846,
     "support": 15,
     "confused_with": {
-      "bot_challenge": 2,
-      "ask_pcos_health_risks": 2
+      "ask_pcos_symptoms": 3,
+      "ask_pcos_causes": 2
+    }
+  },
+  "affirm": {
+    "precision": 0.7058823529411765,
+    "recall": 0.6,
+    "f1-score": 0.6486486486486486,
+    "support": 20,
+    "confused_with": {
+      "deny": 4,
+      "greet": 2
+    }
+  },
+  "mood_unhappy": {
+    "precision": 0.875,
+    "recall": 0.7,
+    "f1-score": 0.7777777777777777,
+    "support": 20,
+    "confused_with": {
+      "deny": 2,
+      "ask_pcos_lifestyle": 1
+    }
+  },
+  "ask_pcos_nutrition": {
+    "precision": 0.6470588235294118,
+    "recall": 0.55,
+    "f1-score": 0.5945945945945946,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_causes": 2,
+      "ask_pcos_symptoms": 2
     }
   },
   "ask_pcos_thyroid": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 15,
+    "support": 20,
     "confused_with": {}
   },
-  "bot_challenge": {
-    "precision": 0.5714285714285714,
-    "recall": 0.8,
-    "f1-score": 0.6666666666666666,
-    "support": 15,
+  "ask_pcos_diagnosis": {
+    "precision": 0.8947368421052632,
+    "recall": 0.85,
+    "f1-score": 0.8717948717948718,
+    "support": 20,
     "confused_with": {
-      "web_info": 2,
-      "mood_unhappy": 1
+      "ask_pcos_risk_prediction": 2,
+      "ask_pcos_fertility": 1
     }
   },
-  "ask_pcos_sleep": {
-    "precision": 0.9333333333333333,
-    "recall": 0.9333333333333333,
-    "f1-score": 0.9333333333333333,
-    "support": 15,
+  "ask_affect_who": {
+    "precision": 0.6842105263157895,
+    "recall": 0.65,
+    "f1-score": 0.6666666666666667,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_stress": 1
-    }
-  },
-  "ask_pcos_weight": {
-    "precision": 0.6875,
-    "recall": 0.7333333333333333,
-    "f1-score": 0.7096774193548386,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_info": 1,
+      "ask_pcos_fertility": 2,
       "ask_pcos_causes": 1
     }
   },
-  "ask_pcos_exercise": {
-    "precision": 0.7692307692307693,
-    "recall": 0.6666666666666666,
-    "f1-score": 0.7142857142857142,
-    "support": 15,
+  "ask_pcos_treatment": {
+    "precision": 0.4642857142857143,
+    "recall": 0.65,
+    "f1-score": 0.5416666666666667,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_symptoms": 2,
-      "ask_pcos_cure": 1
+      "ask_pcos_lifestyle": 2,
+      "ask_affect_who": 1
     }
   },
-  "ask_pcos_stress": {
-    "precision": 0.6470588235294118,
-    "recall": 0.7333333333333333,
-    "f1-score": 0.6875,
-    "support": 15,
+  "bot_challenge": {
+    "precision": 0.7272727272727273,
+    "recall": 0.8,
+    "f1-score": 0.761904761904762,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_weight": 1,
-      "ask_pcos_treatment": 1
-    }
-  },
-  "deny": {
-    "precision": 0.8235294117647058,
-    "recall": 0.9333333333333333,
-    "f1-score": 0.8749999999999999,
-    "support": 15,
-    "confused_with": {
-      "goodbye": 1
-    }
-  },
-  "greet": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 8,
-    "confused_with": {
-      "mood_great": 8
-    }
-  },
-  "goodbye": {
-    "precision": 0.6875,
-    "recall": 0.7333333333333333,
-    "f1-score": 0.7096774193548386,
-    "support": 15,
-    "confused_with": {
-      "ask_pcos_info": 1,
-      "greet": 1
+      "web_info": 3,
+      "out_of_scope": 1
     }
   },
   "ask_pcos_causes": {
-    "precision": 0.21428571428571427,
-    "recall": 0.2,
-    "f1-score": 0.20689655172413796,
-    "support": 15,
+    "precision": 0.4090909090909091,
+    "recall": 0.45,
+    "f1-score": 0.4285714285714286,
+    "support": 20,
     "confused_with": {
-      "ask_pcos_hormones": 2,
-      "ask_pcos_genetic": 2
+      "ask_pcos_symptoms": 6,
+      "ask_pcos_lifestyle": 2
     }
   },
-  "accuracy": 0.5959367945823928,
+  "ask_pcos_lifestyle": {
+    "precision": 0.38095238095238093,
+    "recall": 0.4,
+    "f1-score": 0.3902439024390244,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_treatment": 5,
+      "ask_pcos_nutrition": 3
+    }
+  },
+  "out_of_scope": {
+    "precision": 0.8235294117647058,
+    "recall": 0.7,
+    "f1-score": 0.7567567567567567,
+    "support": 20,
+    "confused_with": {
+      "bot_challenge": 2,
+      "ask_pcos_period_tracker": 1
+    }
+  },
+  "ask_pcos_risk_prediction": {
+    "precision": 0.6521739130434783,
+    "recall": 0.75,
+    "f1-score": 0.6976744186046512,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_diagnosis": 2,
+      "web_info": 1
+    }
+  },
+  "goodbye": {
+    "precision": 0.7894736842105263,
+    "recall": 0.75,
+    "f1-score": 0.7692307692307692,
+    "support": 20,
+    "confused_with": {
+      "bot_challenge": 2,
+      "affirm": 1
+    }
+  },
+  "ask_pcos_health_risks": {
+    "precision": 0.6666666666666666,
+    "recall": 0.4,
+    "f1-score": 0.5,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_lifestyle": 4,
+      "ask_pcos_risk_prediction": 3
+    }
+  },
+  "ask_pcos_symptoms": {
+    "precision": 0.2647058823529412,
+    "recall": 0.45,
+    "f1-score": 0.33333333333333337,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_causes": 4,
+      "ask_pcos_treatment": 2
+    }
+  },
+  "web_info": {
+    "precision": 0.7,
+    "recall": 0.7,
+    "f1-score": 0.7,
+    "support": 20,
+    "confused_with": {
+      "ask_pcos_general": 2,
+      "ask_affect_who": 1
+    }
+  },
+  "ask_pcos_fertility": {
+    "precision": 0.7777777777777778,
+    "recall": 0.7,
+    "f1-score": 0.7368421052631577,
+    "support": 20,
+    "confused_with": {
+      "ask_affect_who": 3,
+      "ask_pcos_symptoms": 2
+    }
+  },
+  "greet": {
+    "precision": 0.7894736842105263,
+    "recall": 0.75,
+    "f1-score": 0.7692307692307692,
+    "support": 20,
+    "confused_with": {
+      "mood_unhappy": 2,
+      "affirm": 1
+    }
+  },
+  "accuracy": 0.6705069124423964,
   "macro avg": {
-    "precision": 0.6021497347967937,
-    "recall": 0.5866666666666666,
-    "f1-score": 0.585445396002028,
-    "support": 443
+    "precision": 0.6894292187123413,
+    "recall": 0.6670653907496013,
+    "f1-score": 0.6727051975085381,
+    "support": 434
   },
   "weighted avg": {
-    "precision": 0.6116645161592712,
-    "recall": 0.5959367945823928,
-    "f1-score": 0.5946962261871618,
-    "support": 443
+    "precision": 0.6920480558373967,
+    "recall": 0.6705069124423964,
+    "f1-score": 0.6757758575479305,
+    "support": 434
   },
   "micro avg": {
-    "precision": 0.5959367945823928,
-    "recall": 0.5959367945823928,
-    "f1-score": 0.5959367945823928,
-    "support": 443
+    "precision": 0.6705069124423964,
+    "recall": 0.6705069124423964,
+    "f1-score": 0.6705069124423964,
+    "support": 434
   }
 }
