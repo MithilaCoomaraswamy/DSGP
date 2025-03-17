@@ -11,17 +11,41 @@ intents:
   - ask_pcos_general
   - ask_pcos_causes
   - ask_affect_who
-  - ask_pcos_health_risks
   - ask_pcos_symptoms
+  - pcos_weight_gain
+  - pcos_acne
+  - pcos_irregular_periods
   - ask_pcos_diagnosis
   - ask_pcos_treatment
   - ask_pcos_period_tracker
   - ask_pcos_risk_prediction
   - ask_pcos_nutrition
+  - sugar_intake_and_pcos
+  - intermittent_fasting_and_pcos
+  - balancing_hormones_through_diet
+  - fiber_and_pcos_nutrition
+  - gluten_and_pcos_diet
+  - anti_inflammatory_foods_for_pcos
+  - general_exercise_and_pcos
+  - cardio_and_pcos
+  - strength_training_and_pcos
+  - yoga_and_pcos
+  - hiit_and_pcos
+  - exercise_for_pcos_and_fertility
+  - exercise_and_hormonal_balance
   - ask_pcos_exercise
-  - ask_pcos_lifestyle
-  - ask_pcos_fertility
-  - ask_pcos_thyroid
+  - lifestyle_and_pcos
+  - stress_management_and_pcos
+  - sleep_and_pcos
+  - pcos_natural_conception
+  - pcos_fertility_treatments
+  - pcos_pregnancy_health
+  - pcos_metabolic_health
+  - pcos_mental_health
+  - pcos_general_health
+  - Sleep Apnea and PCOS
+  - pcos_thyroid_connection
+  - thyroid_health_management_in_pcos
   - out_of_scope
 
 
@@ -41,12 +65,12 @@ entities:
 
 actions:
   - action_fallback_llm
-  - action_listen
-  - action_restart
-  - action_session_start
-  - action_default_fallback
-  - action_default_ask_affirmation
-  - action_default_ask_rephrase
+#  - action_listen
+#  - action_restart
+#  - action_session_start
+#  - action_default_fallback
+#  - action_default_ask_affirmation
+#  - action_default_ask_rephrase
 
 
 
@@ -57,7 +81,7 @@ responses:
 
   utter_happy:
     - text: "I'm glad you're feeling great!"
-    - text: Hey how can i help you?
+    - text: "Hey,how can i help you?"
 
   utter_goodbye:
     - text: "Bye"
@@ -82,6 +106,15 @@ responses:
 
   utter_pcos_symptoms:
     - text: "The symptoms of PCOS may include irregular periods, excessive hair growth, acne, weight gain, difficulty getting pregnant, and thinning scalp hair."
+
+  utter_pcos_irregular_periods:
+    - text: "Yes, PCOS can cause irregular periods due to hormonal imbalances that affect the menstrual cycle."
+
+  utter_pcos_weight_gain:
+    - text: "Yes, weight gain is a common symptom of PCOS, mainly due to insulin resistance and hormonal imbalances."
+
+  utter_pcos_acne:
+    - text: "Yes, acne can be a symptom of PCOS, particularly due to increased levels of androgens (male hormones)."
 
   utter_pcos_tracker:
     - text: "Our web application provides a separate period tracking feature to help users monitor their menstrual cycles effectively."
@@ -114,22 +147,83 @@ responses:
     - text: "The best foods for PCOS include high-fiber vegetables, lean proteins, and healthy fats. Avoid refined carbs and excessive sugar."
     - text: "Diet plays a crucial role in managing PCOS. Maintaining balanced blood sugar levels through proper nutrition can help improve symptoms."
 
+  utter_sugar_intake_response:
+    - text: "Excess sugar intake can lead to insulin resistance, which is a common issue in PCOS. Managing your sugar intake is important to help regulate insulin levels and improve PCOS symptoms."
+
+  utter_intermittent_fasting_response:
+    - text: "Intermittent fasting can help regulate insulin levels and improve hormonal balance in some people with PCOS. However, it is essential to consult with a healthcare provider before trying it, as results can vary."
+
+  utter_balancing_hormones_response:
+    - text: "A balanced diet rich in whole foods like vegetables, lean proteins, healthy fats, and complex carbs can help regulate hormones in PCOS. Focus on anti-inflammatory foods and reduce processed sugars for the best results."
+
+  utter_fiber_nutrition_response:
+    - text: "Fiber is essential in managing PCOS as it helps regulate blood sugar levels, supports weight management, and improves digestion. It also reduces inflammation, which is important for PCOS."
+
+  utter_gluten_diet_response:
+    - text: "Some women with PCOS find that cutting out gluten helps reduce inflammation and improve symptoms, but it’s not necessary for everyone. If you think gluten may be affecting your symptoms, consult a healthcare professional before making any changes."
+
+  utter_anti_inflammatory_foods_response:
+    - text: "Anti-inflammatory foods such as leafy greens, berries, fatty fish (like salmon), nuts, and olive oil can help reduce inflammation in PCOS. Including these in your diet may improve insulin sensitivity and hormone balance."
+
   utter_pcos_exercise:
-    - text: "Exercise can help manage PCOS symptoms by improving insulin sensitivity, aiding in weight management, and reducing stress. Activities such as cardio, strength training, and yoga are often recommended. You can also check out our exercise recommendation site, which is available on our platform."
+    - text: "Activities such as cardio, strength training, and yoga are often recommended. You can also check out our exercise recommendation site, which is available on our platform."
 
-  utter_pcos_lifestyle:
-    - text: "Managing stress and improving sleep are crucial for PCOS. Consider:
-      - Stress reduction techniques like yoga, meditation, and deep breathing.
-      - Maintaining a regular sleep schedule and avoiding blue light exposure before bed."
+  utter_general_exercise_and_pcos:
+    - text: "Exercise is beneficial for managing PCOS as it helps improve insulin sensitivity, balance hormones, and support weight management. A combination of cardio, strength training, and flexibility exercises is ideal."
 
-  utter_pcos_fertility:
-    - text: "PCOS can affect fertility by disrupting ovulation, making it more difficult to get pregnant. However, many people with PCOS can conceive with proper treatment and lifestyle adjustments."
+  utter_cardio_and_pcos:
+    - text: "Cardio exercises like walking, swimming, and cycling can help regulate insulin levels and improve heart health in women with PCOS."
 
-  utter_pcos_health_risks:
-    - text: "PCOS can lead to several health risks, including Type 2 Diabetes, High Blood Pressure, Heart Disease, Sleep Apnea, Depression, Anxiety, and Endometrial Cancer."
+  utter_strength_training_and_pcos:
+    - text: "Strength training can be very helpful for PCOS as it increases muscle mass, boosts metabolism, and improves insulin sensitivity. Including weight training in your workout routine is beneficial."
 
-  utter_pcos_thyroid:
-    - text: "PCOS and thyroid issues are often linked. Many people with PCOS also have thyroid disorders, such as hypothyroidism, which can exacerbate symptoms like weight gain, fatigue, and hair thinning."
+  utter_yoga_and_pcos:
+    - text: "Yoga and Pilates can help reduce stress, balance hormones, and improve flexibility. They are great options for women with PCOS, especially for managing cortisol levels."
+
+  utter_hiit_and_pcos:
+    - text: "HIIT (High-Intensity Interval Training) can help women with PCOS by improving insulin sensitivity, supporting weight loss, and boosting metabolism. However, it’s essential to balance it with low-intensity exercises."
+
+  utter_exercise_for_pcos_and_fertility:
+    - text: "Exercises that support fertility in PCOS include moderate-intensity cardio, strength training, yoga, and exercises that reduce stress, such as walking and Pilates."
+
+  utter_exercise_and_hormonal_balance:
+    - text: "Regular exercise helps balance hormones by reducing insulin resistance, lowering cortisol levels, and promoting the production of beneficial hormones like estrogen and progesterone."
+
+  utter_lifestyle_and_pcos:
+    - text: "A healthy lifestyle can significantly improve PCOS symptoms. Regular exercise, a balanced diet, proper sleep, and stress management all contribute to better hormonal balance."
+
+  utter_stress_management_and_pcos:
+    - text: "Managing stress is crucial for PCOS. Stress can lead to increased cortisol levels, which may worsen symptoms. Meditation, deep breathing, and structured routines can help."
+
+  utter_sleep_and_pcos:
+    - text: "Sleep plays a vital role in managing PCOS. Poor sleep can increase insulin resistance and worsen symptoms. Establishing a consistent sleep schedule and avoiding caffeine late in the day can help."
+
+  utter_pcos_natural_conception:
+    - text: "Women with PCOS can conceive naturally, but it may take longer due to irregular ovulation. Maintaining a healthy lifestyle and tracking ovulation can improve the chances."
+
+  utter_pcos_fertility_treatments:
+    - text: "Fertility treatments such as ovulation-inducing medications and assisted reproductive technologies like IVF can help women with PCOS conceive."
+
+  utter_pcos_pregnancy_health:
+    - text: "PCOS can affect pregnancy by increasing the risk of complications like gestational diabetes and miscarriage, but with proper medical care, many women with PCOS have healthy pregnancies."
+
+  utter_pcos_metabolic_health:
+    - text: "PCOS increases the risk of metabolic conditions like type 2 diabetes, heart disease, high cholesterol, and high blood pressure. Lifestyle modifications and medical management can help reduce these risks."
+
+  utter_pcos_mental_health:
+    - text: "PCOS can impact mental health, leading to anxiety, depression, and emotional distress. Managing stress, seeking professional support, and lifestyle changes can help improve mental well-being."
+
+  utter_pcos_general_health:
+    - text: "PCOS can lead to various health concerns, including hormonal imbalances, increased risk of chronic conditions, and reproductive health complications. Early management can help reduce long-term risks."
+
+  utter_sleep_apnea_response:
+    - text: "Yes, PCOS has been associated with an increased risk of sleep apnea, especially if there are other risk factors like obesity or insulin resistance. Women with PCOS may experience sleep disturbances, and sleep apnea can be more common in those with weight issues or hormonal imbalances."
+
+  utter_pcos_thyroid_connection:
+    - text: "PCOS and thyroid issues are closely related. Women with PCOS may experience thyroid imbalances, and thyroid problems can worsen PCOS symptoms. It's important to monitor thyroid health if you have PCOS."
+
+  utter_thyroid_health_management_in_pcos:
+    - text: "Women with PCOS may experience thyroid dysfunction, and thyroid problems can impact fertility. Thyroid tests and medication adjustments can help manage both conditions. Regular thyroid function monitoring is essential for managing PCOS symptoms effectively."
 
   utter_out_of_scope:
     - text: "I'm sorry, but I can't help with that. Please ask something related to PCOS."
