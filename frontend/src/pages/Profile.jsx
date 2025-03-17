@@ -105,14 +105,6 @@ const Profile = () => {
             <Link to="/profile" className="logo-link">
               <li className="header-btn">Home</li>
             </Link>
-            <Link to="/period-tracker" className="logo-link">
-              <li className="header-btn">Period Tracker</li>
-            </Link>
-            <Link to="/pcos-quiz" className="logo-link">
-              <li className="header-btn">PCOS Quiz</li>
-            </Link>            <Link to="/exercise-recommender" className="logo-link">
-              <li className="header-btn">Exercise Recommender</li>
-            </Link>
             <Link to="/account" className="logo-link">
               <li className="header-btn">Edit Profile</li>
             </Link>

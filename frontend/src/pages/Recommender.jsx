@@ -1,114 +1,139 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-export default function Recommender() {
-  const [weight, setWeight] = useState('');
-  const [height, setHeight] = useState('');
-  const [age, setAge] = useState('');
-  const [preference, setPreference] = useState('');
-  const [result, setResult] = useState(null);
+function Recommender() {
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [age, setAge] = useState(0);
+  const [exerciseType, setExerciseType] = useState("home");
+  const [recommendation, setRecommendation] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [step, setStep] = useState(1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!weight || !height || !age || !preference) {
-      alert('Please fill all fields correctly.');
+    if (!weight || !height || !age) {
+      setRecommendation("Please fill out all fields.");
       return;
     }
 
+    setProgress(100);
+
     try {
-      const response = await fetch('http://localhost:5000/recommend', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ weight, height, age, preference })
+      const response = await fetch("http://localhost:5000/recommend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          weight: Number(weight),
+          height: Number(height),
+          age: Number(age),
+          exerciseType,
+        }),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
-        setResult(data);
+      if (data.error) {
+        setRecommendation(data.error);
       } else {
-        alert(data.error || 'An error occurred.');
+        const exercise =
+          exerciseType === "home" ? data.home_exercise : data.gym_exercise;
+
+        // Check if recommended exercise is null or undefined, if so, recommend visiting a doctor
+        if (!exercise) {
+          setRecommendation("Recommended exercise not found. Please consult a doctor.");
+        } else {
+          setRecommendation(`Recommended Exercise: ${exercise}`);
+        }
       }
     } catch (error) {
-      alert('Server not responding. Please try again later.');
+      setRecommendation("An error occurred. Please try again.");
+      console.error(error);
     }
   };
 
-  return (
-    <div className='recommender-body'>
-      <div className='recommender-topic'>
-        <h1>Welcome to FemPredict Personalized Exercise Recommender!</h1>
-        <p>Your journey to a healthier and more vibrant life begins here. For women with PCOS, staying active through regular exercise isn't just about fitness—it's a powerful tool to manage symptoms and improve overall well-being.</p>
-        <p>Exercise helps regulate hormones, enhance insulin sensitivity, and reduce the risks associated with PCOS, including weight gain, mood swings, and fatigue.</p>
-        <p>At FemPredict, we believe that a tailored workout plan, designed specifically for your needs, can transform your daily routine, boost your energy, and guide you towards living your best life.</p>
-        <p>Start your journey today, because a healthy body leads to a happier you!</p>
-      </div>
+  const handleNext = () => {
+    setStep(step + 1);
+    setProgress((prevProgress) => Math.min(prevProgress + 25, 100));
+  };
 
-      <div className='input-container'>
-        <h2>Enter Your Details</h2>
-        <form onSubmit={handleSubmit}>
-          <div className='input-group'>
+  return (
+    <div className="container">
+      <h1>Personalized Exercise Recommender</h1>
+      <form onSubmit={handleSubmit}>
+        {step === 1 && (
+          <div>
             <label>Weight (kg):</label>
             <input
-              type='number'
+              type="number"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              required
-              min='1'
-              placeholder='Enter weight'
             />
-          </div>
-
-          <div className='input-group'>
-            <label>Height (m):</label>
-            <input
-              type='number'
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              required
-              min='0.1'
-              step='0.01'
-              placeholder='Enter height'
-            />
-          </div>
-
-          <div className='input-group'>
-            <label>Age (years):</label>
-            <input
-              type='number'
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-              min='1'
-              placeholder='Enter age'
-            />
-          </div>
-
-          <div className='input-group'>
-            <label>Workout Preference:</label>
-            <select
-              value={preference}
-              onChange={(e) => setPreference(e.target.value)}
-              required
-            >
-              <option value=''>Select preference</option>
-              <option value='gym'>Gym</option>
-              <option value='home'>Home</option>
-            </select>
-          </div>
-
-          <button type='submit' className='submit-button'>Get Exercise Plan</button>
-        </form>
-
-        {result && (
-          <div className='result-container'>
-            <h3>Results:</h3>
-            <p><strong>BMI:</strong> {result.bmi}</p>
-            <p><strong>BMI Category:</strong> {result.bmi_case}</p>
-            <p><strong>Recommended Exercise:</strong> {result.exercise}</p>
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
           </div>
         )}
-      </div>
+
+        {step === 2 && (
+          <div>
+            <label>Height (cm):</label>
+            <input
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+            />
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div>
+            <label>Age:</label>
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+            <button type="button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div>
+            <label>Exercise Type:</label>
+            <select
+              value={exerciseType}
+              onChange={(e) => setExerciseType(e.target.value)}
+            >
+              <option value="home">Home</option>
+              <option value="gym">Gym</option>
+            </select>
+            <button type="submit">Get Recommendations</button>
+          </div>
+        )}
+      </form>
+
+      {progress > 0 && (
+        <div className="progress-container">
+          <h3>Progress: {progress}%</h3>
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+      )}
+
+      {recommendation && (
+        <div className="recommendation">
+          <h2>{recommendation}</h2>
+        </div>
+      )}
     </div>
   );
 }
+
+export default Recommender;
