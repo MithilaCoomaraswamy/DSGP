@@ -1,0 +1,117 @@
+/* .Topic {
+    font-family: OCR A Std, monospace;
+    font-size: 8px;
+    color :white;
+    padding: 20px; 
+    margin-right: 600px;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+
+
+.body {
+    background-color:#B8ABE8 ;
+}
+
+ */
+ body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.recommender-topic {
+  font-family: 'OCR A Std', monospace;
+  font-size: 16px;
+  color: white;
+  padding: 20px;
+  margin: 100px 10% 0 20px; /* Top, Right, Bottom, Left */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.recommender-body {
+  background-color: #B8ABE8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.input-container {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+}
+
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Hides number input arrows */
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  background-color: #6a5acd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #483d8b;
+}
+
+.result-container {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.result-container h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+.result-container p {
+  font-size: 16px;
+  color: #555;
+}
