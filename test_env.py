@@ -42,34 +42,37 @@
 # except openai.error.OpenAIError as e:
 #     print(f"❌ OpenAI API Error: {e}")
 
-
 import os
-import openai
 from dotenv import load_dotenv
+import openai
 
-# Load .env file
+# Load environment variables from .env
 dotenv_path = os.path.join(os.path.dirname(__file__), "actions", ".env")
 load_dotenv(dotenv_path)
 
-# Check API Key
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    print("❌ OPENAI_API_KEY is NOT loaded. Check your .env file!")
-    exit()
+# Check if the OPENAI_API_KEY is loaded correctly
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
-openai.api_key = api_key
+if openai_api_key:
+    print("OpenAI API key loaded successfully!")
+else:
+    print("Error: OPENAI_API_KEY not found in .env file.")
 
-# Test OpenAI API call (Updated for OpenAI >=1.0.0)
-try:
-    client = openai.OpenAI(api_key=api_key)  # Correct way to initialize client
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Hello, how are you?"}],
-        max_tokens=50
-    )
+# Optional: Test OpenAI API connectivity by making a request
+if openai_api_key:
+    openai.api_key = openai_api_key
+    try:
+        # Make a simple API call to verify it's working
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # Use the correct model for chat completions
+            messages=[
+                {"role": "user", "content": "What is the capital of France?"}
+            ],
+            max_tokens=10
+        )
 
-    print("✅ OpenAI Response:", response.choices[0].message.content)
+        # Print the response to check if everything is working
+        print("OpenAI API response:", response.choices[0].message["content"].strip())
 
-except openai.OpenAIError as e:
-    print(f"❌ OpenAI API Error: {e}")
-
+    except openai.OpenAIError as e:
+        print("Error with OpenAI API:", e)
