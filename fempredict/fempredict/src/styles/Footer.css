@@ -1,0 +1,41 @@
+/* src/components/Footer.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.footer {
+  background-color: #00157c;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
+
+.footer p {
+  margin: 20px 0 0 0; /* Add top margin to create space between links and copyright */
+  font-size: 14px;
+}
+
+.footer ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.footer ul li {
+  display: inline-block; /* Make links appear horizontally */
+  margin-right: 20px; /* Space out the links */
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

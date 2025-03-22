@@ -1,0 +1,31 @@
+/* src/components/HeroSection.css */
+.hero-section {
+    background: url('/images/hero-bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .hero-content {
+    max-width: 600px;
+  }
+  
+  .hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content p {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .hero-content .primary-btn {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+  

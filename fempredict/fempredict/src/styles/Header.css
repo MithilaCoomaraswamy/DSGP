@@ -1,0 +1,43 @@
+/* src/components/Header.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.header {
+    padding: 20px;
+    background-color: #00157c;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .header nav ul li {
+    margin: 0 10px;
+  }
+  
+  .header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .header nav ul li a:hover {
+    color: #007bff;
+  }
+  
+  .header nav ul li img {
+    width: 30px; /* Set the width of the profile icon */
+    height: 30px; /* Set the height of the profile icon */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image fits well within the circle */
+    display: block; /* Remove extra space around the image */
+  }
