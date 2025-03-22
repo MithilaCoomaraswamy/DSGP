@@ -39,4 +39,7 @@ policies:
   nlu_threshold: 4
   core_fallback_threshold: 0.3
   deny_suggestion_intent_name: "out_of_scope"
+- name: RulePolicy
+  core_fallback_threshold: 0.3
+  core_fallback_action_name: "action_validate_user_input"
 assistant_id: 20250314-221415-primary-terry

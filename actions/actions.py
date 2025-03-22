@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from rasa_sdk import Action
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import UserUtteranceReverted
 from rapidfuzz import process  # Ensure rapidfuzz is installed
 
 # Load environment variables from .env
@@ -23,58 +22,45 @@ class ActionValidateUserInput(Action):
         return "action_validate_user_input"
 
     def load_terms(self):
-        """ Load terms and their responses from SQLite database """
+        """Load terms and responses from SQLite database."""
         conn = sqlite3.connect("terms.db")
         cursor = conn.cursor()
-        cursor.execute("SELECT word FROM terms")
-        terms = [row[0] for row in cursor.fetchall()]
+        cursor.execute("SELECT word, response FROM terms")
+        terms = {row[0].lower(): row[1] for row in cursor.fetchall()}
         conn.close()
         return terms
 
-    def get_response(self, term):
-        """ Fetch predefined response from the database if available """
-        conn = sqlite3.connect("terms.db")
-        cursor = conn.cursor()
-        cursor.execute("SELECT response FROM terms WHERE word=?", (term,))
-        response = cursor.fetchone()
-        conn.close()
-        return response[0] if response else None
-
     async def run(self, dispatcher: CollectingDispatcher, tracker, domain):
-        user_input = tracker.latest_message.get("text").lower()
+        user_input = tracker.latest_message.get("text").lower().strip()
 
-        # Load known terms from database
+        # Load known terms and responses
         known_terms = self.load_terms()
 
-        # If the input exactly matches a term, fetch its response
+        # 1️⃣ **Check if the exact query exists in the database**
         if user_input in known_terms:
-            response = self.get_response(user_input)
-            if response:
-                dispatcher.utter_message(text=response)
+            dispatcher.utter_message(known_terms[user_input])
+            return []
+
+        # 2️⃣ **Check for typos using fuzzy matching**
+        best_match, score, _ = process.extractOne(user_input, known_terms.keys(), score_cutoff=80)
+
+        if best_match:
+            # If a correction exists and has a valid response, suggest and respond
+            if best_match in known_terms:
+                dispatcher.utter_message(f"Did you mean '{best_match}'?\nHere’s some information:\n{known_terms[best_match]}")
+                return []
+            else:
+                # If no valid response exists for the corrected word, call OpenAI
+                dispatcher.utter_message(f"Did you mean '{best_match}'?")
+                await self.call_openai(dispatcher, best_match)
                 return []
 
-        # Find the closest match using fuzzy matching
-        match = None
-        if known_terms:
-            match, score, _ = process.extractOne(user_input, known_terms, score_cutoff=80)
-
-        if match:
-            response = self.get_response(match)
-            if response:
-                dispatcher.utter_message(f"Did you mean '{match}'?\n{response}")
-            else:
-                dispatcher.utter_message(f"Did you mean '{match}'?")
-
-        else:
-            # If no match is found, call OpenAI for assistance
-            await self.call_openai(dispatcher, user_input)
-
+        # 3️⃣ **If no match or typo correction, call OpenAI**
+        await self.call_openai(dispatcher, user_input)
         return []
 
     async def call_openai(self, dispatcher, user_message):
-        """
-        Calls OpenAI API when no matching term is found in the database.
-        """
+        """Calls OpenAI API when no matching term is found in the database."""
         try:
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
@@ -83,14 +69,11 @@ class ActionValidateUserInput(Action):
             )
 
             # Extract response message
-            if "choices" in response and len(response["choices"]) > 0:
+            if response.get("choices") and response["choices"][0]["message"]["content"].strip():
                 message_content = response["choices"][0]["message"]["content"].strip()
-                if message_content:
-                    dispatcher.utter_message(text=message_content)
-                else:
-                    dispatcher.utter_message(text="Sorry, I couldn't find an answer to that.")
+                dispatcher.utter_message(text=message_content)
             else:
-                dispatcher.utter_message(text="I didn't receive a valid response from OpenAI.")
+                dispatcher.utter_message(text="Sorry, I couldn't find an answer to that.")
 
         except openai.OpenAIError as e:
             print("OpenAI Error:", e)
