@@ -377,150 +377,150 @@ def get_cycle_number_from_db(email):
         print(f"Error fetching cycle number: {e}")
         return None
 
-ovulation_model = joblib.load('model/ovulation_model.pkl')
+# ovulation_model = joblib.load('model/ovulation_model.pkl')
 
-@app.route('/predict_ovulation', methods=['POST'])
-def predict_ovulation():
-    try:
-        # Get data from the request
-        data = request.get_json()
+# @app.route('/predict_ovulation', methods=['POST'])
+# def predict_ovulation():
+#     try:
+#         # Get data from the request
+#         data = request.get_json()
 
-        # Extract relevant information from the request
-        user = data['user']
-        email = user.get('email')  # Extract email from the user object
-        LengthofCycle = data['LengthofCycle']
-        LengthofMenses = data['LengthofMenses']
-        MeanMensesLength = data['MeanMensesLength']
-        MeanCycleLength = data['MeanCycleLength']
-        start_date_str = data['startDate']
+#         # Extract relevant information from the request
+#         user = data['user']
+#         email = user.get('email')  # Extract email from the user object
+#         LengthofCycle = data['LengthofCycle']
+#         LengthofMenses = data['LengthofMenses']
+#         MeanMensesLength = data['MeanMensesLength']
+#         MeanCycleLength = data['MeanCycleLength']
+#         start_date_str = data['startDate']
 
-        # Convert start date from string to datetime object
-        start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+#         # Convert start date from string to datetime object
+#         start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
-        # Fetch cycle number from the database based on email
-        cycle_number = get_cycle_number_from_db(email)
+#         # Fetch cycle number from the database based on email
+#         cycle_number = get_cycle_number_from_db(email)
 
-        # Prepare input data for prediction (in the format the model expects)
-        input_data = pd.DataFrame([{
-            'CycleNumber': cycle_number,  # Use the cycle number fetched from the database
-            'LengthofCycle': LengthofCycle,
-            'MeanCycleLength': MeanCycleLength,
-            'LengthofMenses': LengthofMenses,
-            'MeanMensesLength': MeanMensesLength
-        }])
+#         # Prepare input data for prediction (in the format the model expects)
+#         input_data = pd.DataFrame([{
+#             'CycleNumber': cycle_number,  # Use the cycle number fetched from the database
+#             'LengthofCycle': LengthofCycle,
+#             'MeanCycleLength': MeanCycleLength,
+#             'LengthofMenses': LengthofMenses,
+#             'MeanMensesLength': MeanMensesLength
+#         }])
 
-        # Make prediction using the loaded model
-        prediction = ovulation_model.predict(input_data)
+#         # Make prediction using the loaded model
+#         prediction = ovulation_model.predict(input_data)
 
-        # Calculate predicted ovulation date (based on the model's output)
-        ovulation_date = start_date + timedelta(days=prediction[0])
+#         # Calculate predicted ovulation date (based on the model's output)
+#         ovulation_date = start_date + timedelta(days=prediction[0])
 
-        # Calculate the day of the cycle for ovulation
-        day_of_cycle = (ovulation_date - start_date).days + 1  # +1 because the cycle starts on day 1
+#         # Calculate the day of the cycle for ovulation
+#         day_of_cycle = (ovulation_date - start_date).days + 1  # +1 because the cycle starts on day 1
 
-        # Prepare the response with both the predicted ovulation date and the cycle day
-        response = {
-            'predictedOvulationDate': ovulation_date.strftime('%Y-%m-%d'),
-            'dayOfCycle': day_of_cycle
-        }
+#         # Prepare the response with both the predicted ovulation date and the cycle day
+#         response = {
+#             'predictedOvulationDate': ovulation_date.strftime('%Y-%m-%d'),
+#             'dayOfCycle': day_of_cycle
+#         }
 
-        return jsonify(response)
+#         return jsonify(response)
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 400
     
-menses_model = joblib.load('model/ovulation_model.pkl')    
+# menses_model = joblib.load('model/ovulation_model.pkl')    
 
-@app.route('/predict_cycle_length', methods=['POST'])
-def predict_cycle_length():
-    try:
-        # Get data from the request
-        data = request.get_json()
+# @app.route('/predict_cycle_length', methods=['POST'])
+# def predict_cycle_length():
+#     try:
+#         # Get data from the request
+#         data = request.get_json()
 
-        user = data['user']
-        email = user.get('email')  # Extract email from the user object
-        LengthofMenses = data['LengthofMenses']
-        MeanMensesLength = data['MeanMensesLength']
-        MeanCycleLength = data['MeanCycleLength']
-        start_date_str = data['startDate']
+#         user = data['user']
+#         email = user.get('email')  # Extract email from the user object
+#         LengthofMenses = data['LengthofMenses']
+#         MeanMensesLength = data['MeanMensesLength']
+#         MeanCycleLength = data['MeanCycleLength']
+#         start_date_str = data['startDate']
 
-        # Convert start date from string to datetime object
-        try:
-            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
-        except ValueError:
-            return jsonify({'error': 'Invalid start date format. Please use YYYY-MM-DD.'}), 400
+#         # Convert start date from string to datetime object
+#         try:
+#             start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+#         except ValueError:
+#             return jsonify({'error': 'Invalid start date format. Please use YYYY-MM-DD.'}), 400
 
-        # Fetch cycle number from the database based on email
-        cycle_number = get_cycle_number_from_db(email)
+#         # Fetch cycle number from the database based on email
+#         cycle_number = get_cycle_number_from_db(email)
 
-        # Prepare input data for prediction (in the format the model expects)
-        input_data = pd.DataFrame([{
-            'CycleNumber': cycle_number,
-            'MeanCycleLength': MeanCycleLength,
-            'LengthofMenses': LengthofMenses,
-            'MeanMensesLength': MeanMensesLength
-        }])
+#         # Prepare input data for prediction (in the format the model expects)
+#         input_data = pd.DataFrame([{
+#             'CycleNumber': cycle_number,
+#             'MeanCycleLength': MeanCycleLength,
+#             'LengthofMenses': LengthofMenses,
+#             'MeanMensesLength': MeanMensesLength
+#         }])
 
-        # Make prediction using the loaded model (assuming the model is loaded elsewhere)
-        prediction = menses_model.predict(input_data)  # Ensure the model is properly loaded and accessible
+#         # Make prediction using the loaded model (assuming the model is loaded elsewhere)
+#         prediction = menses_model.predict(input_data)  # Ensure the model is properly loaded and accessible
 
-        # Calculate predicted cycle length
-        predicted_cycle_length = prediction[0]
+#         # Calculate predicted cycle length
+#         predicted_cycle_length = prediction[0]
 
-        next_period_date = start_date + timedelta(days=prediction[0])
+#         next_period_date = start_date + timedelta(days=prediction[0])
 
-        # Prepare the response with the predicted cycle length
-        response = {
-            'next_period_date': next_period_date.strftime('%Y-%m-%d')
-        }
+#         # Prepare the response with the predicted cycle length
+#         response = {
+#             'next_period_date': next_period_date.strftime('%Y-%m-%d')
+#         }
 
-        return jsonify(response)
+#         return jsonify(response)
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
-@app.route('/save_period_data', methods=['POST'])
-def save_period_data():
-    data = request.json
-    print("Received data:", data)  # Log the incoming data for debugging
+# @app.route('/save_period_data', methods=['POST'])
+# def save_period_data():
+#     data = request.json
+#     print("Received data:", data)  # Log the incoming data for debugging
 
-    email = data.get('email')
-    if not email:
-            return jsonify({'error': 'Email is required'}), 400
+#     email = data.get('email')
+#     if not email:
+#             return jsonify({'error': 'Email is required'}), 400
 
-    LengthofMenses = data['LengthofMenses']
-    MeanMensesLength = data['MeanMensesLength']
-    LengthofCycle = data['LengthofCycle']
-    MeanCycleLength = data['MeanCycleLength']
-    start_date_str = data['startDate']
+#     LengthofMenses = data['LengthofMenses']
+#     MeanMensesLength = data['MeanMensesLength']
+#     LengthofCycle = data['LengthofCycle']
+#     MeanCycleLength = data['MeanCycleLength']
+#     start_date_str = data['startDate']
 
-    start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+#     start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
 
-    # Fetch cycle number from the database based on email
-    cycle_number = get_cycle_number_from_db(email)
+#     # Fetch cycle number from the database based on email
+#     cycle_number = get_cycle_number_from_db(email)
 
 
-    # Validate input data
-    if not email or not start_date or not LengthofCycle or not MeanCycleLength or not LengthofMenses or not MeanMensesLength:
-        print("Missing data!")
-        return jsonify({"error": "Missing data"}), 400
+#     # Validate input data
+#     if not email or not start_date or not LengthofCycle or not MeanCycleLength or not LengthofMenses or not MeanMensesLength:
+#         print("Missing data!")
+#         return jsonify({"error": "Missing data"}), 400
 
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO periods (email, cycle, period_start, period_length, mean_menses_length, cycle_length, mean_cycle_length)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (email, cycle_number, start_date, LengthofMenses, MeanMensesLength, LengthofCycle, MeanCycleLength))
+#     try:
+#         conn = get_db_connection()
+#         cursor = conn.cursor()
+#         cursor.execute('''
+#             INSERT INTO periods (email, cycle, period_start, period_length, mean_menses_length, cycle_length, mean_cycle_length)
+#             VALUES (?, ?, ?, ?, ?, ?, ?)
+#         ''', (email, cycle_number, start_date, LengthofMenses, MeanMensesLength, LengthofCycle, MeanCycleLength))
 
-        conn.commit()
-        conn.close()
+#         conn.commit()
+#         conn.close()
 
-        return jsonify({"message": "Data added successfully"}), 201
+#         return jsonify({"message": "Data added successfully"}), 201
 
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+#     except Exception as e:
+#         print(f"Error: {str(e)}")
+#         return jsonify({"error": str(e)}), 500
 
 # Load trained model and dataset
 
