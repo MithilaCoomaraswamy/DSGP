@@ -1,0 +1,42 @@
+version: "3.1"
+
+language: en
+
+pipeline:
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 2
+  max_ngram: 3
+  use_stop_words: true
+- name: DIETClassifier
+  epochs: 100
+  embedding_dimension: 100
+  learning_rate: 0.001  # Increased for better generalization
+  constrain_similarities: true
+  dropout: 0.2
+- name: EntitySynonymMapper
+- name: ResponseSelector
+  epochs: 50   # Reduced for more generalization
+  retrieval_intent: "faq"
+- name: FallbackClassifier
+  threshold: 0.4
+  ambiguity_threshold: 0.2
+
+policies:
+- name: RulePolicy
+- name: TEDPolicy
+  max_history: 5
+  epochs: 100
+  early_stopping: true
+  patience: 5
+- name: AugmentedMemoizationPolicy
+  core_fallback_action_name: "action_fallback_llm"
+  max_history: 3
+  nlu_threshold: 4
+  core_fallback_threshold: 0.3
+  deny_suggestion_intent_name: "out_of_scope"
+assistant_id: 20250314-221415-primary-terry
