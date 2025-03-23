@@ -1,53 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>PCOS Risk Predictor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>PCOS Risk Predictor</h1>
+        <form id="pcosForm">
+            <!-- Section: Personal Info -->
+            <div class="form-row">
+                <label for="age">Age (in years):</label>
+                <input type="number" name="Age" id="age" placeholder="e.g. 25" required>
+            </div>
 
-<div class="container">
-    <h2>PCOS Risk Predictor</h2>
+            <div class="form-row">
+                <label for="height">Height (cm):</label>
+                <input type="number" name="Height_cm" id="height" step="0.1" placeholder="e.g. 165" required>
+            </div>
 
-    <form method="post">
-        <label>Age:</label>
-        <input type="number" name="age" step="0.1" value="{{ values.get('age', '') }}" required>
+            <div class="form-row">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" name="Weight_kg" id="weight" step="0.1" placeholder="e.g. 60" required>
+            </div>
 
-        <label>Weight (kg):</label>
-        <input type="number" name="weight" step="0.1" value="{{ values.get('weight', '') }}" required>
+            <div class="form-row">
+                <label for="bmi">Body Mass Index (BMI):</label>
+                <input type="number" name="BMI" id="bmi" step="0.1" placeholder="e.g. 22.5" required>
+            </div>
 
-        <label>Height (cm):</label>
-        <input type="number" name="height" step="0.1" value="{{ values.get('height', '') }}" required>
+            <!-- Section: Lifestyle -->
+            <div class="form-row">
+                <label for="sleep">Average Sleep Hours:</label>
+                <input type="number" name="Sleep_Hours" id="sleep" min="0" max="24" step="0.1" placeholder="e.g. 7.5" required>
+            </div>
 
-        <label>Insulin Level:</label>
-        <input type="number" name="insulin" step="0.1" value="{{ values.get('insulin', '') }}" required>
+            <div class="form-row">
+                <label for="stress">Stress Level (1 = Low, 10 = High):</label>
+                <div class="slider-wrapper">
+                    <input type="range" name="Stress_Level" id="stress" min="1" max="10" value="5" oninput="stressValue.value = this.value">
+                    <output id="stressValue">5</output>
+                </div>
+            </div>
 
-        <label>Cycle Length (days):</label>
-        <input type="number" name="cycle" value="{{ values.get('cycle', '') }}" required>
+            <div class="form-row">
+                <label for="smoking">Do you smoke?</label>
+                <select name="Smoking" id="smoking" required>
+                    <option value="" selected disabled hidden>Choose an option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
 
-        <label>Excess Hair Growth:</label>
-        <select name="hair_growth">
-            <option value="1" {% if values.get('hair_growth') == 1 %}selected{% endif %}>Yes</option>
-            <option value="0" {% if values.get('hair_growth') == 0 %}selected{% endif %}>No</option>
-        </select>
+            <div class="form-row">
+                <label for="alcohol">Alcohol/Caffeine Consumption:</label>
+                <select name="Alcohol_Caffeine_Consumption" id="alcohol" required>
+                    <option value="" selected disabled hidden>Choose frequency</option>
+                    <option value="0">None</option>
+                    <option value="1">Sometimes</option>
+                    <option value="2">Frequently</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="sexual_activity">Are you sexually active?</label>
+                <select name="Sexual_Activity" id="sexual_activity" required>
+                    <option value="" selected disabled hidden>Select one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            
 
-        <label>Skin Darkening:</label>
-        <select name="skin_darkening">
-            <option value="1" {% if values.get('skin_darkening') == 1 %}selected{% endif %}>Yes</option>
-            <option value="0" {% if values.get('skin_darkening') == 0 %}selected{% endif %}>No</option>
-        </select>
+            <!-- Section: Menstrual Health -->
+            <div class="form-row">
+                <label for="menarche">Age at First Period (Menarche):</label>
+                <input type="number" name="Age_Menarche" id="menarche" placeholder="e.g. 13" required>
+            </div>
 
-        <button type="submit">Predict Risk</button>
-    </form>
+            <div class="form-row">
+                <label for="cycle">Menstrual Cycle Regularity:</label>
+                <select name="Menstrual_Cycle_Regularity" id="cycle" required>
+                    <option value="" selected disabled hidden>Select one</option>
+                    <option value="2">Regular</option>
+                    <option value="1">Irregular</option>
+                    <option value="0">Absent</option>
+                </select>
+            </div>
 
-    {% if prediction %}
-        <div class="result">Prediction: <strong>{{ prediction }}</strong></div>
-    {% endif %}
+            <div class="form-row">
+                <label for="duration">Average Period Duration (days):</label>
+                <input type="number" name="Period_Duration" id="duration" min="1" max="10" placeholder="e.g. 5" required>
+            </div>
 
-    {% if error %}
-        <div class="error">Error: {{ error }}</div>
-    {% endif %}
-</div>
+            <!-- Section: Symptoms -->
+            <div class="form-row">
+                <label for="acne">Do you experience acne?</label>
+                <select name="Acne" id="acne" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
 
+            <div class="form-row">
+                <label for="hair_loss">Hair thinning or loss?</label>
+                <select name="Hair_Thinning" id="hair_loss" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="weight_gain">Unexplained weight gain?</label>
+                <select name="Weight_Gain" id="weight_gain" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="hair_growth">Excess facial/body hair (Hirsutism)?</label>
+                <select name="Excess_Hair_Growth" id="hair_growth" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <!-- Section: Family & Diet -->
+            <div class="form-row">
+                <label for="family_history">Family History of PCOS:</label>
+                <select name="Family_History_PCOS" id="family_history" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="location">Where do you live?</label>
+                <select name="Geography_Urban" id="location" required>
+                    <option value="" selected disabled hidden>Select area</option>
+                    <option value="1">Urban</option>
+                    <option value="0">Rural</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="diet_type">How would you describe your diet?</label>
+                <select name="Diet_Moderate" id="diet_type" required>
+                    <option value="" selected disabled hidden>Select one</option>
+                    <option value="1">Balanced/Moderate</option>
+                    <option value="0">Unbalanced</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="unhealthy_diet">Do you frequently eat junk food?</label>
+                <select name="Diet_Unhealthy" id="unhealthy_diet" required>
+                    <option value="" selected disabled hidden>Choose one</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <!-- Section: Ethnicity -->
+            <div class="form-row">
+                <label for="ethnicity">Ethnicity:</label>
+                <select name="Ethnicity_Asian" id="ethnicity" required>
+                    <option value="" selected disabled hidden>Select one</option>
+                    <option value="1">Asian</option>
+                    <option value="0">Other</option>
+                </select>
+            </div>
+
+            <!-- Hidden one-hot fields -->
+            <input type="hidden" name="Ethnicity_Caucasian" value="0">
+            <input type="hidden" name="Ethnicity_Hispanic" value="0">
+            <input type="hidden" name="Ethnicity_Other" value="0">
+
+            <button type="button" onclick="submitForm()">Predict Risk</button>
+        </form>
+
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
