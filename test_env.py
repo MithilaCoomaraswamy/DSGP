@@ -66,7 +66,7 @@ if openai_api_key:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # Use the correct model for chat completions
             messages=[
-                {"role": "user", "content": "What is the capital of France?"}
+                {"role": "user", "content": "is pcos life threatening"}
             ],
             max_tokens=10
         )
