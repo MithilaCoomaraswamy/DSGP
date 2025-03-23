@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+import os
+from flask import Flask, request, jsonify, session, redirect, url_for
 from flask_cors import CORS
 import joblib
 import pandas as pd
@@ -7,16 +8,15 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import openai
-import jwt
 from functools import wraps
-import os
-
-
-SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"
 
-OPENAI_API_KEY = 'your-openai-api-key'  # Replace with your OpenAI API key
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  # Use environment variable for OpenAI API Key
 
 # OpenAI ChatGPT API URL
 OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
@@ -27,207 +27,324 @@ period_model = joblib.load("model/menses_predictor.pkl")
 ovulation_model = joblib.load("model/ovulation_predictor.pkl")
 
 app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your-secret-key')  # Secure Flask secret key
+app.config['SESSION_COOKIE_NAME'] = 'session'  # Cookie name
+app.config['SESSION_PERMANENT'] = True  # Ensure session is permanent
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
+serializer = URLSafeTimedSerializer(app.secret_key)
 CORS(app)
 
-# SQLite database path
-DB_PATH = 'database/db.sqlite'
+# SQLite database file
+DATABASE = os.getenv('DATABASE', 'database/fempredict.db')  # Use environment variable for the database path
 
-
-# Utility function to get the database connection
 def get_db_connection():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     return conn
 
-def token_required(f):
-    @wraps(f)
-    def decorator(*args, **kwargs):
-        token = request.headers.get('Authorization')
-        if not token:
-            return jsonify({"message": "Token is missing!"}), 403
-        
-        try:
-            data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            current_user = data['email']
-        except jwt.ExpiredSignatureError:
-            return jsonify({"message": "Token has expired!"}), 403
-        except jwt.InvalidTokenError:
-            return jsonify({"message": "Invalid token!"}), 403
-
-        return f(current_user, *args, **kwargs)
-    return decorator
-
-# Create user table if it doesn't exist
-def create_user_table():
+# Create tables if they don't exist
+def create_tables():
     conn = get_db_connection()
-    conn.execute('''CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    email TEXT UNIQUE,
-                    password TEXT NOT NULL
-                )''')
-    conn.execute('''CREATE TABLE IF NOT EXISTS cycles (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    user_id INTEGER,
-                    start_date TEXT NOT NULL,
-                    cycle_length INTEGER NOT NULL,
-                    menses_length INTEGER NOT NULL,
-                    cycle_number INTEGER NOT NULL,
-                    FOREIGN KEY (user_id) REFERENCES users (id))''')
+    cursor = conn.cursor()
+
+    cursor.execute(''' 
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    ''')
+
+    cursor.execute(''' 
+    CREATE TABLE IF NOT EXISTS password_resets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        verification_code TEXT NOT NULL,
+        verification_code_expiry TEXT NOT NULL
+    )
+    ''')
+
+    cursor.execute(''' 
+    CREATE TABLE IF NOT EXISTS cycles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        cycle INTEGER NOT NULL,
+        period_start TEXT NOT NULL,
+        period_length INTEGER NOT NULL,
+        cycle_length INTEGER NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+
     conn.commit()
     conn.close()
 
+# Call the function to create tables when the app starts
+create_tables()
 
-# API to handle user signup
-@app.route('/api/signup', methods=['POST'])
-def signup():
-    data = request.get_json()
+# User authentication
+def check_credentials(email, password):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    conn.close()
+    if user and check_password_hash(user['password'], password):
+        return user
+    return None
 
-    email = data.get('email')
-    password = data.get('password')
-    confirm_password = data.get('confirmPassword')
+def check_user_exists(email):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    conn.close()
+    return user
 
-    if not email or not password or not confirm_password:
-        return jsonify({"message": "Missing required fields."}), 400
+def send_verification_email(email, token):
+    sender_email = os.getenv("SENDER_EMAIL", "fempredict@gmail.com")  # Use environment variable for the email
+    sender_password = os.getenv("SENDER_PASSWORD", "jptm vipw jimb vhkv")  # Use environment variable for password
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
 
-    if password != confirm_password:
-        return jsonify({"message": "Passwords do not match."}), 400
+    # Create the email message
+    verification_link = url_for('verify_email', token=token, _external=True)
+    body = f'Click the following link to verify your email and log in: {verification_link}'
 
-    # Hash the password before saving to the database
-    hashed_password = generate_password_hash(password)
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = email
+    message["Subject"] = "Email Verification"
+
+    message.attach(MIMEText(body, "plain"))
 
     try:
-        conn = get_db_connection()
-        conn.execute('INSERT INTO users (email, password) VALUES (?, ?)', (email, hashed_password))
-        conn.commit()
-        conn.close()
-        return jsonify({"message": "User created successfully."}), 201
-    except sqlite3.IntegrityError:
-        return jsonify({"message": "User already exists."}), 400
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, email, message.as_string())
+        return True
+    except Exception as e:
+        print(f"Error sending email: {e}")
+        return False
 
+@app.route('/send-verification', methods=['POST'])
+def send_verification():
+    data = request.get_json()
+    email = data.get('email')
 
-# API to handle user login
-@app.route('/api/login', methods=['POST'])
+    if not email:
+        return jsonify({"message": "Email is required"}), 400
+
+    user = check_user_exists(email)
+    if not user:
+        return jsonify({"message": "Email not found in database"}), 404
+
+    # Generate a unique token
+    token = serializer.dumps(email, salt='email-confirm')
+
+    # Send email with verification link
+    if send_verification_email(email, token):
+        return jsonify({"message": "Verification email sent"}), 200
+    else:
+        return jsonify({"message": "Error sending verification email"}), 500
+
+@app.route('/verify-email/<token>', methods=['GET'])
+def verify_email(token):
+    try:
+        # Confirm the token and extract the email
+        email = serializer.loads(token, salt='email-confirm', max_age=3600)  # Token expires in 1 hour
+    except SignatureExpired:
+        return jsonify({'message': 'The verification link has expired.'}), 400
+    except Exception:
+        return jsonify({'message': 'Invalid or malformed token.'}), 400
+
+    # Check if the user exists in the database
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    conn.close()
+
+    if not user:
+        return jsonify({'message': 'User not found.'}), 404
+
+    # Log the user in by setting session data
+    session['user'] = email  # Store the user email in the session
+    print(f"User {email} logged in successfully.")  # Add logging here
+    return jsonify({'message': 'Email verified successfully! You are now logged in.'}), 200
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('user', None)  # Remove the user from the session
+    return jsonify({'message': 'Logged out successfully'}), 200
+
+# User login
+@app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-
     email = data.get('email')
     password = data.get('password')
 
-    if not email or not password:
-        return jsonify({"message": "Missing required fields."}), 400
-
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
-    conn.close()
-
-    if user is None:
-        return jsonify({"message": "User not found."}), 404
-
-    # Check if password is correct
-    if not check_password_hash(user['password'], password):
-        return jsonify({"message": "Incorrect password."}), 400
-
-    # Create a JWT token and return it
-    token = jwt.encode({
-        'email': email,
-        'exp': datetime.utcnow() + timedelta(days=1)  # Token expires in 1 day
-        }, SECRET_KEY, algorithm='HS256')
-
-    return jsonify({"message": "Login successful.", "token": token}), 200
-
-
-# API to get user profile including cycle details (GET)
-@app.route('/api/profile', methods=['GET'])
-@token_required
-def get_profile(current_user):
-    conn = get_db_connection()
-    
-    # Retrieve user info
-    user = conn.execute('SELECT * FROM users WHERE email = ?', (current_user,)).fetchone()
-    
+    user = check_credentials(email, password)
     if user:
-        # Retrieve the cycle information for the user
-        cycles = conn.execute('SELECT * FROM cycles WHERE user_id = ?', (user['id'],)).fetchall()
-        
-        # Format cycle data
-        cycle_data = []
-        for cycle in cycles:
-            cycle_data.append({
-                "start_date": cycle['start_date'],
-                "cycle_length": cycle['cycle_length'],
-                "menses_length": cycle['menses_length'],
-                "cycle_number": cycle['cycle_number']
-            })
-
-        conn.close()
+        session['user'] = email  # Set the session if user is valid
         return jsonify({
-            "email": user['email'],
-            "cycles": cycle_data
+            "message": "Login successful",
+            "user": {
+                "email": user['email'],
+                "created_at": user['created_at']
+            }
         }), 200
-    return jsonify({"message": "User not found."}), 404
+    else:
+        return jsonify({"message": "Invalid credentials"}), 401
 
 
-# API to update user profile (PUT)
-@app.route('/api/profile', methods=['PUT'])
-@token_required
-def update_profile(current_user):
+# User registration
+@app.route('/register', methods=['POST'])
+def register():
     data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
 
-    new_email = data.get('email')
-    new_password = data.get('password')
+    if not password:
+        return jsonify({"message": "Password is required"}), 400
 
-    if not new_email or not new_password:
-        return jsonify({"message": "Email and password are required."}), 400
-
-    hashed_password = generate_password_hash(new_password)
+    hashed_password = generate_password_hash(password, method='scrypt')
+    created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    existing_user = cursor.fetchone()
+    if existing_user:
+        conn.close()
+        return jsonify({"message": "User with this email already exists."}), 400
+
+    cursor.execute("INSERT INTO users (email, password, created_at) VALUES (?, ?, ?)",
+                   (email, hashed_password, created_at))
+    conn.commit()
+
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    new_user = cursor.fetchone()
+    conn.close()
+
+    return jsonify({
+        "message": "User registered successfully.",
+        "user": {
+            "email": new_user['email'],
+            "created_at": new_user['created_at']
+        }
+    }), 201
+
+
+@app.route('/change-password', methods=['POST'])
+def change_password():
+    data = request.get_json()
+    email = session.get('user')
     
-    # Update user information
-    conn.execute('UPDATE users SET email = ?, password = ? WHERE email = ?',
-                 (new_email, hashed_password, current_user))
-    conn.commit()
+    if not email:
+        return jsonify({"message": "User not logged in"}), 401
 
-    # If the user wants to update their cycle information, handle that as well
-    cycle_data = data.get('cycles', [])
-    for cycle in cycle_data:
-        start_date = cycle.get('start_date')
-        cycle_length = cycle.get('cycle_length')
-        menses_length = cycle.get('menses_length')
-        cycle_number = cycle.get('cycle_number')
+    old_password = data.get('old_password')
+    new_password = data.get('new_password')
 
-        # Check if the cycle data is valid
-        if start_date and cycle_length and menses_length and cycle_number:
-            conn.execute('INSERT INTO cycles (user_id, start_date, cycle_length, menses_length, cycle_number) '
-                         'VALUES ((SELECT id FROM users WHERE email = ?), ?, ?, ?, ?)',
-                         (current_user, start_date, cycle_length, menses_length, cycle_number))
-            conn.commit()
+    if not old_password or not new_password:
+        return jsonify({"message": "Old and new passwords are required"}), 400
 
-    conn.close()
-    return jsonify({"message": "Profile updated successfully."}), 200
-
-
-
-# API to delete user account (DELETE)
-@app.route('/api/profile', methods=['DELETE'])
-@token_required
-def delete_account(current_user):
+    # Check if the old password is correct
     conn = get_db_connection()
-    conn.execute('DELETE FROM users WHERE email = ?', (current_user,))
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user or not check_password_hash(user['password'], old_password):
+        conn.close()
+        return jsonify({"message": "Old password is incorrect"}), 400
+
+    # Update password
+    hashed_password = generate_password_hash(new_password, method='scrypt')
+    cursor.execute("UPDATE users SET password = ? WHERE email = ?", (hashed_password, email))
     conn.commit()
     conn.close()
 
-    return jsonify({"message": "Account deleted successfully."}), 200
+    return jsonify({"message": "Password updated successfully"}), 200
 
+@app.route('/change-email', methods=['POST'])
+def change_email():
+    data = request.get_json()
+    email = session.get('user')
+    
+    if not email:
+        return jsonify({"message": "User not logged in"}), 401
 
-# API to handle logout (invalidate token on client-side)
-@app.route('/api/logout', methods=['POST'])
-def logout():
-    return jsonify({"message": "Logged out successfully."}), 200
+    new_email = data.get('new_email')
+    password = data.get('password')
 
+    if not new_email or not password:
+        return jsonify({"message": "New email and password are required"}), 400
+
+    # Verify password
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user or not check_password_hash(user['password'], password):
+        conn.close()
+        return jsonify({"message": "Invalid credentials"}), 400
+
+    # Check if the new email already exists
+    cursor.execute("SELECT * FROM users WHERE email = ?", (new_email,))
+    existing_user = cursor.fetchone()
+    if existing_user:
+        conn.close()
+        return jsonify({"message": "New email already in use"}), 400
+
+    # Update email
+    cursor.execute("UPDATE users SET email = ? WHERE email = ?", (new_email, email))
+    conn.commit()
+    conn.close()
+
+    session['user'] = new_email  # Update session with new email
+    return jsonify({"message": "Email updated successfully"}), 200
+
+@app.route('/delete-account', methods=['DELETE'])
+def delete_account():
+    data = request.get_json()
+    email = session.get('user')
+
+    if not email:
+        return jsonify({"message": "User not logged in"}), 401
+
+    password = data.get('password')
+
+    if not password:
+        return jsonify({"message": "Password is required"}), 400
+
+    # Verify password
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user or not check_password_hash(user['password'], password):
+        conn.close()
+        return jsonify({"message": "Invalid credentials"}), 400
+
+    # Delete user account
+    cursor.execute("DELETE FROM users WHERE email = ?", (email,))
+    cursor.execute("DELETE FROM cycles WHERE email = ?", (email,))  # Delete any associated cycle data
+    conn.commit()
+    conn.close()
+
+    session.pop('user', None)  # Remove user from session
+    return jsonify({"message": "Account deleted successfully"}), 200
 
 @app.route('/recommend', methods=['POST'])
-def predict():
+def recommend():
     try:
         print(f"Received request: {request.data}")  # Log raw request
         print(f"Request JSON: {request.json}")  # Log JSON request
@@ -235,13 +352,28 @@ def predict():
         if not request.json:
             return jsonify({"error": "Empty request body"}), 400
 
-        weight = float(request.json.get("weight", 0))
-        height = float(request.json.get("height", 0))
-        age = int(request.json.get("age", 0))
+        weight = request.json.get("weight")
+        height = request.json.get("height")
+        age = request.json.get("age")
         preference = request.json.get("preference", "").lower()
 
-        if weight <= 0 or height <= 0 or age <= 0:
-            return jsonify({"error": "Invalid input values"}), 400
+        # Validate inputs
+        if weight is None or height is None or age is None:
+            return jsonify({"error": "Missing required fields: weight, height, age"}), 400
+        
+        try:
+            weight = float(weight)
+            height = float(height)
+            age = int(age)
+        except ValueError:
+            return jsonify({"error": "Weight and height must be numbers, age must be an integer"}), 400
+
+        if not (1 <= weight <= 600):
+            return jsonify({"error": "Weight must be between 1 and 600 kg"}), 400
+        if not (0.1 <= height <= 2.5):
+            return jsonify({"error": "Height must be between 0.1 and 2.5 meters"}), 400
+        if not (1 <= age <= 100):
+            return jsonify({"error": "Age must be between 1 and 100 years"}), 400
 
         if preference not in ["gym", "home"]:
             return jsonify({"error": "Invalid preference. Choose 'gym' or 'home'."}), 400
@@ -274,53 +406,6 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-# API to get user cycles
-@app.route('/api/cycles', methods=['GET'])
-@token_required
-def get_cycles(current_user):
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE email = ?', (current_user,)).fetchone()
-
-    if user:
-        # Retrieve all cycles for the user
-        cycles = conn.execute('SELECT * FROM cycles WHERE user_id = ?', (user['id'],)).fetchall()
-        
-        cycle_data = []
-        for cycle in cycles:
-            cycle_data.append({
-                "start_date": cycle['start_date'],
-                "cycle_length": cycle['cycle_length'],
-                "menses_length": cycle['menses_length'],
-                "cycle_number": cycle['cycle_number']
-            })
-
-        conn.close()
-        return jsonify({"cycles": cycle_data}), 200
-    return jsonify({"message": "User not found."}), 404
-
-# API to update a cycle
-@app.route('/api/cycles', methods=['PUT'])
-@token_required
-def update_cycles(current_user):
-    data = request.get_json()
-
-    cycle_id = data.get('cycle_id')
-    start_date = data.get('start_date')
-    cycle_length = data.get('cycle_length')
-    menses_length = data.get('menses_length')
-    cycle_number = data.get('cycle_number')
-
-    if not all([cycle_id, start_date, cycle_length, menses_length, cycle_number]):
-        return jsonify({"message": "Missing cycle data."}), 400
-
-    conn = get_db_connection()
-    conn.execute('UPDATE cycles SET start_date = ?, cycle_length = ?, menses_length = ?, cycle_number = ? WHERE id = ?',
-                 (start_date, cycle_length, menses_length, cycle_number, cycle_id))
-    conn.commit()
-    conn.close()
-
-    return jsonify({"message": "Cycle updated successfully."}), 200
 
     
 @app.route('/predict-cycle', methods=['POST'])
@@ -392,6 +477,114 @@ def predict_cycle():
             "error": str(e)
         }), 400
 
+def get_cycle_number_from_db(email):
+    try:
+        # Connect to SQLite database
+        conn = sqlite3.connect('fempredict.db')
+        cursor = conn.cursor()
+
+        # Query to count the number of records for the given email
+        query = "SELECT COUNT(*) FROM periods WHERE email = ?"
+        cursor.execute(query, (email,))
+        result = cursor.fetchone()
+
+        conn.close()
+
+        if result:
+            return result[0] + 1  # Return the count of records (cycle number)
+        else:
+            return 1  # If no records found, return 1 (default cycle number)
+
+    except Exception as e:
+        print(f"Error fetching cycle number: {e}")
+        return None
+
+@app.route('/save_cycle_data', methods=['POST'])
+def save_cycle_data():
+    data = request.json
+    print("Received data:", data)  # Log the incoming data for debugging
+
+    email = data.get('email')
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400
+
+    LengthofMenses = data['LengthofMenses']
+    LengthofCycle = data['LengthofCycle']
+    start_date_str = data['startDate']
+
+    start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+
+    # Fetch cycle number from the database based on email
+    cycle_number = get_cycle_number_from_db(email)
+
+    # Validate input data
+    if not email or not start_date or not LengthofCycle or not LengthofMenses:
+        print("Missing data!")
+        return jsonify({"error": "Missing data"}), 400
+
+    try:
+        # Connect to SQLite database
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(''' 
+            INSERT INTO cycles (email, cycle, period_start, period_length, cycle_length)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (email, cycle_number, start_date, LengthofMenses, LengthofCycle))
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({"message": "Cycle data saved successfully."}), 201
+
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+    
+# Function to get cycle data for a specific user
+@app.route('/get_cycle_data', methods=['GET'])
+def get_cycle_data():
+    email = request.args.get('email')  # This should come from the logged-in user, or from the request
+    
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400  # Email is mandatory to fetch cycle data
+
+    try:
+        # Connect to SQLite database
+        conn = sqlite3.connect('fempredict.db')
+        cursor = conn.cursor()
+
+        # Query the database for cycle data for this email
+        cursor.execute("SELECT * FROM cycles WHERE email = ?", (email,))
+        cycle_history = cursor.fetchall()
+
+        # Check if cycles are found
+        if not cycle_history:
+            return jsonify({"message": "No cycle data found for this user."}), 404
+
+        # Prepare the cycle data response
+        cycle_data = [
+            {
+                "cycle": cycle["cycle"],
+                "period_start": cycle["period_start"],
+                "period_length": cycle["period_length"],
+                "cycle_length": cycle["cycle_length"]
+            }
+            for cycle in cycle_history
+        ]
+
+        conn.close()
+
+        return jsonify({
+            "message": "Cycle data fetched successfully.",
+            "cycle_history": cycle_data
+        })
+
+    except Exception as e:
+        print(f"Error fetching cycle data: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json  # Get user message from frontend
@@ -417,5 +610,4 @@ def ping():
 
 
 if __name__ == '__main__':
-    create_user_table()
     app.run(debug=True)

@@ -1,154 +1,207 @@
 import React, { useState, useEffect } from 'react';
-import Modal from './Modal'; // Import your Modal component for login/signup
+import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
-  const [userData, setUserData] = useState({ email: '' });
+const Profile = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
+  // Fetch user data when the component mounts
   useEffect(() => {
-    // Check if the user is logged in and fetch profile if they are
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/profile', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            // Include token if using authentication (e.g., JWT)
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
-          },
-        });
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setEmail(user.email);
+    } else {
+      // If there's no user, redirect to home page
+      navigate('/');
+    }
+  }, [navigate]);
 
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-          setEmail(data.email);
-          setIsLoggedIn(true); // User is logged in
-        } else {
-          setMessage('Please log in to view your profile.');
-          setIsLoggedIn(false); // User is not logged in
-          setIsModalOpen(true); // Open modal to login/signup
-        }
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-        setMessage('Error fetching profile');
-      }
-    };
+  // Function to clear localStorage and reset login state
+  const clearUserData = () => {
+    localStorage.clear(); // Clear all localStorage data
+    setIsLoggedIn(false);  // Reset global login state
+  };
 
-    fetchProfile();
-  }, []);
-
-  // Handle profile update
-  const handleUpdate = async (e) => {
+  // Handle email change
+  const handleEmailChange = async (e) => {
     e.preventDefault();
-    setIsUpdating(true);
+
+    if (!newEmail) {
+      setError('New email cannot be empty');
+      return;
+    }
 
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
-        method: 'PUT',
+      // Send a request to the backend to change the email
+      const response = await fetch('http://localhost:5000/change-email', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+        body: JSON.stringify({ newEmail }),
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        setMessage(data.message);
+        setEmail(newEmail); // Update local state
+        setMessage('Email updated successfully!');
       } else {
-        setMessage(data.message);
+        setError(data.message || 'An error occurred');
       }
-      setIsUpdating(false);
     } catch (error) {
-      setMessage('Error updating profile');
-      setIsUpdating(false);
+      setError('An error occurred. Please try again.');
     }
   };
 
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem('authToken'); // Remove auth token from local storage
-    setIsLoggedIn(false); // Set logged-in status to false
-    setMessage('Logged out successfully');
-    setIsModalOpen(true); // Open modal to prompt login/signup
+  // Handle password change
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    try {
+      // Send a request to the backend to change the password
+      const response = await fetch('http://localhost:5000/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ newPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage('Password updated successfully!');
+      } else {
+        setError(data.message || 'An error occurred');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
   };
 
   // Handle account deletion
   const handleDeleteAccount = async () => {
+    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      try {
+        const response = await fetch('http://localhost:5000/delete-account', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Clear user data from localStorage and reset login state
+          clearUserData();
+          navigate('/'); // Redirect to the home page
+        } else {
+          setError(data.message || 'An error occurred');
+        }
+      } catch (error) {
+        setError('An error occurred. Please try again.');
+      }
+    }
+  };
+
+  // Handle logout
+  const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/delete-account', {
-        method: 'DELETE',
+      // Send a request to the backend to log out
+      const response = await fetch('http://localhost:5000/logout', {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        setMessage('Account deleted successfully');
-        handleLogout(); // Log out the user after account deletion
+        // On successful logout from the backend
+        clearUserData();  // Clear user data from localStorage and reset login state
+        navigate('/'); // Redirect to home page
       } else {
-        setMessage(data.message);
+        setError(data.message || 'An error occurred while logging out');
       }
     } catch (error) {
-      setMessage('Error deleting account');
+      setError('An error occurred while logging out. Please try again.');
     }
   };
 
   return (
-    <div className="profile-container">
-      <h1>User Profile</h1>
-      <p>{message}</p>
+    <div className="profile">
+      <h2>Profile Page</h2>
 
-      {/* If logged in, show profile form, otherwise show modal */}
-      {isLoggedIn ? (
-        <>
-          <form onSubmit={handleUpdate}>
-            <div className="input-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
+      {/* Display current email */}
+      <div>
+        <h3>Email: {email}</h3>
+        <form onSubmit={handleEmailChange}>
+          <input
+            type="email"
+            placeholder="New Email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+          <button type="submit">Change Email</button>
+        </form>
+      </div>
 
-            <div className="input-group">
-              <label htmlFor="password">New Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+      {/* Change password section */}
+      <div>
+        <h3>Change Password</h3>
+        <form onSubmit={handlePasswordChange}>
+          <input
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <button type="submit">Change Password</button>
+        </form>
+      </div>
 
-            <button type="submit" disabled={isUpdating}>
-              {isUpdating ? 'Updating...' : 'Update Profile'}
-            </button>
-          </form>
+      {/* Messages */}
+      {message && <p className="message success">{message}</p>}
+      {error && <p className="message error">{error}</p>}
 
-          {/* Buttons for logout and delete account */}
-          <button onClick={handleLogout}>Log Out</button>
-          <button onClick={handleDeleteAccount}>Delete Account</button>
-        </>
-      ) : (
-        <p>Please log in to manage your profile.</p>
-      )}
+      {/* Delete account */}
+      <div>
+        <button onClick={handleDeleteAccount} className="delete-account-btn">
+          Delete Account
+        </button>
+      </div>
 
-      {/* Modal for login/signup */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Sign Up" />
+      {/* Logout */}
+      <div>
+        <button onClick={handleLogout} className="logout-btn">
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
