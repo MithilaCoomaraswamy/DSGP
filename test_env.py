@@ -42,6 +42,8 @@
 # except openai.error.OpenAIError as e:
 #     print(f"❌ OpenAI API Error: {e}")
 
+
+
 import os
 from dotenv import load_dotenv
 import openai
@@ -68,7 +70,7 @@ if openai_api_key:
             messages=[
                 {"role": "user", "content": "is pcos life threatening"}
             ],
-            max_tokens=10
+            max_tokens=80
         )
 
         # Print the response to check if everything is working
