@@ -15,9 +15,11 @@ if "OPENAI_API_KEY" in env_values:
 
 # Set OpenAI API Key
 api_key = os.getenv("OPENAI_API_KEY")
-print(f"DEBUG: Loaded API Key = {api_key}")  # Check if key is loaded
+
 if not api_key:
     print("❌ ERROR: OPENAI_API_KEY is not set.")
+else:
+    print("✅ API Key loaded successfully.")  # Added success message
 
 openai.api_key = api_key  # ✅ Use this instead of OpenAI() client
 
@@ -31,52 +33,56 @@ class ActionFallbackLLM(Action):
         intent_ranking = tracker.latest_message.get("intent_ranking", [])
         confidence = intent_ranking[0]["confidence"] if intent_ranking else 0
 
-        print(f"Intent Confidence: {confidence}")
+        print(f"DEBUG: Intent Confidence: {confidence}")  # Added debug statement to show confidence level
 
-        # ✅ If confidence is high, let Rasa handle it
-        if confidence >= 0.4:
-            return []
+        # 🚨 Handle untrained intents (force fallback to OpenAI)
+        if tracker.latest_message.get("intent", {}).get("name") == "nlu_fallback":
+            print(f"DEBUG: Detected unknown intent. Forcing nlu_fallback.")
+            confidence = 0.0  # 🚨 Force confidence to 0 to trigger OpenAI
 
         # 🚨 Low confidence → Fallback to OpenAI
-        print(f"⚠️ Low confidence! Sending to OpenAI: {user_message}")
-        dispatcher.utter_message(text="I'm not sure about that. Let me try my best to help you.")
+        if confidence < 0.6:  # Force fallback for confidence < 0.6
+            print(f"{user_message}")
+            if not user_message:
+                dispatcher.utter_message(text="I didn't receive any input to process.")
+                return [UserUtteranceReverted()]
 
-        if not user_message:
-            dispatcher.utter_message(text="I didn't receive any input to process.")
-            return [UserUtteranceReverted()]
+            try:
+                response = openai.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7,
+                    max_tokens=90
+                )
 
-        try:
-            response = openai.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": user_message}
-                ],
-                temperature=0.7,
-                max_tokens=500
-            )
 
-            print(f"✅ OpenAI Response: {response}")
+                if response and response.choices:
+                    bot_response = response.choices[0].message.content.strip()
 
-            if response and response.choices:
-                bot_response = response.choices[0].message.content.strip()
-
-                if bot_response:
-                    dispatcher.utter_message(text=bot_response)
-                    return []  # ✅ Successfully handled by GPT
+                    if bot_response:
+                        print(f"DEBUG: GPT Response: {bot_response}")
+                        dispatcher.utter_message(text=bot_response)  # Send GPT response directly to the user
+                    else:
+                        print("⚠️ OpenAI returned an empty response.")
+                        dispatcher.utter_message(text="I'm not sure how to answer that. Can you rephrase?")
 
                 else:
-                    dispatcher.utter_message(text="Sorry, I couldn't generate a response.")
-                    print("⚠️ OpenAI returned an empty response.")
+                    print("⚠️ No valid choices in OpenAI response.")
+                    dispatcher.utter_message(text="I didn't receive a valid response from OpenAI.")
+                    return [UserUtteranceReverted()]
 
-            else:
-                dispatcher.utter_message(text="I didn't receive a valid response from OpenAI.")
-                print("⚠️ No valid choices from OpenAI.")
+            except openai.RateLimitError as e:
+                print("⚠️ OpenAI RateLimitError: Hit rate limit.")
+                dispatcher.utter_message(text="I'm experiencing high traffic. Please try again later.")
+            except openai.OpenAIError as e:
+                print(f"❌ OpenAI API Error: {e}")  # Print exact API error message
+                dispatcher.utter_message(text=f"OpenAI error: {str(e)}")  # Show error to user
 
-        except openai.RateLimitError:
-            dispatcher.utter_message(text="I'm experiencing high traffic. Please try again later.")
-        except openai.OpenAIError as e:
-            print(f"❌ OpenAI API Error: {e}")
-            dispatcher.utter_message(text="An issue occurred while communicating with OpenAI.")
+            return [UserUtteranceReverted()]  # Ensure no further Rasa processing after OpenAI fallback
 
-        return [UserUtteranceReverted()]  # ❌ Only revert if OpenAI fails
+        # ✅ If confidence is sufficient, let Rasa handle it (no fallback)
+        print(f"DEBUG: Handling by Rasa (Confidence: {confidence})")
+        return []
