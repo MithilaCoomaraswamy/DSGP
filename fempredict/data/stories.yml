@@ -34,6 +34,16 @@ stories:
     - intent: ask_pcos_general
     - action: utter_ask_pcos_general
 
+  - story: User asks about Ovulation
+    steps:
+      - intent: ovulation
+      - action: utter_ovulation
+
+  - story: User asks about Hormonal Imbalance
+    steps:
+      - intent: hormonal_imbalance
+      - action: utter_hormonal_imbalance
+
   - story: pcos_symptoms
     steps:
     - intent: ask_pcos_symptoms
@@ -218,6 +228,3 @@ stories:
     steps:
       - intent: thyroid_health_management_in_pcos
       - action: utter_thyroid_health_management_in_pcos
-
-
-

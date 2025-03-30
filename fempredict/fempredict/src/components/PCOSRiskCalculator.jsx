@@ -205,6 +205,7 @@ const PCOSRiskCalculator = () => {
   
 
   return (
+    <div>
     <div className="container">
       <h1>PCOS Risk Predictor</h1>
 
@@ -575,6 +576,11 @@ const PCOSRiskCalculator = () => {
         </div>
       )}
     </div>
+            <footer>
+            <p>Contact us: support@pcosmanagement.com</p>
+            <p>Legal Disclaimer: This information is for educational purposes and not a substitute for medical advice.</p>
+          </footer>
+          </div>
   );
 };
 

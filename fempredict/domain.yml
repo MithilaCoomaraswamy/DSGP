@@ -9,6 +9,8 @@ intents:
   - bot_challenge
   - web_info
   - ask_pcos_general
+  - ovulation
+  - hormonal_imbalance
   - ask_pcos_causes
   - ask_affect_who
   - ask_pcos_symptoms
@@ -65,7 +67,7 @@ entities:
 
 actions:
   - action_fallback_llm
-  - action_validate_user_input
+
 
 #  - action_listen
 #  - action_restart
@@ -96,6 +98,12 @@ responses:
 
   utter_ask_pcos_general:
     - text: Polycystic Ovary Syndrome, is a common hormonal disorder that affects women of reproductive age.  where the body produces higher levels of male hormones, leading to problems like irregular periods, difficulty in ovulation, and sometimes the formation of small fluid-filled sacs on the ovaries.
+
+  utter_ovulation:
+    - text: "Ovulation is the release of an egg from the ovary, typically occurring around the middle of the menstrual cycle."
+
+  utter_hormonal_imbalance:
+    - text: "Hormonal imbalance occurs when there is too much or too little of a hormone in the bloodstream, affecting various body functions."
 
   utter_pcos_causes:
     - text: "Insulin Resistance – Leads to higher insulin levels, which stimulate the ovaries to produce more androgens."
