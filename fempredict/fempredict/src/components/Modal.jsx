@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../styles/Modal.css';
 import ForgotPasswordModal from './ForgotPasswordModal'; // Import the Forgot Password modal
 
@@ -32,36 +33,41 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
     return '';
   };
 
+  const navigate = useNavigate(); // Initialize navigation
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form inputs
+  
     const validationMessage = validateForm();
     if (validationMessage) {
       setMessage(validationMessage);
       return;
     }
-
+  
     const { email, password } = formData;
     const endpoint = isSignUp ? 'http://localhost:5000/register' : 'http://localhost:5000/login';
-
+  
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         console.log('User data:', data);
         setMessage(`${isSignUp ? 'Signed up' : 'Logged in'} successfully!`);
-        localStorage.setItem('user', JSON.stringify(data.user));
 
-        if (!isSignUp && onLogin) {
-          onLogin(); // Trigger onLogin callback if provided
-          onClose();
+        // Store only the email in localStorage
+        localStorage.setItem('email', data.user.email);  // Store the email
+
+  
+        if (!isSignUp) {
+          onLogin(); // Trigger callback
+          onClose(); // Close modal
+          navigate("/profile"); // Redirect to NewsBlog
         } else {
           setIsSignUp(false);
         }
@@ -73,6 +79,7 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
       console.error('Error:', error);
     }
   };
+  
 
   useEffect(() => {
     if (!isOpen) {
@@ -144,7 +151,7 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
                         <input type="checkbox" required />
                         I agree to the{' '}
                         <a href="/terms" target="_blank" rel="noopener noreferrer">terms and conditions</a> and{' '}
-                        <a href="/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>.
+                        <a href="/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>.<br />
                       </label>
                     </div>
                   </>

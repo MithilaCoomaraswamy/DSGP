@@ -1,7 +1,6 @@
 /* General styling for the entire page */
 .recommender-body {
     font-family: 'Poppins', sans-serif;
-    padding: 50px;
     max-width: 800px;
     margin: 0 auto;
   }

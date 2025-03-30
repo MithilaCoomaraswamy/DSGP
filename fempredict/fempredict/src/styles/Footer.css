@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%; /* Ensure the body takes up the full height of the viewport */
 }
 
 .footer {
@@ -10,10 +11,11 @@ html, body {
   color: white;
   text-align: center;
   padding: 10px;
-  position: fixed;
+  position: relative; /* Footer will stay in the normal document flow */
   bottom: 0;
-  width: 100%;
+  width: 100%; /* Ensure it spans the full width of the window */
   left: 0;
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 .footer p {

@@ -9,8 +9,8 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: white;
+  color:black;
 }
 
 /* Main Container */
@@ -169,10 +169,6 @@ footer {
 
 footer p {
   margin: 10px 0;
-}
-
-footer p:last-child {
-  font-size: 0.9em;
 }
 
 /* Responsive Design */

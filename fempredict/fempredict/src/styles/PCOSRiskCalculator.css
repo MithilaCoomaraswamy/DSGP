@@ -1,85 +1,103 @@
-.pcos-risk-calculator {
-  max-width: 600px;
-  margin: 20px auto;
-  margin-top: 60px;
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  color: #007bff;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-.input-group label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 8px 12px; /* Add horizontal padding */
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
-
-.symptoms {
-  margin-top: 20px;
-}
-
-.checkbox-group label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.submit-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: #0056b3;
-}
-
-.result {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #e7f4e4;
-  border-radius: 8px;
-}
-
-.result h3 {
-  margin-top: 0;
-  color: #28a745;
-}
-
-footer {
-  text-align: center;
-  padding: 30px 20px; /* Increased padding for more space inside the footer */
-  margin-top: 40px; /* Increased margin for more space between content and footer */
-  background-color: #333;
-  color: white;
-  font-size: 0.9rem;
-  border-top: 1px solid #444; /* Optional: Add a thin border to separate the footer */
-}
-
-footer p {
-  margin: 5px 0;
-}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .form-row {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input, select, output {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="range"] {
+    width: 80%;
+    display: inline-block;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-fill {
+    background-color: #4caf50;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 1em;
+    color: #888;
+    margin-top: 40px;
+  }
+  
+  footer p {
+    margin: 10px 0;
+  }
+  

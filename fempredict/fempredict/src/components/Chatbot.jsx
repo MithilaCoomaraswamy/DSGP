@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../styles/Chatbot.css';
 
 const Chatbot = () => { 
-
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,40 +38,48 @@ const Chatbot = () => {
     setLoading(false);
   };
 
+  // Add an event listener for "Enter" key
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage(); // Trigger send message when Enter is pressed
+    }
+  };
+
   return (
     <div>
-    <div className="chatbot-container">
-      <div className="chatbot-header">What can I help you with?</div>
-      <div className="chatbot-messages">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message-container ${msg.sender}`}>
-            {msg.sender === "bot" && (
-              <img src="/images/bot-icon.png" alt="Bot" className="chat-icon bot-icon" />
-            )}
-            <div className={`message ${msg.sender}-message`}>{msg.text}</div>
-            {msg.sender === "user" && (
-              <img src="/images/user-icon.png" alt="User" className="chat-icon user-icon" />
-            )}
-          </div>
-        ))}
-        {loading && <div className="typing-indicator">...</div>}
+      <div className="chatbot-container">
+        <div className="chatbot-header">What can I help you with?</div>
+        <div className="chatbot-messages">
+          {messages.map((msg, index) => (
+            <div key={index} className={`message-container ${msg.sender}`}>
+              {msg.sender === "bot" && (
+                <img src="/images/bot-icon.png" alt="Bot" className="chat-icon bot-icon" />
+              )}
+              <div className={`message ${msg.sender}-message`}>{msg.text}</div>
+              {msg.sender === "user" && (
+                <img src="/images/user-icon.png" alt="User" className="chat-icon user-icon" />
+              )}
+            </div>
+          ))}
+          {loading && <div className="typing-indicator">...</div>}
+        </div>
+        <div className="chatbot-input">
+          <input
+            type="text"
+            value={userInput}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}  // Listen for Enter key press
+            placeholder="Type your message..."
+          />
+          <button onClick={handleSendMessage}>
+            <img src="/images/send.png" alt="Send" />
+          </button>
+        </div>
       </div>
-      <div className="chatbot-input">
-        <input
-          type="text"
-          value={userInput}
-          onChange={handleInputChange}
-          placeholder="Type your message..."
-        />
-        <button onClick={handleSendMessage}>
-          <img src="/images/send.png" alt="Send" />
-        </button>
-      </div>
-    </div>
-    <footer>
-      <p>Contact us: support@pcosmanagement.com</p>
-      <p>Legal Disclaimer: This information is for educational purposes and not a substitute for medical advice.</p>
-    </footer>
+      <footer>
+        <p>Contact us: support@pcosmanagement.com</p>
+        <p>Legal Disclaimer: This information is for educational purposes and not a substitute for medical advice.</p>
+      </footer>
     </div>
   );
 };

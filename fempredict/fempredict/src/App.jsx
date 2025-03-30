@@ -19,8 +19,7 @@ const App = () => {
 
   return (
     <>
-      {/* Header component with the login state handler */}
-      <Header setIsLoggedIn={setIsLoggedIn} />
+      <Header/>
 
       <div className="app-content">
         <Routes>

@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask, request, jsonify, session, redirect, url_for
 from flask_cors import CORS
 import joblib
@@ -25,6 +26,7 @@ exercise_model = joblib.load("model/Random_forest_model.pkl")
 exercise_data = pd.read_csv("dataset/Encoded_Exercise_Dataset.csv")
 period_model = joblib.load("model/menses_predictor.pkl")
 ovulation_model = joblib.load("model/ovulation_predictor.pkl")
+model = joblib.load("model/random_forest_pcos_model.pkl")
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your-secret-key')  # Secure Flask secret key
@@ -76,6 +78,17 @@ def create_tables():
         cycle_length INTEGER NOT NULL,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+def delete_tables():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(''' 
+    DROP TABLE IF EXISTS cycles
     ''')
 
     conn.commit()
@@ -176,7 +189,7 @@ def verify_email(token):
     print(f"User {email} logged in successfully.")  # Add logging here
     return jsonify({'message': 'Email verified successfully! You are now logged in.'}), 200
 
-@app.route('/logout', methods=['GET'])
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user', None)  # Remove the user from the session
     return jsonify({'message': 'Logged out successfully'}), 200
@@ -476,29 +489,22 @@ def predict_cycle():
         return jsonify({
             "error": str(e)
         }), 400
-
+    
 def get_cycle_number_from_db(email):
-    try:
-        # Connect to SQLite database
-        conn = sqlite3.connect('fempredict.db')
-        cursor = conn.cursor()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Fetch the highest cycle number from the 'cycles' table
+    cursor.execute("SELECT MAX(cycle) FROM cycles WHERE email = ?", (email,))
+    result = cursor.fetchone()
+    
+    # If there's no cycle in the database, start from cycle 1
+    cycle_number = result[0] + 1 if result[0] is not None else 1
+    conn.close()
+    
+    return cycle_number
 
-        # Query to count the number of records for the given email
-        query = "SELECT COUNT(*) FROM periods WHERE email = ?"
-        cursor.execute(query, (email,))
-        result = cursor.fetchone()
-
-        conn.close()
-
-        if result:
-            return result[0] + 1  # Return the count of records (cycle number)
-        else:
-            return 1  # If no records found, return 1 (default cycle number)
-
-    except Exception as e:
-        print(f"Error fetching cycle number: {e}")
-        return None
-
+    
 @app.route('/save_cycle_data', methods=['POST'])
 def save_cycle_data():
     data = request.json
@@ -508,8 +514,8 @@ def save_cycle_data():
     if not email:
         return jsonify({'error': 'Email is required'}), 400
 
-    LengthofMenses = data['LengthofMenses']
-    LengthofCycle = data['LengthofCycle']
+    LengthofMenses = data['mensesLength']  # Updated field name
+    LengthofCycle = data['cycleLength']    # Updated field name
     start_date_str = data['startDate']
 
     start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
@@ -540,44 +546,48 @@ def save_cycle_data():
         print(f"Error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
-    
-# Function to get cycle data for a specific user
 @app.route('/get_cycle_data', methods=['GET'])
 def get_cycle_data():
-    email = request.args.get('email')  # This should come from the logged-in user, or from the request
-    
+    email = request.args.get('email')  # Get email from query params
     if not email:
-        return jsonify({'error': 'Email is required'}), 400  # Email is mandatory to fetch cycle data
+        return jsonify({'error': 'Email is required'}), 400  # If no email is provided, return error
 
     try:
-        # Connect to SQLite database
-        conn = sqlite3.connect('fempredict.db')
+        # Fetch cycle data from the database
+        conn = sqlite3.connect('database/fempredict.db')
+        conn.row_factory = sqlite3.Row  # Enable dictionary-like access to rows
         cursor = conn.cursor()
-
-        # Query the database for cycle data for this email
         cursor.execute("SELECT * FROM cycles WHERE email = ?", (email,))
         cycle_history = cursor.fetchall()
 
-        # Check if cycles are found
         if not cycle_history:
             return jsonify({"message": "No cycle data found for this user."}), 404
 
-        # Prepare the cycle data response
+        # Function to ensure date formatting (ISO 8601)
+        def format_date(date_string):
+            try:
+                # Assuming the date in the database is in 'YYYY-MM-DD' format
+                date = datetime.strptime(date_string, '%Y-%m-%d')
+                return date.strftime('%Y-%m-%d')  # Convert to ISO format (YYYY-MM-DD)
+            except ValueError:
+                return date_string  # Return as is if the format is invalid
+        
         cycle_data = [
             {
                 "cycle": cycle["cycle"],
-                "period_start": cycle["period_start"],
+                "period_start": format_date(cycle["period_start"]),  # Format the period start date
                 "period_length": cycle["period_length"],
                 "cycle_length": cycle["cycle_length"]
             }
             for cycle in cycle_history
         ]
 
+        print("Formatted cycle data:", cycle_data)
         conn.close()
 
         return jsonify({
             "message": "Cycle data fetched successfully.",
-            "cycle_history": cycle_data
+            "cycleHistory": cycle_data
         })
 
     except Exception as e:
@@ -608,6 +618,58 @@ def chat():
 def ping():
     return jsonify({"message": "Server is running"})
 
+FEATURES = [
+    'Age', 'Sexual_Activity', 'Sleep_Hours', 'Stress_Level',
+    'Alcohol_Caffeine_Consumption', 'Smoking', 'Age_Menarche',
+    'Menstrual_Cycle_Regularity', 'Period_Duration', 'Excess_Hair_Growth',
+    'Acne', 'Weight_Gain', 'Hair_Thinning', 'Family_History_PCOS',
+    'Height_cm', 'Weight_kg', 'BMI', 'Ethnicity_Asian',
+    'Ethnicity_Caucasian', 'Ethnicity_Hispanic', 'Ethnicity_Other',
+    'Geography_Urban', 'Diet_Moderate', 'Diet_Unhealthy'
+]
 
+logging.basicConfig(level=logging.INFO)
+
+@app.route('/calculate', methods=['POST'])
+def calculate_risk():
+    try:
+        data = request.get_json()
+        print("🔍 Incoming data:", data)
+
+        # Check for missing fields
+        if not all(feature in data for feature in FEATURES):
+            missing = [f for f in FEATURES if f not in data]
+            print("❌ Missing fields:", missing)
+            return jsonify({"error": "Missing input fields", "missing": missing}), 400
+
+        # Convert and reorder input
+        input_df = pd.DataFrame([data])[FEATURES]
+        print("✅ Ordered DataFrame:\n", input_df)
+
+        # Prediction
+        prediction = model.predict(input_df)[0]
+
+        # Construct response
+        if prediction == 1:
+            result = {
+                "prediction": "High Risk",
+                "message": "You may be at high risk of Polycystic Ovary Syndrome (PCOS).",
+                "recommendation": "Please consult a gynecologist or endocrinologist for proper diagnosis and early intervention."
+            }
+        else:
+            result = {
+                "prediction": "Low Risk",
+                "message": "You are currently at low risk of Polycystic Ovary Syndrome (PCOS).",
+                "recommendation": "Maintain your healthy lifestyle and monitor any changes in your health over time."
+            }
+
+        return jsonify(result)
+
+    except Exception as e:
+        print("🔥 Server Error:", str(e))
+        return jsonify({"error": "Something went wrong on the server.", "details": str(e)}), 500
+ 
+    
 if __name__ == '__main__':
     app.run(debug=True)
+     

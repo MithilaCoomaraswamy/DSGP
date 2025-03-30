@@ -1,131 +1,56 @@
-/* General profile container styling */
-.profile {
-  padding: 30px;
+/* FeatureCards.css */
+.feature-cards-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  justify-content: space-around;
+  gap: 30px; /* Increase the gap between the cards */
+  padding: 40px; /* Increase the padding around the container */
+  flex-wrap: wrap;
 }
 
-/* Title styling */
-.profile h2 {
+.feature-card {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Increased shadow size */
+  padding: 30px; /* Increase the padding inside the card */
+  width: 350px; /* Increase the width of the card */
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #333;
+  transition: transform 0.3s;
+  border: 2px solid #ddd; /* Add a border for a more prominent effect */
 }
 
-/* Input field styling */
-input {
-  margin: 10px 0;
-  padding: 12px;
-  width: 100%;
-  max-width: 350px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #fff;
-  transition: border-color 0.3s;
+.feature-card:hover {
+  transform: translateY(-15px); /* Increase hover effect */
 }
 
-input:focus {
-  border-color: #4CAF50;
-  outline: none;
+.card-icon {
+  font-size: 80px; /* Increase icon size */
+  margin-bottom: 20px; /* Increase space between icon and text */
 }
 
-/* Button styling */
-button {
-  padding: 12px;
-  width: 100%;
-  max-width: 350px;
-  background-color: #4CAF50;
+h3 {
+  font-size: 1.5em; /* Increase font size for the title */
+  margin-bottom: 15px; /* Add more space below the title */
+}
+
+.card-icon p {
+  font-size: 1.1em; /* Increase font size for description */
+  color: #555;
+}
+
+.card-button {
+  background-color: #007bff; /* Green background */
   color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  margin-top: 10px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-/* Success and Error messages */
-.message {
+  padding: 10px 20px;
   text-align: center;
-  margin-top: 15px;
-  font-size: 16px;
-}
-
-.success {
-  color: green;
-  font-weight: bold;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-}
-
-/* Delete account button styling */
-.delete-account-btn {
-  background-color: red;
-  color: white;
-  font-size: 16px;
-  padding: 12px;
-  width: 100%;
-  max-width: 350px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
   margin-top: 20px;
-  border-radius: 5px;
   cursor: pointer;
-}
-
-.delete-account-btn:hover {
-  background-color: #d32f2f;
-}
-
-/* Logout button styling */
-.logout-btn {
-  background-color: #f1f1f1;
-  color: black;
-  font-size: 16px;
-  padding: 12px;
   border-radius: 5px;
-  width: 100%;
-  max-width: 350px;
-  margin-top: 10px;
-  cursor: pointer;
 }
 
-.logout-btn:hover {
-  background-color: #e0e0e0;
-}
-
-/* Section container */
-div {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Add margin to each form section */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Heading style for change sections */
-h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #444;
+.card-button:hover {
+  background-color: #0056b3; /* Darker green on hover */
 }
