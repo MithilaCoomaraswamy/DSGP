@@ -15,9 +15,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+app = Flask(__name__)
+CORS(app)
+
 RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"
 
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  # Use environment variable for OpenAI API Key
+
+OPENAI_API_KEY = 'your-openai-api-key'  # Replace with your OpenAI API key
 
 # OpenAI ChatGPT API URL
 OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
@@ -28,13 +32,13 @@ period_model = joblib.load("model/menses_predictor.pkl")
 ovulation_model = joblib.load("model/ovulation_predictor.pkl")
 model = joblib.load("model/random_forest_pcos_model.pkl")
 
-app = Flask(__name__)
+
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your-secret-key')  # Secure Flask secret key
 app.config['SESSION_COOKIE_NAME'] = 'session'  # Cookie name
 app.config['SESSION_PERMANENT'] = True  # Ensure session is permanent
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 serializer = URLSafeTimedSerializer(app.secret_key)
-CORS(app)
+
 
 # SQLite database file
 DATABASE = os.getenv('DATABASE', 'database/fempredict.db')  # Use environment variable for the database path
@@ -595,6 +599,7 @@ def get_cycle_data():
         return jsonify({"error": str(e)}), 500
 
 
+# Chat route - Handles user messages
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json  # Get user message from frontend
@@ -612,7 +617,7 @@ def chat():
         return jsonify({"response": " ".join(bot_responses)})  # Return response to frontend
     else:
         return jsonify({"response": "Sorry, I couldn't connect to the chatbot."}), 500
-    
+
 # Ping route - Check if the API is running
 @app.route('/ping', methods=['GET'])
 def ping():

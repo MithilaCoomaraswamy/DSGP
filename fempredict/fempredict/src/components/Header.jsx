@@ -12,11 +12,11 @@ const Header = () => {
 
   const menuRef = useRef(null); // Ref for the dropdown menu
   const profileRef = useRef(null); // Ref for the profile picture
-  
+
   // Check login status and listen for changes in localStorage
   useEffect(() => {
     const checkLoginStatus = () => {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem('email'); // Retrieve the user email from localStorage
       const loggedIn = Boolean(user); // If user exists in localStorage, they are logged in
       setIsLoggedInState(loggedIn); // Update local state
       setIsLoggedIn(loggedIn); // Update global state
@@ -29,34 +29,23 @@ const Header = () => {
 
     // Clean up listener on component unmount
     return () => window.removeEventListener('storage', storageListener);
-  }, []);
+  }, []); // Run once when the component mounts
 
   // Handle logout
   const handleSignOut = async () => {
     try {
-      // Call the backend function to log out the user
-      await fetch('http://localhost:5000/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: 'yourUserIdHere' }) // You may need to include the user ID or other data
-      });
-  
       // Clear user data from localStorage
-      localStorage.removeItem('user');
+      localStorage.removeItem('email');
       setIsLoggedInState(false); // Update local state
       setIsLoggedIn(false); // Update global state
-  
+
       // Navigate to a different page after successful logout
       navigate('/'); // Redirect to home or a specific page
-  
     } catch (error) {
       console.error('Error during logout:', error);
       // Optionally, handle error (show a message to the user, etc.)
     }
   };
-  
 
   // Handle successful login
   const handleLogin = () => {
