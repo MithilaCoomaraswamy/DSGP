@@ -163,6 +163,3 @@ cython_debug/
 
 # Node modules
 my-period-tracker/node_modules/
-
-temp/
-.git/
