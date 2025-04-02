@@ -31,7 +31,7 @@ header {
 
 header h1 {
   font-size: 2.5em;
-  color: #4A90E2;
+  color: #00157c;
 }
 
 header p {
@@ -49,7 +49,7 @@ section {
 
 h2 {
   font-size: 1.8em;
-  color: #4A90E2;
+  color: #00157c;
   margin-bottom: 20px;
 }
 
@@ -59,7 +59,7 @@ h2 {
 }
 
 .cycle-info strong {
-  color: #4A90E2;
+  color: #00157c;
 }
 
 /* Tracker Dashboard - Current Cycle Overview */
@@ -147,7 +147,7 @@ button:hover {
 }
 
 .cycle-history th {
-  background-color: #4A90E2;
+  background-color: #00157c;
   color: white;
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/ExerciseRecommender.css';
 
 const ExerciseRecommender = () => { 
-    
+
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [age, setAge] = useState('');
@@ -50,8 +50,9 @@ const ExerciseRecommender = () => {
         <h2>Enter Your Details</h2>
         <form onSubmit={handleSubmit}>
           <div className='input-group'>
-            <label>Weight (kg):</label>
+            <label htmlFor='weight'>Weight (kg):</label>
             <input
+              id='weight'
               type='number'
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
@@ -62,8 +63,9 @@ const ExerciseRecommender = () => {
           </div>
 
           <div className='input-group'>
-            <label>Height (m):</label>
+            <label htmlFor='height'>Height (m):</label>
             <input
+              id='height'
               type='number'
               value={height}
               onChange={(e) => setHeight(e.target.value)}
@@ -75,8 +77,9 @@ const ExerciseRecommender = () => {
           </div>
 
           <div className='input-group'>
-            <label>Age (years):</label>
+            <label htmlFor='age'>Age (years):</label>
             <input
+              id='age'
               type='number'
               value={age}
               onChange={(e) => setAge(e.target.value)}
@@ -87,8 +90,9 @@ const ExerciseRecommender = () => {
           </div>
 
           <div className='input-group'>
-            <label>Workout Preference:</label>
+            <label htmlFor='preference'>Workout Preference:</label>
             <select
+              id='preference'
               value={preference}
               onChange={(e) => setPreference(e.target.value)}
               required
@@ -111,10 +115,11 @@ const ExerciseRecommender = () => {
           </div>
         )}
       </div>
+
       <footer>
           <p>Contact us: support@pcosmanagement.com</p>
           <p>Legal Disclaimer: This information is for educational purposes and not a substitute for medical advice.</p>
-        </footer>
+      </footer>
     </div>
   );
 }

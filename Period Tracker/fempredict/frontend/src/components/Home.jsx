@@ -10,8 +10,6 @@ const Home = () => {
       <HeroSection />
       <Features />
       <Testimonials />
-      <CallToAction />
-     
     </>
   );
 }

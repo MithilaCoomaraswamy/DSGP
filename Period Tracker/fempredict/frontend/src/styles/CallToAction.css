@@ -1,7 +1,7 @@
 /* src/components/CallToAction.css */
 .cta-section {
     background-color: #007bff;
-    color: white;
+    color: black;
     text-align: center;
     padding: 60px 20px;
   }
@@ -21,6 +21,6 @@
     font-size: 20px;
     padding: 12px 24px;
     background-color: #fff;
-    color: #007bff;
+    color: black;
   }
   

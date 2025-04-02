@@ -79,7 +79,8 @@ body {
   position: absolute;
   right: 10px;
   top: 50px;
-  background-color: #007bff;
+  background-color: #00157c;
+  color: white;
   border: 1px solid #ddd;
   padding: 10px;
   display: flex;
