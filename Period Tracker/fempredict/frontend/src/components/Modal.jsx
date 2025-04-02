@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../styles/Modal.css';
-import ForgotPasswordModal from './ForgotPasswordModal'; // Import the Forgot Password modal
 
 const Modal = ({ isOpen, onClose, onLogin, title }) => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
   const [message, setMessage] = useState('');
-  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
-
-  const openForgotPasswordModal = (e) => {
-    e.preventDefault();
-    setIsForgotPasswordOpen(true);
-    onClose(); // Close current modal
-  };
-
-  const closeForgotPasswordModal = () => setIsForgotPasswordOpen(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +81,7 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
 
   return (
     <>
-      {isOpen && !isForgotPasswordOpen && (
+      {isOpen && (
         <div className="modal-overlay" onClick={onClose}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <header className="modal-header">
@@ -123,14 +113,6 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
                     required
                   />
                 </div>
-
-                {!isSignUp && (
-                  <div className="forgot-password">
-                    <a href="#" onClick={openForgotPasswordModal} className="forgot-password-link">
-                      Forgot Password?
-                    </a>
-                  </div>
-                )}
 
                 {isSignUp && (
                   <>
@@ -179,8 +161,6 @@ const Modal = ({ isOpen, onClose, onLogin, title }) => {
           </div>
         </div>
       )}
-
-      <ForgotPasswordModal isOpen={isForgotPasswordOpen} onClose={closeForgotPasswordModal} />
     </>
   );
 };

@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+from dotenv import dotenv_values
 import logging
 from flask import Flask, request, jsonify, session, redirect, url_for
 from flask_cors import CORS
@@ -14,9 +16,14 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
+env_values = dotenv_values(".env")
 
 RASA_SERVER_URL = "http://localhost:5005/webhooks/rest/webhook"
 
@@ -40,8 +47,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 serializer = URLSafeTimedSerializer(app.secret_key)
 
 
-# SQLite database file
-DATABASE = os.getenv('DATABASE', 'database/fempredict.db')  # Use environment variable for the database path
+DATABASE = env_values["DATABASE"]
 
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
@@ -121,8 +127,8 @@ def check_user_exists(email):
     return user
 
 def send_verification_email(email, token):
-    sender_email = os.getenv("SENDER_EMAIL", "fempredict@gmail.com")  # Use environment variable for the email
-    sender_password = os.getenv("SENDER_PASSWORD", "jptm vipw jimb vhkv")  # Use environment variable for password
+    sender_email = os.getenv("SENDER_EMAIL", "SENDER_EMAIL")  # Use environment variable for the email
+    sender_password = os.getenv("SENDER_PASSWORD", "SENDER_PASSWORD")  # Use environment variable for password
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
 
@@ -198,8 +204,10 @@ def logout():
     session.pop('user', None)  # Remove the user from the session
     return jsonify({'message': 'Logged out successfully'}), 200
 
-# User login
+limiter = Limiter(get_remote_address, app=app)
+
 @app.route('/login', methods=['POST'])
+@limiter.limit("5 per minute")  
 def login():
     data = request.get_json()
     email = data.get('email')
@@ -217,7 +225,13 @@ def login():
         }), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
-
+    
+    
+@app.errorhandler(429)
+def rate_limit_error(e):
+    return jsonify({
+        "message": "Too many login attempts. Please try again later."
+    }), 429
 
 # User registration
 @app.route('/register', methods=['POST'])
