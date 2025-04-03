@@ -56,11 +56,13 @@
   background-color: #00157c;
   color: white;
   margin-top: 0%;
+  width: fit-content;
 }
 
 .message.bot-message {
   background-color: #d4d9de;
   margin-top: 0%;
+  width: fit-content;
 }
 
 /* Icons */
