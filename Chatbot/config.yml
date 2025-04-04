@@ -9,9 +9,9 @@ pipeline:
 - name: CountVectorsFeaturizer
 - name: CountVectorsFeaturizer
   analyzer: char_wb
-  min_ngram: 2
-  max_ngram: 3
-  use_stop_words: true
+  min_ngram: 1
+  max_ngram: 2
+  use_stop_words: false
 - name: DIETClassifier
   epochs: 100
   embedding_dimension: 100

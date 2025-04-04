@@ -54,6 +54,7 @@ intents:
 entities:
   - Polycystic Ovary Syndrome
   - PCOS
+  - pcos
   - symptom
   - treatment
   - health_risks

@@ -1,62 +1,101 @@
 import sqlite3
+import os
 from rapidfuzz import process
 
-# Load medical terms from the database
+# Load medical terms from the SQLite database into a dictionary
 def load_medical_terms():
-    db_path = "actions/medical_terms.db"
-    conn = None
-    terms = []
+    db_path = os.path.join(os.path.dirname(__file__), 'medical_terms.db')
 
-    try:
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        cursor.execute("SELECT term FROM medical_terms")
-        rows = cursor.fetchall()
-        terms = [row[0].lower() for row in rows]
-        return terms
+    if not os.path.exists(db_path):
+        print(f"⚠️ Database file not found at {db_path}. Using default typo corrections.")
+        return {}
 
-    except sqlite3.Error as e:
-        print(f"Error loading medical terms: {e}")
-    finally:
-        if conn:
-            conn.close()
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
 
-    return terms
+    cursor.execute("SELECT term, corrected_term FROM medical_terms")
+    rows = cursor.fetchall()
 
-# Corrects typos using fuzzy matching
-def correct_typo(user_input):
-    medical_terms = load_medical_terms()
+    conn.close()
+    return {term.lower(): corrected_term for term, corrected_term in rows}
 
-    if not medical_terms:
-        return None
+# Load medical terms into a dictionary at startup
+MEDICAL_TERMS = load_medical_terms()
 
-    user_input = user_input.lower()
+# Common typos and their corrections
+COMMON_TYPOS = {
+    "pcsoo": "pcos",
+    "is": "is",
+    "Is": "Is",
+    "for": "for",
+    "thyrod": "thyroid",
+    "symtom": "symptom",
+    "har": "hair",
+    "disorder": "disorder",
+"disease": "disease",
+    "this": "this",
+    "the": "the",
+    "cause": "cause",
+    "hormnl imbalnce": "hormonal imbalance",
+    "cuses": "cause",
+    "causesse": "causes",
+    "ovulotion": "ovulation",
+    "menstral cycle": "menstrual cycle",
+    "infirtility": "infertility",
+    "cysts": "cysts",
+    "rsiks": "risk",
+    "androgens": "androgen",
+    "insuline resistance": "insulin resistance",
+    "weigth gain": "weight gain",
+    "acne": "acne",
+    "reproductive": "reproductive",
+    "irregular period": "irregular periods",
+    "birthcontrol": "birth control",
+    "lifestyle hanges": "lifestyle changes",
+    "hirsutism": "hirsutism",
+    "ultrasouns": "ultrasound",
+    "reproductivehealth": "reproductive health",
+    "pcooo": "pcos",
+    "pso": "pcos",
+    "spco": "pcos",
+    "pscos": "pcos",
+    "life": "life",
+    "are": "are",
+    "polycysticovarysyndrome": "polycystic ovary syndrome",
+"polycystic ovary syndrome":"polycystic ovary syndrome",
 
-    # Perform fuzzy matching with a score cutoff of 60
-    result = process.extractOne(user_input, medical_terms, score_cutoff=60)
+}
 
-    if result:
-        match, score, _ = result
-        return match
+# Merge medical terms into the typo dictionary
+COMMON_TYPOS.update(MEDICAL_TERMS)
 
-    return None
 
-# Test the load_medical_terms function
-if __name__ == "__main__":
-    # Test loading medical terms from database
-    medical_terms = load_medical_terms()
-    if medical_terms:
-        print("Loaded Medical Terms:")
-        for term in medical_terms:
-            print(term)
-    else:
-        print("No terms loaded from the database.")
+def correct_typo(user_message):
+    """
+    Correct typos without changing sentence structure or intent.
+    """
+    original_message = user_message.strip()
+    words = original_message.split()
+    corrected_words = []
 
-    # Test the correct_typo function with a sample input
-    test_input = "homonla imblnce"  # User input with a typo
-    corrected_term = correct_typo(test_input)
+    for word in words:
+        corrected_word = word  # Default to original word
 
-    if corrected_term:
-        print(f"Corrected Term: {corrected_term}")
-    else:
-        print("No correction found.")
+        # Check if the word is a known typo in the dictionary
+        if word.lower() in COMMON_TYPOS:
+            corrected_word = COMMON_TYPOS[word.lower()]
+        else:
+            # Apply fuzzy matching only for long words (>4 characters) to avoid miscorrections
+            if len(word) > 4:
+                match = process.extractOne(word, COMMON_TYPOS.keys(), score_cutoff=90)  # Higher cutoff for better accuracy
+                if match:
+                    corrected_word = COMMON_TYPOS[match[0]]
+
+        corrected_words.append(corrected_word)
+
+    # Keep the sentence structure the same
+    corrected_message = " ".join(corrected_words)
+
+    return corrected_message
+
+

@@ -1,59 +1,66 @@
 import sqlite3
+import os
 
-# Path to your database file
-db_path = "actions/medical_terms.db"
+# Get the absolute path to the database file
+db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "medical_terms.db"))
 
-# Connect to the SQLite database (it will create the file if it doesn't exist)
-try:
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    print(f"Connected to database: {db_path}")
-except sqlite3.Error as e:
-    print(f"Failed to connect to the database: {e}")
-    exit(1)
+# Ensure the directory exists
+db_directory = os.path.dirname(db_path)
+if not os.path.exists(db_directory):
+    os.makedirs(db_directory)
 
-# Create the medical_terms table if it doesn't already exist
-try:
+# Connect to the SQLite database
+conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
+
+# Check if the table exists, if not, create it
+cursor.execute("""SELECT name FROM sqlite_master WHERE type='table' AND name='medical_terms';""")
+if cursor.fetchone() is None:
+    print("⚠️ Table 'medical_terms' not found, creating it.")
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS medical_terms (
+        CREATE TABLE medical_terms (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            term TEXT UNIQUE NOT NULL
+            term TEXT UNIQUE NOT NULL,
+            corrected_term TEXT
         )
     """)
-    print("Database setup: medical_terms table created if not already existing.")
-except sqlite3.Error as e:
-    print(f"Error creating table: {e}")
-    conn.close()
-    exit(1)
+else:
+    print("✅ Table 'medical_terms' already exists.")
 
 # List of medical terms to insert
 medical_terms = [
-    "pcos", "ovulation", "hormonal imbalance", "estrogen", "testosterone",
-    "menstrual cycle", "infertility", "follicle", "cysts", "androgen",
-    "insulin resistance", "weight gain", "acne", "irregular periods",
-    "metformin", "birth control", "lifestyle changes", "hirsutism",
-    "ultrasound", "ovarian dysfunction", "reproductive health"
+
+    ("PCOS", "PCOS"),
+    ("pcos", "pcos"),
+    ("hormonal imbalance", "hormonal imbalance"),
+    ("ovulation", "ovulation"),
+    ("endometriosis", "endometriosis"),
+    ("menstrual cycle", "menstrual cycle"),
+    ("infertility", "infertility"),
+    ("cysts", "cysts"),
+    ("androgen", "androgen"),
+    ("insulin resistance", "insulin resistance"),
+    ("weight gain", "weight gain"),
+    ("acne", "acne"),
+    ("irregular periods", "irregular periods"),
+    ("birth control", "birth control"),
+    ("metformin", "metformin"),
+    ("lifestyle changes", "lifestyle changes"),
+    ("hirsutism", "hirsutism"),
+    ("ultrasound", "ultrasound"),
+    ("reproductive health", "reproductive health")
 ]
 
-# Insert medical terms into the table
-for term in medical_terms:
-    try:
-        cursor.execute("INSERT OR IGNORE INTO medical_terms (term) VALUES (?)", (term,))
-        print(f" {term}")
-    except sqlite3.IntegrityError:
-        # Handle the case where the term already exists
-        print(f"Term '{term}' already exists in the database.")
-    except sqlite3.Error as e:
-        print(f"Error inserting term '{term}': {e}")
+# Insert or update the terms into the table
+for term, corrected_term in medical_terms:
+    cursor.execute("""
+        INSERT INTO medical_terms (term, corrected_term)
+        VALUES (?, ?)
+        ON CONFLICT(term) DO UPDATE SET corrected_term = excluded.corrected_term
+    """, (term, corrected_term))
 
-# Commit the changes
-try:
-    conn.commit()
-    print("Database setup: terms inserted successfully.")
-except sqlite3.Error as e:
-    print(f"Error committing changes: {e}")
-    conn.rollback()
-
-# Close the connection
+# Commit changes and close the connection
+conn.commit()
 conn.close()
-print("Connection closed.")
+
+print("✅ Database setup completed successfully!")
