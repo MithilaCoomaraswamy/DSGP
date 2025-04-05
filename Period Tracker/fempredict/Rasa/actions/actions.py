@@ -15,7 +15,7 @@ if "OPENAI_API_KEY" in env_values:
 
 # Set OpenAI API Key
 api_key = os.getenv("OPENAI_API_KEY")
-
+print(f"DEBUG: Loaded API Key from env: {api_key:5}**")  # Check if key is loaded correctly
 if not api_key:
     print("❌ ERROR: OPENAI_API_KEY is not set.")
 else:
@@ -55,7 +55,8 @@ class ActionFallbackLLM(Action):
                         {"role": "user", "content": user_message}
                     ],
                     temperature=0.7,
-                    max_tokens=90
+                    max_tokens=300,
+                    stop =None
                 )
 
 

@@ -165,6 +165,7 @@ nlu:
   - intent: ask_pcos_general
     examples: |
       - What is PCOS?
+      - What is Polycystic ovary Syndrome?
       - Can you explain PCOS?
       - Give me details about PCOS.
       - give me the idea of PCOS
@@ -178,7 +179,7 @@ nlu:
       - What is the history of PCOS?
       - What does PCOS mean in medical terms?
       - What is refers to PCOS?
-      
+
   - intent: ovulation
     examples: |
       - What is ovulation?
@@ -238,7 +239,6 @@ nlu:
       - How does PCOS affect the body?
       - How do I know if I have the symptoms of PCOS?
       - Is hair thinning a symptom of PCOS?
-      - How does PCOS affect your skin?
       - What changes can I expect in my body with PCOS?
       - Are there specific signs of PCOS in early stages?
       - What symptoms should I watch out for?
