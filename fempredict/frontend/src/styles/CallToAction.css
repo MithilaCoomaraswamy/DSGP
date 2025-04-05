@@ -1,0 +1,26 @@
+/* src/components/CallToAction.css */
+.cta-section {
+    background-color: #007bff;
+    color: black;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .cta-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #000;
+  }
+  
+  .cta-section p {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .cta-section .cta-btn {
+    font-size: 20px;
+    padding: 12px 24px;
+    background-color: #fff;
+    color: black;
+  }
+  

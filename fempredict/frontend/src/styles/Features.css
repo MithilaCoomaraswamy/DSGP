@@ -1,0 +1,27 @@
+/* src/components/Features.css */
+.features-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .features-section h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+  
+  .feature-item {
+    margin-bottom: 30px;
+  }
+  
+  .feature-item h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .feature-item p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  

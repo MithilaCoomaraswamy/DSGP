@@ -1,0 +1,243 @@
+.chatbot-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  overflow: hidden;
+}
+
+.chatbot-header {
+  background-color: #00157c;
+  color: white;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: flex-start;
+}
+
+.message-container.user {
+  justify-content: flex-end;
+}
+
+.message-container.bot {
+  justify-content: flex-start;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: #ffffff;
+  word-wrap: break-word;
+}
+
+.message.user-message {
+  background-color: #00157c;
+  color: white;
+  margin-top: 0%;
+  width: fit-content;
+}
+
+.message.bot-message {
+  background-color: #d4d9de;
+  margin-top: 0%;
+  width: fit-content;
+}
+
+/* Icons */
+.chat-icon {
+  width: 40px; /* Adjusted size to match send button */
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.bot-icon,
+.user-icon {
+  background-color: #f0f0f0;
+  padding: 5px;
+  width: 40px; /* Same size as send icon */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bot-icon {
+  order: 0; /* Places the icon to the left of the bot message */
+  margin-right: 10px;
+}
+
+.user-icon {
+  order: 2; /* Places the icon to the right of the user message */
+  margin-left: 10px;
+}
+
+/* Input box and send button */
+.chatbot-input {
+  display: flex;
+  padding: 5px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  height: 45px;
+}
+
+.chatbot-input input {
+  flex: 1;
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  height: 30px;
+}
+
+.chatbot-input input:focus {
+  border-color: #00157c;
+}
+
+.chatbot-input button {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 2px;
+}
+
+.chatbot-input button:hover {
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+.chatbot-input button:active {
+  transform: scale(0.95);
+}
+
+.chatbot-input button img {
+  width: 35px;
+  height: 35px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  align-self: flex-start;
+  background: #00157c;
+  padding: 10px 16px;
+  border-radius: 18px;
+  color: #fff;
+  max-width: 50px;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+  animation: typing 1.5s infinite;
+}
+
+/* Blinking dots effect */
+@keyframes typing {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+  100% { content: ""; }
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .chatbot-container {
+    width: 100%;
+    margin: 20px auto;
+    height: auto;
+  }
+
+  .chatbot-header {
+    font-size: 20px;
+    padding: 20px;
+  }
+
+  .chatbot-input {
+    padding: 5px 10px;
+  }
+
+  .chatbot-input input {
+    font-size: 14px;
+    height: 35px;
+  }
+
+  .chatbot-input button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+
+  .message-container {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chatbot-header {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .chatbot-input input {
+    font-size: 13px;
+    padding: 8px;
+    height: 35px;
+  }
+
+  .chatbot-input button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .message {
+    font-size: 12px;
+  }
+
+  .message-container {
+    margin-bottom: 8px;
+  }
+}

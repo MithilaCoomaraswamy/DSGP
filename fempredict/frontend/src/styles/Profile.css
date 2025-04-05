@@ -1,0 +1,56 @@
+/* FeatureCards.css */
+.feature-cards-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px; /* Increase the gap between the cards */
+  padding: 40px; /* Increase the padding around the container */
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Increased shadow size */
+  padding: 30px; /* Increase the padding inside the card */
+  width: 350px; /* Increase the width of the card */
+  text-align: center;
+  transition: transform 0.3s;
+  border: 2px solid #ddd; /* Add a border for a more prominent effect */
+}
+
+.feature-card:hover {
+  transform: translateY(-15px); /* Increase hover effect */
+}
+
+.card-icon {
+  font-size: 80px; /* Increase icon size */
+  margin-bottom: 20px; /* Increase space between icon and text */
+}
+
+h3 {
+  font-size: 1.5em; /* Increase font size for the title */
+  margin-bottom: 15px; /* Add more space below the title */
+}
+
+.card-icon p {
+  font-size: 1.1em; /* Increase font size for description */
+  color: #555;
+}
+
+.card-button {
+  background-color: #00157c; /* Green background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.card-button:hover {
+  background-color: #0056b3; /* Darker green on hover */
+}

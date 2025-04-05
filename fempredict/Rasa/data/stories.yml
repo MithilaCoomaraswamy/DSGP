@@ -1,0 +1,230 @@
+version: "3.1"
+
+stories:
+  - story: happy path
+    steps:
+    - intent: greet
+    - action: utter_happy
+
+  - story: sad path 1
+    steps:
+    - intent: greet
+    - action: utter_happy
+    - intent: mood_unhappy
+    - action: utter_did_that_help
+    - intent: affirm
+    - action: utter_happy
+
+  - story: sad path 2
+    steps:
+    - intent: greet
+    - action: utter_happy
+    - intent: mood_unhappy
+    - action: utter_did_that_help
+    - intent: deny
+    - action: utter_goodbye
+
+  - story: website_information
+    steps:
+    - intent: web_info
+    - action: utter_web_info
+
+  - story: Fetch PCOS information
+    steps:
+    - intent: ask_pcos_general
+    - action: utter_ask_pcos_general
+
+  - story: User asks about Ovulation
+    steps:
+      - intent: ovulation
+      - action: utter_ovulation
+
+  - story: User asks about Hormonal Imbalance
+    steps:
+      - intent: hormonal_imbalance
+      - action: utter_hormonal_imbalance
+
+  - story: pcos_symptoms
+    steps:
+    - intent: ask_pcos_symptoms
+    - action: utter_pcos_symptoms
+
+  - story: pcos_skin
+    steps:
+    - intent: pcos_acne
+    - action: utter_pcos_acne
+
+  - story: pcos_weight_gain
+    steps:
+    - intent: pcos_weight_gain
+    - action: utter_pcos_weight_gain
+
+  - story: pcos_irregular_periods
+    steps:
+    - intent: pcos_irregular_periods
+    - action:  utter_pcos_irregular_periods
+
+  - story: pcos_diagnosis
+    steps:
+    - intent: ask_pcos_diagnosis
+    - action: utter_pcos_diagnosis
+
+  - story: pcos_factors
+    steps:
+    - intent: ask_pcos_causes
+    - action: utter_pcos_causes
+
+  - story: pcos_who affected by pcos
+    steps:
+    - intent: ask_affect_who
+    - action: utter_ask_affect_who
+
+  - story: PCOS treatment options
+    steps:
+    - intent: ask_pcos_treatment
+    - action: utter_pcos_treatment
+
+  - story: period tracker
+    steps:
+    - intent: ask_pcos_period_tracker
+    - action: utter_pcos_tracker
+
+  - story: User asks about PCOS risk prediction
+    steps:
+    - intent: ask_pcos_risk_prediction
+    - action: utter_pcos_risk_prediction
+
+  - story: PCOS diet
+    steps:
+    - intent: ask_pcos_nutrition
+    - action: utter_pcos_nutrition
+
+  - story: Sugar Intake and PCOS
+    steps:
+    - intent: sugar_intake_and_pcos
+    - action: utter_sugar_intake_response
+
+  - story: Intermittent Fasting and PCOS
+    steps:
+    - intent: intermittent_fasting_and_pcos
+    - action: utter_intermittent_fasting_response
+
+  - story: Balancing Hormones Through Diet
+    steps:
+    - intent: balancing_hormones_through_diet
+    - action: utter_balancing_hormones_response
+
+  - story: Fiber and PCOS Nutrition
+    steps:
+    - intent: fiber_and_pcos_nutrition
+    - action: utter_fiber_nutrition_response
+
+  - story: Gluten and PCOS Diet
+    steps:
+    - intent: gluten_and_pcos_diet
+    - action: utter_gluten_diet_response
+
+  - story: Anti-inflammatory Foods for PCOS
+    steps:
+    - intent: anti_inflammatory_foods_for_pcos
+    - action: utter_anti_inflammatory_foods_response
+
+  - story: PCOS and exercise
+    steps:
+    - intent: ask_pcos_exercise
+    - action: utter_pcos_exercise
+
+  - story: User asks about general exercise and PCOS
+    steps:
+    - intent: general_exercise_and_pcos
+    - action: utter_general_exercise_and_pcos
+
+  - story: User asks about cardio and PCOS
+    steps:
+    - intent: cardio_and_pcos
+    - action: utter_cardio_and_pcos
+
+  - story: User asks about strength training and PCOS
+    steps:
+    - intent: strength_training_and_pcos
+    - action: utter_strength_training_and_pcos
+
+  - story: User asks about yoga and PCOS
+    steps:
+    - intent: yoga_and_pcos
+    - action: utter_yoga_and_pcos
+
+  - story: User asks about HIIT and PCOS
+    steps:
+    - intent: hiit_and_pcos
+    - action: utter_hiit_and_pcos
+
+  - story: User asks about exercises for PCOS and fertility
+    steps:
+    - intent: exercise_for_pcos_and_fertility
+    - action: utter_exercise_for_pcos_and_fertility
+
+  - story: User asks about exercise and hormonal balance
+    steps:
+    - intent: exercise_and_hormonal_balance
+    - action: utter_exercise_and_hormonal_balance
+
+  - story: User asks about lifestyle and PCOS
+    steps:
+    - intent: lifestyle_and_pcos
+    - action: utter_lifestyle_and_pcos
+
+  - story: User asks about stress management and PCOS
+    steps:
+    - intent: stress_management_and_pcos
+    - action: utter_stress_management_and_pcos
+
+  - story: User asks about sleep and PCOS
+    steps:
+    - intent: sleep_and_pcos
+    - action: utter_sleep_and_pcos
+
+  - story: User asks about natural conception with PCOS
+    steps:
+      - intent: pcos_natural_conception
+      - action: utter_pcos_natural_conception
+
+  - story: User asks about fertility treatments for PCOS
+    steps:
+      - intent: pcos_fertility_treatments
+      - action: utter_pcos_fertility_treatments
+
+  - story: User asks about pregnancy health and PCOS
+    steps:
+      - intent: pcos_pregnancy_health
+      - action: utter_pcos_pregnancy_health
+
+  - story: User asks about metabolic health risks of PCOS
+    steps:
+      - intent: pcos_metabolic_health
+      - action: utter_pcos_metabolic_health
+
+  - story: User asks about mental health concerns related to PCOS
+    steps:
+      - intent: pcos_mental_health
+      - action: utter_pcos_mental_health
+
+  - story: User asks about general health risks of PCOS
+    steps:
+      - intent: pcos_general_health
+      - action: utter_pcos_general_health
+
+  - story: Sleep Apnea and PCOS
+    steps:
+      - intent: Sleep Apnea and PCOS
+      - action: utter_sleep_apnea_response
+
+  - story: pcos and thyroid issu
+    steps:
+      - intent: pcos_thyroid_connection
+      - action: utter_pcos_thyroid_connection
+
+  - story: User asks about thyroid health and management in PCOS
+    steps:
+      - intent: thyroid_health_management_in_pcos
+      - action: utter_thyroid_health_management_in_pcos

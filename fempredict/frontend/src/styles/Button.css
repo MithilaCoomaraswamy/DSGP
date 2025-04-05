@@ -1,0 +1,18 @@
+/* src/components/Button.css */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #00157c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  
+  .btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  

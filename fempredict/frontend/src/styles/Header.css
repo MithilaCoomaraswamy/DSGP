@@ -1,0 +1,96 @@
+/* src/components/Header.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.header {
+  padding: 3px 15px; 
+  background-color: #00157c;
+  position: static; /* Change to fixed if you want it to stay at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center; /* Center the logo horizontally */
+  flex: 1; /* Ensures the logo container takes up available space */
+  color: white;
+}
+
+.logo {
+  font-size: 1.4rem; /* Adjusted logo size */
+  font-weight: bold;
+  color: white;
+  text-align: center; /* Center the logo text */
+  margin: 0; /* Remove any default margin from h1 */
+}
+
+/* Add some padding to the body content to avoid it being hidden under the fixed header */
+body {
+  padding-top: 50px; /* Adjusted to match the further reduced header height */
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.auth-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00157c;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background-color: #00157c;
+  border: 2px solid white;
+}
+
+/* Style for profile picture and dropdown menu */
+.profile-picture {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.menu-dropdown {
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  background-color: #00157c;
+  color: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}

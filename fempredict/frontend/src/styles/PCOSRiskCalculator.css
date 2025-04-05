@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .form-row {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input, select, output {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="range"] {
+    width: 80%;
+    display: inline-block;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #00157c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-fill {
+    background-color: #4caf50;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 1em;
+    color: #888;
+    margin-top: 40px;
+  }
+  
+  footer p {
+    margin: 10px 0;
+  }
+  
