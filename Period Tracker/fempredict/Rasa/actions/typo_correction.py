@@ -31,17 +31,22 @@ COMMON_TYPOS = {
     "thyrod": "thyroid",
     "symtom": "symptom",
     "har": "hair",
+    "health": "health",
+    "problems": "problems",
     "disorder": "disorder",
-"disease": "disease",
+    "disease": "disease",
+    "affegtc": "affect",
     "this": "this",
     "the": "the",
     "cause": "cause",
     "hormnl imbalnce": "hormonal imbalance",
     "cuses": "cause",
     "causesse": "causes",
+    "changes": "changes",
     "ovulotion": "ovulation",
     "menstral cycle": "menstrual cycle",
     "infirtility": "infertility",
+    "menstrualcycle": "menstrual cycle",
     "cysts": "cysts",
     "rsiks": "risk",
     "androgens": "androgen",
@@ -51,21 +56,24 @@ COMMON_TYPOS = {
     "reproductive": "reproductive",
     "irregular period": "irregular periods",
     "birthcontrol": "birth control",
-    "lifestyle hanges": "lifestyle changes",
+    "lifestylechanges": "lifestylechanges",
     "hirsutism": "hirsutism",
     "ultrasouns": "ultrasound",
     "reproductivehealth": "reproductive health",
     "pcooo": "pcos",
+    "cpoos": "pcos",
     "pso": "pcos",
     "spco": "pcos",
     "pscos": "pcos",
+    "pco": "pcos",
     "life": "life",
     "are": "are",
+    "other": "other",
     "polycysticovarysyndrome": "polycystic ovary syndrome",
     "polycystic ovary syndrome":"polycystic ovary syndrome",
-    "problems": "problems",
-    "other": "other",
-    "health": "health",
+    "hirsuitism" : "hirsutism",
+    "heriditay": "hereditary",
+
 }
 
 # Merge medical terms into the typo dictionary
@@ -87,10 +95,11 @@ def correct_typo(user_message):
         if word.lower() in COMMON_TYPOS:
             corrected_word = COMMON_TYPOS[word.lower()]
         else:
-            # Apply fuzzy matching only for long words (>4 characters) to avoid miscorrections
-            if len(word) > 4:
-                match = process.extractOne(word, COMMON_TYPOS.keys(), score_cutoff=90)  # Higher cutoff for better accuracy
+            # Apply fuzzy matching only for long words (>3 characters) to avoid miscorrections
+            if len(word) > 3:
+                match = process.extractOne(word, COMMON_TYPOS.keys(), score_cutoff=80)  # Higher cutoff for better accuracy
                 if match:
+                    print(f"Fuzzy match: '{word}' → '{match[0]}' (score: {match[1]})")  # 🔍 Debug log here
                     corrected_word = COMMON_TYPOS[match[0]]
 
         corrected_words.append(corrected_word)
@@ -99,5 +108,4 @@ def correct_typo(user_message):
     corrected_message = " ".join(corrected_words)
 
     return corrected_message
-
 

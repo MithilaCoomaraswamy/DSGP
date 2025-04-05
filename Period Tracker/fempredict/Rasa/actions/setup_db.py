@@ -29,7 +29,6 @@ else:
 
 # List of medical terms to insert
 medical_terms = [
-
     ("PCOS", "PCOS"),
     ("pcos", "pcos"),
     ("hormonal imbalance", "hormonal imbalance"),
