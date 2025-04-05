@@ -62,8 +62,10 @@ COMMON_TYPOS = {
     "life": "life",
     "are": "are",
     "polycysticovarysyndrome": "polycystic ovary syndrome",
-"polycystic ovary syndrome":"polycystic ovary syndrome",
-
+    "polycystic ovary syndrome":"polycystic ovary syndrome",
+    "problems": "problems",
+    "other": "other",
+    "health": "health",
 }
 
 # Merge medical terms into the typo dictionary
