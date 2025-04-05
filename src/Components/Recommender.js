@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import '../Styles/Exercise.css';
+import Image11 from '../Image1/11.jpg';
+import Image22 from '../image2/22.jpg';
 
 export default function Recommender() {
   const [weight, setWeight] = useState('');
@@ -38,12 +40,30 @@ export default function Recommender() {
 
   return (
     <div className='recommender-body'>
+
+      <div className = "Main-Topic">
+        <h1>Empowering Your PCOS Journey with Fitness</h1>
+      </div>
+
+      <div className='Image1'>
+      <img src={Image11} alt="PCOS Exercise" />
+      </div>
+
       <div className='recommender-topic'>
+      
         <h1>Welcome to FemPredict Personalized Exercise Recommender!</h1>
         <p>Your journey to a healthier and more vibrant life begins here. For women with PCOS, staying active through regular exercise isn't just about fitness—it's a powerful tool to manage symptoms and improve overall well-being.</p>
         <p>Exercise helps regulate hormones, enhance insulin sensitivity, and reduce the risks associated with PCOS, including weight gain, mood swings, and fatigue.</p>
         <p>At FemPredict, we believe that a tailored workout plan, designed specifically for your needs, can transform your daily routine, boost your energy, and guide you towards living your best life.</p>
         <p>Start your journey today, because a healthy body leads to a happier you!</p>
+      </div>
+
+      <div className='Form-Topic'>
+        <h1>Get Your Personalized Exercise Plan from Here</h1>
+      </div>
+
+      <div className='Image2'>
+      <img src={Image22} alt="PCOS Exercise 2" />
       </div>
 
       <div className='input-container'>
@@ -114,3 +134,4 @@ export default function Recommender() {
     </div>
   );
 }
+

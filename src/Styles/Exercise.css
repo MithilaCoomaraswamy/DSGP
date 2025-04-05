@@ -1,34 +1,32 @@
-/* .Topic {
-    font-family: OCR A Std, monospace;
-    font-size: 8px;
-    color :white;
-    padding: 20px; 
-    margin-right: 600px;
-    margin-top: 100px;
-    margin-left: 20px;
-}
 
-
-.body {
-    background-color:#B8ABE8 ;
-}
-
- */
  body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+
+  .Main-Topic h1 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 80px;
+    margin: 100px 20% 0 10px;
+    color: #403372;
+    flex-direction: column;
+    padding: 20px;
+}
+
  .recommender-topic {
     font-family: 'OCR A Std', monospace;
-    font-size: 16px;
+    font-size: 20px;
     color: white;
     padding: 20px;
-    margin: 100px 10% 0 20px; /* Top, Right, Bottom, Left */
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    margin: -450px 40% 0 20px;
+    
 }
+
+.recommender-topic p {
+    font-size: 21px;
+}
+
 
 .recommender-body {
     background-color: #B8ABE8;
@@ -40,7 +38,7 @@
 }
 
 .input-container {
-    margin-top: 50px;
+    margin: -500px 700px 0px 0px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
@@ -74,7 +72,7 @@ input, select {
 }
 
 input[type='number'] {
-    -moz-appearance: textfield; /* Hides number input arrows */
+    -moz-appearance: textfield; 
 }
 
 input[type='number']::-webkit-outer-spin-button,
@@ -115,3 +113,58 @@ input[type='number']::-webkit-inner-spin-button {
     font-size: 16px;
     color: #555;
 }
+
+.Image1 {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: auto; 
+}
+
+.Image1 img {
+    width: 550px; 
+    height: auto;
+    border-radius: 10px; 
+    margin-top: -20px;
+    margin-right: -650px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+}
+
+
+.Form-Topic {
+    text-align: center; 
+    padding: 20px;       
+    border-radius: 10px;  
+    margin: 20px auto;    
+    max-width: 80%;      
+}
+
+
+.Form-Topic h1 {
+    font-size: 40px;      
+    color: #403372;          
+    margin: 10px 0;       
+}
+
+.Image2 {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: auto; 
+}
+
+.Image2 img {
+    width: 600px; 
+    height: auto;
+    border-radius: 10px; 
+    margin-top: 20px;
+    margin-right: -650px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+}
+
+
+
+
+ 
