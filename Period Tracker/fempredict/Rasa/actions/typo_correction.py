@@ -1,3 +1,4 @@
+
 import sqlite3
 import os
 from rapidfuzz import process
@@ -108,4 +109,3 @@ def correct_typo(user_message):
     corrected_message = " ".join(corrected_words)
 
     return corrected_message
-

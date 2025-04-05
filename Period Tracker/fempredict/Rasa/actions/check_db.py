@@ -1,3 +1,4 @@
+
 import sqlite3
 
 db_path = "medical_terms.db"  # Make sure this path is correct
