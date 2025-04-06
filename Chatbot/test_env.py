@@ -24,7 +24,7 @@ if openai_api_key:
             messages=[
                 {"role": "user", "content": "is pcos hereditary disorder"}
             ],
-            max_tokens=80
+            max_tokens=40
         )
 
         # Print the response to check if everything is working
