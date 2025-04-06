@@ -48,7 +48,7 @@
     max-width: 70%;
     padding: 10px;
     border-radius: 15px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.5;
     background-color: #fffff;
     word-wrap: break-word;
@@ -109,18 +109,18 @@
   }
 
   .chatbot-input button {
-  width: 45px;
-  height: 45px;
-  border: none;
-  bottom: 80px;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+      width: 45px;
+      height: 45px;
+      border: none;
+      bottom: 80px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+  }
 
 
   .chatbot-input button:hover {
@@ -153,7 +153,6 @@
     margin: 5px 0;
   }
 
-/* Typing indicator */
 .typing-indicator {
   align-self: flex-start;
   background: #00157c;
@@ -167,7 +166,6 @@
   animation: typing 1.5s infinite;
 }
 
-/* Blinking dots effect */
 @keyframes typing {
   0% { content: "."; }
   33% { content: ".."; }
