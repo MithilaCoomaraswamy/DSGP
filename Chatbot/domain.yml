@@ -69,17 +69,6 @@ entities:
 actions:
   - action_fallback_llm
 
-
-#  - action_listen
-#  - action_restart
-#  - action_session_start
-#  - action_default_fallback
-#  - action_default_ask_affirmation
-#  - action_default_ask_rephrase
-
-
-
-
 responses:
   utter_did_that_help:
      - text: "Did that help you?"
